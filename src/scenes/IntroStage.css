@@ -1,0 +1,261 @@
+/* ─────────────────────────────────────────────────────────────
+   Base layout = static final state of both scenes.
+   This is what reduced-motion visitors see: two calm sections.
+   The cinematic (pinned, layered) layout is added further below.
+   ───────────────────────────────────────────────────────────── */
+
+.stage {
+  position: relative;
+}
+
+.scene {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+}
+
+/* ── Scene 01: The Void ─────────────────────────────────────── */
+
+.void__type {
+  text-align: center;
+}
+
+.void__title {
+  display: flex;
+  justify-content: center;
+  gap: 0.2em;
+  font-size: var(--fs-display);
+  font-weight: 600;
+  line-height: 0.86;
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.void__word {
+  display: block;
+}
+
+/* Clips only the bottom edge, so the intro can raise the word from below
+   without cutting off glyph overhangs at the sides or top. */
+.void__mask {
+  display: block;
+  clip-path: inset(-0.5em -0.5em 0 -0.5em);
+}
+
+.void__word-inner {
+  display: block;
+}
+
+.void__tagline {
+  margin-top: clamp(1.5rem, 3.2vw, 2.75rem);
+  font-size: clamp(0.9375rem, 1.6vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  /* Balances the trailing letter-spacing so the line sits optically centered. */
+  text-indent: 0.24em;
+  text-transform: uppercase;
+}
+
+.void__tagline-inner {
+  display: inline-block;
+}
+
+.scroll-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(1.5rem, 5svh, 3rem);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.scroll-hint__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.scroll-hint__label {
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-indent: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.scroll-hint__track {
+  position: relative;
+  width: 1px;
+  height: 44px;
+  overflow: hidden;
+  background: var(--c-line);
+}
+
+.scroll-hint__line {
+  position: absolute;
+  inset: 0;
+  background: var(--c-fg);
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
+/* ── Scene 02: From Idea to Interface ───────────────────────── */
+
+.interface__stack {
+  position: relative;
+}
+
+/* Sits above the frame without taking part in the centering, so the frame's
+   center is exactly the stage's center, where the impulse appears. */
+.interface__message {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  margin-bottom: clamp(1.25rem, 3.5svh, 2.25rem);
+  font-size: var(--fs-message);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.interface__message-a {
+  color: var(--c-muted);
+}
+
+.interface__message-a,
+.interface__message-b {
+  display: inline-block;
+}
+
+.interface__frame-wrap {
+  --frame-w: min(80vw, 1120px, calc((100svh - 13rem) * 1.6));
+
+  position: relative;
+  width: var(--frame-w);
+  aspect-ratio: 16 / 10;
+}
+
+.impulse {
+  display: none;
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.impulse__dot {
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow:
+    0 0 0 1px rgb(185 200 255 / 0.5),
+    0 0 18px 4px rgb(185 200 255 / 0.45),
+    0 0 60px 12px rgb(185 200 255 / 0.12);
+}
+
+.impulse__line {
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  margin-top: -0.5px;
+  background: linear-gradient(
+    90deg,
+    rgb(185 200 255 / 0) 0%,
+    var(--c-accent) 18%,
+    #fff 50%,
+    var(--c-accent) 82%,
+    rgb(185 200 255 / 0) 100%
+  );
+  box-shadow: 0 0 12px 1px rgb(185 200 255 / 0.35);
+}
+
+/* ── Mobile composition ─────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .void__title {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.04em;
+    font-size: clamp(3.5rem, 23vw, 8rem);
+  }
+
+  .void__tagline {
+    letter-spacing: 0.2em;
+    text-indent: 0.2em;
+  }
+
+  .interface__message-a,
+  .interface__message-b {
+    display: block;
+  }
+
+  .interface__frame-wrap {
+    --frame-w: min(84vw, 400px, calc((100svh - 12rem) * 0.6));
+
+    aspect-ratio: 3 / 5;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Cinematic layout: both scenes layered on one pinned stage.
+   GSAP drives every state change from here (stageTimeline.js).
+   ───────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  .stage {
+    height: 100svh;
+    overflow: hidden;
+  }
+
+  .stage > .scene {
+    position: absolute;
+    inset: 0;
+    min-height: 0;
+  }
+
+  .impulse {
+    display: block;
+  }
+
+  .scroll-hint__line {
+    animation: scroll-hint 2.4s var(--ease-out) infinite;
+  }
+}
+
+@keyframes scroll-hint {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  45% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  55% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+/* Without the animation the hint line is simply shown. */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-hint__line {
+    transform: none;
+  }
+}

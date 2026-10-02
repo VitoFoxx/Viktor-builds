@@ -1,0 +1,28 @@
+:root {
+  /* Color */
+  --c-bg: #0a0a0b;
+  --c-fg: #f2f1ee;
+  --c-muted: #8d8c88;
+  --c-line: rgb(242 241 238 / 0.14);
+  --c-line-strong: rgb(242 241 238 / 0.28);
+  --c-surface: #111113;
+  --c-surface-raised: #18191c;
+  --c-accent: #b9c8ff;
+
+  /* Type */
+  --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --fs-display: clamp(3.5rem, 13vw, 12.5rem);
+  --fs-message: clamp(0.95rem, 1.5vw, 1.375rem);
+  --fs-label: 0.6875rem;
+  --tracking-display: -0.055em;
+  --tracking-label: 0.22em;
+
+  /* Space */
+  --gutter: clamp(1rem, 4vw, 3rem);
+
+  /* Shape */
+  --radius-frame: 12px;
+
+  /* Motion (CSS-driven micro motion only; scroll motion lives in GSAP) */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}

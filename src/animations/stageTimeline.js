@@ -3,7 +3,7 @@ import { gsap } from './gsap.js'
 // Keep in sync with the media queries in IntroStage.css / BrowserFrame.css.
 export const MEDIA = {
   isDesktop: '(min-width: 768px) and (prefers-reduced-motion: no-preference)',
-  isMobile: '(max-width: 767px) and (prefers-reduced-motion: no-preference)',
+  isMobile: '(max-width: 767.98px) and (prefers-reduced-motion: no-preference)',
   reduceMotion: '(prefers-reduced-motion: reduce)',
 }
 
@@ -20,7 +20,7 @@ const FRAME_OPEN = 'inset(0% 0% 0% 0% round 12px)'
  *   build       4.2  the website assembles itself inside the frame
  *   experience  7.8  the message completes, the frame settles
  */
-export function createStageTimeline(stage, q, { isDesktop }) {
+export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
   const wrap = q('.interface__frame-wrap')[0]
   const halfFrame = () => wrap.offsetHeight / 2
 
@@ -40,6 +40,7 @@ export function createStageTimeline(stage, q, { isDesktop }) {
       scrub: 1,
       anticipatePin: 1,
       invalidateOnRefresh: true,
+      onUpdate,
     },
   })
 

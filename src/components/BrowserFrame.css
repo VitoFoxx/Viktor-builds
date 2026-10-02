@@ -240,7 +240,7 @@
 
 /* ── Mobile: portrait frame, simplified page ────────────────── */
 
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
   .frame__chrome {
     height: 9cqw;
     padding: 0 4cqw;

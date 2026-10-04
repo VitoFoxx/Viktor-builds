@@ -72,7 +72,7 @@ export function addPortal(tl, stage, q) {
       { autoAlpha: 1, duration: 0.7, ease: 'power1.inOut' },
       'resolve+=0.55',
     )
-    .fromTo(q('.site-hero__img img'), { scale: 1.08 }, { scale: 1, duration: 1.2, ease: 'power2.out' }, 'resolve+=0.55')
+    .fromTo(q('.site-hero__img .site-photo'), { scale: 1.08 }, { scale: 1, duration: 1.2, ease: 'power2.out' }, 'resolve+=0.55')
 
   /* ── enter ────────────────────────────────────────────── */
   const ENTER = { duration: 2.2, ease: 'power2.inOut' }

@@ -1,0 +1,690 @@
+/* ─────────────────────────────────────────────────────────────
+   Scene 04 chapters of the client site. 12-column Swiss grid,
+   left-aligned: chapter marks in columns 1–3, content from column 4.
+   Base rules = static layout (mobile, reduced motion). The pinned
+   desktop layouts are at the bottom.
+   ───────────────────────────────────────────────────────────── */
+
+.site-body {
+  /* Column width for absolutely positioned layers (containing block = full width)… */
+  --col: calc((100% - 2 * var(--brand-gutter) - 11 * var(--brand-col-gap)) / 12);
+  /* …and for elements in flow (containing block = inside the gutters). */
+  --col-in: calc((100% - 11 * var(--brand-col-gap)) / 12);
+}
+
+.mb-section {
+  padding: clamp(5rem, 10vw, 9rem) var(--brand-gutter);
+}
+
+.mb-grid,
+.mb-head {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--brand-col-gap);
+}
+
+/* Chapter mark: index, label, hairline */
+
+.mb-head {
+  position: relative;
+  align-items: end;
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  padding-bottom: 0.9rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.mb-head__index {
+  grid-column: 1 / span 3;
+}
+
+.mb-head__label {
+  grid-column: 4 / -1;
+}
+
+.mb-rule {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--brand-line-strong);
+  transform-origin: left center;
+}
+
+.mb-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--brand-muted);
+}
+
+.mb-h2 {
+  font-size: clamp(2.25rem, 4.6vw, 4.75rem);
+  font-weight: 650;
+  line-height: 1.02;
+  letter-spacing: -0.028em;
+}
+
+/* Figures: a positioned box SitePhoto fills. */
+.mb-project__fig,
+.mb-process__fig,
+.mb-spec__fig,
+.mb-closing__fig {
+  position: relative;
+  overflow: hidden;
+  background: var(--brand-placeholder);
+}
+
+/* ── 01 Betrieb ─────────────────────────────────────────────── */
+
+.mb-intro__text {
+  grid-column: 4 / -1;
+  max-width: 26em;
+  font-size: clamp(1.5rem, 2.9vw, 2.875rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.016em;
+}
+
+.mb-data {
+  grid-column: 4 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2rem var(--brand-col-gap);
+  margin-top: clamp(3rem, 6vw, 5.5rem);
+}
+
+.mb-data__item {
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--brand-line-strong);
+}
+
+.mb-data dd {
+  margin-top: 0.4rem;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+/* ── 02 Referenz ────────────────────────────────────────────── */
+
+.mb-project__stage {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--brand-col-gap);
+}
+
+.mb-project__stage > .mb-head {
+  grid-column: 1 / -1;
+}
+
+.mb-project__intro {
+  grid-column: 4 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.mb-project__text {
+  max-width: 32em;
+  font-size: clamp(1.0625rem, 1.25vw, 1.25rem);
+  line-height: 1.5;
+  color: var(--brand-muted);
+}
+
+.mb-project__slot {
+  display: none;
+}
+
+.mb-project__fig {
+  grid-column: 1 / -1;
+  aspect-ratio: 16 / 9;
+  margin-top: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.mb-project__fig--detail {
+  margin-top: var(--brand-col-gap);
+}
+
+.mb-sheet {
+  grid-column: 4 / -1;
+  margin-top: clamp(3rem, 6vw, 5rem);
+}
+
+.mb-sheet__title {
+  margin-bottom: 1rem;
+  color: var(--brand-ink);
+}
+
+.mb-sheet__row {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(7.5rem, 1fr) 2fr;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.mb-sheet__rule {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--brand-line-strong);
+  transform-origin: left center;
+}
+
+.mb-sheet dt {
+  color: var(--brand-muted);
+}
+
+.mb-sheet dd {
+  font-weight: 500;
+}
+
+/* ── 03 Fertigung (dark) ────────────────────────────────────── */
+
+.mb-process {
+  background: var(--brand-dark);
+  color: var(--brand-on-dark);
+}
+
+.mb-process .mb-rule {
+  background: var(--brand-line-dark);
+}
+
+.mb-process .mb-label {
+  color: var(--brand-on-dark-muted);
+}
+
+.mb-process .mb-process__fig {
+  background: var(--brand-placeholder-dark);
+}
+
+.mb-process .site-photo--placeholder {
+  background: var(--brand-placeholder-dark);
+  color: var(--brand-on-dark);
+}
+
+.mb-process .site-photo__motif {
+  color: var(--brand-on-dark-muted);
+}
+
+.mb-process__terms {
+  display: none;
+}
+
+.mb-process__title {
+  max-width: 14em;
+  margin: 0 0 clamp(3rem, 6vw, 5rem) calc(3 * (var(--col-in) + var(--brand-col-gap)));
+}
+
+.mb-process__steps {
+  display: grid;
+  gap: clamp(4rem, 8vw, 7rem);
+}
+
+.mb-process__fig {
+  aspect-ratio: 2 / 1;
+}
+
+.mb-process__caption {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--brand-col-gap);
+  align-items: baseline;
+  margin-top: 1.25rem;
+}
+
+/* Each caption line is a mask its text rises through. */
+.mb-process__name,
+.mb-process__text,
+.mb-process__spec {
+  overflow: hidden;
+  padding-bottom: 0.12em;
+}
+
+.mb-mask__inner {
+  display: block;
+}
+
+.mb-process__name {
+  grid-column: 1 / span 3;
+  font-size: clamp(1.5rem, 2.2vw, 2.125rem);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.mb-process__text {
+  grid-column: 4 / span 5;
+  font-size: clamp(1.0625rem, 1.25vw, 1.25rem);
+  line-height: 1.45;
+}
+
+.mb-process__spec {
+  grid-column: 9 / -1;
+  line-height: 1.5;
+}
+
+/* ── 04 Material ────────────────────────────────────────────── */
+
+.mb-spec {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: auto auto 1fr;
+  column-gap: var(--brand-col-gap);
+  padding-block: clamp(3rem, 7vw, 7rem);
+}
+
+.mb-spec + .mb-spec {
+  border-top: 1px solid var(--brand-line);
+}
+
+.mb-spec__label {
+  grid-column: 1 / span 8;
+  grid-row: 1;
+}
+
+.mb-spec__value {
+  grid-column: 1 / span 8;
+  grid-row: 2;
+  margin-top: 0.15em;
+  /* Masks only the bottom edge: the value rises from below, and may drift sideways. */
+  clip-path: inset(-0.3em -100vw 0 -100vw);
+  font-size: clamp(4.5rem, 15vw, 14rem);
+  font-weight: 750;
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+  white-space: nowrap;
+}
+
+.mb-spec__value-inner {
+  display: block;
+}
+
+.mb-spec__text {
+  grid-column: 1 / span 5;
+  grid-row: 3;
+  max-width: 28em;
+  margin-top: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-size: clamp(1.0625rem, 1.25vw, 1.25rem);
+  line-height: 1.5;
+  color: var(--brand-muted);
+}
+
+.mb-spec__fig {
+  grid-column: 9 / -1;
+  grid-row: 1 / span 3;
+  align-self: end;
+  aspect-ratio: 3 / 4;
+}
+
+/* ── 05 Kontakt ─────────────────────────────────────────────── */
+
+.mb-closing__fig {
+  aspect-ratio: 21 / 9;
+}
+
+.mb-closing__cols {
+  row-gap: 2.5rem;
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+}
+
+.mb-closing__col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  font-size: 1.0625rem;
+  font-style: normal;
+  line-height: 1.45;
+}
+
+.mb-closing__col--brand {
+  grid-column: 1 / span 5;
+  gap: 1rem;
+}
+
+.mb-closing__col--address {
+  grid-column: 7 / span 3;
+}
+
+.mb-closing__col--contact {
+  grid-column: 10 / -1;
+}
+
+.mb-closing__col--contact .site-link {
+  min-height: 0;
+  margin-bottom: 0.5rem;
+}
+
+.mb-closing__mark {
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.mb-closing__mark strong {
+  font-weight: 800;
+}
+
+.mb-closing__title {
+  font-size: clamp(1.75rem, 2.8vw, 2.75rem);
+  font-weight: 650;
+  line-height: 1.08;
+  letter-spacing: -0.022em;
+}
+
+.mb-closing__muted {
+  color: var(--brand-muted);
+}
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--brand-line);
+  font-size: 0.8125rem;
+  color: var(--brand-muted);
+}
+
+.site-footer__legal {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.site-footer__demo {
+  margin-left: auto;
+}
+
+/* ── Mobile: 4 columns, everything linear ───────────────────── */
+
+@media (max-width: 767.98px) {
+  .mb-grid,
+  .mb-head,
+  .mb-project__stage,
+  .mb-process__caption,
+  .mb-spec {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .mb-head__index {
+    grid-column: 1;
+  }
+
+  .mb-head__label {
+    grid-column: 2 / -1;
+  }
+
+  .mb-intro__text,
+  .mb-data,
+  .mb-project__intro,
+  .mb-sheet {
+    grid-column: 1 / -1;
+  }
+
+  .mb-data {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mb-project__fig,
+  .mb-process__fig,
+  .mb-closing__fig {
+    aspect-ratio: 4 / 5;
+  }
+
+  .mb-project__fig {
+    margin-inline: calc(-1 * var(--brand-gutter));
+  }
+
+  .mb-sheet__row {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+
+  .mb-process__title {
+    margin-left: 0;
+  }
+
+  .mb-process__caption {
+    row-gap: 0.6rem;
+  }
+
+  .mb-process__name,
+  .mb-process__text,
+  .mb-process__spec {
+    grid-column: 1 / -1;
+  }
+
+  .mb-spec {
+    grid-template-rows: none;
+  }
+
+  .mb-spec__label,
+  .mb-spec__value,
+  .mb-spec__text,
+  .mb-spec__fig {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  .mb-spec__value {
+    font-size: 21vw;
+  }
+
+  .mb-spec__fig {
+    aspect-ratio: 4 / 5;
+    margin-top: 2rem;
+  }
+
+  .mb-closing__col--brand,
+  .mb-closing__col--address,
+  .mb-closing__col--contact {
+    grid-column: 1 / -1;
+  }
+
+  .site-footer {
+    flex-direction: column;
+  }
+
+  .site-footer__demo {
+    margin-left: 0;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Desktop motion layouts: pinned stages (experienceTimeline.js).
+   ───────────────────────────────────────────────────────────── */
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .mb-project,
+  .mb-process,
+  .mb-closing {
+    --stage-top: clamp(6.5rem, 9.5vw, 9rem);
+    padding: 0;
+  }
+
+  .mb-project__stage,
+  .mb-process__stage,
+  .mb-closing__stage {
+    position: relative;
+    height: 100svh;
+    overflow: hidden;
+    padding: var(--stage-top) var(--brand-gutter) 0;
+  }
+
+  /* 02 Referenz */
+
+  .mb-project__stage {
+    display: block;
+  }
+
+  .mb-project__intro {
+    position: absolute;
+    top: 34svh;
+    left: var(--brand-gutter);
+    width: calc(4 * var(--col) + 3 * var(--brand-col-gap));
+  }
+
+  .mb-project__slot {
+    position: absolute;
+    display: block;
+    top: calc(var(--stage-top) + 4rem);
+    bottom: 7svh;
+  }
+
+  .mb-project__slot--intro {
+    left: calc(var(--brand-gutter) + 5 * (var(--col) + var(--brand-col-gap)));
+    right: var(--brand-gutter);
+  }
+
+  .mb-project__slot--sheet {
+    left: var(--brand-gutter);
+    width: calc(7 * var(--col) + 6 * var(--brand-col-gap));
+  }
+
+  .mb-project__fig {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    margin: 0;
+    aspect-ratio: auto;
+  }
+
+  .mb-project__fig--detail {
+    z-index: 3;
+  }
+
+  /* The figures span the whole stage but are clipped to a slot: keep the
+     placeholder label inside the part that is visible longest. */
+  .mb-project__fig .site-photo--placeholder {
+    padding: calc(var(--stage-top) + 5rem) calc(var(--brand-gutter) + 1.25rem);
+  }
+
+  .mb-project__fig--overview .site-photo--placeholder {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .mb-sheet {
+    position: absolute;
+    top: calc(var(--stage-top) + 4rem);
+    left: calc(var(--brand-gutter) + 8 * (var(--col) + var(--brand-col-gap)));
+    right: var(--brand-gutter);
+    margin: 0;
+  }
+
+  .mb-sheet__row {
+    padding: 0.62rem 0;
+    font-size: 0.875rem;
+  }
+
+  /* 03 Fertigung: a letterboxed photo band between terms and captions */
+
+  .mb-process__top {
+    position: relative;
+    z-index: 2;
+  }
+
+  .mb-process__top .mb-head {
+    margin-bottom: 1.1rem;
+  }
+
+  .mb-process__terms {
+    display: flex;
+    gap: 2.4rem;
+    margin-left: calc(3 * (var(--col-in) + var(--brand-col-gap)));
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .mb-process__term {
+    position: relative;
+    opacity: 0.4;
+  }
+
+  .mb-process__term-rule {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.45rem;
+    height: 2px;
+    background: var(--brand-signal);
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+
+  .mb-process__title {
+    position: absolute;
+    left: var(--brand-gutter);
+    bottom: 22svh;
+    margin: 0 0 0 calc(3 * (var(--col) + var(--brand-col-gap)));
+  }
+
+  .mb-process__steps {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .mb-process__fig {
+    position: absolute;
+    top: calc(var(--stage-top) + 5.25rem);
+    bottom: 19svh;
+    left: 0;
+    right: 0;
+    aspect-ratio: auto;
+    clip-path: inset(100% 0% 0% 0%);
+  }
+
+  .mb-process__caption {
+    position: absolute;
+    left: var(--brand-gutter);
+    right: var(--brand-gutter);
+    bottom: 0;
+    height: 19svh;
+    margin: 0;
+    padding-top: 1.6rem;
+    align-content: start;
+  }
+
+  /* 05 Kontakt: one calm screen */
+
+  .mb-closing__stage {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1.5rem;
+  }
+
+  .mb-closing__stage > .mb-head {
+    margin-bottom: 1.75rem;
+  }
+
+  /* The photo opens from a 6 % side inset: keep its label inside. */
+  .mb-closing__fig .site-photo--placeholder {
+    padding-inline: calc(6% + 1rem);
+  }
+
+  .mb-closing__fig {
+    flex: 1;
+    min-height: 0;
+    aspect-ratio: auto;
+  }
+
+  .mb-closing__cols {
+    margin-top: 1.75rem;
+  }
+
+  .site-footer {
+    margin-top: 1.75rem;
+  }
+}

@@ -37,10 +37,13 @@ export default function BrowserFrame() {
             <span className="mock-bar mock-bar--eyebrow" />
             <div className="mock-hero__title">
               <span className="mock-line">
-                <span className="mock-line__inner">Built to be</span>
+                <span className="mock-line__inner">Treppen.</span>
               </span>
               <span className="mock-line">
-                <span className="mock-line__inner">remembered.</span>
+                <span className="mock-line__inner">Geländer.</span>
+              </span>
+              <span className="mock-line">
+                <span className="mock-line__inner">Sonder&shy;anfertigungen.</span>
               </span>
             </div>
             <span className="mock-bar mock-bar--text" />

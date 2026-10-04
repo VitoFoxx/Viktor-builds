@@ -135,7 +135,8 @@
 }
 
 .mock-hero__title {
-  font-size: 5.6cqw;
+  font-size: 4.2cqw;
+  hyphens: manual;
   font-weight: 600;
   line-height: 0.98;
   letter-spacing: -0.045em;
@@ -168,7 +169,7 @@
 .mock-btn {
   display: block;
   height: 3.4cqw;
-  border-radius: 99px;
+  border-radius: 2px;
 }
 
 .mock-btn--primary {
@@ -317,7 +318,7 @@
   }
 
   .mock-hero__title {
-    font-size: 12.5cqw;
+    font-size: 10.5cqw;
   }
 
   .mock-bar--text {

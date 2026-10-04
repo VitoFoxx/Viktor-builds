@@ -84,36 +84,50 @@ The transition should feel immersive rather than like opening a new page.
 
 ## SCENE 04 — THE EXPERIENCE
 
-Inside the website is **VANTA**, a fictional premium automotive performance / restomod brand.
+Principle:
 
-Scene 03 → Scene 04 is the "Enter the Website" moment: the visitor passes through the interface and arrives inside a finished, immersive brand experience.
+**REAL BUSINESS. EXCEPTIONAL PRESENTATION.**
 
-The experience is built around fullscreen vehicle imagery and unfolds as a sequence:
+Inside the website is **Wehrkamp Metallbau**, a fictional but credible German metalwork business: Hannover, since 1987, stairs, railings and custom fabrication.
 
-- **Automotive hero** — the vehicle fills the screen, the VANTA brand is introduced with confident, minimal typography
-- **Vehicle detail sequence** — close-ups of craftsmanship and engineering, revealed through scroll
-- **Performance typography** — large technical figures and specifications set as editorial typography
-- **VANTA / 001** — a closing product presentation of the first vehicle
+The company is not turned into an artificial luxury brand. The quality comes from web design, typography, photography, layout and motion. The site should feel like the exceptionally well designed website of a real German Mittelstand business.
+
+The company name is a working name and lives in one place (`src/site/content.js`). Contact details are deliberately fictional.
+
+Scene 03 → Scene 04 is the "Enter the Website" moment: the visitor passes through the interface and is now scrolling a real company website, with its own fixed header.
+
+The site is in German and unfolds as a sequence of chapters:
+
+- **Hero** — Treppen. Geländer. Sonderanfertigungen. Planning and fabrication in Hannover.
+- **Company** — who they are, in one paragraph and a few hard facts
+- **Reference project** — one realistic project (a house in Hannover-Kirchrode, steel stringer stair with oak treads) staged large, with a project data sheet instead of marketing copy
+- **Fabrication** — planning, fabrication, surface, assembly: documentary photos that replace each other while scrolling, with short captions. No step cards, no icon rows, no "how it works" grid
+- **Material details** — technical facts set very large (S235JR, 15 MM, DB 703), each with a macro photo
+- **Closing** — the company comes together in one calm composition: workshop photo, name, address, contact
 
 Visual direction:
 
-- premium
-- cinematic
 - editorial
-- technical
-- minimal
+- Swiss
+- industrial
+- documentary
+- clear grotesk typography on a strong 12-column grid, mostly left-aligned
+- black, white, grey and one functional signal colour (RAL 3020), never decorative
+- large documentary photography: workshop, people at work, machines, materials, finished projects
 
-Avoid typical AI and SaaS design patterns: no generic feature grids, gradient blobs, glassmorphism cards or stock "dashboard" aesthetics.
+Avoid: generic premium/luxury aesthetics, invented futuristic products, abstract hero objects, drawings of products, glassmorphism, gradient orbs, bento grids, floating cards, pill buttons, glow, fake 3D, decorative shapes, generic claims, centred layouts, Awwwards demo aesthetics without a business.
 
-The purpose is to show what a finished premium website can feel like.
+**No visual asset substitution.** A missing photo is shown as a clearly labelled neutral placeholder (`IMAGE / PROJECT_KIRCHRODE_01`). It is never recreated with CSS, SVG, line drawings, gradients or shapes. All images are managed centrally (`src/site/media.js`).
 
-VANTA is the starting state for Scene 05.
+The purpose is to show what a finished website for a real business can feel like.
+
+The closing composition is the starting state for Scene 05.
 
 ---
 
 ## SCENE 05 — ONE WEBSITE, MANY POSSIBILITIES
 
-Scene 05 starts directly from the VANTA website of Scene 04.
+Scene 05 starts directly from the Wehrkamp Metallbau website of Scene 04.
 
 From there, the interface transforms into clearly different business contexts.
 
@@ -122,13 +136,15 @@ Potential examples:
 - architecture
 - restaurant
 - medical
-- craft / local premium business
+- law firm
 
 The underlying design system adapts while maintaining quality.
 
-The transformation shows that Viktor Builds is not limited to automotive.
+The transformation shows that Viktor Builds is not limited to one industry.
 
 The message:
+
+**ONE WEBSITE. MANY POSSIBILITIES.**
 
 One strong digital foundation can serve very different businesses.
 

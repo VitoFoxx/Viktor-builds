@@ -1,4 +1,5 @@
 import { gsap } from './gsap.js'
+import { addPortal } from './portalTimeline.js'
 
 // Keep in sync with the media queries in IntroStage.css / BrowserFrame.css.
 export const MEDIA = {
@@ -7,11 +8,16 @@ export const MEDIA = {
   reduceMotion: '(prefers-reduced-motion: reduce)',
 }
 
+// Scroll pace of the stage, in viewport heights per timeline second. These are
+// the Phase 1 values (4 / 3 viewports for 9.9 s), so Scene 01 and 02 keep the
+// exact feel they had; Scene 03 simply adds more distance at the same pace.
+const PACE = { desktop: 4 / 9.9, mobile: 3 / 9.9 }
+
 const FRAME_CLOSED = 'inset(50% 0% 50% 0% round 12px)'
 const FRAME_OPEN = 'inset(0% 0% 0% 0% round 12px)'
 
 /**
- * One pinned stage, one scrubbed master timeline for Scene 01 → Scene 02.
+ * One pinned stage, one scrubbed master timeline for Scene 01 → 02 → 03.
  *
  * Labels (timeline seconds, mapped linearly onto the pinned scroll distance):
  *   void        0.0  type opens up, hint and tagline leave
@@ -19,6 +25,7 @@ const FRAME_OPEN = 'inset(0% 0% 0% 0% round 12px)'
  *   frame       3.0  the line splits into the frame's edges, the frame opens
  *   build       4.2  the website assembles itself inside the frame
  *   experience  7.8  the message completes, the frame settles
+ *   resolve …   9.3  Scene 03, see portalTimeline.js
  */
 export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
   const wrap = q('.interface__frame-wrap')[0]
@@ -35,11 +42,13 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
     scrollTrigger: {
       trigger: stage,
       start: 'top top',
-      end: () => `+=${window.innerHeight * (isDesktop ? 4 : 3)}`,
+      end: () => `+=${window.innerHeight * (isDesktop ? PACE.desktop : PACE.mobile) * tl.duration()}`,
       pin: true,
       scrub: 1,
       anticipatePin: 1,
       invalidateOnRefresh: true,
+      // Scene 04's triggers sit below this pin and must measure after it.
+      refreshPriority: 1,
       onUpdate,
     },
   })
@@ -158,8 +167,10 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
       { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power2.out' },
       'experience',
     )
-    // Hold the finished state for a moment before the stage unpins.
-    .to({}, { duration: 1.4 })
+    // Hold the finished interface for a moment before Scene 03 begins.
+    .to({}, { duration: 0.8 })
+
+  addPortal(tl, stage, q)
 
   return tl
 }

@@ -1,5 +1,6 @@
 import { gsap } from './gsap.js'
 import { addPortal } from './portalTimeline.js'
+import { addExperience } from './experienceTimeline.js'
 
 // Keep in sync with the media queries in IntroStage.css / BrowserFrame.css.
 export const MEDIA = {
@@ -10,14 +11,14 @@ export const MEDIA = {
 
 // Scroll pace of the stage, in viewport heights per timeline second. These are
 // the Phase 1 values (4 / 3 viewports for 9.9 s), so Scene 01 and 02 keep the
-// exact feel they had; Scene 03 simply adds more distance at the same pace.
+// exact feel they had; Scene 03 and 04 simply add distance at the same pace.
 const PACE = { desktop: 4 / 9.9, mobile: 3 / 9.9 }
 
 const FRAME_CLOSED = 'inset(50% 0% 50% 0% round 12px)'
 const FRAME_OPEN = 'inset(0% 0% 0% 0% round 12px)'
 
 /**
- * One pinned stage, one scrubbed master timeline for Scene 01 → 02 → 03.
+ * One pinned stage, one scrubbed master timeline for Scene 01 → 02 → 03 → 04.
  *
  * Labels (timeline seconds, mapped linearly onto the pinned scroll distance):
  *   void        0.0  type opens up, hint and tagline leave
@@ -26,6 +27,7 @@ const FRAME_OPEN = 'inset(0% 0% 0% 0% round 12px)'
  *   build       4.2  the website assembles itself inside the frame
  *   experience  7.8  the message completes, the frame settles
  *   resolve …   9.3  Scene 03, see portalTimeline.js
+ *   demo …     13.7  Scene 04, see experienceTimeline.js
  */
 export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
   const wrap = q('.interface__frame-wrap')[0]
@@ -47,8 +49,6 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
       scrub: 1,
       anticipatePin: 1,
       invalidateOnRefresh: true,
-      // Scene 04's triggers sit below this pin and must measure after it.
-      refreshPriority: 1,
       onUpdate,
     },
   })
@@ -171,19 +171,24 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
     .to({}, { duration: 0.8 })
 
   addPortal(tl, stage, q)
+  addExperience(tl, stage, q)
 
   return tl
 }
 
 /**
- * Reduced motion: no pin, no scrub. Both scenes are static sections in their
- * final state (see CSS). Scene 02 only fades in briefly when it enters.
+ * Reduced motion: no pin, no scrub. Every scene is a static section in its
+ * final state (see CSS); Scene 02 and the framed demo only fade in briefly.
  */
 export function createReducedMotion(q) {
-  return gsap.from(q('.interface__stack'), {
-    autoAlpha: 0,
-    duration: 0.3,
-    ease: 'power1.out',
-    scrollTrigger: { trigger: q('.scene--interface')[0], start: 'top 75%', once: true },
-  })
+  const fadeIn = (targets, trigger) =>
+    gsap.from(targets, {
+      autoAlpha: 0,
+      duration: 0.3,
+      ease: 'power1.out',
+      scrollTrigger: { trigger, start: 'top 75%', once: true },
+    })
+
+  fadeIn(q('.interface__stack'), q('.scene--interface')[0])
+  fadeIn(q('.scene--site > :not(.experience__context)'), q('.scene--site')[0])
 }

@@ -1,26 +1,21 @@
 import { company } from './content.js'
 
-/** Company navigation: used in the hero and, identically, in the fixed header. */
-export default function SiteNav({ reveal = false }) {
+/**
+ * Demo-site navigation. The demo is a picture of a website inside Viktor's
+ * stage, so its links are visual only: no focus stops, no dead targets.
+ */
+export default function SiteNav() {
   return (
-    <div className="site-nav" data-reveal={reveal || undefined}>
-      <a className="site-nav__logo" href="#top-site">
+    <div className="site-nav" data-reveal>
+      <span className="site-nav__logo">
         <strong>{company.short}</strong> Metallbau
-      </a>
-      <nav className="site-nav__links" aria-label={company.name}>
-        <ul>
-          {company.nav.map((item) => (
-            <li key={item.href}>
-              <a href={item.href}>
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <a className="site-nav__contact" href="#kontakt">
-        Anfrage
-      </a>
+      </span>
+      <ul className="site-nav__links">
+        {company.nav.map((label) => (
+          <li key={label}>{label}</li>
+        ))}
+      </ul>
+      <span className="site-nav__contact">{company.navAction}</span>
     </div>
   )
 }

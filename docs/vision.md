@@ -8,17 +8,19 @@ Instead of presenting a conventional portfolio with project cards, the website i
 
 The experience should communicate:
 
-**IDEA → INTERFACE → EXPERIENCE → BUSINESS → RESULT**
+**IDEA → BUILD → ENTER → EXPERIENCE → ADAPT → INTELLIGENCE → CONVERSION → RESULT**
 
 The visitor should gradually understand that a website is not simply a collection of pages.
 
 It is an experience, a system and a business tool.
 
+**Viktor Builds remains the main brand throughout. Client websites are demonstrations, never the identity of the page.**
+
 ---
 
 # EXPERIENCE NARRATIVE
 
-## SCENE 01 — THE VOID
+## SCENE 01 — THE VOID (INTRO / IDEA)
 
 The experience begins in darkness.
 
@@ -46,7 +48,7 @@ The visitor should feel that something is beginning to form.
 
 ---
 
-## SCENE 02 — FROM IDEA TO INTERFACE
+## SCENE 02 — FROM IDEA TO INTERFACE (BUILD)
 
 The emerging visual form develops into an abstract browser/interface frame.
 
@@ -70,7 +72,7 @@ The transition from Scene 01 must feel continuous.
 
 ---
 
-## SCENE 03 — ENTER THE WEBSITE
+## SCENE 03 — ENTER THE WEBSITE (ENTER)
 
 The browser/interface becomes a portal.
 
@@ -82,75 +84,57 @@ The transition should feel immersive rather than like opening a new page.
 
 ---
 
-## SCENE 04 — THE EXPERIENCE
+## SCENE 04 — EXPERIENCE
 
-Principle:
+Message:
 
-**REAL BUSINESS. EXCEPTIONAL PRESENTATION.**
+**A WEBSITE SHOULDN'T JUST BE SEEN. IT SHOULD BE EXPERIENCED.**
 
-Inside the website is **Wehrkamp Metallbau**, a fictional but credible German metalwork business: Hannover, since 1987, stairs, railings and custom fabrication.
+After entering the frame, the visitor briefly experiences a real client website from the inside. It is a short, immersive demonstration (about 1.5 viewports of scrolling), not a second website.
 
-The company is not turned into an artificial luxury brand. The quality comes from web design, typography, photography, layout and motion. The site should feel like the exceptionally well designed website of a real German Mittelstand business.
+Demo business (Industrial / Craft): **Wehrkamp Metallbau**, a fictional but credible metalwork business in Hannover. The name is secondary demo content and lives in one place (`src/site/content.js`). No company history, no team, no fake company world.
 
-The company name is a working name and lives in one place (`src/site/content.js`). Contact details are deliberately fictional.
+The demo page is short and built from slots: navigation, hero ("Metallbau. Ohne Umwege."), one reference project (Wohnhaus Hannover-Kirchrode), three material details set as type (S235JR · 15 MM · DB 703) and a CTA. Its quality comes from typography, grid, photography and motion, not from luxury branding.
 
-Scene 03 → Scene 04 is the "Enter the Website" moment: the visitor passes through the interface and is now scrolling a real company website, with its own fixed header.
+Viktor Builds stays present the whole time:
 
-The site is in German and unfolds as a sequence of chapters:
+- During the demo, a small context line: **VIKTOR BUILDS / WEBSITE 01**
+- Then the website pulls back into the browser frame. The browser chrome and Viktor's dark stage return.
+- Above the frame, in Viktor's voice: **SAME PRINCIPLES. DIFFERENT BUSINESS.**
+- Below the frame: **WEBSITE 01 — INDUSTRIAL / CRAFT · DESIGNED AND BUILT BY VIKTOR BUILDS**
 
-- **Hero** — Treppen. Geländer. Sonderanfertigungen. Planning and fabrication in Hannover.
-- **Company** — who they are, in one paragraph and a few hard facts
-- **Reference project** — one realistic project (a house in Hannover-Kirchrode, steel stringer stair with oak treads) staged large, with a project data sheet instead of marketing copy
-- **Fabrication** — planning, fabrication, surface, assembly: documentary photos that replace each other while scrolling, with short captions. No step cards, no icon rows, no "how it works" grid
-- **Material details** — technical facts set very large (S235JR, 15 MM, DB 703), each with a macro photo
-- **Closing** — the company comes together in one calm composition: workshop photo, name, address, contact
+No first-time visitor may leave Scene 04 believing Viktor Builds is a metalwork company.
 
-Visual direction:
+The framed website at the end of Scene 04 is the starting state of Scene 05.
 
-- editorial
-- Swiss
-- industrial
-- documentary
-- clear grotesk typography on a strong 12-column grid, mostly left-aligned
-- black, white, grey and one functional signal colour (RAL 3020), never decorative
-- large documentary photography: workshop, people at work, machines, materials, finished projects
-
-Avoid: generic premium/luxury aesthetics, invented futuristic products, abstract hero objects, drawings of products, glassmorphism, gradient orbs, bento grids, floating cards, pill buttons, glow, fake 3D, decorative shapes, generic claims, centred layouts, Awwwards demo aesthetics without a business.
+Avoid: generic premium/luxury aesthetics, glassmorphism, gradient orbs, bento grids, floating cards, pill buttons, glow, fake 3D, decorative shapes, generic claims.
 
 **No visual asset substitution.** A missing photo is shown as a clearly labelled neutral placeholder (`IMAGE / PROJECT_KIRCHRODE_01`). It is never recreated with CSS, SVG, line drawings, gradients or shapes. All images are managed centrally (`src/site/media.js`).
 
-The purpose is to show what a finished website for a real business can feel like.
-
-The closing composition is the starting state for Scene 05.
-
 ---
 
-## SCENE 05 — ONE WEBSITE, MANY POSSIBILITIES
+## SCENE 05 — ADAPT
 
-Scene 05 starts directly from the Wehrkamp Metallbau website of Scene 04.
+Scene 05 starts from the frame of Scene 04. The frame remains.
 
-From there, the interface transforms into clearly different business contexts.
+The website the visitor has just experienced transforms visibly into other businesses, for example:
 
-Potential examples:
-
-- architecture
 - restaurant
 - medical
-- law firm
+- beauty / service
+- further industries
 
-The underlying design system adapts while maintaining quality.
+What changes: photography, typography, colour, layout, navigation, CTA, content and tone. The caption counts on: WEBSITE 02, WEBSITE 03 …
 
-The transformation shows that Viktor Builds is not limited to one industry.
-
-The message:
+Message:
 
 **ONE WEBSITE. MANY POSSIBILITIES.**
 
-One strong digital foundation can serve very different businesses.
+Viktor Builds has no fixed style. The design follows the business.
 
 ---
 
-## SCENE 06 — WEBSITES CAN THINK
+## SCENE 06 — WEBSITES CAN THINK (INTELLIGENCE)
 
 Introduce AI and intelligent interaction.
 

@@ -1,9 +1,8 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { SplitText } from 'gsap/SplitText'
 import { useGSAP } from '@gsap/react'
 
-gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP)
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 // Mobile browsers resize the viewport when the URL bar shows/hides.
 // Ignoring that avoids a jump of the pinned stage mid-scroll.
@@ -13,4 +12,4 @@ ScrollTrigger.config({ ignoreMobileResize: true })
 // scroll position before the pin exists, which lands inconsistently.
 ScrollTrigger.clearScrollMemory('manual')
 
-export { gsap, ScrollTrigger, SplitText, useGSAP }
+export { gsap, ScrollTrigger, useGSAP }

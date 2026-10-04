@@ -1,75 +1,52 @@
-import { useRef } from 'react'
-import { gsap, useGSAP } from '../animations/gsap.js'
-import { MEDIA } from '../animations/stageTimeline.js'
-import {
-  createHeader,
-  createRules,
-  createIntro,
-  createProject,
-  createProcess,
-  createSpecs,
-  createClosing,
-  createReducedFades,
-  createDemoBadge,
-} from '../animations/experienceTimeline.js'
-import SiteHeader from '../site/SiteHeader.jsx'
-import SiteIntro from '../site/SiteIntro.jsx'
-import SiteProject from '../site/SiteProject.jsx'
-import SiteProcess from '../site/SiteProcess.jsx'
-import SiteSpecs from '../site/SiteSpecs.jsx'
-import SiteClosing from '../site/SiteClosing.jsx'
-import '../site/site.css'
-import '../site/sections.css'
+import SiteDemo from '../site/SiteDemo.jsx'
+import { company } from '../site/content.js'
+import './SceneExperience.css'
 
 /**
- * Scene 04: The Experience. The Wehrkamp Metallbau site continues below the
- * pinned stage, whose last state is this site's hero (SiteHero).
+ * Scene 03 + 04: Enter / Experience. A layer of the pinned stage.
+ *
+ * Two levels, kept strictly apart:
+ *   - Viktor Builds (Geist, dark): statement, caption, context line.
+ *   - The demo website (brand tokens), only ever inside .portal__clip,
+ *     which is the browser frame's page area or the full screen.
+ *
+ * Without motion the same markup is a framed section: statement,
+ * the demo page in a browser frame, caption.
  */
 export default function SceneExperience() {
-  const root = useRef(null)
-
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
-
-      mm.add(MEDIA, (ctx) => {
-        const { isDesktop, reduceMotion } = ctx.conditions
-        const q = gsap.utils.selector(root)
-        const hero = document.querySelector('.scene--site')
-
-        if (reduceMotion) {
-          // The hero sits outside this component's scope, so it is looked up directly.
-          createDemoBadge({ trigger: hero, start: 'top 60%' })
-          createHeader(q, { trigger: hero, start: 'bottom top' })
-          createReducedFades(q)
-          return
-        }
-
-        // Both appear exactly as the pinned stage releases into the site.
-        createDemoBadge({ trigger: root.current, start: 'top bottom' })
-        createHeader(q, { trigger: root.current, start: 'top bottom' })
-        createRules(q)
-        createIntro(q)
-        createProject(q, { isDesktop })
-        createProcess(q, { isDesktop })
-        createSpecs(q, { isDesktop })
-        // Ends on the label `handoff`: the starting point of Scene 05.
-        createClosing(q, { isDesktop })
-      })
-
-      return () => mm.revert()
-    },
-    { scope: root },
-  )
-
   return (
-    <div className="site site-body" data-brand="metallbau" ref={root}>
-      <SiteHeader />
-      <SiteIntro />
-      <SiteProject />
-      <SiteProcess />
-      <SiteSpecs />
-      <SiteClosing />
-    </div>
+    <section className="scene scene--site" aria-labelledby="experience-title">
+      <h2 id="experience-title" className="experience__statement">
+        <span className="experience__mask">
+          <span className="experience__line">Same principles.</span>
+        </span>{' '}
+        <span className="experience__mask">
+          <span className="experience__line">Different business.</span>
+        </span>
+      </h2>
+
+      <div
+        className="portal__clip site"
+        data-brand="metallbau"
+        role="group"
+        aria-label={`Demo-Website: ${company.name} (fiktives Unternehmen)`}
+      >
+        <div className="portal__content">
+          <SiteDemo />
+        </div>
+      </div>
+
+      <p className="experience__caption">
+        <span>Website 01 — Industrial / Craft</span>
+        <span className="experience__caption-sep" aria-hidden="true">
+          {' · '}
+        </span>
+        <span>Designed and built by Viktor Builds</span>
+      </p>
+
+      <p className="experience__context" aria-hidden="true">
+        Viktor Builds / Website 01
+      </p>
+    </section>
   )
 }

@@ -1,8 +1,9 @@
 /* ─────────────────────────────────────────────────────────────
-   The fictional client site (Scene 03 hero + Scene 04 body):
-   base, hero, header, links and photos. Chapters: sections.css.
+   The demo client website (Scene 03 / 04): one short page in the
+   brand's tokens. Viktor's own layer around it (statement, caption,
+   context line) lives in SceneExperience.css.
    Base rules = static final state, which is also the reduced-motion
-   layout. Motion-only layout lives at the bottom of each file.
+   layout. Motion-only layout lives at the bottom.
    ───────────────────────────────────────────────────────────── */
 
 .site {
@@ -11,32 +12,21 @@
   font-family: var(--brand-font);
 }
 
-.site a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.site a:focus-visible {
-  outline: 2px solid var(--brand-signal);
-  outline-offset: 4px;
-}
-
 .site ::selection {
   background: var(--brand-ink);
   color: var(--brand-bg);
 }
 
-/* Text link with an underline. The only place the signal red appears on
-   hover: it marks the action, nothing else. */
+/* Text link with an underline. The signal red marks the primary action
+   and nothing else. (The demo's links are visual only, see SiteNav.) */
 .site-link {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
+  padding: 0.6em 0;
   font-weight: 600;
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.3em;
-  transition: text-decoration-color 0.2s linear;
 }
 
 .site-link::after {
@@ -45,7 +35,7 @@
   font-weight: 400;
 }
 
-.site-link:hover {
+.site-link--primary {
   text-decoration-color: var(--brand-signal);
   text-decoration-thickness: 2px;
 }
@@ -95,12 +85,6 @@ img.site-photo,
    numbers as the mock in BrowserFrame.css. Scaled down to the frame's
    page area, both grids coincide. */
 
-.scene.scene--site {
-  display: block;
-  place-items: normal;
-  padding: 0;
-}
-
 .portal__content {
   container-type: inline-size;
   background: var(--brand-bg);
@@ -110,11 +94,10 @@ img.site-photo,
   display: flex;
   flex-direction: column;
   gap: 3.4cqw;
-  min-height: 100svh;
   padding: 2.4cqw 4.4cqw 3.6cqw;
 }
 
-/* Navigation (hero and fixed header) */
+/* Navigation */
 
 .site-nav {
   display: flex;
@@ -138,34 +121,14 @@ img.site-photo,
   font-weight: 800;
 }
 
-.site-nav__links ul {
+.site-nav__links {
   display: flex;
   gap: 2.6cqw;
 }
 
-.site-nav__links a,
+.site-nav__links li,
 .site-nav__contact {
-  position: relative;
-  display: inline-block;
   padding: 0.6em 0;
-}
-
-.site-nav__links a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0.35em;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right center;
-  transition: transform 0.4s var(--ease-out);
-}
-
-.site-nav__links a:hover::after {
-  transform: scaleX(1);
-  transform-origin: left center;
 }
 
 .site-nav__contact {
@@ -196,11 +159,10 @@ img.site-photo,
 }
 
 .site-hero__title {
-  font-size: 4.2cqw;
+  font-size: 5.6cqw;
   font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.03em;
-  hyphens: manual;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
 }
 
 .site-line {
@@ -270,65 +232,136 @@ img.site-photo,
   color: var(--brand-muted);
 }
 
-/* ── Fixed header ───────────────────────────────────────────────
-   Same container and padding as the hero, so its nav sits exactly
-   where the hero nav was when it takes over. */
+/* ── Project ────────────────────────────────────────────────────
+   One full-bleed photo and a caption on the 12-column grid. The
+   caption, details and CTA share the anchors of columns 1, 5 and 9. */
 
-.site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 20;
-  container-type: inline-size;
-  background: var(--brand-bg);
-  border-bottom: 1px solid transparent;
-  visibility: hidden;
-  transition: border-color 0.3s linear;
+.site-project__media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--brand-placeholder);
 }
 
-.site-header.is-visible {
-  visibility: visible;
+.site-project__img {
+  position: absolute;
+  inset: 0;
 }
 
-.site-header.is-ruled {
-  border-bottom-color: var(--brand-line);
+.site-project__caption,
+.site-details,
+.site-cta {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 1.6cqw;
+  padding-inline: 4.4cqw;
 }
 
-.site-header__inner {
-  padding: 2.4cqw 4.4cqw 0.8cqw;
+.site-project__caption {
+  padding-top: 1.4cqw;
+  font-size: max(13px, 1.1cqw);
+  color: var(--brand-muted);
 }
 
-/* ── Demo badge (Viktor Builds layer, not part of the client site) ── */
+.site-project__caption > .site-line {
+  grid-column: span 4;
+}
 
-.demo-badge {
-  position: fixed;
-  left: clamp(0.875rem, 1.6vw, 1.5rem);
-  bottom: clamp(0.875rem, 1.6vw, 1.5rem);
-  z-index: 10;
-  font-size: 0.625rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
+.site-project__caption strong {
+  font-weight: 650;
+  color: var(--brand-ink);
+}
+
+/* ── Details: three values, set as type ───────────────────────── */
+
+.site-details {
+  padding-top: 8cqw;
+  padding-bottom: 8cqw;
+}
+
+.site-details__item {
+  grid-column: span 4;
+  padding-top: 1.1cqw;
+  border-top: 1px solid var(--brand-line-strong);
+}
+
+.site-details__label {
+  font-size: max(11px, 0.85cqw);
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #fff;
-  mix-blend-mode: difference;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.6s var(--ease-out);
+  color: var(--brand-muted);
 }
 
-.demo-badge.is-visible {
-  opacity: 0.5;
+.site-details__value {
+  margin-top: 2.2cqw;
+  font-size: 7.2cqw;
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+}
+
+/* ── CTA ─────────────────────────────────────────────────────── */
+
+.site-cta {
+  align-items: end;
+  row-gap: 6cqw;
+  padding-top: 7cqw;
+  padding-bottom: 2.4cqw;
+  border-top: 1px solid var(--brand-line);
+}
+
+.site-cta__copy {
+  grid-column: 1 / span 7;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2cqw;
+}
+
+.site-cta__title {
+  font-size: 4.2cqw;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.site-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 2.6cqw;
+  font-size: max(14px, 1cqw);
+}
+
+.site-cta__phone {
+  color: var(--brand-muted);
+}
+
+.site-cta__media {
+  position: relative;
+  grid-column: 9 / span 4;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--brand-placeholder);
+}
+
+.site-cta__footer {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.1cqw;
+  border-top: 1px solid var(--brand-line);
+  font-size: max(11px, 0.85cqw);
+  color: var(--brand-muted);
 }
 
 @media (max-width: 767.98px) {
   .site-hero {
     gap: 7cqw;
     padding: 5cqw 6cqw 7cqw;
-  }
-
-  .site-header__inner {
-    padding: 5cqw 6cqw 2cqw;
   }
 
   .site-nav {
@@ -359,7 +392,7 @@ img.site-photo,
   }
 
   .site-hero__title {
-    font-size: 10.5cqw;
+    font-size: 12.5cqw;
   }
 
   .site-hero__text {
@@ -387,6 +420,70 @@ img.site-photo,
   .site-facts__item:nth-child(n + 2) {
     display: none;
   }
+
+  .site-project__media {
+    aspect-ratio: 4 / 5;
+  }
+
+  .site-project__caption,
+  .site-details,
+  .site-cta {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 6cqw;
+  }
+
+  .site-project__caption {
+    gap: 0.5cqw;
+    padding-top: 4cqw;
+    font-size: max(14px, 3.6cqw);
+  }
+
+  .site-details {
+    gap: 7cqw;
+    padding-top: 16cqw;
+    padding-bottom: 16cqw;
+  }
+
+  .site-details__item {
+    padding-top: 2.6cqw;
+  }
+
+  .site-details__label {
+    font-size: max(11px, 2.8cqw);
+  }
+
+  .site-details__value {
+    margin-top: 3cqw;
+    font-size: 18cqw;
+  }
+
+  .site-cta {
+    align-items: stretch;
+    gap: 9cqw;
+    padding-top: 14cqw;
+    padding-bottom: 6cqw;
+  }
+
+  .site-cta__copy {
+    gap: 4cqw;
+  }
+
+  .site-cta__title {
+    font-size: 9.6cqw;
+  }
+
+  .site-cta__actions {
+    gap: 0 6cqw;
+    font-size: max(15px, 3.8cqw);
+  }
+
+  .site-cta__footer {
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-top: 3cqw;
+    font-size: max(12px, 3cqw);
+  }
 }
 
 /* Short phones: the facts row would fall below the fold of the pinned hero. */
@@ -397,24 +494,11 @@ img.site-photo,
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Motion layout. GSAP drives these states (portalTimeline.js).
+   Motion layout. GSAP drives these states (portalTimeline.js,
+   experienceTimeline.js).
    ───────────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: no-preference) {
-  /* The hero is a layer of the pinned stage, hidden until Scene 03. */
-  .stage > .scene--site {
-    z-index: 3;
-    visibility: hidden;
-    background: none;
-  }
-
-  .portal__clip {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    background: var(--brand-bg);
-  }
-
   .portal__content {
     position: absolute;
     top: 0;
@@ -423,8 +507,15 @@ img.site-photo,
     height: 100%;
   }
 
+  /* The hero is exactly one screen; the rest of the page sits below it
+     and is "scrolled" by moving .site-demo (experienceTimeline.js). */
   .stage .site-hero {
-    height: 100%;
+    height: 100svh;
     min-height: 0;
+  }
+
+  /* Keeps the page footer clear of Viktor's context line. */
+  .stage .site-cta {
+    padding-bottom: 3.75rem;
   }
 }

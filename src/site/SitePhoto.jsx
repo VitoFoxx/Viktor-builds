@@ -1,11 +1,11 @@
 import { media } from './media.js'
 
 /**
- * Every client-site image goes through here. Fills its parent (which sets
+ * Every demo-site image goes through here. Fills its parent (which sets
  * the size). Without a photo it renders a neutral, clearly labelled
  * placeholder: no drawing, no pattern, nothing that pretends to be a photo.
  */
-export default function SitePhoto({ name, sizes = '100vw', eager = false, className = '' }) {
+export default function SitePhoto({ name, sizes = '100vw', priority = false, className = '' }) {
   const shot = media[name]
   const { desktop, mobile } = shot
 
@@ -33,8 +33,10 @@ export default function SitePhoto({ name, sizes = '100vw', eager = false, classN
         height={desktop.height}
         alt={shot.alt}
         style={{ objectPosition: shot.focus }}
-        loading={eager ? 'eager' : 'lazy'}
-        fetchPriority={eager ? 'high' : undefined}
+        // Eager: the demo lives inside the pinned stage, where lazy loading
+        // would only start once the photo is already on screen.
+        loading="eager"
+        fetchPriority={priority ? 'high' : undefined}
         decoding="async"
       />
     </picture>

@@ -9,7 +9,16 @@
   --c-surface-raised: #18191c;
   --c-accent: #b9c8ff;
 
+  /* Client site (Scene 03 / 04): its own brand, deliberately unlike Viktor Builds */
+  --site-bg: #ebe7e0;
+  --site-ink: #161614;
+  --site-muted: #5f5b55;
+  --site-line: rgb(22 22 20 / 0.16);
+  --site-on-ink: #ebe7e0;
+  --site-on-ink-muted: #a29d94;
+
   /* Type */
+  --font-serif: 'Instrument Serif', ui-serif, Georgia, 'Times New Roman', serif;
   --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --fs-display: clamp(3.5rem, 13vw, 12.5rem);
   --fs-message: clamp(0.95rem, 1.5vw, 1.375rem);

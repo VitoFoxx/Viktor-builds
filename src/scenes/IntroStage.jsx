@@ -2,8 +2,10 @@ import { useRef } from 'react'
 import { gsap, ScrollTrigger, useGSAP } from '../animations/gsap.js'
 import { MEDIA, createStageTimeline, createReducedMotion } from '../animations/stageTimeline.js'
 import { createIntroTimeline } from '../animations/introTimeline.js'
+import { createHeroExit } from '../animations/portalTimeline.js'
 import SceneVoid from './SceneVoid.jsx'
 import SceneInterface from './SceneInterface.jsx'
+import SiteHero from '../site/SiteHero.jsx'
 import './IntroStage.css'
 
 export default function IntroStage() {
@@ -33,6 +35,7 @@ export default function IntroStage() {
           onUpdate: (self) => (carriedProgress = self.progress),
         })
         const st = tl.scrollTrigger
+        createHeroExit(q, st)
 
         let raf = 0
         if (carriedProgress > 0) {
@@ -59,6 +62,7 @@ export default function IntroStage() {
     <div className="stage" ref={stage}>
       <SceneVoid />
       <SceneInterface />
+      <SiteHero />
     </div>
   )
 }

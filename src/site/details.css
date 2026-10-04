@@ -1,0 +1,177 @@
+/* ── Details: base = stacked chapters (mobile, reduced motion) ── */
+
+.details {
+  padding: 16svh var(--brand-gutter);
+}
+
+.details__frame {
+  display: flex;
+  flex-direction: column;
+  gap: 14svh;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.detail__figure {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--brand-surface);
+}
+
+.detail__img,
+.detail__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail__shade {
+  position: absolute;
+  inset: 0;
+  background: #0e0d0c;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.detail__caption {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 32rem;
+}
+
+.detail__num {
+  color: var(--brand-accent);
+}
+
+.detail__title {
+  font-size: clamp(2rem, 9vw, 4.5rem);
+  font-stretch: var(--brand-stretch);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.detail__text {
+  max-width: 26em;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--brand-ink);
+}
+
+.detail__spec {
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--brand-line);
+}
+
+.details__index,
+.details__progress {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .detail__figure {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* ── Desktop motion: one pinned frame, chapters cut into each other ── */
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .details {
+    padding: 0;
+  }
+
+  .details__frame {
+    position: relative;
+    display: block;
+    height: 100svh;
+    overflow: hidden;
+  }
+
+  /* Each chapter is its own layer: the next one covers image and caption. */
+  .detail {
+    position: absolute;
+    inset: 0;
+    display: block;
+    isolation: isolate;
+  }
+
+  .detail__figure {
+    position: absolute;
+    inset: 0;
+    aspect-ratio: auto;
+  }
+
+  /* Legibility of the caption, part of the photo layer so the cut takes it along. */
+  .detail__figure::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(14 13 12 / 0.78), transparent 48%);
+    pointer-events: none;
+  }
+
+  .detail__caption {
+    position: absolute;
+    left: var(--brand-gutter);
+    bottom: 11svh;
+    z-index: 1;
+    width: min(34rem, 44vw);
+  }
+
+  .detail__title {
+    font-size: clamp(3rem, 6.4vw, 7rem);
+  }
+
+  .details__index {
+    position: absolute;
+    right: var(--brand-gutter);
+    top: 50%;
+    z-index: 2;
+    display: grid;
+    gap: 0.85rem;
+    translate: 0 -50%;
+    font-family: var(--brand-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .details__index-item {
+    display: flex;
+    gap: 1.1rem;
+    opacity: 0.38;
+  }
+
+  .details__index-item:first-child {
+    opacity: 1;
+  }
+
+  .details__index-num {
+    color: var(--brand-accent);
+  }
+
+  .details__progress {
+    position: absolute;
+    left: var(--brand-gutter);
+    right: var(--brand-gutter);
+    bottom: 5svh;
+    z-index: 2;
+    display: block;
+    height: 1px;
+    background: var(--brand-line);
+  }
+
+  .details__progress-bar {
+    position: absolute;
+    inset: 0;
+    background: var(--brand-ink);
+    transform-origin: left center;
+  }
+}

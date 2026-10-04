@@ -5,7 +5,7 @@ import { gsap } from './gsap.js'
  * Scene 02 → 03 is one continuous pinned sequence.
  *
  * Labels (timeline seconds, continuing stageTimeline.js):
- *   resolve  9.3   inside the frame, the abstract page becomes the real site
+ *   resolve  9.3   inside the frame, the photo floods the abstract page: it becomes VANTA
  *   enter   10.9   the view moves into the frame until the site fills the screen
  *   arrive  13.1   short rest, then the stage unpins into Scene 04
  *
@@ -49,30 +49,45 @@ export function addPortal(tl, stage, q) {
   const CLIP_FULL = 'inset(0px 0px 0px 0px round 0px 0px 0px 0px)'
 
   /* ── resolve ──────────────────────────────────────────── */
-  // "Lights on": the light page fades in over the dark mock first, then the
-  // real content sets itself into the mock's grid. Keeping the two apart
-  // avoids two headlines blending into each other.
+  // "The photo floods the frame": the brand layer covers the mock, but at
+  // first only its photo shows, exactly on the mock's image area. From there
+  // it opens to the whole page, then nav and headline set themselves.
+  const media = q('.mock-hero__media')[0]
+  // The mock's image area in site-layer coordinates (the layer is W × H and
+  // is scaled by page width / W onto the page area).
+  const mediaInset = () => {
+    const a = area()
+    const k = a.width / a.W
+    const x = (media.offsetLeft - page.offsetLeft) / k
+    const y = (media.offsetTop - page.offsetTop) / k
+    const w = media.offsetWidth / k
+    const h = media.offsetHeight / k
+    const r = parseFloat(getComputedStyle(media).borderRadius) / k
+    return `inset(${y}px ${a.W - x - w}px ${a.H - y - h}px ${x}px round ${r}px)`
+  }
+
   tl.addLabel('resolve', '+=0')
-    .fromTo(q('.scene--site'), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5, ease: 'power1.inOut' }, 'resolve')
+    .fromTo(q('.scene--site'), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.45, ease: 'power1.inOut' }, 'resolve')
+    .fromTo(
+      q('.site-hero__media'),
+      { clipPath: mediaInset },
+      { clipPath: 'inset(0px 0px 0px 0px round 0px)', duration: 1, ease: 'power3.inOut' },
+      'resolve+=0.2',
+    )
+    .fromTo(q('.site-hero__img img'), { scale: 1.15 }, { scale: 1.04, duration: 1.3, ease: 'power2.out' }, 'resolve+=0.2')
+    .fromTo(q('.site-hero__shade'), { opacity: 0 }, { opacity: 1, duration: 0.6, ease: 'power1.inOut' }, 'resolve+=0.7')
+    .fromTo(
+      q('.site-hero [data-reveal]'),
+      { autoAlpha: 0, y: 10 },
+      { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.08, ease: 'power2.out' },
+      'resolve+=0.9',
+    )
     .fromTo(
       q('.site-line__inner'),
       { yPercent: 110 },
       { yPercent: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out' },
-      'resolve+=0.45',
+      'resolve+=1.05',
     )
-    .fromTo(
-      q('.site-hero [data-reveal]'),
-      { autoAlpha: 0, y: 10 },
-      { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.06, ease: 'power2.out' },
-      'resolve+=0.5',
-    )
-    .fromTo(
-      q('.site-hero__media'),
-      { autoAlpha: 0 },
-      { autoAlpha: 1, duration: 0.7, ease: 'power1.inOut' },
-      'resolve+=0.55',
-    )
-    .fromTo(q('.site-hero__img img'), { scale: 1.08 }, { scale: 1, duration: 1.2, ease: 'power2.out' }, 'resolve+=0.55')
 
   /* ── enter ────────────────────────────────────────────── */
   const ENTER = { duration: 2.2, ease: 'power2.inOut' }
@@ -90,6 +105,8 @@ export function addPortal(tl, stage, q) {
     .set(wrap, { transformOrigin: '0 0' }, 'enter')
     .to(wrap, { x: frameTarget('x'), y: frameTarget('y'), scale: frameTarget('scale'), ...ENTER }, 'enter')
     .to(q('.interface__message'), { y: () => -stage.offsetHeight * 0.22, autoAlpha: 0, duration: 1.3, ease: 'power2.in' }, 'enter')
+    // A slow dolly towards the car while the view moves in.
+    .to(q('.site-hero__img img'), { scale: 1, ...ENTER }, 'enter')
 
   /* ── arrive ───────────────────────────────────────────── */
   tl.addLabel('arrive', 'enter+=2.2')

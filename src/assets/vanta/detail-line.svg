@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1350" width="2400" height="1350">
+<defs>
+  <radialGradient id="l" cx="0.58" cy="0.2" r="0.85"><stop offset="0" stop-color="#3a3530"/><stop offset="0.55" stop-color="#191714"/><stop offset="1" stop-color="#0c0b0a"/></radialGradient>
+  <linearGradient id="f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="0.04"/></linearGradient>
+</defs>
+<rect width="2400" height="1350" fill="url(#l)"/>
+<rect y="837.0" width="2400" height="513.0" fill="url(#f)"/>
+<g transform="translate(-4900 -380) scale(7.5)"><g fill="none" stroke="#ece8e1" stroke-linejoin="round">
+  <path d="M40 232 L30 205 Q32 180 70 170 L290 150 Q330 140 385 98 Q420 78 520 76 Q600 76 700 110 L850 150 Q905 162 925 190 L930 222 Q930 232 915 232 L828 232 A68 68 0 0 0 692 232 L268 232 A68 68 0 0 0 132 232 Z" fill="#1b1916" stroke-opacity="0.55" stroke-width="0.27999999999999997"/>
+  <path d="M398 104 Q428 86 515 84 Q588 84 664 114 L634 140 L384 142 Z" fill="#0f0e0c" stroke-opacity="0.35" stroke-width="0.27999999999999997"/>
+  <path d="M60 196 Q300 178 560 182 Q760 186 925 204" stroke-opacity="0.25" stroke-width="0.27999999999999997"/>
+  <g fill="#0b0a09" stroke-opacity="0.5" stroke-width="0.27999999999999997">
+    <circle cx="200" cy="232" r="54"/><circle cx="760" cy="232" r="54"/></g>
+  <g stroke-opacity="0.3" stroke-width="0.27999999999999997">
+    <circle cx="200" cy="232" r="34"/><circle cx="760" cy="232" r="34"/></g>
+  <path d="M905 172 L928 178" stroke="#d9531e" stroke-opacity="0.9" stroke-width="0.5599999999999999"/>
+</g></g>
+<g fill="none" stroke="#ece8e1" stroke-opacity="0.35" stroke-width="2.4"><path d="M72.0 129.6 L72.0 72.0 L129.6 72.0"/><path d="M2328.0 129.6 L2328.0 72.0 L2270.4 72.0"/><path d="M72.0 1220.4 L72.0 1278.0 L129.6 1278.0"/><path d="M2328.0 1220.4 L2328.0 1278.0 L2270.4 1278.0"/></g>
+<text x="2306.4" y="1256.4" text-anchor="end" font-family="ui-monospace, Menlo, monospace" font-size="26.4" letter-spacing="3.1679999999999997" fill="#ece8e1" fill-opacity="0.4">PLACEHOLDER · DETAIL LINE · 16:9</text>
+</svg>

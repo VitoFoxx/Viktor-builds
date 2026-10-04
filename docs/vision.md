@@ -84,34 +84,49 @@ The transition should feel immersive rather than like opening a new page.
 
 ## SCENE 04 — THE EXPERIENCE
 
-Inside the website is a fictional premium business website.
+Inside the website is **VANTA**, a fictional premium automotive performance / restomod brand.
 
-This section demonstrates:
+Scene 03 → Scene 04 is the "Enter the Website" moment: the visitor passes through the interface and arrives inside a finished, immersive brand experience.
 
-- typography
-- layout
-- imagery
-- motion
-- interaction
-- visual hierarchy
+The experience is built around fullscreen vehicle imagery and unfolds as a sequence:
+
+- **Automotive hero** — the vehicle fills the screen, the VANTA brand is introduced with confident, minimal typography
+- **Vehicle detail sequence** — close-ups of craftsmanship and engineering, revealed through scroll
+- **Performance typography** — large technical figures and specifications set as editorial typography
+- **VANTA / 001** — a closing product presentation of the first vehicle
+
+Visual direction:
+
+- premium
+- cinematic
+- editorial
+- technical
+- minimal
+
+Avoid typical AI and SaaS design patterns: no generic feature grids, gradient blobs, glassmorphism cards or stock "dashboard" aesthetics.
 
 The purpose is to show what a finished premium website can feel like.
+
+VANTA is the starting state for Scene 05.
 
 ---
 
 ## SCENE 05 — ONE WEBSITE, MANY POSSIBILITIES
 
-The interface morphs through different business contexts.
+Scene 05 starts directly from the VANTA website of Scene 04.
+
+From there, the interface transforms into clearly different business contexts.
 
 Potential examples:
 
 - architecture
 - restaurant
-- automotive
 - medical
 - craft / local premium business
 
 The underlying design system adapts while maintaining quality.
+
+The transformation shows that Viktor Builds is not limited to automotive.
 
 The message:
 

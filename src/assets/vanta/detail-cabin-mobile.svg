@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="1080" height="1350">
+<defs>
+  <radialGradient id="l" cx="0.58" cy="0.2" r="0.85"><stop offset="0" stop-color="#3a3530"/><stop offset="0.55" stop-color="#191714"/><stop offset="1" stop-color="#0c0b0a"/></radialGradient>
+  <linearGradient id="f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="0.04"/></linearGradient>
+</defs>
+<rect width="1080" height="1350" fill="url(#l)"/>
+<rect y="837.0" width="1080" height="513.0" fill="url(#f)"/>
+<g transform="translate(-720 120) scale(3.0)"><g fill="none" stroke="#ece8e1" stroke-width="0.315">
+  <circle cx="500" cy="190" r="170" stroke-opacity="0.55"/>
+  <circle cx="500" cy="190" r="150" stroke-opacity="0.25"/>
+  <circle cx="500" cy="190" r="38" stroke-opacity="0.45" fill="#1b1916"/>
+  <path d="M362 190 L462 190 M538 190 L638 190 M500 228 L500 340" stroke-opacity="0.45"/>
+  <path d="M500 20 L500 40" stroke="#d9531e" stroke-width="0.63"/>
+  <path d="M120 300 Q300 290 340 360 M880 300 Q700 290 660 360" stroke-opacity="0.2" stroke-dasharray="4 7"/>
+</g></g>
+<g fill="none" stroke="#ece8e1" stroke-opacity="0.35" stroke-width="1.35"><path d="M40.5 72.9 L40.5 40.5 L72.9 40.5"/><path d="M1039.5 72.9 L1039.5 40.5 L1007.1 40.5"/><path d="M40.5 1277.1 L40.5 1309.5 L72.9 1309.5"/><path d="M1039.5 1277.1 L1039.5 1309.5 L1007.1 1309.5"/></g>
+<text x="1027.35" y="1297.35" text-anchor="end" font-family="ui-monospace, Menlo, monospace" font-size="14.85" letter-spacing="1.7819999999999998" fill="#ece8e1" fill-opacity="0.4">PLACEHOLDER · DETAIL CABIN · 4:5</text>
+</svg>

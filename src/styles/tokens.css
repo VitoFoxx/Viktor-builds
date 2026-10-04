@@ -9,16 +9,7 @@
   --c-surface-raised: #18191c;
   --c-accent: #b9c8ff;
 
-  /* Client site (Scene 03 / 04): its own brand, deliberately unlike Viktor Builds */
-  --site-bg: #ebe7e0;
-  --site-ink: #161614;
-  --site-muted: #5f5b55;
-  --site-line: rgb(22 22 20 / 0.16);
-  --site-on-ink: #ebe7e0;
-  --site-on-ink-muted: #a29d94;
-
   /* Type */
-  --font-serif: 'Instrument Serif', ui-serif, Georgia, 'Times New Roman', serif;
   --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --fs-display: clamp(3.5rem, 13vw, 12.5rem);
   --fs-message: clamp(0.95rem, 1.5vw, 1.375rem);
@@ -34,4 +25,21 @@
 
   /* Motion (CSS-driven micro motion only; scroll motion lives in GSAP) */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Client brand (Scene 03 / 04): VANTA, a fictional automotive restomod brand.
+   Deliberately unlike Viktor Builds: warmer graphite, bone, one signal accent.
+   Scoped to the brand root, so a later scene can swap the brand as a whole. */
+[data-brand='vanta'] {
+  --brand-bg: #0e0d0c;
+  --brand-surface: #171513;
+  --brand-ink: #ece8e1;
+  --brand-muted: #8a857d;
+  --brand-line: rgb(236 232 225 / 0.14);
+  --brand-line-strong: rgb(236 232 225 / 0.32);
+  --brand-accent: #d9531e;
+  --brand-font: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --brand-font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --brand-stretch: 125%;
+  --brand-gutter: clamp(1.25rem, 4.4vw, 4rem);
 }

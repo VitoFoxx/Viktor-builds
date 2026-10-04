@@ -1,0 +1,147 @@
+/* ── Performance: base = spec row (also reduced motion, end state) ── */
+
+.performance {
+  padding: 16svh var(--brand-gutter);
+  border-top: 1px solid var(--brand-line);
+}
+
+.performance__frame {
+  display: flex;
+  flex-direction: column;
+  gap: 10svh;
+}
+
+.performance__head {
+  display: grid;
+  gap: 1.1rem;
+}
+
+/* A measuring line: hairline with a fine tick every 2.5 %. */
+.performance__rule {
+  position: relative;
+  display: block;
+  height: 9px;
+  border-bottom: 1px solid var(--brand-line-strong);
+  background: repeating-linear-gradient(
+      to right,
+      var(--brand-line-strong) 0 1px,
+      transparent 1px 2.5%
+    )
+    bottom / 100% 5px no-repeat;
+  transform-origin: left center;
+}
+
+.performance__marker {
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 7px;
+  height: 7px;
+  background: var(--brand-accent);
+  translate: -50% 0;
+}
+
+.performance__figures {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--brand-gutter);
+}
+
+.figure {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1.1rem;
+}
+
+.figure__label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  color: var(--brand-ink);
+}
+
+.figure__note {
+  color: var(--brand-muted);
+}
+
+.figure__value {
+  font-size: clamp(4rem, 9.4vw, 10.5rem);
+  font-stretch: var(--brand-stretch);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.figure__digits {
+  display: inline-flex;
+  align-items: flex-start;
+  transform-origin: left bottom;
+}
+
+.figure__digit {
+  display: block;
+  height: 1em;
+  overflow: hidden;
+}
+
+/* Twenty entries (0–9 twice); the static state shows the second turn. */
+.figure__reel {
+  display: block;
+  transform: translateY(calc((10 + var(--d)) * -1em));
+}
+
+.figure__reel > span {
+  display: block;
+  height: 1em;
+}
+
+.figure__unit {
+  margin: 0.12em 0 0 0.22em;
+  font-size: 0.24em;
+  font-stretch: 112%;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--brand-accent);
+}
+
+@media (max-width: 767.98px) {
+  .performance__figures {
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+  }
+
+  .figure__value {
+    font-size: clamp(3.5rem, 21vw, 7rem);
+  }
+}
+
+/* ── Motion: one pinned frame; figures roll in at the centre ── */
+
+@media (prefers-reduced-motion: no-preference) {
+  .performance {
+    padding: 0;
+  }
+
+  .performance__frame {
+    position: relative;
+    justify-content: space-between;
+    gap: 0;
+    height: 100svh;
+    padding: 14svh var(--brand-gutter) 12svh;
+  }
+}
+
+@media (max-width: 767.98px) and (prefers-reduced-motion: no-preference) {
+  .performance__frame {
+    padding: 12svh var(--brand-gutter) 9svh;
+  }
+
+  .performance__figures {
+    gap: 1.6rem;
+  }
+
+  .figure__value {
+    font-size: clamp(3rem, 17vw, 6rem);
+  }
+}

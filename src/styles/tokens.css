@@ -9,16 +9,7 @@
   --c-surface-raised: #18191c;
   --c-accent: #b9c8ff;
 
-  /* Client site (Scene 03 / 04): its own brand, deliberately unlike Viktor Builds */
-  --site-bg: #ebe7e0;
-  --site-ink: #161614;
-  --site-muted: #5f5b55;
-  --site-line: rgb(22 22 20 / 0.16);
-  --site-on-ink: #ebe7e0;
-  --site-on-ink-muted: #a29d94;
-
   /* Type */
-  --font-serif: 'Instrument Serif', ui-serif, Georgia, 'Times New Roman', serif;
   --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --fs-display: clamp(3.5rem, 13vw, 12.5rem);
   --fs-message: clamp(0.95rem, 1.5vw, 1.375rem);
@@ -34,4 +25,27 @@
 
   /* Motion (CSS-driven micro motion only; scroll motion lives in GSAP) */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Design study 01 (Scene 03 / 04): a website for a metalwork business.
+   Paper white, black, grey and one functional signal colour (RAL 3020
+   traffic red: primary action only). Scoped to the brand root, so ADAPT
+   can rebuild the study for another business as a whole. */
+[data-brand='metallbau'] {
+  --brand-bg: #f2f2f0;
+  --brand-ink: #111111;
+  --brand-muted: #5a5a58;
+  --brand-line: rgb(17 17 17 / 0.14);
+  --brand-line-strong: rgb(17 17 17 / 0.4);
+  --brand-dark: #161616;
+  --brand-on-dark: #ececea;
+  --brand-on-dark-muted: #9a9a97;
+  --brand-line-dark: rgb(236 236 234 / 0.16);
+  --brand-signal: #c1121c;
+  --brand-placeholder: #d6d6d3;
+  --brand-placeholder-dark: #2a2a29;
+  --brand-font: 'Schibsted Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --brand-gutter: clamp(1.25rem, 4.4vw, 4rem);
+  --brand-col-gap: clamp(0.75rem, 1.6vw, 1.5rem);
+  --brand-header: 64px;
 }

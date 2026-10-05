@@ -5,6 +5,11 @@
    ───────────────────────────────────────────────────────────── */
 
 .stage {
+  /* Frame size (Scene 02) and the scale the frame returns to after
+     Scene 04, where ADAPT takes over (read by experienceTimeline.js). */
+  --frame-w: min(80vw, 1120px, calc((100svh - 13rem) * 1.6));
+  --exit-scale: 0.75;
+
   position: relative;
 }
 
@@ -136,8 +141,6 @@
 }
 
 .interface__frame-wrap {
-  --frame-w: min(80vw, 1120px, calc((100svh - 13rem) * 1.6));
-
   position: relative;
   width: var(--frame-w);
   aspect-ratio: 16 / 10;
@@ -201,9 +204,12 @@
     display: block;
   }
 
-  .interface__frame-wrap {
+  .stage {
     --frame-w: min(84vw, 400px, calc((100svh - 12rem) * 0.6));
+    --exit-scale: 0.78;
+  }
 
+  .interface__frame-wrap {
     aspect-ratio: 3 / 5;
   }
 }

@@ -171,7 +171,7 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
     .to({}, { duration: 0.8 })
 
   addPortal(tl, stage, q)
-  addExperience(tl, stage, q)
+  addExperience(tl, stage, q, { isDesktop })
 
   return tl
 }

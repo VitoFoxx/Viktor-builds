@@ -178,7 +178,7 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
 
 /**
  * Reduced motion: no pin, no scrub. Every scene is a static section in its
- * final state (see CSS); Scene 02 and the framed demo only fade in briefly.
+ * final state (see CSS); Scene 02 and the framed study only fade in briefly.
  */
 export function createReducedMotion(q) {
   const fadeIn = (targets, trigger) =>
@@ -190,5 +190,5 @@ export function createReducedMotion(q) {
     })
 
   fadeIn(q('.interface__stack'), q('.scene--interface')[0])
-  fadeIn(q('.scene--site > :not(.experience__context)'), q('.scene--site')[0])
+  fadeIn(q('.scene--site > *'), q('.scene--site')[0])
 }

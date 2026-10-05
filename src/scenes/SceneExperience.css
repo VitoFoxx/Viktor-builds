@@ -1,55 +1,28 @@
 /* ─────────────────────────────────────────────────────────────
-   Scene 04: Viktor Builds' layer around the demo website.
-   Statement, caption and context line use Viktor's type, never the
-   demo brand's.
-   Base layout = reduced motion: a dark section with the statement,
-   the demo page in a static browser frame, and the caption.
+   Scene 03 / 04: Viktor Builds' layer around the design study.
+   The context line uses Viktor's type, never the study's.
+   Base layout = reduced motion: a dark section with the context
+   line and the study in a static browser frame.
    ───────────────────────────────────────────────────────────── */
 
 .scene.scene--site {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(1.25rem, 3.5svh, 2.25rem);
+  gap: clamp(1rem, 3svh, 1.75rem);
   padding: clamp(4rem, 12svh, 8rem) var(--gutter);
 }
 
-/* Same voice as the Scene 02 message. */
-.experience__statement {
-  font-size: var(--fs-message);
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.experience__mask {
-  display: inline-block;
-  clip-path: inset(-0.5em -0.5em 0 -0.5em);
-}
-
-.experience__line {
-  display: inline-block;
-}
-
-.experience__caption {
+.experience__context {
   font-size: var(--fs-label);
   font-weight: 500;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-align: center;
   text-transform: uppercase;
   color: var(--c-muted);
 }
 
-.experience__caption > span:last-child {
-  color: var(--c-fg);
-}
-
-.experience__context {
-  display: none;
-}
-
-/* Static browser frame around the demo page. */
+/* Static browser frame around the study. */
 .scene--site .portal__clip {
   position: relative;
   width: min(100%, 1120px);
@@ -66,24 +39,10 @@
   border-bottom: 1px solid var(--c-line);
 }
 
-@media (max-width: 767.98px) {
-  .experience__mask {
-    display: block;
-  }
-
-  .experience__caption > span {
-    display: block;
-  }
-
-  .experience__caption-sep {
-    display: none !important;
-  }
-}
-
 /* ─────────────────────────────────────────────────────────────
-   Motion layout: a layer of the pinned stage. The demo fills the
-   screen, then shrinks back into the frame at --exit-scale; the
-   statement and caption sit just above and below that frame.
+   Motion layout: a layer of the pinned stage. The study fills the
+   screen, then shrinks back into the frame at --exit-scale, where
+   ADAPT takes over. The context line stays bottom-left.
    ───────────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: no-preference) {
@@ -107,33 +66,14 @@
     content: none;
   }
 
-  .experience__statement,
-  .experience__caption {
-    position: absolute;
-    z-index: 1;
-    left: var(--gutter);
-    right: var(--gutter);
-  }
-
-  .experience__statement {
-    bottom: calc(50% + var(--frame-h) * var(--exit-scale) / 2 + clamp(1.25rem, 3.5svh, 2.25rem));
-  }
-
-  .experience__caption {
-    top: calc(50% + var(--frame-h) * var(--exit-scale) / 2 + clamp(1rem, 2.6svh, 1.75rem));
-  }
-
-  /* Small, but always there while the visitor is inside the demo. */
+  /* Small, like a film caption: never mistaken for the study's own
+     navigation, which always sits at the top. */
   .experience__context {
-    display: block;
     position: absolute;
     z-index: 2;
     left: clamp(0.875rem, 1.6vw, 1.5rem);
     bottom: clamp(0.875rem, 1.6vw, 1.5rem);
-    font-size: var(--fs-label);
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+    text-align: left;
     color: #fff;
     mix-blend-mode: difference;
     pointer-events: none;

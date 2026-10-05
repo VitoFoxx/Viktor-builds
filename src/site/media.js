@@ -37,10 +37,4 @@ export const media = {
     'Wohnraum mit viertelgewendelter Stahlwangentreppe und Eichenstufen',
     '16:9 · mobil 4:5',
   ),
-  workshop: shot(
-    'WORKSHOP_01',
-    'Werkstatt: Hände an einer Stahlwange, frische Schweißnaht',
-    'Hände eines Metallbauers an einer Stahlwange mit verschliffener Schweißnaht',
-    '3:2',
-  ),
 }

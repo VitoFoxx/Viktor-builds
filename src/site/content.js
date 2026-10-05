@@ -1,15 +1,14 @@
-// Content of the demo client website shown in Scene 03 / Scene 04.
-// Wehrkamp Metallbau is invented and only a secondary demo name: it lives in
-// `company` below and can be replaced in one place. Contact details are
-// deliberately non-functional (zero phone number).
+// Content of the Scene 03 / 04 design study: a website for a metalwork
+// business. There is deliberately no company name: the wordmark is the
+// trade itself, so the demo reads as a study by Viktor Builds, never as a
+// client or a reference.
 //
-// Scene 05 (ADAPT) will swap these slots per industry, together with
-// media.js and the [data-brand] tokens. Keep the slot structure:
-// nav, eyebrow, headline, text, actions, facts, project, details, cta.
+// ADAPT (Scene 05) will rebuild these slots per industry, together with
+// media.js and the [data-brand] tokens.
 
-export const company = {
-  name: 'Wehrkamp Metallbau',
-  short: 'Wehrkamp',
+export const study = {
+  trade: 'Metallbau',
+  context: 'Website 01 / Metallbau',
   nav: ['Projekte', 'Leistungen', 'Kontakt'],
   navAction: 'Anfrage',
   eyebrow: 'Metallbau · Hannover',
@@ -34,9 +33,3 @@ export const details = [
   { label: 'Wange', value: '15 MM' },
   { label: 'Oberfläche', value: 'DB 703' },
 ]
-
-export const cta = {
-  headline: ['Ihre Treppe beginnt', 'mit einem Aufmaß.'],
-  action: 'Anfrage stellen',
-  phone: '0511 000 000-0',
-}

@@ -8,19 +8,31 @@ Instead of presenting a conventional portfolio with project cards, the website i
 
 The experience should communicate:
 
-**IDEA → BUILD → ENTER → EXPERIENCE → ADAPT → INTELLIGENCE → CONVERSION → RESULT**
+**IDEA → BUILD → ENTER → EXPERIENCE → ADAPT → BUSINESS → RESULT**
 
 The visitor should gradually understand that a website is not simply a collection of pages.
 
-It is an experience, a system and a business tool.
+It is an experience and a business tool.
 
-**Viktor Builds remains the main brand throughout. Client websites are demonstrations, never the identity of the page.**
+Every scene answers one question a potential client has.
+
+**Viktor Builds remains the main brand throughout. Client websites are short design studies, never the identity of the page. There are no fixed templates: every business gets its own website.**
+
+## VIKTOR CONTEXT AND CTA
+
+- There is no permanent Viktor anchor from Scene 01. Scene 01 and 02 are Viktor's own voice already.
+- From Scene 03 on, a small context line appears bottom-left (Viktor's type, uppercase): **VIKTOR BUILDS — WEBSITE 01 / METALLBAU**. It counts on in ADAPT (WEBSITE 02 / RESTAURANT …). It sits at the bottom, so it can never be mistaken for a demo site's navigation.
+- "Projekt anfragen" does not scroll along permanently. The call to action may appear in ADAPT and BUSINESS as part of the story and becomes clearly dominant in RESULT.
+
+## TEXT ECONOMY
+
+Viktor speaks in very few lines across the whole page. Everything else is shown, not said.
 
 ---
 
 # EXPERIENCE NARRATIVE
 
-## SCENE 01 — THE VOID (INTRO / IDEA)
+## SCENE 01 — IDEA · The Void
 
 The experience begins in darkness.
 
@@ -48,7 +60,7 @@ The visitor should feel that something is beginning to form.
 
 ---
 
-## SCENE 02 — FROM IDEA TO INTERFACE (BUILD)
+## SCENE 02 — BUILD · From Idea to Interface
 
 The emerging visual form develops into an abstract browser/interface frame.
 
@@ -72,162 +84,87 @@ The transition from Scene 01 must feel continuous.
 
 ---
 
-## SCENE 03 — ENTER THE WEBSITE (ENTER)
+## SCENE 03 — ENTER · Enter the Website
 
 The browser/interface becomes a portal.
 
-The camera/view moves into the interface.
+The sketch resolves into a real website ("lights on"), then the camera moves into the interface.
 
 The visitor effectively enters the website.
 
 The transition should feel immersive rather than like opening a new page.
 
----
+The URL line reads `your-business.com` and stays constant until the finale: every website shown is "your business".
 
-## SCENE 04 — EXPERIENCE
-
-Message:
-
-**A WEBSITE SHOULDN'T JUST BE SEEN. IT SHOULD BE EXPERIENCED.**
-
-After entering the frame, the visitor briefly experiences a real client website from the inside. It is a short, immersive demonstration (about 1.5 viewports of scrolling), not a second website.
-
-Demo business (Industrial / Craft): **Wehrkamp Metallbau**, a fictional but credible metalwork business in Hannover. The name is secondary demo content and lives in one place (`src/site/content.js`). No company history, no team, no fake company world.
-
-The demo page is short and built from slots: navigation, hero ("Metallbau. Ohne Umwege."), one reference project (Wohnhaus Hannover-Kirchrode), three material details set as type (S235JR · 15 MM · DB 703) and a CTA. Its quality comes from typography, grid, photography and motion, not from luxury branding.
-
-Viktor Builds stays present the whole time:
-
-- During the demo, a small context line: **VIKTOR BUILDS / WEBSITE 01**
-- Then the website pulls back into the browser frame. The browser chrome and Viktor's dark stage return.
-- Above the frame, in Viktor's voice: **SAME PRINCIPLES. DIFFERENT BUSINESS.**
-- Below the frame: **WEBSITE 01 — INDUSTRIAL / CRAFT · DESIGNED AND BUILT BY VIKTOR BUILDS**
-
-No first-time visitor may leave Scene 04 believing Viktor Builds is a metalwork company.
-
-The framed website at the end of Scene 04 is the starting state of Scene 05.
-
-Avoid: generic premium/luxury aesthetics, glassmorphism, gradient orbs, bento grids, floating cards, pill buttons, glow, fake 3D, decorative shapes, generic claims.
-
-**No visual asset substitution.** A missing photo is shown as a clearly labelled neutral placeholder (`IMAGE / PROJECT_KIRCHRODE_01`). It is never recreated with CSS, SVG, line drawings, gradients or shapes. All images are managed centrally (`src/site/media.js`).
+The Viktor context line becomes visible here, subtly.
 
 ---
 
-## SCENE 05 — ADAPT
+## SCENE 04 — EXPERIENCE · Website 01
 
-Scene 05 starts from the frame of Scene 04. The frame remains.
+A short, intense moment inside a real-feeling website: proof of quality in one breath.
 
-The website the visitor has just experienced transforms visibly into other businesses, for example:
-
-- restaurant
-- medical
-- beauty / service
-- further industries
-
-What changes: photography, typography, colour, layout, navigation, CTA, content and tone. The caption counts on: WEBSITE 02, WEBSITE 03 …
-
-Message:
-
-**ONE WEBSITE. MANY POSSIBILITIES.**
-
-Viktor Builds has no fixed style. The design follows the business.
+- About 1.0 viewport fullscreen on desktop, 0.8 on mobile.
+- Design study for a metalwork business. **No company name**: the wordmark is the trade (METALLBAU) with a small square mark.
+- Content: hero ("Metallbau. Ohne Umwege.") → full-bleed project photo with one caption line (Wohnhaus Hannover-Kirchrode · Stahlwangentreppe / Eiche · 2026) → detail line set as type (S235JR · 15 MM · DB 703).
+- No statement of its own. Scene 02 promised EXPERIENCE; Scene 04 delivers it without repeating it.
+- Exit: the page scrolls back to its top while it shrinks into the browser frame. Chrome and the dark stage return. ADAPT starts from there without a pause.
 
 ---
 
-## SCENE 06 — WEBSITES CAN THINK (INTELLIGENCE)
+## SCENE 05 — ADAPT · No template
 
-Introduce AI and intelligent interaction.
+The website the visitor has just experienced is taken apart and rebuilt three times, for three other businesses:
 
-Examples:
+**01 Metallbau → 02 Restaurant → 03 Friseursalon → 04 Physiotherapie-Praxis**
 
-- AI chat
-- visitor questions
-- lead qualification
-- intelligent interaction
+What changes most visibly is the **priority of the content**: each website starts with what *its* visitors need first (the restaurant with "today", the practice with an appointment). Photography, typography, colour, layout, navigation, CTA and tone change with it.
 
-The goal is not to show AI as a gimmick.
+Mechanics: **take apart → re-plan → rebuild**, using the vocabulary of Scene 02 (grey placeholder bars, masked headlines). Never a colour morph: that would read as a theme switcher, i.e. a template. The transitions accelerate (1→2 slow, 3→4 fastest).
 
-It should demonstrate how websites can actively assist businesses.
+Constants: frame, browser chrome, `your-business.com`, dark stage, frame position, context line with counter.
 
----
+Line above the frame, two-part like Scene 02: **DIFFERENT BUSINESS → DIFFERENT WEBSITE.**
 
-## SCENE 07 — FROM VISITOR TO LEAD
-
-Visualize the conversion journey:
-
-**VISITOR → WEBSITE → INTERACTION → LEAD → CUSTOMER**
-
-Show how design and functionality can contribute to business results.
+ADAPT needs real, documentary photography (see the asset rule). It is not built until the photos are decided.
 
 ---
 
-## SCENE 08 — DESKTOP → MOBILE
+## SCENE 06 — BUSINESS · While you work
 
-Demonstrate responsive transformation.
+The website works while the business works. Told from the owner's perspective, as a short time story:
 
-The interface changes between:
+- Bridge line: **A WEBSITE CAN DO MORE THAN LOOK GOOD.**
+- `DI 21:47 — PRAXIS GESCHLOSSEN`: the frame becomes a phone (the request comes in the evening, from a phone), the practice website reflows instead of shrinking.
+- A visitor sends a short request. Its words visibly move into a clean, typographic entry (new patient, prescription, mornings only, call-back number).
+- A matching slot is proposed and confirmed.
+- `MI 07:30 — PRAXIS ÖFFNET`: the appointment is in the calendar.
 
-- desktop
-- tablet
-- mobile
-
-The design should adapt rather than simply shrink.
-
----
-
-## SCENE 09 — THE SYSTEM
-
-Reveal the larger system surrounding a modern website.
-
-Possible elements:
-
-- Design
-- AI
-- Automation
-- SEO
-- Hosting
-- Content
-- Conversion
-
-The website becomes the center of a larger digital system.
+Rules: no "AI" label, no chat bubbles, no typing dots, no sparkle; no invented metrics; no symptoms or diagnoses, only organisational details. Responsive design appears here in passing, never as a scene of its own.
 
 ---
 
-## SCENE 10 — PHILOSOPHY
+## SCENE 07 — RESULT · Your website
 
-Short statements appear.
+1. The frame empties back to the wireframe of Scene 02 with `your-business.com`.
+2. Ring closure: the frame closes into the line, and **VIKTOR BUILDS / WEBSITES THAT MOVE.** returns, same type, same position as in Scene 01.
+3. Contact area (unpinned, normal page flow): Viktor as a person (short first-person paragraph, real photo, region); primary **Projekt anfragen** as a short three-step request; e-mail and phone; a service line (Konzept · Design · Entwicklung · Hosting · Pflege); imprint, privacy and the note "Alle gezeigten Websites sind Designstudien von Viktor Builds."
 
-Examples:
-
-**BEAUTIFUL IS NOT ENOUGH.**
-
-**FAST IS NOT ENOUGH.**
-
-**FUNCTIONAL IS NOT ENOUGH.**
-
-Then:
-
-**IT HAS TO WORK.**
-
-The message is that design must ultimately serve a purpose.
+Here the call to action is clearly dominant.
 
 ---
 
-## SCENE 11 — FINAL CTA
+# ASSET RULE
 
-The experience resolves into a simple final message.
+Real photography only: documentary, natural light, licensed or own. No AI images, no stock clichés.
 
-**YOUR WEBSITE COULD BE NEXT.**
+**No visual asset substitution.** A missing photo is shown as a clearly labelled neutral placeholder (`IMAGE / PROJECT_KIRCHRODE_01`), only during development. It is never recreated with CSS, SVG, line drawings, gradients or shapes. All images are managed centrally (`src/site/media.js`).
 
-Primary CTA:
+---
 
-**START A PROJECT**
+# ANTI-SLOP
 
-Secondary option:
-
-**EXPLORE MY WORK**
-
-The final scene should feel confident and restrained rather than sales-heavy.
+Avoid: generic premium/luxury aesthetics, fake luxury brands, invented company names, invented metrics, glassmorphism, gradient orbs, bento grids, floating cards, pill buttons, glow, fake 3D, decorative shapes, chat optics, device mockups, generic claims, industry clichés (gold on black, turquoise practice, rosé salon, plates from above).
 
 ---
 

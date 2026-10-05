@@ -5,11 +5,10 @@
    ───────────────────────────────────────────────────────────── */
 
 .stage {
-  /* Frame size, shared by the frame (Scene 02) and the Scene 04 layout
-     around the frame once it has shrunk to --exit-scale. */
+  /* Frame size (Scene 02) and the scale the frame returns to after
+     Scene 04, where ADAPT takes over (read by experienceTimeline.js). */
   --frame-w: min(80vw, 1120px, calc((100svh - 13rem) * 1.6));
-  --frame-h: calc(var(--frame-w) * 10 / 16);
-  --exit-scale: 0.72;
+  --exit-scale: 0.75;
 
   position: relative;
 }
@@ -207,7 +206,6 @@
 
   .stage {
     --frame-w: min(84vw, 400px, calc((100svh - 12rem) * 0.6));
-    --frame-h: calc(var(--frame-w) * 5 / 3);
     --exit-scale: 0.78;
   }
 

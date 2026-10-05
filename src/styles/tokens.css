@@ -27,10 +27,10 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Client site (Scene 03 / 04): Wehrkamp Metallbau, a fictional German
-   metalwork business. Paper white, black, grey and one functional signal
-   colour (RAL 3020 traffic red: active state, focus, link underline only).
-   Scoped to the brand root, so Scene 05 can swap the brand as a whole. */
+/* Design study 01 (Scene 03 / 04): a website for a metalwork business.
+   Paper white, black, grey and one functional signal colour (RAL 3020
+   traffic red: primary action only). Scoped to the brand root, so ADAPT
+   can rebuild the study for another business as a whole. */
 [data-brand='metallbau'] {
   --brand-bg: #f2f2f0;
   --brand-ink: #111111;

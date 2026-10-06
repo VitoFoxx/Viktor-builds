@@ -114,8 +114,13 @@ export function addAdapt(tl, stage, q, { isDesktop }) {
     { autoAlpha: 0, duration: 0.3, stagger: 0.025, ease: 'power1.in' },
     'takeApart+=0.1',
   )
-    // Under its opaque field by now.
-    .to(q('.scene--site .site-hero__media'), { autoAlpha: 0, duration: 0.2 }, 'takeApart+=0.35')
+    // Under its opaque field by now. The rest of the page goes too: on wide
+    // screens its top edge shows below the hero inside the frame.
+    .to(
+      q('.scene--site .site-hero__media, .scene--site .site-project, .scene--site .site-details'),
+      { autoAlpha: 0, duration: 0.2 },
+      'takeApart+=0.35',
+    )
     .fromTo(
       q('.adapt__message-a'),
       { autoAlpha: 0, y: 10 },

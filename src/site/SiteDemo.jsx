@@ -45,7 +45,7 @@ export default function SiteDemo() {
 
           <div className="site-hero__media">
             <div className="site-hero__img">
-              <SitePhoto name="hero" sizes="(min-width: 768px) 45vw, 90vw" priority />
+              <SitePhoto name="metallbau.hero" sizes="(min-width: 768px) 45vw, 90vw" priority />
             </div>
           </div>
         </div>
@@ -63,7 +63,7 @@ export default function SiteDemo() {
       <div className="site-project">
         <div className="site-project__media">
           <div className="site-project__img">
-            <SitePhoto name="project" />
+            <SitePhoto name="metallbau.project" />
           </div>
         </div>
         <p className="site-project__caption">

@@ -5,6 +5,7 @@ import { createIntroTimeline } from '../animations/introTimeline.js'
 import SceneVoid from './SceneVoid.jsx'
 import SceneInterface from './SceneInterface.jsx'
 import SceneExperience from './SceneExperience.jsx'
+import SceneAdapt from './SceneAdapt.jsx'
 import './IntroStage.css'
 
 export default function IntroStage() {
@@ -76,6 +77,7 @@ export default function IntroStage() {
       <SceneVoid />
       <SceneInterface />
       <SceneExperience />
+      <SceneAdapt />
     </div>
   )
 }

@@ -1,12 +1,13 @@
 import { media } from './media.js'
 
 /**
- * Every demo-site image goes through here. Fills its parent (which sets
+ * Every demo-site image goes through here, by its media.js path. Fills its parent (which sets
  * the size). Without a photo it renders a neutral, clearly labelled
  * placeholder: no drawing, no pattern, nothing that pretends to be a photo.
  */
 export default function SitePhoto({ name, sizes = '100vw', priority = false, className = '' }) {
-  const shot = media[name]
+  // name = '<branche>.<slot>', see media.js
+  const shot = name.split('.').reduce((group, key) => group[key], media)
   const { desktop, mobile } = shot
 
   if (!desktop.src) {

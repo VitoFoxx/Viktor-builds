@@ -1,0 +1,213 @@
+/* ─────────────────────────────────────────────────────────────
+   Scene 05: Adapt. Viktor's line and context in his own type; the
+   restaurant study only ever inside .adapt__clip.
+   Base layout = reduced motion: a dark section with the line, the
+   context line and the restaurant in a static browser frame.
+   ───────────────────────────────────────────────────────────── */
+
+.scene.scene--adapt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 3svh, 1.75rem);
+  padding: clamp(4rem, 12svh, 8rem) var(--gutter);
+}
+
+.adapt__message {
+  font-size: var(--fs-message);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.adapt__message-a {
+  color: var(--c-muted);
+}
+
+.adapt__message-a,
+.adapt__message-b {
+  display: inline-block;
+}
+
+.adapt__context {
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+/* Static browser frame around the study. */
+.adapt__clip {
+  position: relative;
+  width: min(100%, 1120px);
+  overflow: hidden;
+  border: 1px solid var(--c-line-strong);
+  border-radius: var(--radius-frame);
+}
+
+.adapt__clip::before {
+  content: '';
+  display: block;
+  height: 2.25rem;
+  background: var(--c-surface-raised);
+  border-bottom: 1px solid var(--c-line);
+}
+
+.adapt__content {
+  position: relative;
+  container-type: inline-size;
+}
+
+.adapt__bg {
+  position: absolute;
+  inset: 0;
+  background: var(--brand-bg);
+}
+
+.adapt__skeleton {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .adapt__message-a,
+  .adapt__message-b {
+    display: block;
+  }
+
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Motion layout: a layer of the pinned stage over Scene 04's exit
+   state. adaptTimeline.js clips it to the frame's page area and
+   scales the screen-sized content into it, like the portal.
+   ───────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  .stage > .scene--adapt {
+    z-index: 4;
+    display: block;
+    padding: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  /* The frame at its exit scale, centred like the frame itself, so the
+     line sits just above it (as Scene 02's line sits above the frame). */
+  .adapt__anchor {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: calc(var(--frame-w) * var(--exit-scale));
+    aspect-ratio: 16 / 10;
+    translate: -50% -50%;
+  }
+
+  .adapt__message {
+    position: absolute;
+    left: -50vw;
+    right: -50vw;
+    bottom: 100%;
+    margin-bottom: clamp(1.25rem, 3.5svh, 2.25rem);
+  }
+
+  /* Shown by the shared context line in Scene 04 instead (it counts on). */
+  .adapt__context {
+    display: none;
+  }
+
+  .adapt__clip {
+    position: absolute;
+    inset: 0;
+    width: auto;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .adapt__clip::before {
+    content: none;
+  }
+
+  .adapt__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Placeholders of Scene 02: plain fields, moved and sized by transform
+     from a 100 × 100 px box (adaptTimeline.js). */
+  .adapt__skeleton {
+    display: block;
+    position: absolute;
+    inset: 0;
+  }
+
+  .adapt__block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    transform-origin: 0 0;
+    background: rgb(36 30 26 / 0.1);
+    visibility: hidden;
+  }
+
+  .adapt__block--image {
+    background: rgb(36 30 26 / 0.17);
+  }
+
+  .adapt__block--line {
+    background: rgb(36 30 26 / 0.16);
+  }
+
+  /* The new grid, shown briefly while the placeholders re-plan. */
+  .adapt__guide {
+    position: absolute;
+    background: rgb(36 30 26 / 0.28);
+    visibility: hidden;
+  }
+
+  .adapt__guide--h {
+    left: 0;
+    right: 0;
+    top: 35.4cqw; /* the photo's lower edge: 60 % of the 59cqw page */
+    height: 1px;
+  }
+
+  .adapt__guide--v {
+    top: 0;
+    bottom: 0;
+    width: 1px;
+  }
+
+  .adapt__guide--v0 {
+    left: 4.4cqw;
+  }
+
+  .adapt__guide--v1 {
+    left: 30cqw;
+  }
+
+  .adapt__guide--v2 {
+    left: 64cqw;
+  }
+
+  .adapt__guide--v3 {
+    right: 4.4cqw;
+  }
+}
+
+@media (max-width: 767.98px) and (prefers-reduced-motion: no-preference) {
+  .adapt__anchor {
+    aspect-ratio: 3 / 5;
+  }
+
+  .adapt__guide {
+    display: none;
+  }
+}

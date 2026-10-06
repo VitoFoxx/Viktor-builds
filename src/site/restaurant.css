@@ -1,0 +1,283 @@
+/* ─────────────────────────────────────────────────────────────
+   Design study 02: Restaurant (ADAPT). A different page, not the
+   metalwork page in new colours: image first and full-bleed, the
+   wordmark centred, "Heute" as a typographic menu, the reservation
+   as the one strong action. Literata throughout, prices in old-style
+   figures, warm paper and one deep wine tone.
+   The study only ever appears in the browser frame, so .r-site has
+   the proportions of the frame's page area (16:10 minus chrome; mobile
+   3:5 minus chrome). Positions are fractions of it, type is in cqw.
+   ───────────────────────────────────────────────────────────── */
+
+.r-site {
+  position: relative;
+  height: 59cqw;
+  overflow: hidden;
+  color: var(--brand-ink);
+  font-family: var(--brand-font);
+  font-optical-sizing: auto;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+
+.r-site picture,
+.r-site .site-photo {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.r-site img {
+  object-fit: cover;
+}
+
+/* ── Image first ──────────────────────────────────────────────── */
+
+.r-hero__media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  overflow: hidden;
+  background: var(--brand-placeholder);
+}
+
+.r-hero__img {
+  position: absolute;
+  inset: 0;
+}
+
+/* Legibility for the navigation and headline that sit on the photo. */
+.r-hero__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgb(24 14 10 / 0.62), rgb(24 14 10 / 0) 58%),
+    linear-gradient(to bottom, rgb(24 14 10 / 0.5), rgb(24 14 10 / 0) 24%);
+}
+
+.r-nav {
+  position: absolute;
+  top: 0;
+  left: 4.4cqw;
+  right: 4.4cqw;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding-top: 1.8cqw;
+  font-size: max(13px, 1.05cqw);
+  color: var(--brand-on-image);
+}
+
+.r-nav__menu,
+.r-nav__reserve {
+  padding: 0.5em 0;
+  border-bottom: 1px solid currentColor;
+}
+
+.r-nav__menu {
+  justify-self: start;
+}
+
+.r-nav__reserve {
+  justify-self: end;
+}
+
+.r-nav__logo {
+  font-size: 1.9em;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.r-hero__copy {
+  position: absolute;
+  left: 4.4cqw;
+  bottom: calc(40% + 3.2cqw);
+  max-width: 62cqw;
+  color: var(--brand-on-image);
+}
+
+.r-eyebrow {
+  width: fit-content;
+  margin-bottom: 1.2cqw;
+  font-size: max(12px, 1cqw);
+  letter-spacing: 0.02em;
+  opacity: 0.86;
+}
+
+.r-hero__title {
+  font-size: 6.4cqw;
+  font-weight: 450;
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+/* The cook: a second, smaller picture that bridges photo and menu. */
+.r-chef {
+  position: absolute;
+  right: 4.4cqw;
+  top: 37%;
+  height: 35%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--brand-placeholder);
+}
+
+/* ── Heute ────────────────────────────────────────────────────── */
+
+.r-today {
+  position: absolute;
+  left: 4.4cqw;
+  top: calc(60% + 2.4cqw);
+}
+
+.r-today__label {
+  font-size: 3.8cqw;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.r-today__hours {
+  margin-top: 0.9cqw;
+  font-size: max(13px, 1cqw);
+  color: var(--brand-muted);
+}
+
+/* Menu and reservation: one column, the action right under the dishes. */
+.r-order {
+  position: absolute;
+  left: 30cqw;
+  width: 34cqw;
+  top: calc(60% + 2.4cqw);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.4cqw;
+}
+
+.r-menu {
+  align-self: stretch;
+  font-size: max(14px, 1.2cqw);
+}
+
+.r-menu__item {
+  display: flex;
+  justify-content: space-between;
+  gap: 2em;
+  padding: 0.62em 0;
+  border-top: 1px solid var(--brand-line);
+}
+
+.r-menu__item:last-child {
+  border-bottom: 1px solid var(--brand-line);
+}
+
+.r-menu__price {
+  color: var(--brand-deep);
+}
+
+/* The reservation: when, for how many, and the one filled action. */
+.r-reserve {
+  display: flex;
+  font-size: max(13px, 1cqw);
+}
+
+.r-reserve__when,
+.r-reserve__action {
+  padding: 0.95em 1.3em;
+}
+
+.r-reserve__when {
+  border: 1px solid var(--brand-line-strong);
+  border-right: 0;
+}
+
+.r-reserve__action {
+  background: var(--brand-deep);
+  color: var(--brand-on-deep);
+  font-weight: 600;
+}
+
+/* ── Mobile: the same priorities, stacked ─────────────────────── */
+
+@media (max-width: 767.98px) {
+  .r-site {
+    height: 163cqw;
+  }
+
+  .r-hero__media {
+    height: 48%;
+  }
+
+  .r-nav {
+    left: 6cqw;
+    right: 6cqw;
+    padding-top: 4cqw;
+    font-size: max(13px, 3.5cqw);
+  }
+
+  .r-nav__logo {
+    font-size: 1.45em;
+  }
+
+  .r-hero__copy {
+    left: 6cqw;
+    bottom: calc(52% + 6cqw);
+    max-width: none;
+  }
+
+  .r-eyebrow {
+    margin-bottom: 2.4cqw;
+    font-size: max(11px, 3cqw);
+  }
+
+  .r-hero__title {
+    font-size: 9cqw;
+  }
+
+  .r-chef {
+    right: 6cqw;
+    top: 45%;
+    width: 30cqw;
+    height: auto;
+  }
+
+  .r-today {
+    left: 6cqw;
+    top: calc(48% + 6cqw);
+  }
+
+  .r-today__label {
+    font-size: 9cqw;
+  }
+
+  .r-today__hours {
+    margin-top: 1.6cqw;
+    font-size: max(12px, 3.2cqw);
+  }
+
+  .r-order {
+    left: 6cqw;
+    right: 6cqw;
+    width: auto;
+    top: 67.5%;
+    gap: 3.6cqw;
+  }
+
+  .r-menu {
+    font-size: max(14px, 3.7cqw);
+  }
+
+  .r-reserve {
+    font-size: max(12px, 3.2cqw);
+  }
+
+  .r-reserve__when,
+  .r-reserve__action {
+    padding: 0.9em 1em;
+  }
+}

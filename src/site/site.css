@@ -171,6 +171,8 @@ img.site-photo,
 
 .site-line {
   display: block;
+  /* As wide as its text, so ADAPT's placeholders match the words. */
+  width: fit-content;
   clip-path: inset(-0.5em -0.5em 0 -0.5em);
 }
 

@@ -14,6 +14,15 @@
   font-display: swap;
 }
 
+/* Design study 02 (Restaurant). Latin subset, wght 400–600, opsz 12–72. */
+@font-face {
+  font-family: 'Literata';
+  src: url('/fonts/literata-latin-wght.woff2') format('woff2');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 *,
 *::before,
 *::after {

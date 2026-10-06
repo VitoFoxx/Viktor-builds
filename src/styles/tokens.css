@@ -49,3 +49,18 @@
   --brand-col-gap: clamp(0.75rem, 1.6vw, 1.5rem);
   --brand-header: 64px;
 }
+
+/* Design study 02 (ADAPT): a restaurant. Warm paper, dark brown ink and
+   one deep wine tone for prices and the reservation. No gold. */
+[data-brand='restaurant'] {
+  --brand-bg: #f2ebe0;
+  --brand-ink: #241a15;
+  --brand-muted: #6f6157;
+  --brand-line: rgb(36 26 21 / 0.16);
+  --brand-line-strong: rgb(36 26 21 / 0.36);
+  --brand-deep: #5c1b24;
+  --brand-on-deep: #f6efe4;
+  --brand-on-image: #f8f1e6;
+  --brand-placeholder: #dcd2c3;
+  --brand-font: 'Literata', Georgia, 'Times New Roman', serif;
+}

@@ -22,6 +22,11 @@
   color: var(--c-muted);
 }
 
+/* The counter (WEBSITE 01 → 02). Without motion only the first. */
+.context__item--next {
+  display: none;
+}
+
 /* Static browser frame around the study. */
 .scene--site .portal__clip {
   position: relative;
@@ -77,5 +82,21 @@
     color: #fff;
     mix-blend-mode: difference;
     pointer-events: none;
+  }
+
+  /* Both counter states in one cell; ADAPT swaps them through a mask. */
+  .context__swap {
+    display: inline-grid;
+    clip-path: inset(0 -1em);
+    vertical-align: top;
+  }
+
+  .context__item {
+    grid-area: 1 / 1;
+  }
+
+  .context__item--next {
+    display: block;
+    visibility: hidden;
   }
 }

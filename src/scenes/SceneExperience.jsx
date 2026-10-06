@@ -1,5 +1,5 @@
 import SiteDemo from '../site/SiteDemo.jsx'
-import { study } from '../site/content.js'
+import { study, restaurant } from '../site/content.js'
 import './SceneExperience.css'
 
 /**
@@ -17,7 +17,14 @@ export default function SceneExperience() {
   return (
     <section className="scene scene--site" aria-labelledby="experience-context">
       <h2 id="experience-context" className="experience__context">
-        Viktor Builds <span aria-hidden="true">—</span> {study.context}
+        Viktor Builds <span aria-hidden="true">—</span>{' '}
+        <span className="context__swap">
+          <span className="context__item">{study.context}</span>
+          {/* ADAPT counts on here; the restaurant section has its own heading. */}
+          <span className="context__item context__item--next" aria-hidden="true">
+            {restaurant.context}
+          </span>
+        </span>
       </h2>
 
       <div

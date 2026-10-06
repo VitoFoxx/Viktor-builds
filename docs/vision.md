@@ -106,7 +106,7 @@ A short, intense moment inside a real-feeling website: proof of quality in one b
 
 - About 1.0 viewport fullscreen on desktop, 0.8 on mobile.
 - Design study for a metalwork business. **No company name**: the wordmark is the trade (METALLBAU) with a small square mark.
-- Content: hero ("Metallbau. Ohne Umwege.") → full-bleed project photo with one caption line (Wohnhaus Hannover-Kirchrode · Stahlwangentreppe / Eiche · 2026) → detail line set as type (S235JR · 15 MM · DB 703).
+- Content: hero ("Metallbau. Ohne Umwege.") → full-bleed project photo with one caption line (Außentreppe Bürogebäude · Stahltreppe / Seilgeländer · 2026) → detail line set as type (S235JR · 15 MM · DB 703).
 - No statement of its own. Scene 02 promised EXPERIENCE; Scene 04 delivers it without repeating it.
 - Exit: the page scrolls back to its top while it shrinks into the browser frame. Chrome and the dark stage return. ADAPT starts from there without a pause.
 
@@ -126,7 +126,7 @@ Constants: frame, browser chrome, `your-business.com`, dark stage, frame positio
 
 Line above the frame, two-part like Scene 02: **DIFFERENT BUSINESS → DIFFERENT WEBSITE.**
 
-ADAPT needs real, documentary photography (see the asset rule). It is not built until the photos are decided.
+ADAPT needs real, documentary photography (see the asset rule). Prototype built: Metallbau → Restaurant (Metallbau black and white, Restaurant in colour, two photos each). Salon and practice follow once their photos exist.
 
 ---
 

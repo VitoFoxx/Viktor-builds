@@ -9,7 +9,8 @@ import { portalGeometry } from './portalTimeline.js'
  *   demo     13.7  the visitor "scrolls" through the study
  *   exit     16.2  (mobile 17.5) the study shrinks back into the frame,
  *                  chrome and stage return
- *   handoff  17.8  (mobile 19.1) no rest: ADAPT (Scene 05) starts here
+ *   handoff  17.8  (mobile 19.1) no rest: ADAPT (Scene 05, adaptTimeline.js)
+ *                  starts here
  *
  * The page inside moves linearly, about as fast as the visitor's own scroll
  * on mobile, so it reads like scrolling, not like a fly-through. Mobile gets

@@ -1,0 +1,330 @@
+/* ─────────────────────────────────────────────────────────────
+   Design study 03: Barbershop (ADAPT). A price board, not the
+   restaurant in green: the services are the headline, set huge and
+   condensed like a shop sign, with time and price on their row. The
+   room stands tall at the right edge, the razor at the left; between
+   them the board and the booking (service → barber → time).
+   Archivo throughout (condensed for the board, normal width for the
+   details), dark bottle green, mint only for the booking action.
+   Same frame proportions as restaurant.css: positions in cqw.
+   ───────────────────────────────────────────────────────────── */
+
+.s-site {
+  position: relative;
+  height: 59cqw;
+  overflow: hidden;
+  color: var(--brand-ink);
+  font-family: var(--brand-font);
+  font-size: max(12px, 1cqw);
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums;
+}
+
+.s-site picture,
+.s-site .site-photo {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.s-site img {
+  object-fit: cover;
+}
+
+/* ── Photos: the room tall at the right, the razor at the left ─── */
+
+.s-room {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 37cqw;
+  overflow: hidden;
+  background: var(--brand-placeholder);
+}
+
+.s-razor {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 14.5cqw;
+  height: 25cqw;
+  overflow: hidden;
+  background: var(--brand-placeholder);
+}
+
+/* ── Left column: wordmark and a numbered index ─────────────────── */
+
+.s-logo {
+  position: absolute;
+  left: 3.6cqw;
+  top: 3cqw;
+  width: fit-content;
+  font-size: 2.1cqw;
+  font-stretch: 62%;
+  font-weight: 780;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.s-nav-action {
+  display: none;
+}
+
+.s-index {
+  position: absolute;
+  left: 3.6cqw;
+  top: 12.4cqw;
+  width: 10cqw;
+}
+
+.s-index li {
+  padding: 0.3em 0;
+}
+
+.s-index__no {
+  display: inline-block;
+  width: 2em;
+  color: var(--brand-muted);
+}
+
+/* ── The board ──────────────────────────────────────────────────── */
+
+.s-eyebrow {
+  position: absolute;
+  left: 18.6cqw;
+  top: 3.5cqw;
+  width: fit-content;
+  color: var(--brand-muted);
+  letter-spacing: 0.01em;
+}
+
+/* Row height shared by the words and their prices. */
+.s-title,
+.s-prices {
+  --row: 7.6cqw;
+}
+
+.s-title {
+  position: absolute;
+  left: 18.6cqw;
+  top: 11.4cqw;
+  font-size: 6.4cqw;
+  font-stretch: 62%;
+  font-weight: 800;
+  line-height: var(--row);
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+}
+
+/* Overrides the shared mask: the condensed caps need no overhang room
+   and the row's full height belongs to the word. */
+.s-title .site-line {
+  height: var(--row);
+  clip-path: inset(0 -0.2em);
+}
+
+.s-prices {
+  position: absolute;
+  left: 41.5cqw;
+  right: calc(37cqw + 3.6cqw);
+  top: 11.4cqw;
+}
+
+.s-price {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-content: center;
+  column-gap: 1em;
+  height: var(--row);
+}
+
+/* The rule runs under the word too: one board, three rows. */
+.s-price::before {
+  content: '';
+  position: absolute;
+  left: -22.9cqw;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--brand-line);
+}
+
+.s-price__service {
+  font-size: max(13px, 1.2cqw);
+  font-weight: 600;
+}
+
+.s-price__meta {
+  display: flex;
+  gap: 1em;
+  font-size: max(13px, 1.2cqw);
+  color: var(--brand-muted);
+}
+
+.s-price__amount {
+  min-width: 2.6em;
+  text-align: right;
+  color: var(--brand-ink);
+  font-weight: 600;
+}
+
+.s-price__note {
+  grid-column: 1 / -1;
+  margin-top: 0.25em;
+  color: var(--brand-muted);
+}
+
+/* ── Booking: the order of the booking tool, then the action ──── */
+
+.s-book {
+  position: absolute;
+  left: 18.6cqw;
+  right: calc(37cqw + 3.6cqw);
+  top: 40.5cqw;
+}
+
+.s-steps {
+  display: flex;
+  gap: 2.2em;
+  width: fit-content;
+  color: var(--brand-muted);
+}
+
+.s-steps__no {
+  display: inline-grid;
+  place-items: center;
+  width: 1.7em;
+  height: 1.7em;
+  margin-right: 0.35em;
+  border: 1px solid var(--brand-line-strong);
+  color: var(--brand-ink);
+  font-size: 0.85em;
+}
+
+.s-action {
+  width: fit-content;
+  margin-top: 1.6cqw;
+  padding: 0.95em 2.4em;
+  background: var(--brand-accent);
+  color: var(--brand-on-accent);
+  font-size: max(13px, 1.15cqw);
+  font-weight: 650;
+}
+
+.s-action::after {
+  content: '→';
+  margin-left: 0.6em;
+  font-weight: 400;
+}
+
+.s-walkin {
+  width: fit-content;
+  margin-top: 1.3cqw;
+  color: var(--brand-muted);
+}
+
+/* ── Mobile: its own order. Wordmark and "Termin", the room, the
+   board, then razor and booking side by side. ──────────────────── */
+
+@media (max-width: 767.98px) {
+  .s-site {
+    height: 163cqw;
+    font-size: max(11px, 3.1cqw);
+  }
+
+  .s-logo {
+    left: 6cqw;
+    top: 4.6cqw;
+    font-size: 6.6cqw;
+  }
+
+  .s-nav-action {
+    display: block;
+    position: absolute;
+    right: 6cqw;
+    top: 4.4cqw;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid var(--brand-accent);
+    font-size: max(12px, 3.6cqw);
+    font-weight: 600;
+  }
+
+  .s-index {
+    display: none;
+  }
+
+  .s-room {
+    top: 15cqw;
+    bottom: auto;
+    left: 0;
+    width: auto;
+    height: 60cqw;
+  }
+
+  .s-eyebrow {
+    left: 6cqw;
+    top: 79cqw;
+  }
+
+  .s-title,
+  .s-prices {
+    --row: 13.4cqw;
+    top: 85cqw;
+  }
+
+  .s-title {
+    left: 6cqw;
+    font-size: 11.2cqw;
+  }
+
+  .s-prices {
+    left: 48cqw;
+    right: 6cqw;
+  }
+
+  .s-price::before {
+    left: -42cqw;
+  }
+
+  .s-price__service,
+  .s-price__meta {
+    font-size: max(12px, 3.4cqw);
+  }
+
+  .s-price__note {
+    display: none;
+  }
+
+  .s-razor {
+    width: 36cqw;
+    height: 33cqw;
+  }
+
+  .s-book {
+    left: 42cqw;
+    right: 6cqw;
+    top: 130cqw;
+  }
+
+  .s-steps {
+    gap: 1.1em;
+    font-size: max(10px, 2.8cqw);
+  }
+
+  .s-action {
+    width: auto;
+    margin-top: 3.4cqw;
+    padding: 0.9em 1em;
+    text-align: center;
+    font-size: max(12px, 3.5cqw);
+  }
+
+  .s-walkin {
+    display: none;
+  }
+}

@@ -28,6 +28,15 @@ import restaurantHero1600 from '../assets/site/restaurant-hero-01-1600.webp'
 import restaurantHero800 from '../assets/site/restaurant-hero-01-800.webp'
 import restaurantDetail960 from '../assets/site/restaurant-detail-01-960.webp'
 import restaurantDetail480 from '../assets/site/restaurant-detail-01-480.webp'
+import salonHero1000 from '../assets/site/salon-hero-01-1000.webp'
+import salonHero600 from '../assets/site/salon-hero-01-600.webp'
+import salonHeroM1000 from '../assets/site/salon-hero-01-m-1000.webp'
+import salonDetail760 from '../assets/site/salon-detail-01-760.webp'
+import salonDetail440 from '../assets/site/salon-detail-01-440.webp'
+import dentalHero1000 from '../assets/site/dental-hero-01-1000.webp'
+import dentalHero600 from '../assets/site/dental-hero-01-600.webp'
+import dentalDetail800 from '../assets/site/dental-detail-01-800.webp'
+import dentalDetail480 from '../assets/site/dental-detail-01-480.webp'
 
 const missing = { src: null }
 
@@ -107,6 +116,63 @@ export const media = {
       ),
       desktop: file(restaurantDetail960, 960, restaurantDetail480, 480, 1.25),
       source: pexels('cottonbro studio', 'https://www.pexels.com/photo/4253312/'),
+    },
+  },
+  // 03 Barbershop: the room in colour, the razor in black and white.
+  salon: {
+    // Retouched (brand name on four bottles), floor cut off: ceiling spots,
+    // mirrors, both chairs and the tiles. Hochformat, used as such.
+    hero: {
+      ...shot(
+        'SALON_HERO_01',
+        'Barbershop: grüne Wand, zwei Spiegel, Barbierstühle, Schachbrettboden',
+        'Barbershop mit grüner Wand, zwei Spiegeln mit Holzrahmen, einem alten und einem modernen Barbierstuhl auf Schachbrettfliesen',
+        '0,71 hoch · mobil 4:3',
+        '50% 50%',
+      ),
+      desktop: file(salonHero1000, 1000, salonHero600, 600, 2950 / 2100),
+      mobile: { src: salonHeroM1000, width: 1000, height: 741 },
+      source: pexels('beratilgin (Profilname laut Datei)', 'https://www.pexels.com/photo/17665771/'),
+    },
+    // Uncut, black and white as delivered.
+    detail: {
+      ...shot(
+        'SALON_DETAIL_01',
+        'Barbier zieht mit dem Rasiermesser eine Kontur am Haaransatz',
+        'Nahaufnahme: Hände eines Barbiers ziehen mit einem Rasiermesser die Kontur am Haaransatz, schwarz-weiß',
+        'hoch',
+        '45% 38%',
+      ),
+      desktop: file(salonDetail760, 760, salonDetail440, 440, 4051 / 2775),
+      source: pexels('Vitaly Gorbachev', 'https://www.pexels.com/photo/10775082/'),
+    },
+  },
+
+  // 04 Zahnarztpraxis: colour, cool daylight.
+  dental: {
+    // Retouched (practice logo on the wall behind the bonsai), uncut.
+    hero: {
+      ...shot(
+        'DENTAL_HERO_01',
+        'Empfang einer Praxis: Mitarbeiterin am Tresen, Patient lehnt davor',
+        'Empfangstresen einer Zahnarztpraxis, eine Mitarbeiterin notiert etwas, ein Patient steht am Tresen',
+        'hoch · mobil 4:3',
+        '58% 40%',
+      ),
+      desktop: file(dentalHero1000, 1000, dentalHero600, 600, 5473 / 3654),
+      source: pexels('Pavel Danilyuk', 'https://www.pexels.com/photo/6809656/'),
+    },
+    // Uncut.
+    detail: {
+      ...shot(
+        'DENTAL_DETAIL_01',
+        'Leerer Behandlungsstuhl vor hellen Fenstern',
+        'Leerer Behandlungsstuhl in einem hellen Behandlungsraum mit Tageslicht',
+        'hoch',
+        '50% 55%',
+      ),
+      desktop: file(dentalDetail800, 800, dentalDetail480, 480, 8000 / 5334),
+      source: pexels('Cedric Fauntleroy', 'https://www.pexels.com/photo/4269265/'),
     },
   },
 }

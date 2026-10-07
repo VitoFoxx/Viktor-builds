@@ -116,9 +116,9 @@ A short, intense moment inside a real-feeling website: proof of quality in one b
 
 The website the visitor has just experienced is taken apart and rebuilt three times, for three other businesses:
 
-**01 Metallbau → 02 Restaurant → 03 Friseursalon → 04 Physiotherapie-Praxis**
+**01 Metallbau → 02 Restaurant → 03 Barbershop → 04 Zahnarztpraxis**
 
-What changes most visibly is the **priority of the content**: each website starts with what *its* visitors need first (the restaurant with "today", the practice with an appointment). Photography, typography, colour, layout, navigation, CTA and tone change with it.
+What changes most visibly is the **priority of the content**: each website starts with what *its* visitors need first (the restaurant with "today", the barbershop with its services and prices, the practice with the visitor's concern and an appointment). Photography, typography, colour, layout, navigation, CTA and tone change with it.
 
 Mechanics: **take apart → re-plan → rebuild**, using the vocabulary of Scene 02 (grey placeholder bars, masked headlines). Never a colour morph: that would read as a theme switcher, i.e. a template. Order: the old page is taken apart element by element, details first and structure (nav, photo) last; the new grid is drawn before the fields move into it; the new page is built structure first (ground, photo, nav, headline) and its main action last. The transitions accelerate (1→2 slow, 3→4 fastest).
 
@@ -126,7 +126,9 @@ Constants: frame, browser chrome, `your-business.com`, dark stage, frame positio
 
 Line above the frame, two-part like Scene 02: **DIFFERENT BUSINESS → DIFFERENT WEBSITE.**
 
-ADAPT needs real, documentary photography (see the asset rule). Prototype built: Metallbau → Restaurant (Metallbau black and white, Restaurant in colour, two photos each). Salon and practice follow once their photos exist.
+ADAPT needs real, documentary photography (see the asset rule). Built with two photos per business: Metallbau black and white; Restaurant in warm colour; Barbershop as a price board on dark bottle green (room in colour, razor in black and white); Zahnarztpraxis light and calm (status bar with today's hours, "Wobei können wir Ihnen helfen?" with four ways in, appointment in the navigation).
+
+ADAPT ends on the practice and holds still. BUSINESS continues from exactly this page (timeline label `adaptEnd`).
 
 ---
 

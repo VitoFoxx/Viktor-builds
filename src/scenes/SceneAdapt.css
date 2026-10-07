@@ -178,7 +178,7 @@
   .adapt__guide--h {
     left: 0;
     right: 0;
-    top: 35.4cqw; /* the photo's lower edge: 60 % of the 59cqw page */
+    top: 34cqw; /* the kitchen photo's lower edge (restaurant.css) */
     height: 1px;
   }
 
@@ -188,6 +188,7 @@
     width: 1px;
   }
 
+  /* Columns of the restaurant: gutter, menu, its end, the cook. */
   .adapt__guide--v0 {
     left: 4.4cqw;
   }
@@ -197,11 +198,11 @@
   }
 
   .adapt__guide--v2 {
-    left: 64cqw;
+    left: 66cqw;
   }
 
   .adapt__guide--v3 {
-    right: 4.4cqw;
+    left: 74cqw;
   }
 }
 
@@ -214,7 +215,24 @@
     aspect-ratio: 3 / 5;
   }
 
-  .adapt__guide {
-    display: none;
+  .adapt__guide--h {
+    top: 74cqw;
+  }
+
+  .adapt__guide--v0 {
+    left: 6cqw;
+  }
+
+  .adapt__guide--v1 {
+    left: 56cqw;
+  }
+
+  .adapt__guide--v2 {
+    left: 62cqw;
+  }
+
+  .adapt__guide--v3 {
+    left: auto;
+    right: 6cqw;
   }
 }

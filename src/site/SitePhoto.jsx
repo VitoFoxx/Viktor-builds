@@ -33,7 +33,8 @@ export default function SitePhoto({ name, sizes = '100vw', priority = false, cla
         width={desktop.width}
         height={desktop.height}
         alt={shot.alt}
-        style={{ objectPosition: shot.focus }}
+        // A layout may move the crop per breakpoint with --focus.
+        style={{ objectPosition: `var(--focus, ${shot.focus})` }}
         // Eager: the demo lives inside the pinned stage, where lazy loading
         // would only start once the photo is already on screen.
         loading="eager"

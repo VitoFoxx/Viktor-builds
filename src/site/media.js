@@ -11,7 +11,8 @@
 // Components and CSS do not change.
 //
 //   desktop  ≥ 768 px     mobile  < 768 px (falls back to desktop if null)
-//   focus    CSS object-position of the crop
+//   focus    CSS object-position of the crop (a layout can override it
+//            per breakpoint with the --focus custom property)
 //   format   intended aspect ratio, printed on the placeholder
 //   source   origin and licence, for the asset audit before launch
 //
@@ -90,7 +91,7 @@ export const media = {
         'Offene Küche am Pass: Abzugshaube, Pfannen, Tellerstapel',
         'Offene Restaurantküche mit hängenden Pfannen, Abzugshaube aus Edelstahl und gestapelten Tellern',
         '16:9 · mobil 4:5',
-        '50% 42%',
+        '50% 30%',
       ),
       desktop: file(restaurantHero1600, 1600, restaurantHero800, 800, 1576 / 2420),
       source: pexels('Maria Orlova', 'https://www.pexels.com/photo/4947388/'),
@@ -102,7 +103,7 @@ export const media = {
         'Koch richtet einen Teller an, Sauce vom Löffel',
         'Koch gießt mit einem Löffel Sauce über einen angerichteten Teller',
         '4:5',
-        '50% 50%',
+        '40% 40%',
       ),
       desktop: file(restaurantDetail960, 960, restaurantDetail480, 480, 1.25),
       source: pexels('cottonbro studio', 'https://www.pexels.com/photo/4253312/'),

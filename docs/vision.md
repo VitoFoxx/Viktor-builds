@@ -120,7 +120,7 @@ The website the visitor has just experienced is taken apart and rebuilt three ti
 
 What changes most visibly is the **priority of the content**: each website starts with what *its* visitors need first (the restaurant with "today", the practice with an appointment). Photography, typography, colour, layout, navigation, CTA and tone change with it.
 
-Mechanics: **take apart → re-plan → rebuild**, using the vocabulary of Scene 02 (grey placeholder bars, masked headlines). Never a colour morph: that would read as a theme switcher, i.e. a template. The transitions accelerate (1→2 slow, 3→4 fastest).
+Mechanics: **take apart → re-plan → rebuild**, using the vocabulary of Scene 02 (grey placeholder bars, masked headlines). Never a colour morph: that would read as a theme switcher, i.e. a template. Order: the old page is taken apart element by element, details first and structure (nav, photo) last; the new grid is drawn before the fields move into it; the new page is built structure first (ground, photo, nav, headline) and its main action last. The transitions accelerate (1→2 slow, 3→4 fastest).
 
 Constants: frame, browser chrome, `your-business.com`, dark stage, frame position, context line with counter.
 

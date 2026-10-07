@@ -39,7 +39,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 60%;
+  height: 34cqw;
   overflow: hidden;
   background: var(--brand-placeholder);
 }
@@ -49,14 +49,15 @@
   inset: 0;
 }
 
-/* Legibility for the navigation and headline that sit on the photo. */
+/* No veil over the whole photo: a light band for the navigation and a
+   local shadow only where the headline sits (lower left). */
 .r-hero__media::after {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to top, rgb(24 14 10 / 0.62), rgb(24 14 10 / 0) 58%),
-    linear-gradient(to bottom, rgb(24 14 10 / 0.5), rgb(24 14 10 / 0) 24%);
+    radial-gradient(ellipse 62cqw 26cqw at 0% 100%, rgb(22 13 9 / 0.82), rgb(22 13 9 / 0.5) 48%, rgb(22 13 9 / 0) 100%),
+    linear-gradient(to bottom, rgb(22 13 9 / 0.5), rgb(22 13 9 / 0) 9cqw);
 }
 
 .r-nav {
@@ -92,50 +93,53 @@
   letter-spacing: -0.01em;
 }
 
+/* The headline in the shadowed corner, a short measure, set like a
+   magazine opener rather than a banner. */
 .r-hero__copy {
   position: absolute;
   left: 4.4cqw;
-  bottom: calc(40% + 3.2cqw);
-  max-width: 62cqw;
+  bottom: calc(59cqw - 34cqw + 3cqw);
+  max-width: 46cqw;
   color: var(--brand-on-image);
 }
 
 .r-eyebrow {
   width: fit-content;
-  margin-bottom: 1.2cqw;
+  margin-bottom: 1.1cqw;
   font-size: max(12px, 1cqw);
   letter-spacing: 0.02em;
-  opacity: 0.86;
 }
 
 .r-hero__title {
-  font-size: 6.4cqw;
+  font-size: 4.9cqw;
   font-weight: 450;
-  line-height: 1;
-  letter-spacing: -0.025em;
+  line-height: 1.04;
+  letter-spacing: -0.022em;
 }
 
-/* The cook: a second, smaller picture that bridges photo and menu. */
+/* The cook: anchored to the right and bottom edges of the page and
+   reaching up into the kitchen photo. One picture story, not a teaser. */
 .r-chef {
   position: absolute;
-  right: 4.4cqw;
-  top: 37%;
-  height: 35%;
-  aspect-ratio: 4 / 5;
+  right: 0;
+  bottom: 0;
+  width: 26cqw;
+  height: 32cqw;
   overflow: hidden;
   background: var(--brand-placeholder);
 }
 
-/* ── Heute ────────────────────────────────────────────────────── */
+/* ── Heute: the evening, then the table ───────────────────────── */
 
 .r-today {
   position: absolute;
   left: 4.4cqw;
-  top: calc(60% + 2.4cqw);
+  top: 38cqw;
+  width: 21cqw;
 }
 
 .r-today__label {
-  font-size: 3.8cqw;
+  font-size: 3.6cqw;
   font-weight: 500;
   line-height: 1;
   letter-spacing: -0.02em;
@@ -143,32 +147,56 @@
 
 .r-today__hours {
   margin-top: 0.9cqw;
-  font-size: max(13px, 1cqw);
+  font-size: max(13px, 1.05cqw);
   color: var(--brand-muted);
 }
 
-/* Menu and reservation: one column, the action right under the dishes. */
-.r-order {
-  position: absolute;
-  left: 30cqw;
-  width: 34cqw;
-  top: calc(60% + 2.4cqw);
+/* The reservation: when and for how many, then the one filled action. */
+.r-reserve {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 2.4cqw;
+  margin-top: 2.6cqw;
+  font-size: max(13px, 1cqw);
+  text-align: center;
 }
 
+.r-reserve__when,
+.r-reserve__action {
+  padding: 0.9em 1em;
+}
+
+.r-reserve__when {
+  border: 1px solid var(--brand-line-strong);
+  border-bottom: 0;
+}
+
+.r-reserve__action {
+  background: var(--brand-deep);
+  color: var(--brand-on-deep);
+  font-weight: 600;
+}
+
+/* ── Menu ─────────────────────────────────────────────────────── */
+
 .r-menu {
-  align-self: stretch;
-  font-size: max(14px, 1.2cqw);
+  position: absolute;
+  left: 30cqw;
+  width: 36cqw;
+  top: 38.2cqw;
+  font-size: max(14px, 1.25cqw);
+}
+
+.r-menu__label {
+  margin-bottom: 1cqw;
+  font-size: max(12px, 0.95cqw);
+  color: var(--brand-muted);
 }
 
 .r-menu__item {
   display: flex;
   justify-content: space-between;
   gap: 2em;
-  padding: 0.62em 0;
+  padding: 0.66em 0;
   border-top: 1px solid var(--brand-line);
 }
 
@@ -180,29 +208,8 @@
   color: var(--brand-deep);
 }
 
-/* The reservation: when, for how many, and the one filled action. */
-.r-reserve {
-  display: flex;
-  font-size: max(13px, 1cqw);
-}
-
-.r-reserve__when,
-.r-reserve__action {
-  padding: 0.95em 1.3em;
-}
-
-.r-reserve__when {
-  border: 1px solid var(--brand-line-strong);
-  border-right: 0;
-}
-
-.r-reserve__action {
-  background: var(--brand-deep);
-  color: var(--brand-on-deep);
-  font-weight: 600;
-}
-
-/* ── Mobile: the same priorities, stacked ─────────────────────── */
+/* ── Mobile: its own order. Kitchen and headline, then the cook
+   beside "Heute" and the reservation, the menu last. ───────────── */
 
 @media (max-width: 767.98px) {
   .r-site {
@@ -210,7 +217,18 @@
   }
 
   .r-hero__media {
-    height: 48%;
+    height: 74cqw;
+  }
+
+  /* Pans and lamps in the narrower crop. */
+  .r-hero__img {
+    --focus: 58% 24%;
+  }
+
+  .r-hero__media::after {
+    background:
+      radial-gradient(ellipse 130cqw 46cqw at 0% 100%, rgb(22 13 9 / 0.82), rgb(22 13 9 / 0.48) 50%, rgb(22 13 9 / 0) 100%),
+      linear-gradient(to bottom, rgb(22 13 9 / 0.5), rgb(22 13 9 / 0) 20cqw);
   }
 
   .r-nav {
@@ -226,7 +244,8 @@
 
   .r-hero__copy {
     left: 6cqw;
-    bottom: calc(52% + 6cqw);
+    right: 6cqw;
+    bottom: calc(163cqw - 74cqw + 6cqw);
     max-width: none;
   }
 
@@ -236,19 +255,21 @@
   }
 
   .r-hero__title {
-    font-size: 9cqw;
+    font-size: 9.6cqw;
   }
 
+  /* The visible page ends near 157cqw (3:5 frame minus chrome). */
   .r-chef {
-    right: 6cqw;
-    top: 45%;
-    width: 30cqw;
-    height: auto;
+    top: 74cqw;
+    bottom: auto;
+    width: 38cqw;
+    height: 47.5cqw;
   }
 
   .r-today {
     left: 6cqw;
-    top: calc(48% + 6cqw);
+    top: 81cqw;
+    width: 50cqw;
   }
 
   .r-today__label {
@@ -260,24 +281,29 @@
     font-size: max(12px, 3.2cqw);
   }
 
-  .r-order {
-    left: 6cqw;
-    right: 6cqw;
-    width: auto;
-    top: 67.5%;
-    gap: 3.6cqw;
-  }
-
-  .r-menu {
-    font-size: max(14px, 3.7cqw);
-  }
-
   .r-reserve {
-    font-size: max(12px, 3.2cqw);
+    margin-top: 5cqw;
+    font-size: max(11px, 2.9cqw);
   }
 
   .r-reserve__when,
   .r-reserve__action {
-    padding: 0.9em 1em;
+    padding: 0.85em 0.6em;
+  }
+
+  .r-menu {
+    left: 6cqw;
+    right: 6cqw;
+    width: auto;
+    top: 127cqw;
+    font-size: max(14px, 3.6cqw);
+  }
+
+  .r-menu__label {
+    display: none;
+  }
+
+  .r-menu__item {
+    padding: 0.46em 0;
   }
 }

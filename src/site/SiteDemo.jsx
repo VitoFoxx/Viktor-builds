@@ -50,14 +50,20 @@ export default function SiteDemo() {
           </div>
         </div>
 
-        <ul className="site-facts">
-          {study.facts.map((fact) => (
-            <li className="site-facts__item" key={fact.title} data-reveal>
-              <span className="site-facts__title">{fact.title}</span>
-              <span className="site-facts__text">{fact.text}</span>
-            </li>
-          ))}
-        </ul>
+        <div className="site-facts">
+          <p className="site-facts__label" data-reveal>
+            {study.factsLabel}
+          </p>
+          <ol className="site-facts__list">
+            {study.facts.map((fact, i) => (
+              <li className="site-facts__item" key={fact.title} data-reveal>
+                <span className="site-facts__index">{String(i + 1).padStart(2, '0')}</span>
+                <span className="site-facts__title">{fact.title}</span>
+                <span className="site-facts__text">{fact.text}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
 
       <div className="site-project">

@@ -10,9 +10,9 @@ const Line = ({ children }) => (
 
 /**
  * Design study 02: a restaurant, rebuilt from the metalwork study in
- * ADAPT. One screen, image first: the room and the open kitchen, then
- * "Heute" as a typographic menu and the reservation. Like SiteDemo it is
- * a picture of a website: links are visual only.
+ * ADAPT. One screen, image first: the open kitchen, the cook anchored to
+ * its lower edge, then "Heute" with the reservation and the evening's
+ * menu. Like SiteDemo it is a picture of a website: links are visual only.
  */
 export default function SiteRestaurant() {
   return (
@@ -41,16 +41,27 @@ export default function SiteRestaurant() {
       </div>
 
       <div className="r-chef">
-        <SitePhoto name="restaurant.detail" sizes="(min-width: 768px) 20vw, 34vw" />
+        <SitePhoto name="restaurant.detail" sizes="(min-width: 768px) 22vw, 42vw" />
       </div>
 
-      <div className="r-today" data-reveal>
-        <p className="r-today__label">{restaurant.today.label}</p>
-        <p className="r-today__hours">{restaurant.today.hours}</p>
+      <div className="r-today">
+        <p className="r-today__label" data-reveal>
+          {restaurant.today.label}
+        </p>
+        <p className="r-today__hours" data-reveal>
+          {restaurant.today.hours}
+        </p>
+        <p className="r-reserve" data-reveal>
+          <span className="r-reserve__when">{restaurant.reserve.when}</span>
+          <span className="r-reserve__action">{restaurant.reserve.action}</span>
+        </p>
       </div>
 
-      <div className="r-order">
-        <ul className="r-menu">
+      <div className="r-menu">
+        <p className="r-menu__label" data-reveal>
+          {restaurant.menuLabel}
+        </p>
+        <ul>
           {restaurant.menu.map((item) => (
             <li className="r-menu__item" key={item.dish} data-reveal>
               <span>{item.dish}</span>
@@ -58,11 +69,6 @@ export default function SiteRestaurant() {
             </li>
           ))}
         </ul>
-
-        <p className="r-reserve" data-reveal>
-          <span className="r-reserve__when">{restaurant.reserve.when}</span>
-          <span className="r-reserve__action">{restaurant.reserve.action}</span>
-        </p>
       </div>
     </div>
   )

@@ -15,6 +15,7 @@ export const study = {
   headline: ['Metallbau.', 'Ohne Umwege.'],
   text: 'Treppen, Geländer und Sonderanfertigungen aus Stahl. Geplant und gefertigt in Hannover.',
   actions: [{ label: 'Projekte ansehen' }, { label: 'Anfrage stellen', primary: true }],
+  factsLabel: 'Leistungen',
   facts: [
     { title: 'Treppen', text: 'Stahlwangen, gewendelt, gerade' },
     { title: 'Geländer', text: 'Flachstahl, innen und außen' },
@@ -47,6 +48,7 @@ export const restaurant = {
   eyebrow: 'Offene Küche · Hannover',
   headline: ['Gekocht wird', 'vor Ihren Augen.'],
   today: { label: 'Heute', hours: 'Geöffnet ab 17 Uhr' },
+  menuLabel: 'Aus der Karte',
   menu: [
     { dish: 'Rehrücken, Jus, Quitte', price: '29' },
     { dish: 'Saibling, Lauch, Beurre blanc', price: '24' },

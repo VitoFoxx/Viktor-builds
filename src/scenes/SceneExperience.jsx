@@ -1,5 +1,5 @@
 import SiteDemo from '../site/SiteDemo.jsx'
-import { study, restaurant } from '../site/content.js'
+import { study, restaurant, salon, dental } from '../site/content.js'
 import './SceneExperience.css'
 
 /**
@@ -20,10 +20,12 @@ export default function SceneExperience() {
         Viktor Builds <span aria-hidden="true">—</span>{' '}
         <span className="context__swap">
           <span className="context__item">{study.context}</span>
-          {/* ADAPT counts on here; the restaurant section has its own heading. */}
-          <span className="context__item context__item--next" aria-hidden="true">
-            {restaurant.context}
-          </span>
+          {/* ADAPT counts on here; its studies have their own labels. */}
+          {[restaurant, salon, dental].map((next) => (
+            <span className="context__item context__item--next" aria-hidden="true" key={next.context}>
+              {next.context}
+            </span>
+          ))}
         </span>
       </h2>
 

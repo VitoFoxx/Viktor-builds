@@ -56,3 +56,48 @@ export const restaurant = {
   ],
   reserve: { when: 'Heute · 2 Personen · 19:30', action: 'Tisch reservieren' },
 }
+
+// 03 Barbershop. Its visitors ask: what do they do, what does it cost,
+// when can I come? So the page is a price board, the room shows what kind
+// of shop it is, and booking runs service → barber → time. Du, short.
+export const salon = {
+  trade: 'Barbershop',
+  context: 'Website 03 / Barbershop',
+  eyebrow: 'Herrenfriseur und Barbier · Linden',
+  index: ['Preise', 'Barbiere', 'Laden'],
+  navAction: 'Termin',
+  board: [
+    { word: 'Schnitt.', service: 'Haarschnitt', note: 'Schere oder Maschine, mit Waschen', time: '30 Min', price: '32 €' },
+    { word: 'Bart.', service: 'Bart in Form', note: 'Konturen mit der Klinge', time: '20 Min', price: '22 €' },
+    { word: 'Rasur.', service: 'Nassrasur', note: 'Heißes Tuch, Klinge, Balsam', time: '30 Min', price: '28 €' },
+  ],
+  steps: ['Leistung', 'Barbier', 'Uhrzeit'],
+  action: 'Termin wählen',
+  walkIn: 'Ohne Termin? Komm Di – Fr zwischen 10 und 13 Uhr vorbei.',
+}
+
+// 04 Zahnarztpraxis. Its visitors arrive with a concern, not with time to
+// read: the page starts with their question and four ways in, opening
+// hours and the phone always in view. Sie, calm, no promises.
+// BUSINESS (Scene 06) continues from this page: `status` and `action`
+// are the elements it will pick up.
+export const dental = {
+  trade: 'Zahnarztpraxis',
+  context: 'Website 04 / Zahnarztpraxis',
+  status: { today: 'Heute geöffnet · 8 – 18 Uhr', call: 'Anrufen', emergency: 'Notdienst' },
+  nav: ['Leistungen', 'Team', 'Praxis'],
+  navAction: 'Termin vereinbaren',
+  eyebrow: 'Hannover-List · alle Kassen und privat',
+  headline: ['Wobei können wir', 'Ihnen helfen?'],
+  needs: [
+    { title: 'Akute Beschwerden', text: 'Schmerzen, Schwellung oder ein Unfall' },
+    { title: 'Termin vereinbaren', text: 'Kontrolle, Reinigung oder Behandlung' },
+    { title: 'Neu bei uns', text: 'Was Sie zum ersten Termin mitbringen' },
+    { title: 'Leistungen', text: 'Von Prophylaxe bis Zahnersatz' },
+  ],
+  hoursLabel: 'Sprechzeiten',
+  hours: [
+    { days: 'Mo – Do', time: '8 – 18 Uhr' },
+    { days: 'Fr', time: '8 – 14 Uhr' },
+  ],
+}

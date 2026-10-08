@@ -23,6 +23,25 @@
   font-display: swap;
 }
 
+/* Design study 03 (Barbershop). Latin subset, wdth 62–100, wght 400–800. */
+@font-face {
+  font-family: 'Archivo';
+  src: url('/fonts/archivo-latin-wdth-wght.woff2') format('woff2');
+  font-weight: 400 800;
+  font-stretch: 62% 100%;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Design study 04 (Zahnarztpraxis). Latin subset, wght 200–800. */
+@font-face {
+  font-family: 'Atkinson Hyperlegible Next';
+  src: url('/fonts/atkinson-hyperlegible-next-latin-wght.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 *,
 *::before,
 *::after {

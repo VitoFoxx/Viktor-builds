@@ -64,3 +64,35 @@
   --brand-placeholder: #dcd2c3;
   --brand-font: 'Literata', Georgia, 'Times New Roman', serif;
 }
+
+/* Design study 03 (ADAPT): a barbershop. Dark bottle green from the
+   room's walls, off-white type and the wall's mint as the one action
+   colour. No gold, no beige. */
+[data-brand='salon'] {
+  --brand-bg: #0f1613;
+  --brand-ink: #eceee8;
+  --brand-muted: #8e9a93;
+  --brand-line: rgb(236 238 232 / 0.16);
+  --brand-line-strong: rgb(236 238 232 / 0.4);
+  --brand-accent: #9fd6b6;
+  --brand-on-accent: #0f1613;
+  --brand-placeholder: #1d2622;
+  --brand-font: 'Archivo', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+/* Design study 04 (ADAPT): a dental practice. Light and calm, deep
+   blue-black type and one quiet blue for the appointment. No white and
+   gold, no turquoise. */
+[data-brand='dental'] {
+  --brand-bg: #f5f6f4;
+  --brand-ink: #14212c;
+  --brand-muted: #56636d;
+  --brand-line: rgb(20 33 44 / 0.14);
+  --brand-line-strong: rgb(20 33 44 / 0.36);
+  --brand-accent: #1f4e78;
+  --brand-on-accent: #f5f8fa;
+  --brand-bar: #14212c;
+  --brand-on-bar: #e6ecf0;
+  --brand-placeholder: #dfe3e2;
+  --brand-font: 'Atkinson Hyperlegible Next', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}

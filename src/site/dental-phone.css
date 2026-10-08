@@ -1,0 +1,467 @@
+/* ─────────────────────────────────────────────────────────────
+   Design study 04 on a phone (Scene 06 BUSINESS). The practice's
+   mobile layout (dental.css at 390 px) in cqw of the phone, plus the
+   menu, the action bar at the bottom and the request pages. Same
+   brand tokens, type and tone as the desktop page.
+   Base = the state in which BUSINESS leaves it (and reduced motion
+   shows it): the request is sent. businessTimeline.js sets the start.
+   ───────────────────────────────────────────────────────────── */
+
+.pd-site {
+  position: absolute;
+  inset: 0;
+  color: var(--brand-ink);
+  font-family: var(--brand-font);
+  font-size: 3.3cqw;
+  line-height: 1.4;
+}
+
+/* ── Status bar and navigation (stay while the pages change) ────── */
+
+.pd-status {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8.6cqw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6cqw;
+  color: var(--brand-on-bar);
+  font-size: 2.9cqw;
+}
+
+.pd-status__bg {
+  position: absolute;
+  inset: 0;
+  background: var(--brand-bar);
+  transform-origin: 0 0;
+}
+
+/* Open now and closed now in one cell; BUSINESS swaps them. */
+.pd-status__swap {
+  position: relative;
+  display: grid;
+  clip-path: inset(0 -1em);
+}
+
+.pd-status__today {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+}
+
+.pd-status__today::before {
+  content: '';
+  display: inline-block;
+  width: 0.55em;
+  height: 0.55em;
+  margin-right: 0.6em;
+  border-radius: 50%;
+  background: #8fc7a0;
+  vertical-align: 0.05em;
+}
+
+.pd-status__today--closed::before {
+  background: #8a969f;
+}
+
+.pd-status__today:first-child {
+  visibility: hidden;
+}
+
+.pd-status__call {
+  position: relative;
+}
+
+.pd-nav {
+  position: absolute;
+  top: 8.6cqw;
+  left: 6cqw;
+  right: 6cqw;
+  height: 14.4cqw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pd-logo {
+  font-size: 4.6cqw;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.pd-burger {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6cqw;
+  width: 6cqw;
+}
+
+.pd-burger span {
+  height: 1.5px;
+  background: currentColor;
+}
+
+.pd-nav__rule,
+.pd-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--brand-line);
+  transform-origin: 0 0;
+}
+
+/* The request's progress runs along the navigation's rule. */
+.pd-progress {
+  height: 2px;
+  background: var(--brand-accent);
+  visibility: hidden;
+}
+
+/* ── Pages: below the navigation, pushed in from the right ──────── */
+
+.pd-pages {
+  position: absolute;
+  top: 23cqw;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.pd-page {
+  position: absolute;
+  inset: 0;
+  padding: 0 6cqw;
+  visibility: hidden;
+}
+
+.pd-page--sent {
+  visibility: inherit;
+}
+
+/* Start page: the practice's mobile layout. */
+
+.pd-photo {
+  position: absolute;
+  top: 4cqw;
+  height: 42cqw;
+  clip-path: inset(0px 0px 0px 0px);
+}
+
+.pd-photo--reception {
+  left: 6cqw;
+  width: 55cqw;
+}
+
+.pd-photo--chair {
+  left: 63cqw;
+  width: 31cqw;
+}
+
+/* The whole photo at its natural aspect, so the timeline can carry it
+   over from the desktop crop; the frame above crops it. */
+.pd-photo__img {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  transform-origin: 0 0;
+}
+
+.pd-photo--reception .pd-photo__img {
+  /* 1000 × 1498 at 55 cqw, both people at the counter (62% 36%). */
+  top: -14.54cqw;
+  height: 82.39cqw;
+}
+
+.pd-photo--chair .pd-photo__img {
+  /* 800 × 1200 at 31 cqw (50% 55%). */
+  top: -2.48cqw;
+  height: 46.5cqw;
+}
+
+.pd-photo__img picture,
+.pd-photo__img img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pd-intro {
+  position: absolute;
+  top: 52cqw;
+  left: 6cqw;
+  right: 6cqw;
+}
+
+.pd-eyebrow,
+.pd-step {
+  width: fit-content;
+  margin-bottom: 2.2cqw;
+  color: var(--brand-muted);
+  font-size: 3cqw;
+}
+
+.pd-title,
+.pd-step__title,
+.pd-sent__title {
+  width: fit-content;
+  font-size: 7.6cqw;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+.pd-needs {
+  position: absolute;
+  top: 80cqw;
+  left: 6cqw;
+  right: 6cqw;
+}
+
+.pd-need {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-content: center;
+  column-gap: 1.5em;
+  height: 13.4cqw;
+}
+
+.pd-need > :not(.pd-need__rule) {
+  width: fit-content;
+}
+
+.pd-need__rule,
+.pd-needs__end {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--brand-line);
+  transform-origin: 0 0;
+}
+
+.pd-needs__end {
+  position: relative;
+}
+
+.pd-need__title {
+  font-size: 4cqw;
+  font-weight: 650;
+}
+
+.pd-need__text {
+  grid-row: 2;
+  color: var(--brand-muted);
+}
+
+.pd-need__go {
+  grid-row: 1 / 3;
+  grid-column: 2;
+  align-self: center;
+  color: var(--brand-accent);
+  font-size: 4cqw;
+}
+
+.pd-need__go--call {
+  padding: 0.5em 1em;
+  border: 1px solid var(--brand-accent);
+  font-size: 3.1cqw;
+  font-weight: 650;
+}
+
+/* Request steps: one question per page, short. */
+
+.pd-step {
+  margin-top: 7cqw;
+}
+
+.pd-options {
+  margin-top: 6cqw;
+}
+
+.pd-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 12.4cqw;
+  border-top: 1px solid var(--brand-line);
+  font-size: 4cqw;
+  font-weight: 500;
+}
+
+.pd-option:last-child {
+  border-bottom: 1px solid var(--brand-line);
+}
+
+.pd-option__radio {
+  position: relative;
+  width: 5.2cqw;
+  height: 5.2cqw;
+  border: 1.5px solid var(--brand-line-strong);
+  border-radius: 50%;
+}
+
+.pd-option__dot {
+  position: absolute;
+  inset: 1cqw;
+  border-radius: 50%;
+  background: var(--brand-accent);
+  transform: scale(0);
+}
+
+.pd-choice {
+  margin-top: 6cqw;
+}
+
+.pd-choice__question {
+  margin-bottom: 2.4cqw;
+  color: var(--brand-muted);
+}
+
+.pd-choice__options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.4cqw;
+}
+
+.pd-choice__option {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 12cqw;
+  border: 1px solid var(--brand-line-strong);
+  font-size: 4cqw;
+  font-weight: 600;
+}
+
+.pd-choice__fill {
+  position: absolute;
+  inset: -1px;
+  background: var(--brand-accent);
+  visibility: hidden;
+}
+
+.pd-choice__label {
+  position: relative;
+}
+
+.pd-field {
+  margin-top: 6cqw;
+}
+
+.pd-field__label,
+.pd-field__box,
+.pd-field__value,
+.pd-sent__line {
+  display: block;
+}
+
+.pd-field__label {
+  margin-bottom: 2.4cqw;
+  color: var(--brand-muted);
+}
+
+.pd-field__box {
+  height: 12cqw;
+  padding: 0 4cqw;
+  border: 1px solid var(--brand-line-strong);
+}
+
+.pd-field__value {
+  width: fit-content;
+  font-size: 4cqw;
+  font-weight: 500;
+  line-height: 12cqw;
+  letter-spacing: 0.02em;
+}
+
+/* Sent: the request in four lines, as the patient sent it. */
+
+.pd-sent__title {
+  margin-top: 10cqw;
+}
+
+.pd-sent__text {
+  margin-top: 3cqw;
+  color: var(--brand-muted);
+  font-size: 3.6cqw;
+}
+
+.pd-summary {
+  margin-top: 9cqw;
+}
+
+.pd-summary__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1em;
+  padding: 3cqw 0;
+  border-top: 1px solid var(--brand-line);
+}
+
+.pd-summary__row:last-child {
+  border-bottom: 1px solid var(--brand-line);
+}
+
+.pd-summary dt {
+  color: var(--brand-muted);
+}
+
+.pd-summary__value {
+  font-size: 3.6cqw;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ── The action bar: the appointment, then each step's action ───── */
+
+.pd-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 15cqw;
+  display: grid;
+  place-items: center;
+  color: var(--brand-on-accent);
+  font-size: 4cqw;
+  font-weight: 650;
+  visibility: hidden;
+}
+
+.pd-bar__bg,
+.pd-bar__press {
+  position: absolute;
+  inset: 0;
+  background: var(--brand-accent);
+  transform-origin: 0 0;
+}
+
+.pd-bar__press {
+  background: rgb(0 0 0 / 0.22);
+  visibility: hidden;
+}
+
+.pd-bar__labels {
+  position: relative;
+  display: grid;
+  clip-path: inset(0 -1em);
+}
+
+.pd-bar__label {
+  grid-area: 1 / 1;
+  justify-self: center;
+}
+
+.pd-bar__label:not(:first-child) {
+  visibility: hidden;
+}

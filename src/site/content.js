@@ -58,8 +58,9 @@ export const restaurant = {
 }
 
 // 03 Barbershop. Its visitors ask: what do they do, what does it cost,
-// when can I come? So the page is a price board, the room shows what kind
-// of shop it is, and booking runs service → barber → time. Du, short.
+// what will it look like, when can I come? So the page reads service →
+// style → appointment: a price board, one line on the cut (with the room
+// as the shop's look), and booking as service → barber → time. Du, short.
 export const salon = {
   trade: 'Barbershop',
   context: 'Website 03 / Barbershop',
@@ -71,6 +72,7 @@ export const salon = {
     { word: 'Bart.', service: 'Bart in Form', note: 'Konturen mit der Klinge', time: '20 Min', price: '22 €' },
     { word: 'Rasur.', service: 'Nassrasur', note: 'Heißes Tuch, Klinge, Balsam', time: '30 Min', price: '28 €' },
   ],
+  style: 'Klassisch geschnitten, mit der Klinge nachgezogen.',
   steps: ['Leistung', 'Barbier', 'Uhrzeit'],
   action: 'Termin wählen',
   walkIn: 'Ohne Termin? Komm Di – Fr zwischen 10 und 13 Uhr vorbei.',

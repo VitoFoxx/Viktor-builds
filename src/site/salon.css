@@ -179,13 +179,24 @@
   color: var(--brand-muted);
 }
 
+/* The style between service and appointment: what the cut looks like. */
+.s-style {
+  position: absolute;
+  left: 18.6cqw;
+  right: calc(37cqw + 3.6cqw);
+  top: 36.4cqw;
+  font-size: max(13px, 1.3cqw);
+  font-weight: 500;
+  letter-spacing: 0.005em;
+}
+
 /* ── Booking: the order of the booking tool, then the action ──── */
 
 .s-book {
   position: absolute;
   left: 18.6cqw;
   right: calc(37cqw + 3.6cqw);
-  top: 40.5cqw;
+  top: 42cqw;
 }
 
 .s-steps {
@@ -324,6 +335,9 @@
     font-size: max(12px, 3.5cqw);
   }
 
+  /* Mobile shows the shop's look in the room photo up top; the line
+     would crowd the board. */
+  .s-style,
   .s-walkin {
     display: none;
   }

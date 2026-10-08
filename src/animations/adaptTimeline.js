@@ -256,7 +256,8 @@ const buildRestaurant = (q, stageQ) => (tl, handOver) => {
 }
 
 // Barbershop: the room, then the shop's name and index, the board word
-// by word with its prices, the razor, the booking last.
+// by word with its prices, the razor and the line on the cut, the booking
+// last.
 const buildSalon = (q) => (tl, handOver) => {
   tl.fromTo(...wipe(q('.s-room'), 'bottom'), 'rebuild+=0.15').fromTo(
     q('.s-room .site-photo'),
@@ -271,7 +272,9 @@ const buildSalon = (q) => (tl, handOver) => {
     .fromTo(...rise(q('.s-title .site-line__inner')), 'rebuild+=0.8')
   handOver(['eyebrow', 'label', 'title-1', 'title-2', 'title-3'], 'rebuild+=0.8')
     .fromTo(...fadeUp(q('.s-price [data-reveal]'), 0.04), 'rebuild+=1.05')
-  handOver(['prices'], 'rebuild+=1.1').fromTo(...wipe(q('.s-razor'), 'top', 0.7), 'rebuild+=1.1')
+  handOver(['prices'], 'rebuild+=1.1')
+    .fromTo(...wipe(q('.s-razor'), 'top', 0.7), 'rebuild+=1.1')
+    .fromTo(...fadeUp(q('.s-style')), 'rebuild+=1.3')
   handOver(['detail'], 'rebuild+=1.5').fromTo(...fadeUp(q('.s-steps, .s-walkin'), 0.08), 'rebuild+=1.45')
   handOver(['hours'], 'rebuild+=1.5').fromTo(...fadeUp(q('.s-action')), 'rebuild+=1.85')
   handOver(['action'], 'rebuild+=1.85')

@@ -10,9 +10,10 @@ const Line = ({ children }) => (
 
 /**
  * Design study 03: a barbershop, rebuilt from the restaurant in ADAPT.
- * The page is a price board: three services as the headline, each with
- * its time and price on the same row, the room as a tall photo beside it
- * (what kind of shop) and booking as service → barber → time. Dark like
+ * The page reads service → style → appointment: three services as the
+ * headline, each with its time and price on the same row, one line on the
+ * cut and the room as a tall photo beside it (what kind of shop), then
+ * booking as service → barber → time. Dark like
  * the shop, a numbered index instead of a menu bar. Links are visual only.
  */
 export default function SiteSalon() {
@@ -64,6 +65,10 @@ export default function SiteSalon() {
           </li>
         ))}
       </ul>
+
+      <p className="s-style" data-reveal>
+        {salon.style}
+      </p>
 
       <div className="s-book">
         <ol className="s-steps" data-reveal>

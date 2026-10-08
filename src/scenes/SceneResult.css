@@ -1,0 +1,518 @@
+/* ─────────────────────────────────────────────────────────────
+   Scene 07: Result, after the pinned stage. Viktor's own page:
+   his type, his colours, no study. One action dominates:
+   "Projekt anfragen". The same in motion and without.
+   ───────────────────────────────────────────────────────────── */
+
+.result {
+  --result-max: 80rem;
+  --text-soft: rgb(242 241 238 / 0.78);
+
+  width: min(100%, calc(var(--result-max) + 2 * var(--gutter)));
+  margin: 0 auto;
+  padding: clamp(6rem, 18svh, 12rem) var(--gutter) clamp(4rem, 12svh, 8rem);
+}
+
+/* ── Ring closure without motion (in motion the stage does it) ──── */
+
+.result__ring {
+  min-height: 70svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: calc(-1 * clamp(6rem, 18svh, 12rem));
+  text-align: center;
+}
+
+.result__address {
+  padding: 0.35em 2.5em;
+  font-size: var(--fs-message);
+  letter-spacing: 0.02em;
+  background: var(--c-surface-raised);
+  border: 1px solid var(--c-line-strong);
+  border-radius: 99px;
+}
+
+/* Scene 01's type (IntroStage.css). */
+.result__name {
+  margin-top: 1rem;
+  font-size: var(--fs-display);
+  font-weight: 600;
+  line-height: 0.86;
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+}
+
+.result__claim {
+  font-size: clamp(0.9375rem, 1.6vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-indent: 0.24em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .result__ring {
+    display: none;
+  }
+}
+
+/* ── What Viktor Builds does ────────────────────────────────── */
+
+.result__eyebrow,
+.offer__n,
+.result__services,
+.request__legend,
+.footer {
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.result__title {
+  margin-top: clamp(1.25rem, 3svh, 2rem);
+  font-size: clamp(2.5rem, 6.6vw, 6.5rem);
+  font-weight: 600;
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.result__title span {
+  display: block;
+}
+
+.result__lead {
+  max-width: 34em;
+  margin-top: clamp(1.5rem, 3.5svh, 2.25rem);
+  font-size: clamp(1.0625rem, 1.35vw, 1.3125rem);
+  line-height: 1.5;
+  color: var(--text-soft);
+  text-wrap: pretty;
+}
+
+/* The main action of the page: the only solid, light surface. */
+.result__cta,
+.request__submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9em;
+  min-height: 3.25rem;
+  padding: 0 1.6rem;
+  border: 0;
+  border-radius: 2px;
+  background: var(--c-fg);
+  color: var(--c-bg);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s var(--ease-out);
+}
+
+.result__cta {
+  margin-top: clamp(2rem, 5svh, 3rem);
+}
+
+.result__cta span,
+.request__submit span {
+  transition: transform 0.25s var(--ease-out);
+}
+
+.result__cta:hover,
+.request__submit:hover {
+  background: #fff;
+}
+
+.result__cta:hover span,
+.request__submit:hover span {
+  transform: translateX(3px);
+}
+
+.result__cta:active,
+.request__submit:active {
+  transform: translateY(1px);
+}
+
+.result a:focus-visible,
+.request__submit:focus-visible,
+.footer a:focus-visible {
+  outline: 1px solid var(--c-accent);
+  outline-offset: 4px;
+}
+
+.result__offer {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.5rem, 2.6vw, 2.5rem);
+  margin-top: clamp(4.5rem, 12svh, 8rem);
+}
+
+.offer {
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--c-line-strong);
+}
+
+.offer__n {
+  display: block;
+  font-variant-numeric: tabular-nums;
+}
+
+.offer__title {
+  margin-top: 1.75rem;
+  font-size: clamp(1.0625rem, 1.3vw, 1.25rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.offer__text {
+  margin-top: 0.6rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--c-muted);
+  text-wrap: pretty;
+}
+
+.result__services {
+  margin-top: clamp(2.5rem, 6svh, 3.5rem);
+  line-height: 2;
+}
+
+/* ── Projekt anfragen ───────────────────────────────────────── */
+
+.request {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  margin-top: clamp(6rem, 18svh, 11rem);
+  padding-top: clamp(2rem, 5svh, 3rem);
+  border-top: 1px solid var(--c-line-strong);
+  scroll-margin-top: clamp(1rem, 4svh, 2.5rem);
+}
+
+.request__title {
+  font-size: clamp(2.25rem, 4.6vw, 4.25rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.request__text {
+  max-width: 24em;
+  margin-top: 1.25rem;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--text-soft);
+}
+
+.request__direct {
+  margin-top: 2rem;
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+
+.request__direct a {
+  color: var(--c-fg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--c-line-strong);
+}
+
+.request__region {
+  margin-top: 1rem;
+  color: var(--c-muted);
+}
+
+.request__form {
+  display: grid;
+  gap: clamp(2rem, 5svh, 2.75rem);
+}
+
+.request__step {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.request__legend {
+  display: flex;
+  gap: 1.25em;
+  width: 100%;
+  padding: 0 0 0.9rem;
+  border-bottom: 1px solid var(--c-line);
+}
+
+.request__count {
+  color: var(--c-fg);
+  font-variant-numeric: tabular-nums;
+}
+
+.request__question {
+  display: block;
+  margin-top: 1.25rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.request__hint {
+  margin-left: 0.5em;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--c-muted);
+}
+
+.request__input {
+  width: 100%;
+  min-height: 3rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--c-line-strong);
+  border-radius: 0;
+  background: transparent;
+  color: var(--c-fg);
+  font: inherit;
+  font-size: 1.0625rem;
+  transition: border-color 0.2s var(--ease-out);
+}
+
+.request__input::placeholder {
+  color: var(--c-muted);
+}
+
+.request__input:hover {
+  border-color: rgb(242 241 238 / 0.5);
+}
+
+.request__input:focus {
+  outline: none;
+  border-color: var(--c-fg);
+  box-shadow: 0 1px 0 0 var(--c-fg);
+}
+
+.request__input:user-invalid {
+  border-color: #e58f7c;
+  box-shadow: 0 1px 0 0 #e58f7c;
+}
+
+.request__options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.request__option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-height: 3rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--c-line-strong);
+  border-radius: 2px;
+  font-size: 0.9375rem;
+  line-height: 1.3;
+  cursor: pointer;
+  transition:
+    border-color 0.2s var(--ease-out),
+    background-color 0.2s var(--ease-out);
+}
+
+/* The real control stays in place (and focusable), only unseen. */
+.request__option input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.request__option-mark {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid var(--c-line-strong);
+  border-radius: 2px;
+}
+
+.request__option input[type='radio'] + .request__option-mark {
+  border-radius: 50%;
+}
+
+.request__option-mark::after {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: inherit;
+  background: var(--c-bg);
+  transform: scale(0);
+  transition: transform 0.2s var(--ease-out);
+}
+
+.request__option:hover {
+  border-color: rgb(242 241 238 / 0.5);
+}
+
+.request__option:has(input:checked) {
+  border-color: var(--c-fg);
+  background: var(--c-surface-raised);
+}
+
+.request__option input:checked + .request__option-mark {
+  border-color: var(--c-fg);
+  background: var(--c-fg);
+}
+
+.request__option input:checked + .request__option-mark::after {
+  transform: scale(1);
+}
+
+.request__option:has(input:focus-visible) {
+  outline: 1px solid var(--c-accent);
+  outline-offset: 3px;
+}
+
+.request__fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.75rem;
+}
+
+.request__field-label {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--c-muted);
+}
+
+.request__send {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+}
+
+.request__note {
+  flex: 1 1 16rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--c-muted);
+}
+
+.request__sent {
+  align-self: start;
+  padding-top: 0.25rem;
+  outline: none;
+}
+
+.request__sent-title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.request__sent-title span {
+  display: block;
+}
+
+.request__sent-text {
+  margin-top: 1rem;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--text-soft);
+}
+
+.request__again {
+  display: inline-block;
+  margin-top: 1.5rem;
+  color: var(--c-fg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--c-line-strong);
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem 2.5rem;
+  width: min(100%, calc(80rem + 2 * var(--gutter)));
+  margin: 0 auto;
+  padding: 2rem var(--gutter) clamp(2rem, 6svh, 3rem);
+  border-top: 1px solid var(--c-line);
+  line-height: 1.7;
+}
+
+.footer__line {
+  flex: 1 1 auto;
+  color: var(--c-fg);
+}
+
+.footer__legal {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: var(--c-fg);
+}
+
+/* ── Smaller screens ────────────────────────────────────────── */
+
+@media (max-width: 1023.98px) {
+  .result__offer {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 2.5rem;
+  }
+
+  .request {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .result__offer {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 2rem;
+  }
+
+  .offer__title {
+    margin-top: 1rem;
+  }
+
+  .request__options,
+  .request__fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .result__cta,
+  .request__submit {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .request__hint {
+    display: block;
+    margin: 0.3rem 0 0;
+  }
+}

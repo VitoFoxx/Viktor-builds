@@ -151,8 +151,10 @@
   background: var(--brand-bg);
 }
 
+/* Above the page: in RESULT the address moves down over it. */
 .device__bar {
   position: absolute;
+  z-index: 1;
   top: 0;
   left: 0;
   right: 0;
@@ -194,6 +196,7 @@
 /* The phone is put away for the night. */
 .device__dim {
   position: absolute;
+  z-index: 2;
   inset: 0;
   background: #070708;
   visibility: hidden;

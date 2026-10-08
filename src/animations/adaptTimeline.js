@@ -72,7 +72,7 @@ export const STUDIES = [
 
 // Untransformed box of `el` inside `root` (offsets ignore transforms, so this
 // is safe to measure while both layers are scaled into the frame).
-function boxIn(el, root) {
+export function boxIn(el, root) {
   let x = 0
   let y = 0
   for (let node = el; node && node !== root; node = node.offsetParent) {

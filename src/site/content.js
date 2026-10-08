@@ -103,3 +103,54 @@ export const dental = {
     { days: 'Fr', time: '8 – 14 Uhr' },
   ],
 }
+
+// Scene 06 BUSINESS: the same practice website, evening, on a phone. A new
+// patient asks for an appointment in three short steps (concern, two
+// facts, when and where to call back). Only organisational details: no
+// symptoms, no diagnosis, no promise. `summary` is what the practice finds
+// the next morning, word for word.
+export const dentalRequest = {
+  closed: 'Geschlossen · morgen ab 8 Uhr',
+  label: 'Terminanfrage',
+  steps: [
+    {
+      title: 'Worum geht es?',
+      options: ['Akute Beschwerden', 'Kontrolle oder Reinigung', 'Laufende Behandlung', 'Etwas anderes'],
+      action: 'Weiter',
+    },
+    {
+      title: 'Zwei kurze Fragen',
+      choices: [
+        { question: 'Waren Sie schon bei uns?', options: ['Ja', 'Nein'], picked: 1 },
+        { question: 'Wie sind Sie versichert?', options: ['Gesetzlich', 'Privat'], picked: 0 },
+      ],
+      action: 'Weiter',
+    },
+    {
+      title: 'Wann passt es Ihnen?',
+      options: ['So früh wie möglich', 'Diese Woche', 'Nächste Woche'],
+      phoneLabel: 'Rückrufnummer',
+      phone: '0151 •••• 2047',
+      action: 'Anfrage senden',
+    },
+  ],
+  sent: {
+    title: ['Danke.', 'Ihre Anfrage ist da.'],
+    text: 'Wir rufen Sie morgen ab 8 Uhr zurück.',
+  },
+  summary: [
+    { label: 'Anliegen', value: 'Akute Beschwerden' },
+    { label: 'Patient', value: 'Neu · gesetzlich versichert' },
+    { label: 'Termin', value: 'So früh wie möglich' },
+    { label: 'Rückruf', value: '0151 •••• 2047' },
+  ],
+}
+
+// Viktor's lines around it (stage level, not part of the study).
+export const business = {
+  line: ['A website can do more', 'than look good.'],
+  evening: { clock: 'Di 21:47', state: 'Praxis geschlossen', spoken: 'Dienstag, 21:47 Uhr' },
+  morning: { clock: 'Mi 07:30', state: 'Vor der Sprechstunde', spoken: 'Mittwoch, 7:30 Uhr' },
+  entry: 'Eingang über die Website · Di 21:47',
+  cta: 'Projekt anfragen',
+}

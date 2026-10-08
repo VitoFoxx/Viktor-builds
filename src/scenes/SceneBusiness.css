@@ -1,0 +1,422 @@
+/* ─────────────────────────────────────────────────────────────
+   Scene 06: Business. Viktor's level (line, time, entry, call to
+   action) in his own type; the practice only ever inside the device.
+   Base layout = reduced motion: the line, then the evening (time and
+   the phone with the sent request) next to the morning (time and the
+   entry), then "Projekt anfragen".
+   ───────────────────────────────────────────────────────────── */
+
+.scene.scene--business {
+  --phone-w: min(18.5rem, 72vw);
+  --phone-h: calc(var(--phone-w) * 2.05);
+  --phone-r: calc(var(--phone-w) * 0.09);
+
+  display: grid;
+  grid-template-areas:
+    'msg'
+    'eve'
+    'dev'
+    'mor'
+    'ent'
+    'cta';
+  justify-content: center;
+  justify-items: center;
+  row-gap: clamp(1.25rem, 3.5svh, 2rem);
+  padding: clamp(4rem, 12svh, 8rem) var(--gutter);
+}
+
+.business__message {
+  grid-area: msg;
+  font-size: var(--fs-message);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.business__message-a {
+  color: var(--c-muted);
+}
+
+.business__message-a,
+.business__message-b {
+  display: inline-block;
+}
+
+.business__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ── Time: the evening and the next morning ─────────────────────── */
+
+.business__time {
+  display: contents;
+}
+
+.time__mark--evening {
+  grid-area: eve;
+}
+
+.time__mark--morning {
+  grid-area: mor;
+}
+
+.time__mark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Each line in its own mask, so the morning can replace the evening. */
+.time__mask {
+  display: block;
+  clip-path: inset(-0.1em -1em);
+}
+
+.time__clock,
+.time__state {
+  display: block;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.time__clock {
+  font-size: clamp(2rem, 4.4vw, 4.25rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  font-variant-numeric: tabular-nums;
+}
+
+.time__state {
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: var(--c-muted);
+}
+
+/* ── The device: Scene 02's frame as a phone ─────────────────────── */
+
+.business__device {
+  grid-area: dev;
+  position: relative;
+  width: var(--phone-w);
+  height: var(--phone-h);
+  container-type: inline-size;
+}
+
+/* A hairline around the screen (the frame's border), then the screen.
+   In motion both clips start on the browser frame. */
+.device__shell,
+.device__screen {
+  position: absolute;
+  inset: 0;
+}
+
+/* Larger than the device, so its clip can start on the (wider) frame. */
+.device__shell {
+  inset: -1px;
+  background: var(--c-line-strong);
+  clip-path: inset(0px 0px 0px 0px round calc(var(--phone-r) + 1px));
+}
+
+.device__screen {
+  clip-path: inset(0px 0px 0px 0px round var(--phone-r));
+}
+
+.device__chrome,
+.device__ground {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  transform-origin: 0 0;
+}
+
+.device__chrome {
+  top: 0;
+  height: 11cqw;
+  background: var(--c-surface);
+  border-bottom: 1px solid var(--c-line);
+}
+
+.device__ground {
+  top: 11cqw;
+  bottom: 0;
+  background: var(--brand-bg);
+}
+
+.device__bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 11cqw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.device__clock {
+  position: absolute;
+  left: 6.5cqw;
+  font-size: 3.5cqw;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The frame's URL pill, in the same proportions (BrowserFrame.css). */
+.device__url {
+  padding: 0.335em 2.48em;
+  font-size: 3cqw;
+  letter-spacing: 0.02em;
+  color: var(--c-muted);
+  background: var(--c-surface-raised);
+  border-radius: 99px;
+  transform-origin: 0 0;
+}
+
+.device__site {
+  position: absolute;
+  top: 11cqw;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  container-type: inline-size;
+}
+
+/* The phone is put away for the night. */
+.device__dim {
+  position: absolute;
+  inset: 0;
+  background: #070708;
+  visibility: hidden;
+}
+
+/* ── The entry the practice finds in the morning ────────────────── */
+
+.business__entry {
+  grid-area: ent;
+  width: min(100%, 22rem);
+}
+
+.entry__head,
+.entry__label {
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.entry__head {
+  margin-bottom: clamp(1rem, 2.4svh, 1.5rem);
+}
+
+.entry__row + .entry__row {
+  margin-top: clamp(0.75rem, 1.8svh, 1.1rem);
+}
+
+/* The rule belongs to the label, so the value can travel on its own. */
+.entry__label {
+  padding-top: clamp(0.6rem, 1.4svh, 0.85rem);
+  border-top: 1px solid var(--c-line-strong);
+}
+
+.entry__value {
+  width: fit-content;
+  margin-top: 0.35rem;
+  font-size: clamp(1.05rem, 1.5vw, 1.4rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  transform-origin: 0 0;
+}
+
+/* ── Call to action: small, in Viktor's caption type ─────────────── */
+
+.business__cta {
+  grid-area: cta;
+  padding: 0.6em 0 0.45em;
+  border-bottom: 1px solid var(--c-line-strong);
+  color: var(--c-fg);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: border-color 0.2s var(--ease-out);
+}
+
+.business__cta:hover {
+  border-color: var(--c-fg);
+}
+
+.business__cta:focus-visible {
+  outline: 1px solid var(--c-accent);
+  outline-offset: 4px;
+}
+
+@media (min-width: 768px) {
+  .scene.scene--business {
+    grid-template-areas:
+      'msg msg'
+      'eve mor'
+      'dev ent'
+      'cta cta';
+    column-gap: clamp(3rem, 9vw, 8rem);
+    align-items: start;
+  }
+
+  .business__entry {
+    align-self: center;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .business__message-a,
+  .business__message-b {
+    display: block;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Motion layout: a layer of the pinned stage over ADAPT's last
+   state. The phone stands where the frame stood, the line above it,
+   the time to its left and the entry to its right (on mobile: the
+   time below it, the entry where the phone was).
+   businessTimeline.js starts every part on the frame and the
+   practice's desktop page and moves it here.
+   ───────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  .stage > .scene--business {
+    z-index: 5;
+    display: block;
+    padding: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .scene.scene--business {
+    /* Narrow (portrait) screens keep room for the time and the entry. */
+    --phone-h: min(72svh, 46rem, 74vw);
+    --phone-w: calc(var(--phone-h) / 2.05);
+    --phone-top: calc(50% - var(--phone-h) / 2 + 2svh);
+    --side-gap: clamp(2rem, 5.5vw, 6rem);
+  }
+
+  .business__message {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(100% - var(--phone-top) + clamp(1.25rem, 3.5svh, 2.25rem));
+  }
+
+  .device__shell {
+    inset: -50vmax;
+  }
+
+  .business__device {
+    position: absolute;
+    visibility: hidden;
+    top: var(--phone-top);
+    left: calc(50% - var(--phone-w) / 2);
+  }
+
+  .business__time,
+  .business__entry {
+    position: absolute;
+    top: var(--phone-top);
+    height: var(--phone-h);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .business__time {
+    right: calc(50% + var(--phone-w) / 2 + var(--side-gap));
+    display: grid;
+    align-content: center;
+  }
+
+  .time__mark {
+    grid-area: 1 / 1;
+    align-items: flex-end;
+  }
+
+  .business__entry {
+    left: calc(50% + var(--phone-w) / 2 + var(--side-gap));
+    width: min(24vw, 22rem);
+  }
+
+  .business__cta {
+    position: absolute;
+    right: clamp(0.875rem, 1.6vw, 1.5rem);
+    bottom: calc(clamp(0.875rem, 1.6vw, 1.5rem) - 0.45em);
+    pointer-events: auto;
+  }
+}
+
+@media (max-width: 767.98px) and (prefers-reduced-motion: no-preference) {
+  .scene.scene--business {
+    --phone-h: min(62svh, 36rem);
+    --phone-top: calc(50% - var(--phone-h) / 2 - 1.5svh);
+  }
+
+  .business__time {
+    left: 0;
+    right: 0;
+    top: calc(var(--phone-top) + var(--phone-h) + 2.4svh);
+    height: auto;
+    justify-items: center;
+  }
+
+  .time__mark {
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .time__clock {
+    font-size: clamp(1.75rem, 8.5vw, 2.5rem);
+  }
+
+  /* In the morning the phone moves up, the entry takes its place. */
+  .business__entry {
+    left: var(--gutter);
+    right: var(--gutter);
+    width: auto;
+    top: calc(var(--phone-top) + var(--phone-h) * 0.42);
+    height: calc(var(--phone-h) * 0.58);
+    justify-content: flex-start;
+  }
+
+  .entry__head {
+    margin-bottom: 0.75rem;
+  }
+
+  .entry__row + .entry__row {
+    margin-top: 0.6rem;
+  }
+
+  .entry__label {
+    padding-top: 0.55rem;
+  }
+
+  .entry__value {
+    margin-top: 0.2rem;
+    font-size: 1rem;
+  }
+
+  .business__cta {
+    right: auto;
+    left: clamp(0.875rem, 1.6vw, 1.5rem);
+    bottom: calc(clamp(0.875rem, 1.6vw, 1.5rem) + 1.5rem);
+  }
+}

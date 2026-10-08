@@ -6,6 +6,7 @@ import SceneVoid from './SceneVoid.jsx'
 import SceneInterface from './SceneInterface.jsx'
 import SceneExperience from './SceneExperience.jsx'
 import SceneAdapt from './SceneAdapt.jsx'
+import SceneBusiness from './SceneBusiness.jsx'
 import './IntroStage.css'
 
 export default function IntroStage() {
@@ -78,6 +79,7 @@ export default function IntroStage() {
       <SceneInterface />
       <SceneExperience />
       <SceneAdapt />
+      <SceneBusiness />
     </div>
   )
 }

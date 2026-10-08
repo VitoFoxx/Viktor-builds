@@ -2,6 +2,7 @@ import { gsap } from './gsap.js'
 import { addPortal } from './portalTimeline.js'
 import { addExperience } from './experienceTimeline.js'
 import { addAdapt } from './adaptTimeline.js'
+import { addBusiness } from './businessTimeline.js'
 
 // Keep in sync with the media queries in IntroStage.css / BrowserFrame.css.
 export const MEDIA = {
@@ -12,14 +13,14 @@ export const MEDIA = {
 
 // Scroll pace of the stage, in viewport heights per timeline second. These are
 // the Phase 1 values (4 / 3 viewports for 9.9 s), so Scene 01 and 02 keep the
-// exact feel they had; Scene 03 – 05 simply add distance at the same pace.
+// exact feel they had; Scene 03 – 06 simply add distance at the same pace.
 const PACE = { desktop: 4 / 9.9, mobile: 3 / 9.9 }
 
 const FRAME_CLOSED = 'inset(50% 0% 50% 0% round 12px)'
 const FRAME_OPEN = 'inset(0% 0% 0% 0% round 12px)'
 
 /**
- * One pinned stage, one scrubbed master timeline for Scene 01 → 02 → 03 → 04 → 05.
+ * One pinned stage, one scrubbed master timeline for Scene 01 → 02 → 03 → 04 → 05 → 06.
  *
  * Labels (timeline seconds, mapped linearly onto the pinned scroll distance):
  *   void        0.0  type opens up, hint and tagline leave
@@ -30,6 +31,7 @@ const FRAME_OPEN = 'inset(0% 0% 0% 0% round 12px)'
  *   resolve …   9.3  Scene 03, see portalTimeline.js
  *   demo …     13.7  Scene 04, see experienceTimeline.js
  *   adapt …    17.8  Scene 05, see adaptTimeline.js
+ *   business … adaptEnd  Scene 06, see businessTimeline.js
  */
 export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
   const wrap = q('.interface__frame-wrap')[0]
@@ -175,6 +177,7 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
   addPortal(tl, stage, q)
   addExperience(tl, stage, q, { isDesktop })
   addAdapt(tl, stage, q)
+  addBusiness(tl, stage, q, { isDesktop })
 
   return tl
 }
@@ -195,4 +198,5 @@ export function createReducedMotion(q) {
   fadeIn(q('.interface__stack'), q('.scene--interface')[0])
   fadeIn(q('.scene--site > *'), q('.scene--site')[0])
   fadeIn(q('.scene--adapt > *'), q('.scene--adapt')[0])
+  fadeIn(q('.scene--business > *'), q('.scene--business')[0])
 }

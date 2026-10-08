@@ -15,8 +15,8 @@ const Line = ({ children }) => (
  * helfen?" with four ways in (acute pain first, by phone), then the
  * practice in two photos. Calm, legible, Sie. Links are visual only.
  *
- * BUSINESS (Scene 06) will continue from exactly this page: .d-status
- * (open / closed) and .d-nav__action (the appointment) are its hooks.
+ * BUSINESS (Scene 06) continues from exactly this page: it reflows it
+ * into a phone (SiteDentalPhone.jsx), element by element.
  */
 export default function SiteDental() {
   return (

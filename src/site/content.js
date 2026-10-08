@@ -146,6 +146,9 @@ export const dentalRequest = {
   ],
 }
 
+// Scene 07 RESULT: the next website in the count is the visitor's.
+export const yours = { context: 'Website 05 / Ihr Unternehmen' }
+
 // Viktor's lines around it (stage level, not part of the study).
 export const business = {
   line: ['A website can do more', 'than look good.'],
@@ -153,4 +156,72 @@ export const business = {
   morning: { clock: 'Mi 07:30', state: 'Vor der Sprechstunde', spoken: 'Mittwoch, 7:30 Uhr' },
   entry: 'Eingang über die Website · Di 21:47',
   cta: 'Projekt anfragen',
+}
+
+// Scene 07 RESULT, the contact area. Viktor's own page: German, Sie,
+// short. Fields marked "einzutragen" are Viktor's to fill in before the
+// launch; empty values are simply not shown (no invented contact data).
+export const result = {
+  claim: { address: 'your-business.com', name: 'Viktor Builds', line: 'Websites that move.' },
+  eyebrow: 'Viktor Builds · Webdesign und Entwicklung',
+  title: ['Individuelle Websites', 'für Unternehmen.'],
+  lead: 'Ich bin Viktor und baue Websites für Unternehmen. Für jeden Betrieb eine eigene, ausgerichtet auf seine Kunden und darauf, dass sie anfragen, buchen oder anrufen.',
+  offer: [
+    { title: 'Individuelle Websites', text: 'Aufbau, Gestaltung und Texte richten sich nach Ihrem Betrieb und Ihren Kunden.' },
+    { title: 'Modernes Webdesign', text: 'Klare Typografie, kurze Ladezeiten, am Smartphone so gut bedienbar wie am Schreibtisch.' },
+    { title: 'Motion und Interaktion', text: 'Bewegung dort, wo sie etwas zeigt oder durch die Seite führt.' },
+    { title: 'Fokus auf Ergebnis', text: 'Die Seite ist dafür gebaut, dass aus Besuchern Anfragen, Termine und Kunden werden.' },
+  ],
+  services: ['Konzept', 'Design', 'Entwicklung', 'Hosting', 'Pflege'],
+  cta: 'Projekt anfragen',
+}
+
+export const request = {
+  title: 'Projekt anfragen',
+  text: 'Drei kurze Angaben genügen für den Anfang. Alles Weitere besprechen wir persönlich.',
+  steps: [
+    {
+      label: 'Ihr Unternehmen',
+      question: 'Was macht Ihr Unternehmen?',
+      placeholder: 'z. B. Tischlerei mit eigener Werkstatt',
+    },
+    {
+      label: 'Ziel',
+      question: 'Was soll die Website erreichen?',
+      hint: 'Mehrere möglich',
+      options: ['Mehr Anfragen', 'Termine oder Buchungen online', 'Besser gefunden werden', 'Ein zeitgemäßer Auftritt'],
+    },
+    {
+      label: 'Zeitrahmen und Kontakt',
+      question: 'Wann soll es losgehen?',
+      options: ['So bald wie möglich', 'In den nächsten Monaten', 'Noch offen'],
+      name: 'Ihr Name',
+      contact: 'E-Mail oder Telefon',
+    },
+  ],
+  submit: 'Projekt anfragen',
+  note: 'Beim Absenden öffnet sich Ihr E-Mail-Programm mit der fertigen Nachricht. Gespeichert wird nichts.',
+  sent: {
+    title: ['Danke.', 'Ihre Anfrage ist fertig.'],
+    text: 'Sie liegt in Ihrem E-Mail-Programm bereit. Bitte dort noch absenden.',
+    again: 'Nicht geöffnet? Noch einmal öffnen',
+  },
+  subject: 'Projektanfrage',
+}
+
+// Einzutragen: Viktor's real details. Empty = not shown.
+export const contact = {
+  email: '',
+  phone: '',
+  phoneHref: '',
+  region: '',
+  imprintUrl: '',
+  privacyUrl: '',
+}
+
+export const footer = {
+  line: 'Viktor Builds — Individuelle Websites für Unternehmen.',
+  note: 'Alle gezeigten Websites sind Designstudien von Viktor Builds.',
+  imprint: 'Impressum',
+  privacy: 'Datenschutz',
 }

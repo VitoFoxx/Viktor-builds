@@ -26,7 +26,7 @@ const focusOf = (img) => {
  *   morning     7.05  MI 07:30, the phone is put away, its four lines
  *                     move into the practice's entry
  *   businessEnd 9.95  "Projekt anfragen" stands, nothing moves: RESULT
- *                     (Scene 07) starts here
+ *                     (Scene 07, resultTimeline.js) starts here
  *
  * The reflow is one FLIP: the phone layout is the real layout, each part
  * starts transformed onto its counterpart (the frame, the desktop page)
@@ -95,21 +95,20 @@ export function addBusiness(tl, stage, q, { isDesktop }) {
   // sides share line-height and em paddings).
   // `anchor` (default: the element itself) is the part that has to land
   // on `start`, e.g. one label of a masked group that moves as a whole.
-  const uniform = (el, start, by = 'h', anchor = el) => {
+  // The transform that puts `el` onto `start` (RESULT reuses it).
+  const uniformOnto = (el, start, by = 'h', anchor = el) => {
     const box = home(el)
     const end = home(anchor)
     const k = () => start()[by] / end()[by]
-    flips.push([
-      el,
-      {
-        x: () => start().x - box().x - k() * (end().x - box().x),
-        y: () => start().y - box().y - k() * (end().y - box().y),
-        scale: k,
-        transformOrigin: '0 0',
-      },
-      { x: 0, y: 0, scale: 1 },
-    ])
+    return {
+      x: () => start().x - box().x - k() * (end().x - box().x),
+      y: () => start().y - box().y - k() * (end().y - box().y),
+      scale: k,
+      transformOrigin: '0 0',
+    }
   }
+  const uniform = (el, start, by, anchor) =>
+    flips.push([el, uniformOnto(el, start, by, anchor), { x: 0, y: 0, scale: 1 }])
   // Grounds, bars and rules: stretched onto their counterpart.
   const stretch = (el, start) => {
     const end = home(el)
@@ -204,6 +203,8 @@ export function addBusiness(tl, stage, q, { isDesktop }) {
   stretch(phone('.device__chrome'), chrome)
   uniform(phone('.device__url'), url, 'w')
   stretch(phone('.device__ground'), pageArea)
+  // Shell, screen, chrome, address and ground: RESULT turns them back.
+  const deviceFlips = flips.slice()
 
   /* ── the practice: desktop → phone ────────────────────── */
 
@@ -423,4 +424,38 @@ export function addBusiness(tl, stage, q, { isDesktop }) {
   )
     .to({}, { duration: 0.8 })
     .addLabel('businessEnd')
+
+  /* ── for RESULT (Scene 07) ────────────────────────────── */
+
+  // The empty phone becomes Scene 02's browser frame again: the inverse
+  // of the reflow's device part. Explicit start values: a browser may
+  // shorten a computed inset() with equal sides, which would not tween.
+  const toFrame = (at) =>
+    deviceFlips.forEach(([el, from, to]) => tl.fromTo(el, { ...to }, { ...from, ...MORPH, immediateRender: false }, at))
+  const [[, shellFrame], [, screenFrame]] = deviceFlips
+
+  // The frame contracts onto its address, centred on the stage and `grow`
+  // times its size in the frame.
+  const toAddress = (at, grow, vars) => {
+    const address = () => {
+      const u = url()
+      const w = u.w * grow
+      const h = u.h * grow
+      return {
+        x: stage.offsetWidth / 2 - w / 2 - device.offsetLeft,
+        y: stage.offsetHeight / 2 - h / 2 - device.offsetTop,
+        w,
+        h,
+      }
+    }
+    const outline = () => {
+      const a = address()
+      return { x: a.x - 1, y: a.y - 1, w: a.w + 2, h: a.h + 2 }
+    }
+    tl.fromTo(shell, shellFrame, { clipPath: () => clip(shell, outline(), outline().h / 2), ...vars, immediateRender: false }, at)
+      .fromTo(screen, screenFrame, { clipPath: () => clip(screen, address(), address().h / 2), ...vars, immediateRender: false }, at)
+      .to(phone('.device__url'), { ...uniformOnto(phone('.device__url'), address, 'w'), ...vars }, at)
+  }
+
+  return { toFrame, toAddress }
 }

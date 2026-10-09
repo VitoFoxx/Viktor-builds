@@ -1,4 +1,5 @@
 import BrowserFrame from '../components/BrowserFrame.jsx'
+import withStop from '../components/withStop.jsx'
 
 export default function SceneInterface() {
   return (
@@ -7,7 +8,8 @@ export default function SceneInterface() {
         <h2 id="scene-interface-title" className="interface__message">
           <span className="interface__message-a">Von der Idee</span>{' '}
           <span className="interface__message-b">
-            <span aria-hidden="true">→ </span>zur Website.
+            <span aria-hidden="true">→ </span>
+            {withStop('zur Website.')}
           </span>
         </h2>
 

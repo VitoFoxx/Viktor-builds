@@ -39,7 +39,7 @@ export default function SceneResult() {
         </a>
       </header>
 
-      <ol className="result__offer">
+      <ol className="result__offer" id="leistungen">
         {result.offer.map((item, i) => (
           <li className="offer" key={item.title}>
             <span className="offer__n" aria-hidden="true">

@@ -11,8 +11,8 @@
  *   reframe    0.35  the empty phone becomes Scene 02's browser frame
  *   address    1.7   the frame contracts onto its address, ihr-unternehmen.de,
  *                    in the middle of the stage
- *   claim      3.2   VIKTOR BUILDS / the closing claim return: Scene 01's
- *                    own type, in its own place
+ *   claim      3.2   VITOWORKS / the closing claim: the brand in display
+ *                    type, centred on the stage
  *   resultEnd  4.55 + rest: the pin releases into the contact area
  *
  * Calmer than ADAPT and BUSINESS on purpose: one thing moves at a time.
@@ -22,8 +22,6 @@ export function addResult(tl, stage, q, { isDesktop, device }) {
   const phone = q('.business__device')[0]
   const words = q('.void__word')
   const tagline = q('.void__tagline')[0]
-  const heroLine = q('.void__tagline-inner')
-  const finalLine = q('.void__tagline-final')
   const contexts = q('.context__item')
   const tokens = getComputedStyle(stage)
   const surface = tokens.getPropertyValue('--c-surface').trim()
@@ -71,14 +69,16 @@ export function addResult(tl, stage, q, { isDesktop, device }) {
   tl.addLabel('claim', 'address+=1.5')
     .to([phone, q('.experience__context')[0]], { autoAlpha: 0, duration: 0.5, ease: 'power1.in' }, 'claim')
     .set(layer, { autoAlpha: 0 }, 'claim+=0.5')
-    // Scene 01 left its words parted and faded; they come back unchanged.
-    .set(words, { x: 0, y: 0, scale: 1, autoAlpha: 1 }, 'claim+=0.3')
+    // The brand and the closing claim, centred on the dark stage.
+    .set(words, { autoAlpha: 1 }, 'claim+=0.3')
     .set(q('.void__word-inner'), { yPercent: 110 }, 'claim+=0.3')
     .to(q('.void__word-inner'), { yPercent: 0, duration: 1.0, stagger: 0.09, ease: 'power4.out' }, 'claim+=0.3')
-    .set(heroLine, { autoAlpha: 0 }, 'claim+=0.3')
-    .set(finalLine, { autoAlpha: 1 }, 'claim+=0.3')
-    .set(tagline, { y: 14 }, 'claim+=0.3')
-    .to(tagline, { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 'claim+=0.75')
+    .fromTo(
+      tagline,
+      { autoAlpha: 0, y: 14 },
+      { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power3.out', immediateRender: false },
+      'claim+=0.75',
+    )
     // It stands for a moment before the page continues.
     .to({}, { duration: 1.0 })
     .addLabel('resultEnd')

@@ -1,10 +1,10 @@
-# VIKTOR BUILDS — VISION
+# VITOWORKS — VISION
 
 ## CORE IDEA
 
 The website is the portfolio.
 
-Instead of presenting a conventional portfolio with project cards, the website itself demonstrates the capabilities of Viktor Builds.
+Instead of presenting a conventional portfolio with project cards, the website itself demonstrates the capabilities of VITOWORKS.
 
 The experience should communicate:
 
@@ -16,12 +16,12 @@ It is an experience and a business tool.
 
 Every scene answers one question a potential client has.
 
-**Viktor Builds remains the main brand throughout. Client websites are short design studies, never the identity of the page. There are no fixed templates: every business gets its own website.**
+**VITOWORKS remains the main brand throughout (Viktor is the person behind it). Client websites are short design studies, never the identity of the page. There are no fixed templates: every business gets its own website.**
 
 ## VIKTOR CONTEXT AND CTA
 
-- There is no permanent Viktor anchor from Scene 01. Scene 01 and 02 are Viktor's own voice already.
-- From Scene 03 on, a small context line appears bottom-left (Viktor's type, uppercase): **VIKTOR BUILDS — WEBSITE 01 / METALLBAU**. It counts on in ADAPT (WEBSITE 02 / RESTAURANT …). It sits at the bottom, so it can never be mistaken for a demo site's navigation.
+- The opening carries the brand and the main action; nothing scrolls along permanently.
+- From Scene 03 on, a small context line appears bottom-left (Viktor's type, uppercase): **VITOWORKS — WEBSITE 01 / METALLBAU**. It counts on in ADAPT (WEBSITE 02 / RESTAURANT …). It sits at the bottom, so it can never be mistaken for a demo site's navigation.
 - "Projekt anfragen" does not scroll along permanently. The call to action may appear in ADAPT and BUSINESS as part of the story and becomes clearly dominant in RESULT.
 
 ## TEXT ECONOMY
@@ -32,37 +32,26 @@ Viktor speaks in very few lines across the whole page. Everything else is shown,
 
 # EXPERIENCE NARRATIVE
 
-## SCENE 01 — IDEA · The Void
+## SCENE 01 — OPENING · Clarity first
 
-The experience begins in darkness.
+Since 2026-10-09 (rebrand VITOWORKS): the page no longer starts on an empty dark stage. A first-time visitor must understand within one or two seconds who this is, what is offered, for whom, and why it matters.
 
-Minimal composition.
+Cream paper, anthracite type, one dark warm red for the main action. Two columns on desktop, stacked on mobile:
 
-Large typography:
+- a thin bar: **VITOWORKS** wordmark, links Leistungen · Kontakt
+- eyebrow: Webdesign und Entwicklung
+- claim: **WEBSITES NACH MASS.** (the full stop in red)
+- subline: *Individuelle Websites für Unternehmen, die nicht nur gut aussehen, sondern Kunden zum Handeln bringen.*
+- actions: **Projekt anfragen** (red, to the contact area) and **Referenzen** (to the first design study at full size)
+- the website itself: the browser frame of Scene 02 with the Metallbau study inside, labelled "Beispiel: Website für einen Metallbaubetrieb"; on mobile it starts below the copy and runs off the bottom edge
 
-**VIKTOR BUILDS**
-
-Then:
-
-**WEBSITES THAT MOVE.**
-
-A subtle instruction:
-
-**SCROLL TO EXPLORE**
-
-Scrolling begins to transform the typography and composition.
-
-A subtle visual impulse emerges.
-
-The scene gradually becomes more complex.
-
-The visitor should feel that something is beginning to form.
+Scrolling: the copy leaves, the website glides to the centre, the paper turns anthracite and the finished page fades back to its empty frame. Scene 02 then builds it. Story: **Klarheit → Aufbau → Experience → Adapt → Business → Result**.
 
 ---
 
 ## SCENE 02 — BUILD · From Idea to Interface
 
-The emerging visual form develops into an abstract browser/interface frame.
+The finished website of the opening returns to its empty frame and is built again, abstractly.
 
 The interface is progressively constructed.
 
@@ -149,8 +138,8 @@ Rules: no "AI" label, no chat bubbles, no typing dots, no sparkle; no invented m
 ## SCENE 07 — RESULT · Your website
 
 1. The frame empties back to the wireframe of Scene 02 with `your-business.com`.
-2. Ring closure: the frame closes into the line, and **VIKTOR BUILDS / WEBSITES THAT MOVE.** returns, same type, same position as in Scene 01.
-3. Contact area (unpinned, normal page flow): Viktor as a person (short first-person paragraph, real photo, region); primary **Projekt anfragen** as a short three-step request; e-mail and phone; a service line (Konzept · Design · Entwicklung · Hosting · Pflege); imprint, privacy and the note "Alle gezeigten Websites sind Designstudien von Viktor Builds."
+2. Ring closure: the frame closes into the line, and **VITOWORKS / WEBSITES, DIE KUNDEN ZUM HANDELN BRINGEN.** stands centred on the dark stage.
+3. Contact area (unpinned, normal page flow): Viktor as a person (short first-person paragraph, real photo, region); primary **Projekt anfragen** as a short three-step request; e-mail and phone; a service line (Konzept · Design · Entwicklung · Hosting · Pflege); imprint, privacy and the note "Alle gezeigten Websites sind Designstudien von VITOWORKS."
 
 Here the call to action is clearly dominant.
 

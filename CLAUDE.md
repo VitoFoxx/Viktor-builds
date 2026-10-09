@@ -1,8 +1,8 @@
-# VIKTOR BUILDS — PROJECT RULES
+# VITOWORKS — PROJECT RULES
 
 ## 1. PROJECT
 
-Viktor Builds is a premium web design studio.
+VITOWORKS (formerly Viktor Builds) is a premium web design studio. Viktor is the person behind it.
 
 Core idea:
 

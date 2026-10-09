@@ -6,7 +6,7 @@
 
 .result {
   --result-max: 80rem;
-  --text-soft: rgb(242 241 238 / 0.78);
+  --text-soft: rgb(236 230 219 / 0.78);
 
   width: min(100%, calc(var(--result-max) + 2 * var(--gutter)));
   margin: 0 auto;
@@ -97,7 +97,7 @@
   text-wrap: pretty;
 }
 
-/* The main action of the page: the only solid, light surface. */
+/* The main action of the page: the only solid red surface here. */
 .result__cta,
 .request__submit {
   display: inline-flex;
@@ -107,8 +107,8 @@
   padding: 0 1.6rem;
   border: 0;
   border-radius: 2px;
-  background: var(--c-fg);
-  color: var(--c-bg);
+  background: var(--c-accent);
+  color: var(--c-fg);
   font: inherit;
   font-size: 0.8125rem;
   font-weight: 600;
@@ -130,7 +130,7 @@
 
 .result__cta:hover,
 .request__submit:hover {
-  background: #fff;
+  background: var(--c-accent-hover);
 }
 
 .result__cta:hover span,
@@ -146,7 +146,7 @@
 .result a:focus-visible,
 .request__submit:focus-visible,
 .footer a:focus-visible {
-  outline: 1px solid var(--c-accent);
+  outline: 2px solid var(--c-accent-light);
   outline-offset: 4px;
 }
 
@@ -165,6 +165,7 @@
 
 .offer__n {
   display: block;
+  color: var(--c-accent-light);
   font-variant-numeric: tabular-nums;
 }
 
@@ -292,13 +293,13 @@
 }
 
 .request__input:hover {
-  border-color: rgb(242 241 238 / 0.5);
+  border-color: rgb(236 230 219 / 0.5);
 }
 
 .request__input:focus {
   outline: none;
-  border-color: var(--c-fg);
-  box-shadow: 0 1px 0 0 var(--c-fg);
+  border-color: var(--c-accent-light);
+  box-shadow: 0 1px 0 0 var(--c-accent-light);
 }
 
 .request__input:user-invalid {
@@ -364,17 +365,17 @@
 }
 
 .request__option:hover {
-  border-color: rgb(242 241 238 / 0.5);
+  border-color: rgb(236 230 219 / 0.5);
 }
 
 .request__option:has(input:checked) {
-  border-color: var(--c-fg);
+  border-color: var(--c-accent-light);
   background: var(--c-surface-raised);
 }
 
 .request__option input:checked + .request__option-mark {
-  border-color: var(--c-fg);
-  background: var(--c-fg);
+  border-color: var(--c-accent-light);
+  background: var(--c-accent-light);
 }
 
 .request__option input:checked + .request__option-mark::after {
@@ -382,7 +383,7 @@
 }
 
 .request__option:has(input:focus-visible) {
-  outline: 1px solid var(--c-accent);
+  outline: 2px solid var(--c-accent-light);
   outline-offset: 3px;
 }
 

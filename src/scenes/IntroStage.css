@@ -21,17 +21,283 @@
   padding: var(--gutter);
 }
 
-/* ── Scene 01: The Void ─────────────────────────────────────── */
+/* ── Scene 01: the opening ──────────────────────────────────────
+   Cream paper, anthracite ink, one red action. Two columns: what is
+   offered (left) and the website itself (right, in `.hero__visual`). */
+
+.scene.scene--void {
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  grid-template-rows: auto 1fr;
+  place-items: stretch;
+  column-gap: clamp(2.5rem, 4.5vw, 5rem);
+  padding-top: 0;
+  background: var(--c-paper);
+  color: var(--c-ink);
+}
+
+.scene--void ::selection {
+  background: var(--c-ink);
+  color: var(--c-paper);
+}
+
+.hero__bar {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--c-ink-line);
+}
+
+.hero__brand {
+  padding: 1.35rem 0 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.hero__nav {
+  display: flex;
+  gap: clamp(1.25rem, 2.6vw, 2.5rem);
+}
+
+.hero__nav a,
+.hero__refs {
+  padding: 0.75rem 0;
+  color: inherit;
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.55em;
+  text-transform: uppercase;
+  transition: text-decoration-color 0.2s var(--ease-out);
+}
+
+.hero__nav a:hover,
+.hero__refs:hover {
+  text-decoration-color: var(--c-accent);
+}
+
+.hero__copy {
+  align-self: center;
+  padding-block: clamp(2rem, 6svh, 4rem);
+}
+
+/* A short red rule in front: the one mark that says "start here". */
+.hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-ink-muted);
+}
+
+.hero__eyebrow::before {
+  content: '';
+  width: 2rem;
+  height: 2px;
+  background: var(--c-accent);
+}
+
+.hero__title {
+  margin-top: clamp(1.25rem, 3svh, 2rem);
+  font-size: clamp(3rem, 7vw, 8.5rem);
+  font-weight: 600;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+/* Clips only the bottom edge, so the intro can raise each line from
+   below without cutting off glyph overhangs at the sides or top. */
+.hero__line {
+  display: block;
+  clip-path: inset(-0.5em -0.5em 0 -0.5em);
+}
+
+.hero__line-inner {
+  display: block;
+}
+
+/* The full stop of the claim: the one red letter. */
+.hero__stop {
+  color: var(--c-accent);
+}
+
+.hero__sub {
+  max-width: 27em;
+  margin-top: clamp(1.25rem, 3.4svh, 2rem);
+  font-size: clamp(1.0625rem, 1.3vw, 1.3125rem);
+  line-height: 1.5;
+  color: #3a3733;
+  text-wrap: pretty;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem clamp(1.5rem, 2.4vw, 2.25rem);
+  margin-top: clamp(1.75rem, 4.5svh, 2.75rem);
+}
+
+/* The page's main action: the only red surface on the opening screen. */
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9em;
+  min-height: 3.25rem;
+  padding: 0 1.5rem;
+  border-radius: 2px;
+  background: var(--c-accent);
+  color: var(--c-paper);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 0.2s var(--ease-out);
+}
+
+.hero__cta span {
+  transition: transform 0.25s var(--ease-out);
+}
+
+.hero__cta:hover {
+  background: var(--c-accent-hover);
+}
+
+.hero__cta:hover span {
+  transform: translateX(3px);
+}
+
+.hero__refs {
+  text-decoration-color: var(--c-ink-line);
+}
+
+.scene--void a:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 4px;
+}
+
+/* The slot for the website. Empty in the markup: the stage timeline lays
+   the browser frame and the design study exactly into this box. Its
+   aspect ratio is the frame's. */
+.hero__visual {
+  position: relative;
+  align-self: center;
+  justify-self: end;
+  width: min(100%, calc(64svh * 1.6));
+  aspect-ratio: 16 / 10;
+}
+
+/* A dimension line, as on a drawing: made to measure. */
+.hero__measure {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1.25rem;
+  height: 9px;
+  border-inline: 1px solid var(--c-accent);
+}
+
+.hero__measure::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 4px;
+  height: 1px;
+  background: var(--c-ink-line);
+}
+
+.hero__example {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 1rem;
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-ink-muted);
+  white-space: nowrap;
+}
+
+/* Without motion there is no frame in the slot: the study follows below. */
+@media (prefers-reduced-motion: reduce) {
+  .scene.scene--void {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 88svh;
+  }
+
+  .hero__visual,
+  .scroll-hint,
+  .void__type {
+    display: none;
+  }
+}
+
+.scroll-hint {
+  position: absolute;
+  left: var(--gutter);
+  bottom: clamp(1.25rem, 4svh, 2.25rem);
+  pointer-events: none;
+}
+
+.scroll-hint__inner {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.scroll-hint__label {
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--c-ink-muted);
+}
+
+.scroll-hint__track {
+  position: relative;
+  width: 44px;
+  height: 1px;
+  overflow: hidden;
+  background: var(--c-ink-line);
+}
+
+.scroll-hint__line {
+  position: absolute;
+  inset: 0;
+  background: var(--c-ink);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* ── Ring closure (RESULT): brand and closing claim ─────────────
+   Hidden until the end of the stage, then centred on the dark stage. */
 
 .void__type {
-  position: relative;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gutter);
+  color: var(--c-fg);
   text-align: center;
+  pointer-events: none;
 }
 
 .void__title {
-  display: flex;
-  justify-content: center;
-  gap: 0.2em;
   font-size: var(--fs-display);
   font-weight: 600;
   line-height: 0.86;
@@ -40,12 +306,16 @@
   white-space: nowrap;
 }
 
+.void__word,
+.void__tagline {
+  visibility: hidden;
+  opacity: 0;
+}
+
 .void__word {
   display: block;
 }
 
-/* Clips only the bottom edge, so the intro can raise the word from below
-   without cutting off glyph overhangs at the sides or top. */
 .void__mask {
   display: block;
   clip-path: inset(-0.5em -0.5em 0 -0.5em);
@@ -56,6 +326,7 @@
 }
 
 .void__tagline {
+  max-width: 90vw;
   margin-top: clamp(1.5rem, 3.2vw, 2.75rem);
   font-size: clamp(0.9375rem, 1.6vw, 1.5rem);
   font-weight: 500;
@@ -63,80 +334,7 @@
   /* Balances the trailing letter-spacing so the line sits optically centered. */
   text-indent: 0.24em;
   text-transform: uppercase;
-}
-
-/* The hero line and the closing claim share one place; RESULT swaps them. */
-.void__tagline {
-  display: grid;
-  justify-items: center;
-  max-width: 90vw;
-  margin-inline: auto;
   text-wrap: balance;
-}
-
-.void__tagline-inner,
-.void__tagline-final {
-  grid-area: 1 / 1;
-}
-
-.void__tagline-final {
-  visibility: hidden;
-}
-
-/* Hangs below the tagline without moving the title off the centre. */
-.void__lead {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  width: min(36rem, 88vw);
-  margin: clamp(1.25rem, 3svh, 2rem) auto 0;
-  font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
-  line-height: 1.55;
-  color: var(--c-muted);
-  text-wrap: pretty;
-}
-
-.scroll-hint {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: clamp(1.5rem, 5svh, 3rem);
-  display: flex;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.scroll-hint__inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.875rem;
-}
-
-.scroll-hint__label {
-  font-size: var(--fs-label);
-  font-weight: 500;
-  letter-spacing: var(--tracking-label);
-  text-indent: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--c-muted);
-}
-
-.scroll-hint__track {
-  position: relative;
-  width: 1px;
-  height: 44px;
-  overflow: hidden;
-  background: var(--c-line);
-}
-
-.scroll-hint__line {
-  position: absolute;
-  inset: 0;
-  background: var(--c-fg);
-  transform: scaleY(0);
-  transform-origin: top;
 }
 
 /* ── Scene 02: From Idea to Interface ───────────────────────── */
@@ -146,7 +344,7 @@
 }
 
 /* Sits above the frame without taking part in the centering, so the frame's
-   center is exactly the stage's center, where the impulse appears. */
+   center is exactly the stage's center. */
 .interface__message {
   position: absolute;
   left: 0;
@@ -169,58 +367,103 @@
   display: inline-block;
 }
 
+.interface__message-b span {
+  color: var(--c-accent-light);
+}
+
 .interface__frame-wrap {
   position: relative;
   width: var(--frame-w);
   aspect-ratio: 16 / 10;
 }
 
-.impulse {
+.frame-shadow {
   display: none;
   position: absolute;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.impulse__dot {
-  left: 50%;
-  top: 50%;
-  width: 8px;
-  height: 8px;
-  margin: -4px 0 0 -4px;
-  border-radius: 50%;
-  background: #fff;
+  inset: 0;
+  border-radius: var(--radius-frame);
   box-shadow:
-    0 0 0 1px rgb(185 200 255 / 0.5),
-    0 0 18px 4px rgb(185 200 255 / 0.45),
-    0 0 60px 12px rgb(185 200 255 / 0.12);
+    0 2px 4px rgb(28 27 25 / 0.06),
+    0 24px 48px -16px rgb(28 27 25 / 0.28);
 }
 
-.impulse__line {
-  left: 0;
-  right: 0;
-  top: 50%;
-  height: 1px;
-  margin-top: -0.5px;
-  background: linear-gradient(
-    90deg,
-    rgb(185 200 255 / 0) 0%,
-    var(--c-accent) 18%,
-    #fff 50%,
-    var(--c-accent) 82%,
-    rgb(185 200 255 / 0) 100%
-  );
-  box-shadow: 0 0 12px 1px rgb(185 200 255 / 0.35);
+/* ── Medium widths: copy above, website below ───────────────── */
+
+@media (min-width: 768px) and (max-width: 1099.98px) {
+  .scene.scene--void {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
+  }
+
+  .hero__copy {
+    padding-bottom: 2.5rem;
+  }
+
+  .hero__visual {
+    align-self: start;
+    width: min(100%, calc(52svh * 1.6));
+  }
+
+  .scroll-hint {
+    display: none;
+  }
 }
 
 /* ── Mobile composition ─────────────────────────────────────── */
 
 @media (max-width: 767.98px) {
-  .void__title {
+  .scene.scene--void {
+    display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.04em;
-    font-size: clamp(3.5rem, 23vw, 8rem);
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  .hero__brand {
+    padding: 1.1rem 0 1rem;
+    font-size: 0.875rem;
+  }
+
+  .hero__copy {
+    align-self: auto;
+    padding: clamp(1.75rem, 6svh, 3.25rem) 0 0;
+  }
+
+  .hero__title {
+    font-size: clamp(3rem, 15.5vw, 5.5rem);
+  }
+
+  .hero__sub {
+    font-size: 1rem;
+  }
+
+  .hero__cta {
+    padding: 0 1.25rem;
+  }
+
+  /* The website starts below the copy and runs off the bottom edge:
+     a look into it, not the whole page. */
+  .hero__visual {
+    align-self: stretch;
+    flex: none;
+    width: 100%;
+    margin-top: 3.25rem;
+    aspect-ratio: 3 / 5;
+  }
+
+  .hero__measure,
+  .scroll-hint {
+    display: none;
+  }
+
+  .hero__example {
+    top: auto;
+    bottom: 100%;
+    margin: 0 0 0.75rem;
+  }
+
+  .void__title {
+    font-size: clamp(3rem, 15.5vw, 6rem);
   }
 
   .void__tagline {
@@ -244,14 +487,17 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Cinematic layout: both scenes layered on one pinned stage.
+   Cinematic layout: all scenes layered on one pinned stage.
    GSAP drives every state change from here (stageTimeline.js).
    ───────────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: no-preference) {
+  /* Starts on the opening's paper; the stage turns anthracite as the
+     website is taken back to its plan (Scene 02). */
   .stage {
     height: 100svh;
     overflow: hidden;
+    background: var(--c-paper);
   }
 
   .stage > .scene {
@@ -260,7 +506,19 @@
     min-height: 0;
   }
 
-  .impulse {
+  /* Above every layer, so its links stay usable; the empty parts let
+     clicks through. */
+  .stage > .scene--void {
+    z-index: 6;
+    background: none;
+    pointer-events: none;
+  }
+
+  .scene--void a {
+    pointer-events: auto;
+  }
+
+  .frame-shadow {
     display: block;
   }
 
@@ -271,26 +529,19 @@
 
 @keyframes scroll-hint {
   0% {
-    transform: scaleY(0);
-    transform-origin: top;
+    transform: scaleX(0);
+    transform-origin: left;
   }
   45% {
-    transform: scaleY(1);
-    transform-origin: top;
+    transform: scaleX(1);
+    transform-origin: left;
   }
   55% {
-    transform: scaleY(1);
-    transform-origin: bottom;
+    transform: scaleX(1);
+    transform-origin: right;
   }
   100% {
-    transform: scaleY(0);
-    transform-origin: bottom;
-  }
-}
-
-/* Without the animation the hint line is simply shown. */
-@media (prefers-reduced-motion: reduce) {
-  .scroll-hint__line {
-    transform: none;
+    transform: scaleX(0);
+    transform-origin: right;
   }
 }

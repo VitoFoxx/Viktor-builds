@@ -1,5 +1,5 @@
 import { gsap } from './gsap.js'
-import { addPortal } from './portalTimeline.js'
+import { addPortal, portalGeometry } from './portalTimeline.js'
 import { addExperience } from './experienceTimeline.js'
 import { addAdapt } from './adaptTimeline.js'
 import { addBusiness } from './businessTimeline.js'
@@ -13,38 +13,50 @@ export const MEDIA = {
 }
 
 // Scroll pace of the stage, in viewport heights per timeline second. These are
-// the Phase 1 values (4 / 3 viewports for 9.9 s), so Scene 01 and 02 keep the
-// exact feel they had; Scene 03 – 07 simply add distance at the same pace.
+// the Phase 1 values (4 / 3 viewports for 9.9 s), kept for every scene.
 const PACE = { desktop: 4 / 9.9, mobile: 3 / 9.9 }
-
-const FRAME_CLOSED = 'inset(50% 0% 50% 0% round 12px)'
-const FRAME_OPEN = 'inset(0% 0% 0% 0% round 12px)'
 
 /**
  * One pinned stage, one scrubbed master timeline for Scene 01 → 02 → 03 → 04 → 05 → 06 → 07.
  *
  * Labels (timeline seconds, mapped linearly onto the pinned scroll distance):
- *   void        0.0  type opens up, hint and tagline leave
- *   impulse     1.2  a point of light appears and stretches into a line
- *   frame       3.0  the line splits into the frame's edges, the frame opens
- *   build       4.2  the website assembles itself inside the frame
- *   experience  7.8  the message completes, the frame settles
- *   resolve …   9.3  Scene 03, see portalTimeline.js
- *   demo …     13.7  Scene 04, see experienceTimeline.js
- *   adapt …    17.8  Scene 05, see adaptTimeline.js
+ *   hero        0.0  the opening's copy leaves; the website glides from its
+ *                    slot (.hero__visual) to the centre of the stage
+ *   plan        1.7  lights down: the paper turns anthracite, the finished
+ *                    page fades and leaves the empty frame
+ *   build       2.4  the website assembles itself inside the frame
+ *   experience  6.0  the message completes, the frame settles
+ *   resolve …   7.6  Scene 03, see portalTimeline.js
+ *   demo …           Scene 04, see experienceTimeline.js
+ *   adapt …   handoff  Scene 05, see adaptTimeline.js
  *   business … adaptEnd  Scene 06, see businessTimeline.js
  *   result … businessEnd  Scene 07, see resultTimeline.js; the contact
  *                    area follows unpinned (SceneResult.jsx)
  */
 export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
-  const wrap = q('.interface__frame-wrap')[0]
-  const halfFrame = () => wrap.offsetHeight / 2
+  const site = q('.scene--site')[0]
+  const clip = q('.portal__clip')[0]
+  const content = q('.portal__content')[0]
+  const slot = q('.hero__visual')[0]
+  const { wrap, clipAt, contentAt } = portalGeometry(stage, q)
+  const bg = getComputedStyle(stage).getPropertyValue('--c-bg').trim()
 
-  // Desktop: the two words part sideways. Mobile: they are stacked and part vertically.
-  const part = (dir) =>
-    isDesktop
-      ? { x: () => dir * window.innerWidth * 0.08 }
-      : { y: () => dir * window.innerHeight * 0.12 }
+  // The opening's slot, as a transform of the centred frame: scale about
+  // its centre, then move. Measured from layout boxes (the slot is never
+  // transformed), so it holds at any scroll position.
+  const hero = {
+    scale: () => slot.offsetWidth / wrap.offsetWidth,
+    x: () => rect().x + slot.offsetWidth / 2 - stage.offsetWidth / 2,
+    y: () => rect().y + slot.offsetHeight / 2 - stage.offsetHeight / 2,
+  }
+  const GLIDE = { duration: 1.8, ease: 'power2.inOut' }
+  const GLIDE_AT = 0.15
+
+  function rect() {
+    const a = slot.getBoundingClientRect()
+    const b = stage.getBoundingClientRect()
+    return { x: a.left - b.left, y: a.top - b.top }
+  }
 
   const tl = gsap.timeline({
     defaults: { ease: 'power2.inOut' },
@@ -57,60 +69,69 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
       anticipatePin: 1,
       invalidateOnRefresh: true,
       onUpdate,
+      // Before the glide starts, nothing re-renders the opening's
+      // freshly measured slot after a resize or a late font swap. Step
+      // just past the start and back, so the frame sits in its new slot.
+      onRefresh: (self) => {
+        const a = self.animation
+        if (a && a.time() < GLIDE_AT) {
+          const t = a.time()
+          a.time(GLIDE_AT + 0.001, true).time(t, true)
+        }
+      },
     },
   })
 
-  /* ── void ─────────────────────────────────────────────── */
-  tl.addLabel('void', 0)
-    .to(q('.scroll-hint'), { autoAlpha: 0, y: 12, duration: 0.4, ease: 'power1.in' }, 'void')
-    .to(q('.void__tagline, .void__lead'), { autoAlpha: 0, y: -24, duration: 0.8 }, 'void+=0.1')
-    .to(q('.void__word--a'), { ...part(-1), scale: isDesktop ? 0.78 : 0.9, duration: 1.8 }, 'void')
-    .to(q('.void__word--b'), { ...part(1), scale: isDesktop ? 0.78 : 0.9, duration: 1.8 }, 'void')
+  // The opening shows the finished study inside the frame.
+  gsap.set(site, { autoAlpha: 1 })
+  // The frame scales about its top-left corner throughout the stage
+  // (Scene 03 – 07 rely on it). A percentage origin would be stored in
+  // pixels and go stale on resize.
+  gsap.set(wrap, { transformOrigin: '0 0' })
+  // The opening's slot in that origin: the same box as a centre scale.
+  const heroWrap = {
+    scale: hero.scale,
+    x: () => hero.x() + ((1 - hero.scale()) * wrap.offsetWidth) / 2,
+    y: () => hero.y() + ((1 - hero.scale()) * wrap.offsetHeight) / 2,
+  }
 
-  /* ── impulse ──────────────────────────────────────────── */
-  tl.addLabel('impulse', 1.2)
+  /* ── hero ─────────────────────────────────────────────── */
+
+  tl.addLabel('hero', 0)
+    .to(q('.scroll-hint'), { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, 'hero')
+    .to(q('.hero__bar'), { autoAlpha: 0, y: -16, duration: 0.7, ease: 'power1.in' }, 'hero')
+    .to(q('.hero__copy'), { autoAlpha: 0, y: () => -window.innerHeight * 0.08, duration: 0.9, ease: 'power2.in' }, 'hero')
+    .to(slot, { autoAlpha: 0, duration: 0.4, ease: 'power1.in' }, 'hero')
+    // Frame, clip and content share one ease, so they stay locked together.
+    .fromTo(wrap, { ...heroWrap }, { x: 0, y: 0, scale: 1, ...GLIDE }, GLIDE_AT)
+    .fromTo(clip, { clipPath: clipAt(hero.scale, hero.x, hero.y) }, { clipPath: clipAt(1), ...GLIDE }, GLIDE_AT)
     .fromTo(
-      q('.impulse__dot'),
-      { autoAlpha: 0, scale: 0 },
-      { autoAlpha: 1, scale: 1, duration: 0.5, ease: 'power3.out' },
-      'impulse',
+      content,
+      { ...contentAt(hero.scale, hero.x, hero.y), transformOrigin: '0 0' },
+      { ...contentAt(1), ...GLIDE },
+      GLIDE_AT,
     )
-    .to(q('.void__word'), { autoAlpha: 0, duration: 0.9, ease: 'power1.inOut' }, 'impulse+=0.5')
-    .fromTo(
-      q('.impulse__line'),
-      { scaleX: 0 },
-      { scaleX: 1, duration: 1.1, ease: 'power3.inOut' },
-      'impulse+=0.7',
-    )
-    .to(q('.impulse__dot'), { autoAlpha: 0, scale: 0.4, duration: 0.4 }, 'impulse+=1.3')
+
+  /* ── plan ─────────────────────────────────────────────── */
+  // The page goes back to its plan: what follows shows how it is made.
+  tl.addLabel('plan', 1.7)
+    .to(stage, { backgroundColor: bg, duration: 1.0, ease: 'power1.inOut' }, 'plan')
+    .to(site, { autoAlpha: 0, duration: 0.7, ease: 'power1.inOut' }, 'plan')
+    .to(q('.frame-shadow'), { autoAlpha: 0, duration: 0.6, ease: 'power1.inOut' }, 'plan')
+    // Hidden, so Scene 03 can set it into the grid again (portalTimeline.js).
+    .set(q('.site-hero .site-line__inner'), { yPercent: 110 }, 'plan+=0.7')
+    .set(q('.site-hero [data-reveal]'), { autoAlpha: 0, y: 10 }, 'plan+=0.7')
+    .set(q('.site-hero__media'), { autoAlpha: 0 }, 'plan+=0.7')
+    .set(q('.site-hero__img .site-photo'), { scale: 1.08 }, 'plan+=0.7')
     .fromTo(
       q('.interface__message-a'),
       { autoAlpha: 0, y: 10 },
       { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out' },
-      'impulse+=0.9',
-    )
-
-  /* ── frame ────────────────────────────────────────────── */
-  tl.addLabel('frame', 3.0)
-    .fromTo(wrap, { scale: 0.92 }, { scale: 1, duration: 5.2, ease: 'power1.inOut' }, 'frame')
-    .fromTo(
-      q('.frame'),
-      { clipPath: FRAME_CLOSED },
-      { clipPath: FRAME_OPEN, duration: 1.2, ease: 'power3.inOut' },
-      'frame',
-    )
-    .to(q('.impulse__line--top'), { y: () => -halfFrame(), duration: 1.2, ease: 'power3.inOut' }, 'frame')
-    .to(q('.impulse__line--bottom'), { y: () => halfFrame(), duration: 1.2, ease: 'power3.inOut' }, 'frame')
-    .to(q('.impulse__line'), { autoAlpha: 0, duration: 0.5, ease: 'power1.out' }, 'frame+=1.0')
-    .fromTo(
-      q('.frame__dot, .frame__url'),
-      { autoAlpha: 0 },
-      { autoAlpha: 1, duration: 0.4, stagger: 0.06, ease: 'power1.out' },
-      'frame+=0.9',
+      'plan+=0.5',
     )
 
   /* ── build ────────────────────────────────────────────── */
-  tl.addLabel('build', 4.2)
+  tl.addLabel('build', 2.4)
     .fromTo(
       q('.mock-nav__mark, .mock-bar--logo, .mock-nav__link, .mock-nav__burger'),
       { autoAlpha: 0, y: -6 },
@@ -167,7 +188,7 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
     )
 
   /* ── experience ───────────────────────────────────────── */
-  tl.addLabel('experience', 7.8)
+  tl.addLabel('experience', 6.0)
     .fromTo(
       q('.interface__message-b'),
       { autoAlpha: 0, y: 8 },

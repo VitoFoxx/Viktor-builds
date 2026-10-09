@@ -230,6 +230,7 @@ Bewertung: **OK (F-13)**.
 | Font | Datei | Lokal? | Echt WOFF2? | Lizenz |
 |---|---|---|---|---|
 | Geist | `public/fonts/geist-latin-wght.woff2` | ja | ja (29 KB) | OFL, Lizenzdatei liegt bei |
+| Geist (nur ẞ) | `public/fonts/geist-sharp-s-wght.woff2` | ja | ja (1 KB) | OFL, aus dem latin-ext-Subset |
 | Schibsted Grotesk | `public/fonts/schibsted-grotesk-latin-wght.woff2` | ja | ja (47 KB) | OFL |
 | Literata | `public/fonts/literata-latin-wght.woff2` | ja | ja (57 KB) | OFL |
 | Archivo | `public/fonts/archivo-latin-wdth-wght.woff2` | ja | ja (60 KB) | OFL |

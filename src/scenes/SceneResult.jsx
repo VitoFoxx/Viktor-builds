@@ -6,8 +6,8 @@ const Legal = ({ href, children }) => (href ? <a href={href}>{children}</a> : <s
 
 /**
  * Scene 07: Result, the part after the pinned stage. The stage has just
- * closed the ring (ihr-unternehmen.de → VIKTOR BUILDS / WEBSITES, DIE KUNDEN ZUM HANDELN BRINGEN.);
- * here Viktor Builds says plainly what it offers, and "Projekt anfragen"
+ * closed the ring (ihr-unternehmen.de → VITOWORKS / WEBSITES, DIE KUNDEN ZUM HANDELN BRINGEN.);
+ * here VITOWORKS says plainly what it offers, and "Projekt anfragen"
  * is the one thing to do. Normal page flow, so the request is comfortable
  * to fill in. Calm on purpose: no scroll animation.
  *
@@ -83,7 +83,7 @@ export default function SceneResult() {
   )
 }
 
-// The page's last line: what Viktor Builds does, and the legal links.
+// The page's last line: what VITOWORKS does, and the legal links.
 export function SiteFooter() {
   return (
     <footer className="footer">

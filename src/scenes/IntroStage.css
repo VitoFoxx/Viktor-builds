@@ -238,15 +238,16 @@
   }
 
   .hero__visual,
-  .scroll-hint,
   .void__type {
     display: none;
   }
 }
 
+/* Bottom right, under the website: where the eye lands after the
+   frame. A line and an arrow, no box. */
 .scroll-hint {
   position: absolute;
-  left: var(--gutter);
+  right: var(--gutter);
   bottom: clamp(1.25rem, 4svh, 2.25rem);
   pointer-events: none;
 }
@@ -259,26 +260,26 @@
 
 .scroll-hint__label {
   font-size: var(--fs-label);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  color: var(--c-ink-muted);
+  color: var(--c-ink);
 }
 
-.scroll-hint__track {
-  position: relative;
-  width: 44px;
-  height: 1px;
-  overflow: hidden;
-  background: var(--c-ink-line);
+.scroll-hint__icon {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--c-ink-line);
+  border-radius: 50%;
+  color: var(--c-accent);
 }
 
-.scroll-hint__line {
-  position: absolute;
-  inset: 0;
-  background: var(--c-ink);
-  transform: scaleX(0);
-  transform-origin: left;
+.scroll-hint__arrow {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
 }
 
 /* ── Ring closure (RESULT): brand and closing claim ─────────────
@@ -406,13 +407,23 @@
     padding-bottom: 2.5rem;
   }
 
+  .hero__copy {
+    grid-area: 2 / 1;
+  }
+
   .hero__visual {
+    grid-area: 3 / 1;
     align-self: start;
     width: min(100%, calc(52svh * 1.6));
   }
 
+  /* In the free space right of the actions. */
   .scroll-hint {
-    display: none;
+    position: static;
+    grid-area: 2 / 1;
+    justify-self: end;
+    align-self: end;
+    margin-bottom: calc(2.5rem + 0.375rem);
   }
 }
 
@@ -451,6 +462,7 @@
   /* The website starts below the copy and runs off the bottom edge:
      a look into it, not the whole page. */
   .hero__visual {
+    order: 2;
     align-self: stretch;
     flex: none;
     width: 100%;
@@ -458,9 +470,16 @@
     aspect-ratio: 3 / 5;
   }
 
-  .hero__measure,
-  .scroll-hint {
+  .hero__measure {
     display: none;
+  }
+
+  /* Between the actions and the website, right. */
+  .scroll-hint {
+    order: 1;
+    position: static;
+    align-self: flex-end;
+    margin-top: 1.75rem;
   }
 
   .hero__example {
@@ -529,26 +548,17 @@
     display: block;
   }
 
-  .scroll-hint__line {
-    animation: scroll-hint 2.4s var(--ease-out) infinite;
+  .scroll-hint__arrow {
+    animation: scroll-hint 1.8s ease-in-out infinite;
   }
 }
 
 @keyframes scroll-hint {
-  0% {
-    transform: scaleX(0);
-    transform-origin: left;
-  }
-  45% {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
-  55% {
-    transform: scaleX(1);
-    transform-origin: right;
-  }
+  0%,
   100% {
-    transform: scaleX(0);
-    transform-origin: right;
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(3px);
   }
 }

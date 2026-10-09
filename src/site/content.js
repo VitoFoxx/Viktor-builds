@@ -166,7 +166,7 @@ export const hero = {
   request: 'Projekt anfragen',
   references: 'Referenzen',
   example: 'Beispiel: Website für einen Metallbaubetrieb',
-  scroll: 'Scrollen',
+  scroll: 'Scrollen, um mehr zu erfahren',
 }
 
 export const adapt = {

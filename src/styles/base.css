@@ -6,6 +6,17 @@
   font-display: swap;
 }
 
+/* The capital sharp s (ẞ, "NACH MAẞ"), missing from the latin subset;
+   taken from Geist's latin-ext subset. */
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/geist-sharp-s-wght.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+1E9E;
+}
+
 @font-face {
   font-family: 'Schibsted Grotesk';
   src: url('/fonts/schibsted-grotesk-latin-wght.woff2') format('woff2');

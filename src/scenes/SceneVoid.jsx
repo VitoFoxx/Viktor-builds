@@ -1,6 +1,9 @@
 import ScrollHint from '../components/ScrollHint.jsx'
 import { brand, hero, result } from '../site/content.js'
 
+// The claim is set in capitals; CSS would spell ß as SS ("MASS").
+const capitalSharpS = (text) => text.replace(/ß/g, 'ẞ')
+
 /**
  * Scene 01: the opening. Clarity first: who (VITOWORKS), what (websites
  * nach Maß), for whom (Unternehmen), why (they bring customers to act),
@@ -29,7 +32,7 @@ export default function SceneVoid() {
       <div className="hero__copy">
         <p className="hero__eyebrow">{hero.eyebrow}</p>
         <h1 id="hero-title" className="hero__title">
-          {hero.claim.map((line) => (
+          {hero.claim.map(capitalSharpS).map((line) => (
             <span className="hero__line" key={line}>
               <span className="hero__line-inner">
                 {line.endsWith('.') ? (

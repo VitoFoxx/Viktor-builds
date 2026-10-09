@@ -2,6 +2,7 @@ import SiteRestaurant from '../site/SiteRestaurant.jsx'
 import SiteSalon from '../site/SiteSalon.jsx'
 import SiteDental from '../site/SiteDental.jsx'
 import { adapt, brand as studio, restaurant, salon, dental } from '../site/content.js'
+import withStop from '../components/withStop.jsx'
 import { STUDIES } from '../animations/adaptTimeline.js'
 import './SceneAdapt.css'
 
@@ -29,7 +30,8 @@ export default function SceneAdapt() {
         <h2 id="adapt-title" className="adapt__message">
           <span className="adapt__message-a">Jede Branche ist anders.</span>{' '}
           <span className="adapt__message-b">
-            <span aria-hidden="true">→ </span>Ihre Website sollte es auch sein.
+            <span aria-hidden="true">→ </span>
+            {withStop('Ihre Website sollte es auch sein.')}
           </span>
           <span className="adapt__message-sub">{adapt.sub}</span>
         </h2>

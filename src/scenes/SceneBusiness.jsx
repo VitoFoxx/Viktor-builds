@@ -1,4 +1,5 @@
 import SiteDentalPhone from '../site/SiteDentalPhone.jsx'
+import withStop from '../components/withStop.jsx'
 import { brand, business, dentalRequest } from '../site/content.js'
 import './SceneBusiness.css'
 
@@ -29,7 +30,7 @@ export default function SceneBusiness() {
     <section className="scene scene--business" aria-labelledby="business-title">
       <h2 id="business-title" className="business__message">
         <span className="business__message-a">{business.line[0]}</span>{' '}
-        <span className="business__message-b">{business.line[1]}</span>
+        <span className="business__message-b">{withStop(business.line[1])}</span>
       </h2>
 
       {/* The two moments of the story, swapped in place; read out below. */}

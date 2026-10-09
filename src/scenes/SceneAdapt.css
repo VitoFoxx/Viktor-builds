@@ -15,9 +15,10 @@
 }
 
 .adapt__message {
-  font-size: var(--fs-message);
-  font-weight: 500;
-  letter-spacing: 0.1em;
+  font-size: var(--fs-line);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
   text-align: center;
   text-transform: uppercase;
 }
@@ -28,16 +29,22 @@
 
 .adapt__message-a,
 .adapt__message-b {
-  display: inline-block;
+  display: block;
+  text-wrap: balance;
+}
+
+.adapt__message-b span:first-child {
+  color: var(--c-muted);
 }
 
 /* The line under the claim: plain sentence, not capitals. */
 .adapt__message-sub {
   display: block;
-  margin-top: 0.9em;
-  font-size: 0.8em;
+  margin-top: 1.2rem;
+  font-size: clamp(0.95rem, 1.2vw, 1.125rem);
   font-weight: 400;
-  letter-spacing: 0.01em;
+  line-height: 1.4;
+  letter-spacing: 0;
   text-transform: none;
   color: var(--c-muted);
 }
@@ -120,9 +127,8 @@
 }
 
 @media (max-width: 767.98px) {
-  .adapt__message-a,
-  .adapt__message-b {
-    display: block;
+  .adapt__message {
+    font-size: clamp(1.25rem, 6.1vw, 1.625rem);
   }
 
   .adapt__message-sub {
@@ -161,8 +167,9 @@
 
   .adapt__message {
     position: absolute;
-    left: -50vw;
-    right: -50vw;
+    /* The screen's width, less the gutters, around the frame's centre. */
+    left: calc(50% - 50vw + var(--gutter));
+    right: calc(50% - 50vw + var(--gutter));
     bottom: 100%;
     margin-bottom: clamp(1.25rem, 3.5svh, 2.25rem);
   }

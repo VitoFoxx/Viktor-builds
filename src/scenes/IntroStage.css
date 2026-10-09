@@ -7,7 +7,7 @@
 .stage {
   /* Frame size (Scene 02) and the scale the frame returns to after
      Scene 04, where ADAPT takes over (read by experienceTimeline.js). */
-  --frame-w: min(80vw, 1120px, calc((100svh - 13rem) * 1.6));
+  --frame-w: min(80vw, 1120px, calc((100svh - 17rem) * 1.6));
   --exit-scale: 0.75;
 
   position: relative;
@@ -350,12 +350,14 @@
   left: 0;
   right: 0;
   bottom: 100%;
-  margin-bottom: clamp(1.25rem, 3.5svh, 2.25rem);
-  font-size: var(--fs-message);
-  font-weight: 500;
-  letter-spacing: 0.1em;
+  margin-bottom: clamp(1.25rem, 3.5svh, 2rem);
+  font-size: var(--fs-line);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
   text-align: center;
   text-transform: uppercase;
+  text-wrap: balance;
 }
 
 .interface__message-a {
@@ -367,7 +369,12 @@
   display: inline-block;
 }
 
-.interface__message-b span {
+.interface__message-b span:first-child {
+  color: var(--c-muted);
+}
+
+/* The lines' full stop: the one red letter, as in the opening claim. */
+.line__stop {
   color: var(--c-accent-light);
 }
 
@@ -473,11 +480,11 @@
 
   .interface__message-a,
   .interface__message-b {
-    display: block;
+    display: inline;
   }
 
   .stage {
-    --frame-w: min(84vw, 400px, calc((100svh - 12rem) * 0.6));
+    --frame-w: min(84vw, 400px, calc((100svh - 15rem) * 0.6));
     --exit-scale: 0.78;
   }
 

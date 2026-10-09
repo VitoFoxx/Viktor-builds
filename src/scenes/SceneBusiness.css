@@ -27,11 +27,13 @@
 
 .business__message {
   grid-area: msg;
-  font-size: var(--fs-message);
-  font-weight: 500;
-  letter-spacing: 0.1em;
+  font-size: var(--fs-line);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
   text-align: center;
   text-transform: uppercase;
+  text-wrap: balance;
 }
 
 .business__message-a {
@@ -285,7 +287,7 @@
 @media (max-width: 767.98px) {
   .business__message-a,
   .business__message-b {
-    display: block;
+    display: inline;
   }
 }
 
@@ -317,8 +319,8 @@
 
   .business__message {
     position: absolute;
-    left: 0;
-    right: 0;
+    left: var(--gutter);
+    right: var(--gutter);
     bottom: calc(100% - var(--phone-top) + clamp(1.25rem, 3.5svh, 2.25rem));
   }
 

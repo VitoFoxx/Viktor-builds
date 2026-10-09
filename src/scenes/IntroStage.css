@@ -186,35 +186,24 @@
   outline-offset: 4px;
 }
 
+/* The website's place, with room up and left for the two studies that fan
+   out behind it (.hero-fan, offsets below). */
+.hero__showcase {
+  display: grid;
+  align-items: center;
+  justify-items: end;
+  min-width: 0;
+}
+
 /* The slot for the website. Empty in the markup: the stage timeline lays
    the browser frame and the design study exactly into this box. Its
-   aspect ratio is the frame's. */
+   aspect ratio is the frame's. Moved down by one fan step, so the fan as
+   a whole sits centred. */
 .hero__visual {
   position: relative;
-  align-self: center;
-  justify-self: end;
-  width: min(100%, calc(64svh * 1.6));
+  width: min(74%, calc(64svh * 1.6 * 0.74));
   aspect-ratio: 16 / 10;
-}
-
-/* A dimension line, as on a drawing: made to measure. */
-.hero__measure {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -1.25rem;
-  height: 9px;
-  border-inline: 1px solid var(--c-accent);
-}
-
-.hero__measure::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 4px;
-  height: 1px;
-  background: var(--c-ink-line);
+  translate: 0 23%;
 }
 
 .hero__example {
@@ -237,7 +226,7 @@
     min-height: 88svh;
   }
 
-  .hero__visual,
+  .hero__showcase,
   .void__type {
     display: none;
   }
@@ -411,11 +400,21 @@
     grid-area: 2 / 1;
   }
 
-  /* Wide as the screen's height leaves room for, below the copy. */
-  .hero__visual {
+  /* Below the copy, right; the fan opens to the left. Wide as the
+     screen's height leaves room for. */
+  .hero__showcase {
     grid-area: 3 / 1;
-    align-self: start;
-    width: min(100%, calc(52svh * 1.6), calc((100svh - 34rem) * 1.6));
+    align-items: start;
+  }
+
+  .hero__visual {
+    width: min(69%, calc(52svh * 1.6), calc((100svh - 34rem) * 1.6));
+    translate: 0 6%;
+  }
+
+  .hero__example {
+    left: auto;
+    right: 0;
   }
 
   /* In the free space right of the actions. */
@@ -460,33 +459,25 @@
     padding: 0 1.25rem;
   }
 
-  /* The website starts below the copy and runs off the bottom edge:
-     a look into it, not the whole page. */
-  .hero__visual {
+  .hero__showcase {
     order: 2;
-    align-self: stretch;
-    flex: none;
-    width: 100%;
-    margin-top: 3.25rem;
+  }
+
+  .hero__visual {
     aspect-ratio: 3 / 5;
   }
 
-  .hero__measure {
-    display: none;
-  }
-
-  /* Between the actions and the website, right. */
+  /* Below the website, right. */
   .scroll-hint {
-    order: 1;
+    order: 3;
     position: static;
     align-self: flex-end;
     margin-top: 1.75rem;
   }
 
+  /* The studies' own names say what they are; the line would wrap. */
   .hero__example {
-    top: auto;
-    bottom: 100%;
-    margin: 0 0 0.75rem;
+    display: none;
   }
 
   .void__title {
@@ -518,28 +509,30 @@
    GSAP drives every state change from here (stageTimeline.js).
    ───────────────────────────────────────────────────────────── */
 
-/* Mobile, in motion: the first screen holds the copy alone, centred, with
-   the hint at its foot. The website waits just below the screen and
-   glides up into the frame's place as the visitor scrolls. */
+/* Mobile, in motion: copy on top, the fan of websites fills the rest of
+   the first screen, the hint at its foot. The fan's box is sized by the
+   room left over (a size container): the website as tall as fits, and
+   narrow enough for both studies beside it. */
 @media (max-width: 767.98px) and (prefers-reduced-motion: no-preference) {
   .hero__copy {
-    margin-block: auto;
-    padding-top: 0;
+    padding-top: clamp(1.25rem, 4svh, 2.5rem);
   }
 
-  .scroll-hint {
-    margin: 1.75rem 0 clamp(1.25rem, 4svh, 2.25rem);
+  .hero__showcase {
+    flex: 1 1 0;
+    min-height: 12rem;
+    margin-top: clamp(1.25rem, 3.5svh, 2.25rem);
+    container-type: size;
   }
 
   .hero__visual {
-    position: absolute;
-    top: calc(100% + 4rem);
-    left: var(--gutter);
-    right: var(--gutter);
-    justify-self: stretch;
+    width: min(calc(100cqw / 1.76), calc(100cqh * 0.6 / 1.08));
+    translate: 0 4%;
     align-self: start;
-    width: auto;
-    margin: 0;
+  }
+
+  .scroll-hint {
+    margin: 0.75rem 0 clamp(1rem, 3svh, 2rem);
   }
 }
 
@@ -576,6 +569,61 @@
 
   .scroll-hint__arrow {
     animation: scroll-hint 1.8s ease-in-out infinite;
+  }
+}
+
+/* ── The fan: two more studies behind the opening's website ────
+   Inside the frame wrap, so the opening's slot transform places them with
+   the website. Each card is the frame's size, moved up and left by `--k`
+   steps; --fan-in (load intro) and --fan-out (first scroll) scale the
+   steps, both animated by GSAP. */
+
+.hero-fan {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-fan {
+    --fan-dx: 17.5%;
+    --fan-dy: 23%;
+    --fan-in: 1;
+    --fan-out: 0;
+    display: block;
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero-fan__card {
+    --step: calc(var(--k) * (var(--fan-in) + var(--fan-out)) * -1);
+    display: block;
+    position: absolute;
+    inset: 0;
+    translate: calc(var(--step) * var(--fan-dx)) calc(var(--step) * var(--fan-dy));
+    border-radius: var(--radius-frame);
+    box-shadow:
+      0 2px 4px rgb(28 27 25 / 0.06),
+      0 24px 48px -20px rgb(28 27 25 / 0.32);
+  }
+
+  .hero-fan__card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1099.98px) and (prefers-reduced-motion: no-preference) {
+  .hero-fan {
+    --fan-dx: 22%;
+    --fan-dy: 6%;
+  }
+}
+
+@media (max-width: 767.98px) and (prefers-reduced-motion: no-preference) {
+  .hero-fan {
+    --fan-dx: 38%;
+    --fan-dy: 4%;
   }
 }
 

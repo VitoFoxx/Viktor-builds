@@ -153,8 +153,8 @@ export const yours = { context: 'Website 05 / Ihr Unternehmen' }
 export const brand = { name: 'VITOWORKS' }
 
 // The opening screen: who, what, for whom, why it matters, in that order.
-// `example` names the website shown in the frame, so it reads as an
-// example of the work, never as the page's own business.
+// `example` names the websites shown in the frame, so they read as
+// examples of the work, never as the page's own business.
 export const hero = {
   nav: [
     { label: 'Leistungen', href: '#leistungen' },
@@ -165,7 +165,7 @@ export const hero = {
   sub: 'Individuelle Websites für Unternehmen, die nicht nur gut aussehen, sondern Kunden zum Handeln bringen.',
   request: 'Projekt anfragen',
   references: 'Referenzen',
-  example: 'Beispiel: Website für einen Metallbaubetrieb',
+  example: 'Beispiele: Zahnarztpraxis · Barbershop · Metallbau',
   scroll: 'Scrollen, um mehr zu erfahren',
 }
 

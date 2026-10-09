@@ -98,7 +98,6 @@
 }
 
 /* The main action of the page: the only solid red surface here. */
-.result__cta,
 .request__submit {
   display: inline-flex;
   align-items: center;
@@ -119,26 +118,18 @@
   transition: background-color 0.2s var(--ease-out);
 }
 
-.result__cta {
-  margin-top: clamp(2rem, 5svh, 3rem);
-}
-
-.result__cta span,
 .request__submit span {
   transition: transform 0.25s var(--ease-out);
 }
 
-.result__cta:hover,
 .request__submit:hover {
   background: var(--c-accent-hover);
 }
 
-.result__cta:hover span,
 .request__submit:hover span {
   transform: translateX(3px);
 }
 
-.result__cta:active,
 .request__submit:active {
   transform: translateY(1px);
 }
@@ -507,7 +498,6 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .result__cta,
   .request__submit {
     width: 100%;
     justify-content: space-between;

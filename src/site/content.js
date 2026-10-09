@@ -174,7 +174,7 @@ export const result = {
   claim: { address: 'ihr-unternehmen.de', name: 'Viktor Builds', line: 'Websites, die Kunden zum Handeln bringen.' },
   eyebrow: 'Viktor Builds · Webdesign und Entwicklung',
   title: ['Individuelle Websites', 'für Unternehmen.'],
-  lead: 'Ich bin Viktor und baue Websites für Unternehmen. Für jeden Betrieb eine eigene, ausgerichtet auf seine Kunden und darauf, dass sie anfragen, buchen oder anrufen.',
+  lead: 'Ich bin Viktor und baue Websites, die zu Ihrem Unternehmen passen und Ihre Kunden gezielt zur Anfrage, Buchung oder Kontaktaufnahme führen.',
   offer: [
     { title: 'Individuelle Websites', text: 'Aufbau, Gestaltung und Texte richten sich nach Ihrem Betrieb und Ihren Kunden.' },
     { title: 'Modernes Webdesign', text: 'Klare Typografie, kurze Ladezeiten, am Smartphone so gut bedienbar wie am Schreibtisch.' },

@@ -94,7 +94,7 @@ export const dental = {
   needs: [
     { title: 'Akute Beschwerden', text: 'Schmerzen, Schwellung oder ein Unfall' },
     { title: 'Termin vereinbaren', text: 'Kontrolle, Reinigung oder Behandlung' },
-    { title: 'Neu bei uns', text: 'Was Sie zum ersten Termin mitbringen' },
+    { title: 'Neupatient', text: 'Was Sie zum ersten Termin mitbringen' },
     { title: 'Leistungen', text: 'Von Prophylaxe bis Zahnersatz' },
   ],
   hoursLabel: 'Sprechzeiten',
@@ -150,8 +150,17 @@ export const dentalRequest = {
 export const yours = { context: 'Website 05 / Ihr Unternehmen' }
 
 // Viktor's lines around it (stage level, not part of the study).
+export const hero = {
+  tagline: 'Websites nach Maß.',
+  lead: 'Individuelle Websites für Unternehmen und Betriebe – unabhängig von der Branche. Gemeinsam schaffen wir einen Auftritt, der zu Ihnen passt und Ihre Kunden zum Handeln bringt.',
+}
+
+export const adapt = {
+  sub: 'Maßgeschneidert auf Ihr Unternehmen, Ihre Kunden und Ihre Ziele.',
+}
+
 export const business = {
-  line: ['A website can do more', 'than look good.'],
+  line: ['Eine Website kann mehr', 'als gut aussehen.'],
   evening: { clock: 'Di 21:47', state: 'Praxis geschlossen', spoken: 'Dienstag, 21:47 Uhr' },
   morning: { clock: 'Mi 07:30', state: 'Vor der Sprechstunde', spoken: 'Mittwoch, 7:30 Uhr' },
   entry: 'Eingang über die Website · Di 21:47',
@@ -162,14 +171,14 @@ export const business = {
 // short. Fields marked "einzutragen" are Viktor's to fill in before the
 // launch; empty values are simply not shown (no invented contact data).
 export const result = {
-  claim: { address: 'your-business.com', name: 'Viktor Builds', line: 'Websites that move.' },
+  claim: { address: 'ihr-unternehmen.de', name: 'Viktor Builds', line: 'Websites, die Kunden zum Handeln bringen.' },
   eyebrow: 'Viktor Builds · Webdesign und Entwicklung',
   title: ['Individuelle Websites', 'für Unternehmen.'],
   lead: 'Ich bin Viktor und baue Websites für Unternehmen. Für jeden Betrieb eine eigene, ausgerichtet auf seine Kunden und darauf, dass sie anfragen, buchen oder anrufen.',
   offer: [
     { title: 'Individuelle Websites', text: 'Aufbau, Gestaltung und Texte richten sich nach Ihrem Betrieb und Ihren Kunden.' },
     { title: 'Modernes Webdesign', text: 'Klare Typografie, kurze Ladezeiten, am Smartphone so gut bedienbar wie am Schreibtisch.' },
-    { title: 'Motion und Interaktion', text: 'Bewegung dort, wo sie etwas zeigt oder durch die Seite führt.' },
+    { title: 'Animation und Interaktion', text: 'Bewegung dort, wo sie etwas zeigt oder durch die Seite führt.' },
     { title: 'Fokus auf Ergebnis', text: 'Die Seite ist dafür gebaut, dass aus Besuchern Anfragen, Termine und Kunden werden.' },
   ],
   services: ['Konzept', 'Design', 'Entwicklung', 'Hosting', 'Pflege'],

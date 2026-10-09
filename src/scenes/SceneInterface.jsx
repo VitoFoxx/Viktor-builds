@@ -5,9 +5,9 @@ export default function SceneInterface() {
     <section className="scene scene--interface" aria-labelledby="scene-interface-title">
       <div className="interface__stack">
         <h2 id="scene-interface-title" className="interface__message">
-          <span className="interface__message-a">From an idea</span>{' '}
+          <span className="interface__message-a">Von der Idee</span>{' '}
           <span className="interface__message-b">
-            <span aria-hidden="true">→ </span>to an experience.
+            <span aria-hidden="true">→ </span>zur Website.
           </span>
         </h2>
 

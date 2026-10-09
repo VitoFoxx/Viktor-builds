@@ -1,4 +1,5 @@
 import ScrollHint from '../components/ScrollHint.jsx'
+import { hero, result } from '../site/content.js'
 
 export default function SceneVoid() {
   return (
@@ -17,8 +18,13 @@ export default function SceneVoid() {
           </span>
         </h1>
         <p className="void__tagline">
-          <span className="void__tagline-inner">Websites that move.</span>
+          <span className="void__tagline-inner">{hero.tagline}</span>
+          {/* The closing claim takes its place when the ring closes (RESULT). */}
+          <span className="void__tagline-final" aria-hidden="true">
+            {result.claim.line}
+          </span>
         </p>
+        <p className="void__lead">{hero.lead}</p>
       </div>
       <ScrollHint />
     </section>

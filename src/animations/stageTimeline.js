@@ -63,7 +63,7 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
   /* ── void ─────────────────────────────────────────────── */
   tl.addLabel('void', 0)
     .to(q('.scroll-hint'), { autoAlpha: 0, y: 12, duration: 0.4, ease: 'power1.in' }, 'void')
-    .to(q('.void__tagline'), { autoAlpha: 0, y: -24, duration: 0.8 }, 'void+=0.1')
+    .to(q('.void__tagline, .void__lead'), { autoAlpha: 0, y: -24, duration: 0.8 }, 'void+=0.1')
     .to(q('.void__word--a'), { ...part(-1), scale: isDesktop ? 0.78 : 0.9, duration: 1.8 }, 'void')
     .to(q('.void__word--b'), { ...part(1), scale: isDesktop ? 0.78 : 0.9, duration: 1.8 }, 'void')
 

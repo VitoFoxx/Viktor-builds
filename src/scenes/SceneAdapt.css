@@ -31,6 +31,17 @@
   display: inline-block;
 }
 
+/* The line under the claim: plain sentence, not capitals. */
+.adapt__message-sub {
+  display: block;
+  margin-top: 0.9em;
+  font-size: 0.8em;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--c-muted);
+}
+
 .adapt__clip {
   width: min(100%, 1120px);
 }
@@ -112,6 +123,12 @@
   .adapt__message-a,
   .adapt__message-b {
     display: block;
+  }
+
+  .adapt__message-sub {
+    max-width: 30ch;
+    margin-inline: auto;
+    text-wrap: balance;
   }
 }
 

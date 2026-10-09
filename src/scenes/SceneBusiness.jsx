@@ -51,7 +51,7 @@ export default function SceneBusiness() {
           <div className="device__chrome" />
           <div className="device__bar" aria-hidden="true">
             <span className="device__clock">{business.evening.clock.split(' ')[1]}</span>
-            <span className="device__url">your-business.com</span>
+            <span className="device__url">ihr-unternehmen.de</span>
           </div>
           <div className="device__ground" />
           <div className="device__site" aria-hidden="true">

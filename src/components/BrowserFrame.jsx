@@ -11,7 +11,7 @@ export default function BrowserFrame() {
           <span className="frame__dot" />
           <span className="frame__dot" />
         </span>
-        <span className="frame__url">your-business.com</span>
+        <span className="frame__url">ihr-unternehmen.de</span>
       </div>
 
       <div className="frame__page">

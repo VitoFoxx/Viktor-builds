@@ -6,7 +6,7 @@ const Legal = ({ href, children }) => (href ? <a href={href}>{children}</a> : <s
 
 /**
  * Scene 07: Result, the part after the pinned stage. The stage has just
- * closed the ring (your-business.com → VIKTOR BUILDS / WEBSITES THAT MOVE.);
+ * closed the ring (ihr-unternehmen.de → VIKTOR BUILDS / WEBSITES, DIE KUNDEN ZUM HANDELN BRINGEN.);
  * here Viktor Builds says plainly what it offers, and "Projekt anfragen"
  * is the one thing to do. Normal page flow, so the request is comfortable
  * to fill in. Calm on purpose: no scroll animation.

@@ -12,11 +12,9 @@ export default function SceneInterface() {
         </h2>
 
         <div className="interface__frame-wrap">
-          {/* The impulse: a point of light that stretches into a line and
-              splits into the frame's top and bottom edges. */}
-          <span className="impulse impulse__dot" aria-hidden="true" />
-          <span className="impulse impulse__line impulse__line--top" aria-hidden="true" />
-          <span className="impulse impulse__line impulse__line--bottom" aria-hidden="true" />
+          {/* The website lies on the opening's paper: a soft contact shadow
+              that leaves with the paper. */}
+          <span className="frame-shadow" aria-hidden="true" />
           <BrowserFrame />
         </div>
       </div>

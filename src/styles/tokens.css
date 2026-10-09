@@ -1,15 +1,27 @@
 :root {
-  /* Color */
-  --c-bg: #0a0a0b;
-  --c-fg: #f2f1ee;
-  --c-muted: #8d8c88;
-  --c-line: rgb(242 241 238 / 0.14);
-  --c-line-strong: rgb(242 241 238 / 0.28);
-  --c-surface: #111113;
-  --c-surface-raised: #18191c;
-  --c-accent: #b9c8ff;
+  /* Color: VITOWORKS. Dark warm anthracite, light cream and one dark,
+     warm red. The red is used sparingly: the main action, small marks,
+     lines, active and focus states. */
+  --c-bg: #1a1918;
+  --c-fg: #ece6db;
+  --c-muted: #9b948a;
+  --c-line: rgb(236 230 219 / 0.14);
+  --c-line-strong: rgb(236 230 219 / 0.28);
+  --c-surface: #21201e;
+  --c-surface-raised: #2a2826;
+  /* Red as a surface (buttons) and as a mark on cream. */
+  --c-accent: #8e2a21;
+  --c-accent-hover: #a3342a;
+  /* Red as type or a thin line on anthracite (enough contrast there). */
+  --c-accent-light: #c4604d;
 
-  /* Type */
+  /* The opening (hero) is set on cream paper with anthracite ink. */
+  --c-paper: #ebe4d8;
+  --c-ink: #1c1b19;
+  --c-ink-muted: #686157;
+  --c-ink-line: rgb(28 27 25 / 0.16);
+
+/* Type */
   --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --fs-display: clamp(3.5rem, 13vw, 12.5rem);
   --fs-message: clamp(0.95rem, 1.5vw, 1.375rem);

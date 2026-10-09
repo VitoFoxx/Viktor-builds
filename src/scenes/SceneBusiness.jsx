@@ -1,5 +1,5 @@
 import SiteDentalPhone from '../site/SiteDentalPhone.jsx'
-import { business, dentalRequest } from '../site/content.js'
+import { brand, business, dentalRequest } from '../site/content.js'
 import './SceneBusiness.css'
 
 const Mark = ({ time, modifier }) => (
@@ -44,7 +44,7 @@ export default function SceneBusiness() {
       <div
         className="business__device"
         role="group"
-        aria-label="Designstudie von Viktor Builds: die Website der Zahnarztpraxis auf dem Smartphone. Ein neuer Patient fragt am Abend in drei Schritten einen Termin an: Anliegen, zwei kurze Fragen, Rückrufnummer."
+        aria-label={`Designstudie von ${brand.name}: die Website der Zahnarztpraxis auf dem Smartphone. Ein neuer Patient fragt am Abend in drei Schritten einen Termin an: Anliegen, zwei kurze Fragen, Rückrufnummer.`}
       >
         <div className="device__shell" />
         <div className="device__screen" data-brand="dental">

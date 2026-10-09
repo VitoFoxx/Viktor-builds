@@ -1,7 +1,7 @@
 import SiteRestaurant from '../site/SiteRestaurant.jsx'
 import SiteSalon from '../site/SiteSalon.jsx'
 import SiteDental from '../site/SiteDental.jsx'
-import { adapt, restaurant, salon, dental } from '../site/content.js'
+import { adapt, brand as studio, restaurant, salon, dental } from '../site/content.js'
 import { STUDIES } from '../animations/adaptTimeline.js'
 import './SceneAdapt.css'
 
@@ -44,11 +44,11 @@ export default function SceneAdapt() {
                 className={`adapt__layer adapt__layer--${brand}`}
                 data-brand={brand}
                 role="group"
-                aria-label={`Designstudie von Viktor Builds: Website für ${label}`}
+                aria-label={`Designstudie von ${studio.name}: Website für ${label}`}
                 key={brand}
               >
                 <p className="adapt__context">
-                  Viktor Builds <span aria-hidden="true">—</span> {content.context}
+                  {studio.name} <span aria-hidden="true">—</span> {content.context}
                 </p>
                 <div className="adapt__page">
                   <div className="adapt__bg" />

@@ -43,6 +43,15 @@ export default function IntroStage() {
           st.getTween()?.progress(1)
         }
 
+        // "Referenzen" leads to the first website at full size. The anchor
+        // target sits inside the pinned stage, so scroll to its moment.
+        const refs = q('.hero__refs')[0]
+        const toReferences = (event) => {
+          event.preventDefault()
+          window.scrollTo({ top: st.labelToScroll('arrive'), behavior: 'smooth' })
+        }
+        refs?.addEventListener('click', toReferences)
+
         let raf = 0
         if (carriedProgress > 0) {
           const progress = carriedProgress
@@ -60,6 +69,7 @@ export default function IntroStage() {
 
         return () => {
           cancelAnimationFrame(raf)
+          refs?.removeEventListener('click', toReferences)
           ScrollTrigger.removeEventListener('refreshInit', keep)
           ScrollTrigger.removeEventListener('refresh', restore)
         }

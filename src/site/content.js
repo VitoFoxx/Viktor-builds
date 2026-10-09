@@ -1,6 +1,6 @@
 // Content of the design studies. There is deliberately no company name:
 // the wordmark is the trade itself, so each demo reads as a study by
-// Viktor Builds, never as a client or a reference.
+// VITOWORKS, never as a client or a reference.
 //
 // 01 Metallbau: Scene 03 / 04. 02 Restaurant: rebuilt from it in ADAPT
 // (Scene 05), with its own layout, type and priorities, not new colours
@@ -149,10 +149,24 @@ export const dentalRequest = {
 // Scene 07 RESULT: the next website in the count is the visitor's.
 export const yours = { context: 'Website 05 / Ihr Unternehmen' }
 
-// Viktor's lines around it (stage level, not part of the study).
+// The brand. Viktor is the person, VITOWORKS the name of the studio.
+export const brand = { name: 'VITOWORKS' }
+
+// The opening screen: who, what, for whom, why it matters, in that order.
+// `example` names the website shown in the frame, so it reads as an
+// example of the work, never as the page's own business.
 export const hero = {
-  tagline: 'Websites nach Maß.',
-  lead: 'Individuelle Websites für Unternehmen und Betriebe – unabhängig von der Branche. Gemeinsam schaffen wir einen Auftritt, der zu Ihnen passt und Ihre Kunden zum Handeln bringt.',
+  nav: [
+    { label: 'Leistungen', href: '#leistungen' },
+    { label: 'Kontakt', href: '#kontakt' },
+  ],
+  eyebrow: 'Webdesign und Entwicklung',
+  claim: ['Websites', 'nach Maß.'],
+  sub: 'Individuelle Websites für Unternehmen, die nicht nur gut aussehen, sondern Kunden zum Handeln bringen.',
+  request: 'Projekt anfragen',
+  references: 'Referenzen',
+  example: 'Beispiel: Website für einen Metallbaubetrieb',
+  scroll: 'Scrollen',
 }
 
 export const adapt = {
@@ -171,8 +185,8 @@ export const business = {
 // short. Fields marked "einzutragen" are Viktor's to fill in before the
 // launch; empty values are simply not shown (no invented contact data).
 export const result = {
-  claim: { address: 'ihr-unternehmen.de', name: 'Viktor Builds', line: 'Websites, die Kunden zum Handeln bringen.' },
-  eyebrow: 'Viktor Builds · Webdesign und Entwicklung',
+  claim: { address: 'ihr-unternehmen.de', name: brand.name, line: 'Websites, die Kunden zum Handeln bringen.' },
+  eyebrow: `${brand.name} · Webdesign und Entwicklung`,
   title: ['Individuelle Websites', 'für Unternehmen.'],
   lead: 'Ich bin Viktor und baue Websites, die zu Ihrem Unternehmen passen und Ihre Kunden gezielt zur Anfrage, Buchung oder Kontaktaufnahme führen.',
   offer: [
@@ -231,8 +245,8 @@ export const contact = {
 }
 
 export const footer = {
-  line: 'Viktor Builds — Individuelle Websites für Unternehmen.',
-  note: 'Alle gezeigten Websites sind Designstudien von Viktor Builds.',
+  line: `${brand.name} — Individuelle Websites für Unternehmen.`,
+  note: `Alle gezeigten Websites sind Designstudien von ${brand.name}.`,
   imprint: 'Impressum',
   privacy: 'Datenschutz',
 }

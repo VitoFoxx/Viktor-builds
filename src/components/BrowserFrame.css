@@ -65,7 +65,7 @@
   display: block;
   height: 0.85cqw;
   border-radius: 0.5cqw;
-  background: rgb(242 241 238 / 0.12);
+  background: rgb(236 230 219 / 0.12);
   transform-origin: left center;
 }
 
@@ -93,7 +93,7 @@
 
 .mock-bar--logo {
   width: 7cqw;
-  background: rgb(242 241 238 / 0.24);
+  background: rgb(236 230 219 / 0.24);
 }
 
 .mock-nav__links {
@@ -131,7 +131,7 @@
 .mock-bar--eyebrow {
   width: 9cqw;
   height: 0.7cqw;
-  background: rgb(185 200 255 / 0.4);
+  background: var(--c-accent-light);
 }
 
 .mock-hero__title {
@@ -168,12 +168,12 @@
 .mock-btn {
   display: block;
   height: 3.4cqw;
-  border-radius: 99px;
+  border-radius: 0.25cqw;
 }
 
 .mock-btn--primary {
   width: 11cqw;
-  background: var(--c-fg);
+  background: var(--c-accent);
 }
 
 .mock-btn--ghost {
@@ -192,7 +192,7 @@
 .mock-hero__media-inner {
   position: absolute;
   inset: 0;
-  background: radial-gradient(120% 95% at 72% 18%, #2c303b 0%, #191a1f 55%, #121214 100%);
+  background: radial-gradient(120% 95% at 72% 18%, #34312d 0%, #22201e 55%, #191817 100%);
 }
 
 /* A single thin arc gives the placeholder image a sense of subject and depth. */
@@ -204,7 +204,7 @@
   width: 72%;
   aspect-ratio: 1;
   border-radius: 50%;
-  border: 1px solid rgb(185 200 255 / 0.28);
+  border: 1px solid rgb(196 96 77 / 0.35);
 }
 
 /* Columns */
@@ -230,7 +230,7 @@
 
 .mock-bar--col-title {
   width: 11cqw;
-  background: rgb(242 241 238 / 0.22);
+  background: rgb(236 230 219 / 0.22);
 }
 
 .mock-bar--col-text {

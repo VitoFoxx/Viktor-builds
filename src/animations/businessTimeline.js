@@ -25,7 +25,7 @@ const focusOf = (img) => {
  *   sent        5.75  the request in four lines
  *   morning     7.05  MI 07:30, the phone is put away, its four lines
  *                     move into the practice's entry
- *   businessEnd 9.95  "Projekt anfragen" stands, nothing moves: RESULT
+ *   businessEnd 9.95  the entry stands, nothing moves: RESULT
  *                     (Scene 07, resultTimeline.js) starts here
  *
  * The reflow is one FLIP: the phone layout is the real layout, each part
@@ -415,13 +415,8 @@ export function addBusiness(tl, stage, q, { isDesktop }) {
 
   /* ── handoff ──────────────────────────────────────────── */
 
-  // The first time Viktor asks for something: small, once the benefit is shown.
-  tl.fromTo(
-    q('.business__cta'),
-    { autoAlpha: 0, y: 6 },
-    { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out' },
-    'morning+=1.5',
-  )
+  // The entry stands a moment before RESULT; nothing asks yet.
+  tl.to({}, { duration: 0.6 }, 'morning+=1.5')
     .to({}, { duration: 0.8 })
     .addLabel('businessEnd')
 

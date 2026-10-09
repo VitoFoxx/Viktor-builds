@@ -1,9 +1,9 @@
 /* ─────────────────────────────────────────────────────────────
-   Scene 06: Business. Viktor's level (line, time, entry, call to
-   action) in his own type; the practice only ever inside the device.
+   Scene 06: Business. Viktor's level (line, time, entry) in his own
+   type; the practice only ever inside the device.
    Base layout = reduced motion: the line, then the evening (time and
    the phone with the sent request) next to the morning (time and the
-   entry), then "Projekt anfragen".
+   entry).
    ───────────────────────────────────────────────────────────── */
 
 .scene.scene--business {
@@ -17,8 +17,7 @@
     'eve'
     'dev'
     'mor'
-    'ent'
-    'cta';
+    'ent';
   justify-content: center;
   justify-items: center;
   row-gap: clamp(1.25rem, 3.5svh, 2rem);
@@ -244,37 +243,12 @@
   transform-origin: 0 0;
 }
 
-/* ── Call to action: small, in Viktor's caption type ─────────────── */
-
-.business__cta {
-  grid-area: cta;
-  padding: 0.6em 0 0.45em;
-  border-bottom: 1px solid var(--c-line-strong);
-  color: var(--c-fg);
-  font-size: var(--fs-label);
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: border-color 0.2s var(--ease-out);
-}
-
-.business__cta:hover {
-  border-color: var(--c-accent-light);
-}
-
-.business__cta:focus-visible {
-  outline: 2px solid var(--c-accent-light);
-  outline-offset: 4px;
-}
-
 @media (min-width: 768px) {
   .scene.scene--business {
     grid-template-areas:
       'msg msg'
       'eve mor'
-      'dev ent'
-      'cta cta';
+      'dev ent';
     column-gap: clamp(3rem, 9vw, 8rem);
     align-items: start;
   }
@@ -360,13 +334,6 @@
     left: calc(50% + var(--phone-w) / 2 + var(--side-gap));
     width: min(24vw, 22rem);
   }
-
-  .business__cta {
-    position: absolute;
-    right: clamp(0.875rem, 1.6vw, 1.5rem);
-    bottom: calc(clamp(0.875rem, 1.6vw, 1.5rem) - 0.45em);
-    pointer-events: auto;
-  }
 }
 
 @media (max-width: 767.98px) and (prefers-reduced-motion: no-preference) {
@@ -417,11 +384,5 @@
   .entry__value {
     margin-top: 0.2rem;
     font-size: 1rem;
-  }
-
-  .business__cta {
-    right: auto;
-    left: clamp(0.875rem, 1.6vw, 1.5rem);
-    bottom: calc(clamp(0.875rem, 1.6vw, 1.5rem) + 1.5rem);
   }
 }

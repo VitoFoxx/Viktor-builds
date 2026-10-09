@@ -478,7 +478,9 @@ img.site-photo,
   /* The hero is exactly one screen; the rest of the page sits below it
      and is "scrolled" by moving .site-demo (experienceTimeline.js). */
   .stage .site-hero {
-    height: 100svh;
+    /* One screen; inside the opening's frame, the frame's page height
+       (stageTimeline.js). */
+    height: var(--site-hero-h, 100svh);
     min-height: 0;
   }
 

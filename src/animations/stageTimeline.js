@@ -51,6 +51,13 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
   }
   const GLIDE = { duration: 1.8, ease: 'power2.inOut' }
   const GLIDE_AT = 0.15
+  // The opening shows the site's first screen whole: its hero is as tall as
+  // the frame's page area shows, so nothing is cut at the frame's edge.
+  // Back to one full screen once the page is hidden (Scene 02 on).
+  const page = q('.frame__page')[0]
+  // (A few pixels over, so no sliver of the next section shows through rounding.)
+  const pageHeight = () => `${Math.ceil((page.offsetHeight / page.offsetWidth) * stage.offsetWidth) + 8}px`
+  const FULL_HERO_AT = 2.4 // 'plan' + 0.7: the page has faded out
 
   function rect() {
     const a = slot.getBoundingClientRect()
@@ -70,13 +77,13 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
       invalidateOnRefresh: true,
       onUpdate,
       // Before the glide starts, nothing re-renders the opening's
-      // freshly measured slot after a resize or a late font swap. Step
-      // just past the start and back, so the frame sits in its new slot.
+      // freshly measured slot (or the site's height) after a resize or a
+      // late font swap. Step just past both and back, so they are measured anew.
       onRefresh: (self) => {
         const a = self.animation
-        if (a && a.time() < GLIDE_AT) {
+        if (a && a.time() < FULL_HERO_AT) {
           const t = a.time()
-          a.time(GLIDE_AT + 0.001, true).time(t, true)
+          a.time(FULL_HERO_AT + 0.001, true).time(t, true)
         }
       },
     },
@@ -110,6 +117,12 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
       { ...contentAt(hero.scale, hero.x, hero.y), transformOrigin: '0 0' },
       { ...contentAt(1), ...GLIDE },
       GLIDE_AT,
+    )
+    .fromTo(
+      content,
+      { '--site-hero-h': pageHeight },
+      { '--site-hero-h': '100svh', duration: 0, immediateRender: true },
+      FULL_HERO_AT,
     )
 
   /* ── plan ─────────────────────────────────────────────── */

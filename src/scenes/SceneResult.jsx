@@ -7,7 +7,7 @@ const Legal = ({ href, children }) => (href ? <a href={href}>{children}</a> : <s
 /**
  * Scene 07: Result, the part after the pinned stage. The stage has just
  * closed the ring (ihr-unternehmen.de → VITOWORKS / WEBSITES, DIE KUNDEN ZUM HANDELN BRINGEN.);
- * here VITOWORKS says plainly what it offers, and "Projekt anfragen"
+ * here VITOWORKS says plainly what it offers, and the request at the end
  * is the one thing to do. Normal page flow, so the request is comfortable
  * to fill in. Calm on purpose: no scroll animation.
  *
@@ -34,9 +34,6 @@ export default function SceneResult() {
           {result.title[0]} <span>{result.title[1]}</span>
         </h2>
         <p className="result__lead">{result.lead}</p>
-        <a className="result__cta" href="#kontakt">
-          {result.cta} <span aria-hidden="true">→</span>
-        </a>
       </header>
 
       <ol className="result__offer" id="leistungen">

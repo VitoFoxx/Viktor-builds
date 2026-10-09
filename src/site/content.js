@@ -197,7 +197,6 @@ export const result = {
     { title: 'SEO-optimiert', text: 'Technisch sauber aufgebaut, damit Suchmaschinen Ihre Inhalte verstehen können.' },
   ],
   services: ['Konzept', 'Design', 'Entwicklung', 'Hosting', 'Pflege'],
-  cta: 'Projekt anfragen',
 }
 
 export const request = {

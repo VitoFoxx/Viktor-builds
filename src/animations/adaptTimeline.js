@@ -248,7 +248,7 @@ const buildRestaurant = (q, stageQ) => (tl, handOver) => {
   handOver(['reserve'], 'rebuild+=1.85')
     // "→ DIFFERENT WEBSITE." once the first proof stands.
     .fromTo(
-      stageQ('.adapt__message-b'),
+      stageQ('.adapt__message-b, .adapt__message-sub'),
       { autoAlpha: 0, y: 8 },
       { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power2.out' },
       'rebuild+=2.1',

@@ -46,6 +46,8 @@
 }
 
 .result__claim {
+  max-width: 90vw;
+  text-wrap: balance;
   font-size: clamp(0.9375rem, 1.6vw, 1.5rem);
   font-weight: 500;
   letter-spacing: 0.24em;

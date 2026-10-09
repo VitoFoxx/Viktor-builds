@@ -9,9 +9,9 @@
  *                    call to action leave, the phone empties, the context
  *                    line counts on to WEBSITE 05 / IHR UNTERNEHMEN
  *   reframe    0.35  the empty phone becomes Scene 02's browser frame
- *   address    1.7   the frame contracts onto its address, your-business.com,
+ *   address    1.7   the frame contracts onto its address, ihr-unternehmen.de,
  *                    in the middle of the stage
- *   claim      3.2   VIKTOR BUILDS / WEBSITES THAT MOVE. return: Scene 01's
+ *   claim      3.2   VIKTOR BUILDS / the closing claim return: Scene 01's
  *                    own type, in its own place
  *   resultEnd  4.55 + rest: the pin releases into the contact area
  *
@@ -22,6 +22,8 @@ export function addResult(tl, stage, q, { isDesktop, device }) {
   const phone = q('.business__device')[0]
   const words = q('.void__word')
   const tagline = q('.void__tagline')[0]
+  const heroLine = q('.void__tagline-inner')
+  const finalLine = q('.void__tagline-final')
   const contexts = q('.context__item')
   const tokens = getComputedStyle(stage)
   const surface = tokens.getPropertyValue('--c-surface').trim()
@@ -58,7 +60,7 @@ export function addResult(tl, stage, q, { isDesktop, device }) {
   // Mobile: the phone had made room for the entry.
   if (!isDesktop) tl.to(phone, { scale: 1, y: 0, duration: 1.1, ease: 'power3.inOut' }, 'reframe')
 
-  /* ── address: the frame contracts onto your-business.com ─ */
+  /* ── address: the frame contracts onto ihr-unternehmen.de ─ */
 
   tl.addLabel('address', 'reframe+=1.35')
   device.toAddress('address', isDesktop ? 2.2 : 2, { duration: 1.2, ease: 'power3.inOut' })
@@ -73,6 +75,8 @@ export function addResult(tl, stage, q, { isDesktop, device }) {
     .set(words, { x: 0, y: 0, scale: 1, autoAlpha: 1 }, 'claim+=0.3')
     .set(q('.void__word-inner'), { yPercent: 110 }, 'claim+=0.3')
     .to(q('.void__word-inner'), { yPercent: 0, duration: 1.0, stagger: 0.09, ease: 'power4.out' }, 'claim+=0.3')
+    .set(heroLine, { autoAlpha: 0 }, 'claim+=0.3')
+    .set(finalLine, { autoAlpha: 1 }, 'claim+=0.3')
     .set(tagline, { y: 14 }, 'claim+=0.3')
     .to(tagline, { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 'claim+=0.75')
     // It stands for a moment before the page continues.

@@ -24,6 +24,7 @@
 /* ── Scene 01: The Void ─────────────────────────────────────── */
 
 .void__type {
+  position: relative;
   text-align: center;
 }
 
@@ -64,8 +65,36 @@
   text-transform: uppercase;
 }
 
-.void__tagline-inner {
-  display: inline-block;
+/* The hero line and the closing claim share one place; RESULT swaps them. */
+.void__tagline {
+  display: grid;
+  justify-items: center;
+  max-width: 90vw;
+  margin-inline: auto;
+  text-wrap: balance;
+}
+
+.void__tagline-inner,
+.void__tagline-final {
+  grid-area: 1 / 1;
+}
+
+.void__tagline-final {
+  visibility: hidden;
+}
+
+/* Hangs below the tagline without moving the title off the centre. */
+.void__lead {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: min(36rem, 88vw);
+  margin: clamp(1.25rem, 3svh, 2rem) auto 0;
+  font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
+  line-height: 1.55;
+  color: var(--c-muted);
+  text-wrap: pretty;
 }
 
 .scroll-hint {

@@ -180,6 +180,8 @@ export const result = {
     { title: 'Modernes Webdesign', text: 'Klare Typografie, kurze Ladezeiten, am Smartphone so gut bedienbar wie am Schreibtisch.' },
     { title: 'Animation und Interaktion', text: 'Bewegung dort, wo sie etwas zeigt oder durch die Seite führt.' },
     { title: 'Fokus auf Ergebnis', text: 'Die Seite ist dafür gebaut, dass aus Besuchern Anfragen, Termine und Kunden werden.' },
+    { title: 'DSGVO-gerecht', text: 'Datenschutz von Anfang an mitgedacht.' },
+    { title: 'SEO-optimiert', text: 'Technisch sauber aufgebaut, damit Suchmaschinen Ihre Inhalte verstehen können.' },
   ],
   services: ['Konzept', 'Design', 'Entwicklung', 'Hosting', 'Pflege'],
   cta: 'Projekt anfragen',

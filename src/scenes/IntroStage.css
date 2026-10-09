@@ -411,10 +411,11 @@
     grid-area: 2 / 1;
   }
 
+  /* Wide as the screen's height leaves room for, below the copy. */
   .hero__visual {
     grid-area: 3 / 1;
     align-self: start;
-    width: min(100%, calc(52svh * 1.6));
+    width: min(100%, calc(52svh * 1.6), calc((100svh - 34rem) * 1.6));
   }
 
   /* In the free space right of the actions. */
@@ -516,6 +517,31 @@
    Cinematic layout: all scenes layered on one pinned stage.
    GSAP drives every state change from here (stageTimeline.js).
    ───────────────────────────────────────────────────────────── */
+
+/* Mobile, in motion: the first screen holds the copy alone, centred, with
+   the hint at its foot. The website waits just below the screen and
+   glides up into the frame's place as the visitor scrolls. */
+@media (max-width: 767.98px) and (prefers-reduced-motion: no-preference) {
+  .hero__copy {
+    margin-block: auto;
+    padding-top: 0;
+  }
+
+  .scroll-hint {
+    margin: 1.75rem 0 clamp(1.25rem, 4svh, 2.25rem);
+  }
+
+  .hero__visual {
+    position: absolute;
+    top: calc(100% + 4rem);
+    left: var(--gutter);
+    right: var(--gutter);
+    justify-self: stretch;
+    align-self: start;
+    width: auto;
+    margin: 0;
+  }
+}
 
 @media (prefers-reduced-motion: no-preference) {
   /* Starts on the opening's paper; the stage turns anthracite as the

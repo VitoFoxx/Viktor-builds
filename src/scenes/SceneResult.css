@@ -152,8 +152,9 @@
 
 .result__offer {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(1.5rem, 2.6vw, 2.5rem);
+  row-gap: clamp(2.5rem, 4vw, 3.5rem);
   margin-top: clamp(4.5rem, 12svh, 8rem);
 }
 

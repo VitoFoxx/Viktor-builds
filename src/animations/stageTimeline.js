@@ -109,6 +109,8 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
     .to(q('.hero__bar'), { autoAlpha: 0, y: -16, duration: 0.7, ease: 'power1.in' }, 'hero')
     .to(q('.hero__copy'), { autoAlpha: 0, y: () => -window.innerHeight * 0.08, duration: 0.9, ease: 'power2.in' }, 'hero')
     .to(slot, { autoAlpha: 0, duration: 0.4, ease: 'power1.in' }, 'hero')
+    // The two studies behind the website step aside and leave it alone.
+    .to(q('.hero-fan'), { '--fan-out': 0.5, autoAlpha: 0, duration: 0.6, ease: 'power1.in' }, 'hero')
     // Frame, clip and content share one ease, so they stay locked together.
     .fromTo(wrap, { ...heroWrap }, { x: 0, y: 0, scale: 1, ...GLIDE }, GLIDE_AT)
     .fromTo(clip, { clipPath: clipAt(hero.scale, hero.x, hero.y) }, { clipPath: clipAt(1), ...GLIDE }, GLIDE_AT)

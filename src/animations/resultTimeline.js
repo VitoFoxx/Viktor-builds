@@ -31,7 +31,7 @@ export function addResult(tl, stage, q, { isDesktop, device }) {
 
   tl.addLabel('result', 'businessEnd')
     .to(
-      q('.business__message, .business__time, .business__entry, .business__cta'),
+      q('.business__message, .business__time, .business__entry'),
       { autoAlpha: 0, duration: 0.5, ease: 'power1.in' },
       'result',
     )

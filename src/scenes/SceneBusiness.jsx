@@ -19,11 +19,12 @@ const Mark = ({ time, modifier }) => (
  * ADAPT left it. The browser frame becomes a phone (the request comes in
  * the evening, from a phone) and the practice website reflows into it.
  * A new patient sends a short request; the next morning the practice finds
- * it in four plain lines. Viktor's level (his line, the time, the entry,
- * "Projekt anfragen") stays in his type, around the phone, never inside it.
+ * it in four plain lines. Viktor's level (his line, the time, the entry)
+ * stays in his type, around the phone, never inside it. "Projekt anfragen"
+ * comes only at the opening and in RESULT.
  *
  * Without motion: the line, then the evening (phone with the sent request)
- * next to the morning (the entry), then "Projekt anfragen".
+ * next to the morning (the entry).
  */
 export default function SceneBusiness() {
   return (
@@ -76,11 +77,6 @@ export default function SceneBusiness() {
           ))}
         </dl>
       </div>
-
-      {/* Small and late on purpose: RESULT makes it the main action. */}
-      <a className="business__cta" href="#kontakt">
-        {business.cta} <span aria-hidden="true">→</span>
-      </a>
     </section>
   )
 }

@@ -1,5 +1,5 @@
 import ProjectRequest from '../components/ProjectRequest.jsx'
-import { result, flow, request, contact, footer } from '../site/content.js'
+import { result, visibility, flow, request, contact, footer } from '../site/content.js'
 import portrait480 from '../assets/about/viktor-portrait-480.webp'
 import portrait960 from '../assets/about/viktor-portrait-960.webp'
 import './SceneResult.css'
@@ -29,6 +29,31 @@ export default function SceneResult() {
         <p className="result__name">{result.claim.name}</p>
         <p className="result__claim">{result.claim.line}</p>
       </div>
+
+      <section className="visibility" aria-labelledby="visibility-title">
+        <p className="visibility__label">{visibility.label}</p>
+        <h2 id="visibility-title" className="visibility__title">
+          {visibility.title}
+        </h2>
+        <p className="visibility__lead">{visibility.lead}</p>
+        <ul className="visibility__facts">
+          {visibility.facts.map((fact) => (
+            <li className="fact" key={fact.value}>
+              <p className="fact__value">
+                {fact.prefix && <small>{fact.prefix} </small>}
+                {fact.value}
+                <span> %</span>
+              </p>
+              <p className="fact__text">{fact.text}</p>
+              <p className="fact__source">
+                <a href={fact.href} target="_blank" rel="noopener noreferrer">
+                  Quelle: {fact.source}
+                </a>
+              </p>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <header className="result__intro">
         <p className="result__eyebrow">{result.eyebrow}</p>

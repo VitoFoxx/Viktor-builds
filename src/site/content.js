@@ -200,6 +200,43 @@ export const result = {
   services: ['Konzept', 'Design', 'Entwicklung', 'Hosting', 'Pflege'],
 }
 
+// Why visibility matters, right after the story and before the offer.
+// Only figures with a primary source; the year stays visible because
+// they age. Wording follows the sources ("Offliner" share 2024 is "gut
+// 4 %", so "über 95 %" is online).
+export const visibility = {
+  label: 'Sichtbarkeit',
+  title: 'Warum Ihr Unternehmen online sichtbar sein muss.',
+  lead: 'Kunden suchen zuerst online. Ihre Website arbeitet, wenn Sie geschlossen haben, und prägt den ersten Eindruck, noch bevor jemand anruft.',
+  facts: [
+    {
+      prefix: 'über',
+      value: '95',
+      text: 'der 16- bis 74-Jährigen in Deutschland nutzen das Internet.',
+      source: 'Statistisches Bundesamt, 2024',
+      href: 'https://www.destatis.de/DE/Presse/Pressemitteilungen/2025/04/PD25_N017_63.html',
+    },
+    {
+      value: '83',
+      text: 'der 16- bis 74-Jährigen haben schon einmal online etwas gekauft oder bestellt.',
+      source: 'Statistisches Bundesamt, 2024',
+      href: 'https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/11/PD24_446_63.html',
+    },
+    {
+      value: '74',
+      text: 'der Befragten googeln, wenn sie ein Produkt oder eine Dienstleistung suchen.',
+      source: 'Nordlight Research, Trendmonitor Deutschland, 2025',
+      href: 'https://trendmonitor-deutschland.de/online-suche-ki/',
+    },
+    {
+      value: '58',
+      text: 'der Befragten besuchen vor dem Kauf die Website des Anbieters.',
+      source: 'GfK für Greven Medien, 2021',
+      href: 'https://www.presseportal.de/pm/59864/4955827',
+    },
+  ],
+}
+
 // How a project runs, between the offer and the request. The price line
 // is the one orientation the page gives; the exact price is in the offer.
 export const flow = {

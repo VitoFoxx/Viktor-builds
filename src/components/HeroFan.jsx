@@ -1,18 +1,22 @@
 import barbershop640 from '../assets/site/hero-fan-barbershop-640.webp'
 import barbershop1100 from '../assets/site/hero-fan-barbershop-1100.webp'
 import barbershopM420 from '../assets/site/hero-fan-barbershop-m-420.webp'
+import restaurant640 from '../assets/site/hero-fan-restaurant-640.webp'
+import restaurant1100 from '../assets/site/hero-fan-restaurant-1100.webp'
+import restaurantM420 from '../assets/site/hero-fan-restaurant-m-420.webp'
 import dental640 from '../assets/site/hero-fan-dental-640.webp'
 import dental1100 from '../assets/site/hero-fan-dental-1100.webp'
 import dentalM420 from '../assets/site/hero-fan-dental-m-420.webp'
 
-// Two more of the studies (Scene 05), as stills of their finished first
+// Three more of the studies (Scene 05), as stills of their finished first
 // screen, fanned out behind the opening's website: "nach Maß" at a glance.
 // Rendered from the live demo pages; the photos in them are the ones in
-// media.js (salon, dental) and fall under the same asset audit.
+// media.js (restaurant, salon, dental) and fall under the same asset audit.
 // Back to front: `--k` is the card's distance from the website.
 const cards = [
-  { key: 'dental', k: 2, small: dental640, large: dental1100, mobile: dentalM420 },
-  { key: 'barbershop', k: 1, small: barbershop640, large: barbershop1100, mobile: barbershopM420 },
+  { key: 'dental', k: 3, small: dental640, large: dental1100, mobile: dentalM420 },
+  { key: 'barbershop', k: 2, small: barbershop640, large: barbershop1100, mobile: barbershopM420 },
+  { key: 'restaurant', k: 1, small: restaurant640, large: restaurant1100, mobile: restaurantM420 },
 ]
 
 export default function HeroFan() {

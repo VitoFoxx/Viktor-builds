@@ -66,6 +66,8 @@
 .result__eyebrow,
 .offer__n,
 .flow__label,
+.visibility__label,
+.fact__source,
 .flow__n,
 .result__services,
 .request__legend,
@@ -213,6 +215,95 @@
 .result__services {
   margin-top: clamp(2.5rem, 6svh, 3.5rem);
   line-height: 2;
+}
+
+
+/* ── Sichtbarkeit: the claim, then four sourced figures ────── */
+
+.visibility {
+  margin-bottom: clamp(6rem, 18svh, 11rem);
+}
+
+.visibility__label {
+  color: var(--c-accent-light);
+}
+
+.visibility__title {
+  max-width: 14em;
+  margin-top: 1.25rem;
+  font-size: clamp(2.25rem, 4.6vw, 4.25rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.visibility__lead {
+  max-width: 36em;
+  margin-top: clamp(1.5rem, 3svh, 2rem);
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--text-soft);
+  text-wrap: pretty;
+}
+
+.visibility__facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.5rem, 2.6vw, 2.5rem);
+  margin-top: clamp(3rem, 8svh, 5rem);
+  list-style: none;
+}
+
+.fact {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--c-line-strong);
+}
+
+.fact__value {
+  font-size: clamp(3rem, 5.4vw, 5rem);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  font-variant-numeric: tabular-nums;
+}
+
+.fact__value small {
+  font-size: 0.32em;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.fact__value span {
+  color: var(--c-accent-light);
+}
+
+.fact__text {
+  margin-top: 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--text-soft);
+  text-wrap: pretty;
+}
+
+.fact__source {
+  margin-top: 1rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+}
+
+.fact__source a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--c-line-strong);
+  text-underline-offset: 0.25em;
+}
+
+.fact__source a:hover {
+  color: var(--c-fg);
 }
 
 /* ── Ablauf ─────────────────────────────────────────────────── */
@@ -599,6 +690,11 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .visibility__facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 2.5rem;
+  }
+
   .flow__steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     row-gap: 2.5rem;
@@ -628,6 +724,11 @@
 
   .result__portrait {
     width: 5.5rem;
+  }
+
+  .visibility__facts {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 2rem;
   }
 
   /* Vertical on phones: the rule runs down beside the steps. */

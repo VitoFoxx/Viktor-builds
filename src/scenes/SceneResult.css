@@ -94,7 +94,7 @@
    "Ich bin Viktor", not a hero image. */
 .result__about {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: clamp(1.25rem, 2.6vw, 2.25rem);
   margin-top: clamp(1.75rem, 4svh, 2.75rem);
 }
@@ -622,6 +622,7 @@
   /* Phones: portrait above the lead, so the text keeps its full width. */
   .result__about {
     flex-direction: column;
+    align-items: flex-start;
     gap: 1.25rem;
   }
 

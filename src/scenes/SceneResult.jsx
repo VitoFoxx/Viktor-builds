@@ -1,5 +1,7 @@
 import ProjectRequest from '../components/ProjectRequest.jsx'
 import { result, flow, request, contact, footer } from '../site/content.js'
+import portrait480 from '../assets/about/viktor-portrait-480.webp'
+import portrait960 from '../assets/about/viktor-portrait-960.webp'
 import './SceneResult.css'
 
 const Legal = ({ href, children }) => (href ? <a href={href}>{children}</a> : <span>{children}</span>)
@@ -33,7 +35,22 @@ export default function SceneResult() {
         <h2 id="result-title" className="result__title">
           {result.title[0]} <span>{result.title[1]}</span>
         </h2>
-        <p className="result__lead">{result.lead}</p>
+        <div className="result__about">
+          <figure className="result__portrait">
+            <img
+              src={portrait480}
+              srcSet={`${portrait480} 480w, ${portrait960} 960w`}
+              sizes="(max-width: 767.98px) 5.5rem, 9rem"
+              width="480"
+              height="600"
+              loading="lazy"
+              decoding="async"
+              alt={result.portrait.alt}
+            />
+            <figcaption>{result.portrait.caption}</figcaption>
+          </figure>
+          <p className="result__lead">{result.lead}</p>
+        </div>
       </header>
 
       <ol className="result__offer" id="leistungen">

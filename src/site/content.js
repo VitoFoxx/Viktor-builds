@@ -187,7 +187,8 @@ export const result = {
   claim: { address: 'ihr-unternehmen.de', name: brand.name, line: 'Websites, die Kunden zum Handeln bringen.' },
   eyebrow: `${brand.name} · Webdesign und Entwicklung in Hannover`,
   title: ['Individuelle Websites', 'für Unternehmen.'],
-  lead: 'Ich bin Viktor und baue Websites, die zu Ihrem Unternehmen passen und Ihre Kunden gezielt zur Anfrage, Buchung oder Kontaktaufnahme führen.',
+  lead: 'Ich bin Viktor, Webentwickler aus der Region Hannover. Ich baue Websites, die zu Ihrem Unternehmen passen und Ihre Kunden gezielt zur Anfrage, Buchung oder Kontaktaufnahme führen. Kein Baukasten, keine Vorlage: Ihre Website gibt es nur einmal, wie ein Anzug, der nur Ihnen passt.',
+  portrait: { alt: 'Viktor, Webentwickler bei VITOWORKS', caption: 'Viktor · Hannover' },
   offer: [
     { title: 'Individuelle Websites', text: 'Aufbau, Gestaltung und Texte richten sich nach Ihrem Betrieb und Ihren Kunden.' },
     { title: 'Modernes Webdesign', text: 'Klare Typografie, kurze Ladezeiten, am Smartphone so gut bedienbar wie am Schreibtisch.' },

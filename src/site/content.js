@@ -207,7 +207,7 @@ export const result = {
 export const visibility = {
   label: 'Sichtbarkeit',
   title: 'Warum Ihr Unternehmen online sichtbar sein muss.',
-  lead: 'Kunden suchen zuerst online. Ihre Website arbeitet, wenn Sie geschlossen haben, und prägt den ersten Eindruck, noch bevor jemand anruft.',
+  lead: 'Kunden suchen zuerst online. Ihre Website arbeitet, wenn Sie geschlossen haben. Und ihr Eindruck entscheidet mit, ob jemand bucht oder Kontakt aufnimmt.',
   facts: [
     {
       prefix: 'über',
@@ -229,10 +229,10 @@ export const visibility = {
       href: 'https://trendmonitor-deutschland.de/online-suche-ki/',
     },
     {
-      value: '58',
-      text: 'der Befragten besuchen vor dem Kauf die Website des Anbieters.',
-      source: 'GfK für Greven Medien, 2021',
-      href: 'https://www.presseportal.de/pm/59864/4955827',
+      value: '35',
+      text: 'der 18- bis 64-Jährigen halten einen guten Internetauftritt mit Kontaktmöglichkeit für sehr wichtig.',
+      source: 'Gelbe Seiten / mafo.de, 2018',
+      href: 'https://www.gelbeseiten.de/gsservice/Newsroom/Pressemitteilungen/Pressemeldungen-national/Handwerk-kommt-Wunsch-der-Verbraucher-nach-Digitalisierung-nicht-nach-Jeder-zweite-hat-keine-Website',
     },
   ],
 }

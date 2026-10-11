@@ -11,6 +11,7 @@ const capitalSharpS = (text) => text.replace(/ß/g, 'ẞ')
  * slot only marks the place, the real browser frame (Scene 02) and the
  * design study (Scene 03) are laid into it by the stage timeline, so the
  * website seen first is the one the visitor later builds and enters.
+ * Two more studies fan out behind it (HeroFan, inside the frame).
  *
  * `.void__type` is not part of the opening: RESULT brings the brand and
  * the closing claim back here at the end of the stage.
@@ -58,9 +59,10 @@ export default function SceneVoid() {
         </p>
       </div>
 
-      <div className="hero__visual" aria-hidden="true">
-        <span className="hero__measure" />
-        <p className="hero__example">{hero.example}</p>
+      <div className="hero__showcase">
+        <div className="hero__visual" aria-hidden="true">
+          <p className="hero__example">{hero.example}</p>
+        </div>
       </div>
 
       <ScrollHint />

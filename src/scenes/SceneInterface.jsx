@@ -1,4 +1,5 @@
 import BrowserFrame from '../components/BrowserFrame.jsx'
+import HeroFan from '../components/HeroFan.jsx'
 import withStop from '../components/withStop.jsx'
 
 export default function SceneInterface() {
@@ -14,6 +15,7 @@ export default function SceneInterface() {
         </h2>
 
         <div className="interface__frame-wrap">
+          <HeroFan />
           {/* The website lies on the opening's paper: a soft contact shadow
               that leaves with the paper. */}
           <span className="frame-shadow" aria-hidden="true" />

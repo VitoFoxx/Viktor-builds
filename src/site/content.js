@@ -244,12 +244,12 @@ export const flow = {
   title: 'So entsteht Ihre Website.',
   steps: [
     { title: 'Gespräch', text: 'Wir sprechen über Ihren Betrieb, Ihre Kunden und das Ziel der Website. Kostenlos und unverbindlich.' },
-    { title: 'Konzept und Angebot', text: 'Sie erhalten Aufbau, Inhalte und einen festen Preis, bevor die Arbeit beginnt.' },
+    { title: 'Konzept und Angebot', text: 'Das Angebot ist kostenlos. Sie erhalten Aufbau, Inhalte und einen festen Preis, bevor die Arbeit beginnt.' },
     { title: 'Design und Entwicklung', text: 'Sie sehen die Seite früh im Entstehen und geben Rückmeldung, bis sie passt.' },
     { title: 'Start und Pflege', text: 'Die Website geht online. Auf Wunsch übernehme ich Hosting und laufende Pflege.' },
   ],
   price: 'Projekte ab 999 €.',
-  priceNote: 'Den genauen Preis nennt Ihnen das Angebot, bevor es losgeht.',
+  priceNote: 'Das Angebot ist kostenlos und nennt Ihnen den genauen Preis, bevor es losgeht.',
 }
 
 export const request = {

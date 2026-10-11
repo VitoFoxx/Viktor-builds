@@ -207,7 +207,7 @@ export const result = {
 export const visibility = {
   label: 'Sichtbarkeit',
   title: 'Warum Ihr Unternehmen online sichtbar sein muss.',
-  lead: 'Kunden suchen zuerst online. Ihre Website arbeitet, wenn Sie geschlossen haben, und prägt den ersten Eindruck, noch bevor jemand anruft.',
+  lead: 'Kunden suchen zuerst online. Ihre Website arbeitet, wenn Sie geschlossen haben. Und ihr Eindruck entscheidet mit, ob jemand bucht oder Kontakt aufnimmt.',
   facts: [
     {
       prefix: 'über',
@@ -229,10 +229,10 @@ export const visibility = {
       href: 'https://trendmonitor-deutschland.de/online-suche-ki/',
     },
     {
-      value: '58',
-      text: 'der Befragten besuchen vor dem Kauf die Website des Anbieters.',
-      source: 'GfK für Greven Medien, 2021',
-      href: 'https://www.presseportal.de/pm/59864/4955827',
+      value: '35',
+      text: 'der 18- bis 64-Jährigen halten einen guten Internetauftritt mit Kontaktmöglichkeit für sehr wichtig.',
+      source: 'Gelbe Seiten / mafo.de, 2018',
+      href: 'https://www.gelbeseiten.de/gsservice/Newsroom/Pressemitteilungen/Pressemeldungen-national/Handwerk-kommt-Wunsch-der-Verbraucher-nach-Digitalisierung-nicht-nach-Jeder-zweite-hat-keine-Website',
     },
   ],
 }
@@ -244,12 +244,12 @@ export const flow = {
   title: 'So entsteht Ihre Website.',
   steps: [
     { title: 'Gespräch', text: 'Wir sprechen über Ihren Betrieb, Ihre Kunden und das Ziel der Website. Kostenlos und unverbindlich.' },
-    { title: 'Konzept und Angebot', text: 'Sie erhalten Aufbau, Inhalte und einen festen Preis, bevor die Arbeit beginnt.' },
+    { title: 'Konzept und Angebot', text: 'Das Angebot ist kostenlos. Sie erhalten Aufbau, Inhalte und einen festen Preis, bevor die Arbeit beginnt.' },
     { title: 'Design und Entwicklung', text: 'Sie sehen die Seite früh im Entstehen und geben Rückmeldung, bis sie passt.' },
     { title: 'Start und Pflege', text: 'Die Website geht online. Auf Wunsch übernehme ich Hosting und laufende Pflege.' },
   ],
   price: 'Projekte ab 999 €.',
-  priceNote: 'Den genauen Preis nennt Ihnen das Angebot, bevor es losgeht.',
+  priceNote: 'Das Angebot ist kostenlos und nennt Ihnen den genauen Preis, bevor es losgeht.',
 }
 
 export const request = {

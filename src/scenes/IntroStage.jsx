@@ -43,7 +43,7 @@ export default function IntroStage() {
           st.getTween()?.progress(1)
         }
 
-        // "Referenzen" leads to the first website at full size. The anchor
+        // "Beispiele" leads to the first website at full size. The anchor
         // target sits inside the pinned stage, so scroll to its moment.
         const refs = q('.hero__refs')[0]
         const toReferences = (event) => {

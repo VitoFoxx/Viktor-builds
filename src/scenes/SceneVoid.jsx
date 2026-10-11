@@ -53,7 +53,7 @@ export default function SceneVoid() {
           <a className="hero__cta" href="#kontakt">
             {hero.request} <span aria-hidden="true">→</span>
           </a>
-          <a className="hero__refs" href="#referenzen">
+          <a className="hero__refs" href="#beispiele">
             {hero.references}
           </a>
         </p>

@@ -15,7 +15,7 @@ import './SceneExperience.css'
  */
 export default function SceneExperience() {
   return (
-    <section className="scene scene--site" id="referenzen" aria-labelledby="experience-context">
+    <section className="scene scene--site" id="beispiele" aria-labelledby="experience-context">
       <h2 id="experience-context" className="experience__context">
         {brand.name} <span aria-hidden="true">—</span>{' '}
         <span className="context__swap">

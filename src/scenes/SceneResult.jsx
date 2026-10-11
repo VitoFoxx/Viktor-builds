@@ -60,6 +60,19 @@ export default function SceneResult() {
         <h2 id="result-title" className="result__title">
           {result.title[0]} <span>{result.title[1]}</span>
         </h2>
+        <figure className="result__portrait">
+          <img
+            src={portrait480}
+            srcSet={`${portrait480} 480w, ${portrait960} 960w`}
+            sizes="(max-width: 767.98px) 5.5rem, 15rem"
+            width="480"
+            height="600"
+            loading="lazy"
+            decoding="async"
+            alt={result.portrait.alt}
+          />
+          <figcaption>{result.portrait.caption}</figcaption>
+        </figure>
         <p className="result__lead">{result.lead}</p>
       </header>
 
@@ -107,19 +120,6 @@ export default function SceneResult() {
 
       <div className="request" id="kontakt" aria-labelledby="request-title" role="region">
         <div className="request__intro">
-          <figure className="request__person">
-            <img
-              src={portrait480}
-              srcSet={`${portrait480} 480w, ${portrait960} 960w`}
-              sizes="7rem"
-              width="480"
-              height="600"
-              loading="lazy"
-              decoding="async"
-              alt={result.portrait.alt}
-            />
-            <figcaption>{result.portrait.caption}</figcaption>
-          </figure>
           <h2 id="request-title" className="request__title">
             {request.title}
           </h2>

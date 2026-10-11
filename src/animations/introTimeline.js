@@ -19,6 +19,9 @@ export function createIntroTimeline(q) {
     .from(q('.hero__brand, .hero__nav'), { autoAlpha: 0, duration: 0.8, ease: 'power1.out' }, 0.1)
     .from(q('.hero__line-inner'), { yPercent: 110, duration: 1.2, stagger: 0.09, ease: 'power4.out' }, 0.15)
     .from(q('.hero__eyebrow, .hero__sub, .hero__actions'), { autoAlpha: 0, y: 14, duration: 0.9, stagger: 0.08 }, 0.5)
+    // The red marks draw themselves in: the rule, then the full stop.
+    .fromTo(q('.hero__eyebrow'), { '--rule': 0 }, { '--rule': 1, duration: 0.6, ease: 'power3.inOut', immediateRender: true }, 0.55)
+    .from(q('.hero__stop'), { scale: 0, duration: 0.55, ease: 'back.out(3)' }, 0.8)
     // The website appears as one object: frame and page together.
     .from(q('.frame, .portal__content'), { autoAlpha: 0, duration: 1.1, ease: 'power1.out' }, 0.45)
     // Then the two studies fan out from behind it.

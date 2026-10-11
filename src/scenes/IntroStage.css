@@ -103,6 +103,9 @@
   width: 2rem;
   height: 2px;
   background: var(--c-accent);
+  /* Drawn in by the load intro (--rule 0 → 1). */
+  transform: scaleX(var(--rule, 1));
+  transform-origin: left center;
 }
 
 .hero__title {
@@ -127,7 +130,9 @@
 
 /* The full stop of the claim: the one red letter. */
 .hero__stop {
+  display: inline-block;
   color: var(--c-accent);
+  transform-origin: 50% 80%;
 }
 
 .hero__sub {

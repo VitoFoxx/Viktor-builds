@@ -185,9 +185,10 @@ export const business = {
 // launch; empty values are simply not shown (no invented contact data).
 export const result = {
   claim: { address: 'ihr-unternehmen.de', name: brand.name, line: 'Websites, die Kunden zum Handeln bringen.' },
-  eyebrow: `${brand.name} · Webdesign und Entwicklung`,
+  eyebrow: `${brand.name} · Webdesign und Entwicklung in Hannover`,
   title: ['Individuelle Websites', 'für Unternehmen.'],
-  lead: 'Ich bin Viktor und baue Websites, die zu Ihrem Unternehmen passen und Ihre Kunden gezielt zur Anfrage, Buchung oder Kontaktaufnahme führen.',
+  lead: 'Ich bin Viktor, Webentwickler aus der Region Hannover. Ich baue Websites, die zu Ihrem Unternehmen passen und Ihre Kunden gezielt zur Anfrage, Buchung oder Kontaktaufnahme führen. Kein Baukasten, keine Vorlage: Ihre Website gibt es nur einmal, wie ein Anzug, der nur Ihnen passt.',
+  portrait: { alt: 'Viktor, Webentwickler bei VITOWORKS', caption: 'Viktor · Hannover' },
   offer: [
     { title: 'Individuelle Websites', text: 'Aufbau, Gestaltung und Texte richten sich nach Ihrem Betrieb und Ihren Kunden.' },
     { title: 'Modernes Webdesign', text: 'Klare Typografie, kurze Ladezeiten, am Smartphone so gut bedienbar wie am Schreibtisch.' },
@@ -197,6 +198,21 @@ export const result = {
     { title: 'SEO-optimiert', text: 'Technisch sauber aufgebaut, damit Suchmaschinen Ihre Inhalte verstehen können.' },
   ],
   services: ['Konzept', 'Design', 'Entwicklung', 'Hosting', 'Pflege'],
+}
+
+// How a project runs, between the offer and the request. The price line
+// is the one orientation the page gives; the exact price is in the offer.
+export const flow = {
+  label: 'Ablauf',
+  title: 'So entsteht Ihre Website.',
+  steps: [
+    { title: 'Gespräch', text: 'Wir sprechen über Ihren Betrieb, Ihre Kunden und das Ziel der Website. Kostenlos und unverbindlich.' },
+    { title: 'Konzept und Angebot', text: 'Sie erhalten Aufbau, Inhalte und einen festen Preis, bevor die Arbeit beginnt.' },
+    { title: 'Design und Entwicklung', text: 'Sie sehen die Seite früh im Entstehen und geben Rückmeldung, bis sie passt.' },
+    { title: 'Start und Pflege', text: 'Die Website geht online. Auf Wunsch übernehme ich Hosting und laufende Pflege.' },
+  ],
+  price: 'Projekte ab 999 €.',
+  priceNote: 'Den genauen Preis nennt Ihnen das Angebot, bevor es losgeht.',
 }
 
 export const request = {
@@ -234,10 +250,10 @@ export const request = {
 
 // Einzutragen: Viktor's real details. Empty = not shown.
 export const contact = {
-  email: '',
-  phone: '',
-  phoneHref: '',
-  region: '',
+  email: 'info@vitoworks.de',
+  phone: '+49 172 4756485',
+  phoneHref: '+491724756485',
+  region: 'Webdesign aus Hannover',
   imprintUrl: '',
   privacyUrl: '',
 }

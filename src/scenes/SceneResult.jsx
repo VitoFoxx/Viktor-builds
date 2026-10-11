@@ -1,5 +1,7 @@
 import ProjectRequest from '../components/ProjectRequest.jsx'
-import { result, request, contact, footer } from '../site/content.js'
+import { result, flow, request, contact, footer } from '../site/content.js'
+import portrait480 from '../assets/about/viktor-portrait-480.webp'
+import portrait960 from '../assets/about/viktor-portrait-960.webp'
 import './SceneResult.css'
 
 const Legal = ({ href, children }) => (href ? <a href={href}>{children}</a> : <span>{children}</span>)
@@ -33,7 +35,22 @@ export default function SceneResult() {
         <h2 id="result-title" className="result__title">
           {result.title[0]} <span>{result.title[1]}</span>
         </h2>
-        <p className="result__lead">{result.lead}</p>
+        <div className="result__about">
+          <figure className="result__portrait">
+            <img
+              src={portrait480}
+              srcSet={`${portrait480} 480w, ${portrait960} 960w`}
+              sizes="(max-width: 767.98px) 5.5rem, 9rem"
+              width="480"
+              height="600"
+              loading="lazy"
+              decoding="async"
+              alt={result.portrait.alt}
+            />
+            <figcaption>{result.portrait.caption}</figcaption>
+          </figure>
+          <p className="result__lead">{result.lead}</p>
+        </div>
       </header>
 
       <ol className="result__offer" id="leistungen">
@@ -56,6 +73,27 @@ export default function SceneResult() {
           </span>
         ))}
       </p>
+
+      <section className="flow" id="ablauf" aria-labelledby="flow-title">
+        <p className="flow__label">{flow.label}</p>
+        <h2 id="flow-title" className="flow__title">
+          {flow.title}
+        </h2>
+        <ol className="flow__steps">
+          {flow.steps.map((step, i) => (
+            <li className="flow__step" key={step.title}>
+              <span className="flow__n" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 className="flow__step-title">{step.title}</h3>
+              <p className="flow__text">{step.text}</p>
+            </li>
+          ))}
+        </ol>
+        <p className="flow__price">
+          <strong>{flow.price}</strong> {flow.priceNote}
+        </p>
+      </section>
 
       <div className="request" id="kontakt" aria-labelledby="request-title" role="region">
         <div className="request__intro">

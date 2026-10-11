@@ -164,7 +164,7 @@ export const hero = {
   claim: ['Websites', 'nach Maß.'],
   sub: 'Individuelle Websites für Unternehmen, die nicht nur gut aussehen, sondern Kunden zum Handeln bringen.',
   request: 'Projekt anfragen',
-  references: 'Referenzen',
+  references: 'Beispiele',
   example: 'Beispiele: Zahnarztpraxis · Barbershop · Metallbau',
   scroll: 'Scrollen, um mehr zu erfahren',
 }

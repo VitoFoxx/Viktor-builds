@@ -42,7 +42,7 @@ Cream paper, anthracite type, one dark warm red for the main action. Two columns
 - eyebrow: Webdesign und Entwicklung
 - claim: **WEBSITES NACH MASS.** (the full stop in red)
 - subline: *Individuelle Websites für Unternehmen, die nicht nur gut aussehen, sondern Kunden zum Handeln bringen.*
-- actions: **Projekt anfragen** (red, to the contact area) and **Referenzen** (to the first design study at full size)
+- actions: **Projekt anfragen** (red, to the contact area) and **Beispiele** (to the first design study at full size)
 - the website itself: the browser frame of Scene 02 with the Metallbau study inside, labelled "Beispiel: Website für einen Metallbaubetrieb"; on mobile it starts below the copy and runs off the bottom edge
 
 Scrolling: the copy leaves, the website glides to the centre, the paper turns anthracite and the finished page fades back to its empty frame. Scene 02 then builds it. Story: **Klarheit → Aufbau → Experience → Adapt → Business → Result**.

@@ -60,20 +60,24 @@ export default function SceneResult() {
         <h2 id="result-title" className="result__title">
           {result.title[0]} <span>{result.title[1]}</span>
         </h2>
-        <figure className="result__portrait">
-          <img
-            src={portrait480}
-            srcSet={`${portrait480} 480w, ${portrait960} 960w`}
-            sizes="(max-width: 767.98px) 5.5rem, 15rem"
-            width="480"
-            height="600"
-            loading="lazy"
-            decoding="async"
-            alt={result.portrait.alt}
-          />
-          <figcaption>{result.portrait.caption}</figcaption>
-        </figure>
-        <p className="result__lead">{result.lead}</p>
+        <div className="result__about">
+          <figure className="result__portrait">
+            <img
+              src={portrait480}
+              srcSet={`${portrait480} 480w, ${portrait960} 960w`}
+              sizes="(max-width: 767.98px) 8rem, 17rem"
+              width="480"
+              height="600"
+              loading="lazy"
+              decoding="async"
+              alt={result.portrait.alt}
+            />
+                    </figure>
+          <div className="result__bio">
+            <p className="result__name-line">{result.portrait.caption}</p>
+            <p className="result__lead">{result.lead}</p>
+          </div>
+        </div>
       </header>
 
       <ol className="result__offer" id="leistungen">

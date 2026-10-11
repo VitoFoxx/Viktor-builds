@@ -65,6 +65,8 @@
 
 .result__eyebrow,
 .offer__n,
+.flow__label,
+.flow__n,
 .result__services,
 .request__legend,
 .footer {
@@ -89,7 +91,7 @@
 }
 
 .result__lead {
-  max-width: 34em;
+  max-width: 40em;
   margin-top: clamp(1.5rem, 3.5svh, 2.25rem);
   font-size: clamp(1.0625rem, 1.35vw, 1.3125rem);
   line-height: 1.5;
@@ -178,6 +180,88 @@
 .result__services {
   margin-top: clamp(2.5rem, 6svh, 3.5rem);
   line-height: 2;
+}
+
+/* ── Ablauf ─────────────────────────────────────────────────── */
+
+.flow {
+  margin-top: clamp(6rem, 18svh, 11rem);
+  padding-top: clamp(2rem, 5svh, 3rem);
+  border-top: 1px solid var(--c-line-strong);
+}
+
+.flow__label {
+  color: var(--c-accent-light);
+}
+
+.flow__title {
+  margin-top: 1.25rem;
+  font-size: clamp(2.25rem, 4.6vw, 4.25rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+/* Four steps on one line, joined by a rule that runs through the
+   numbers, so the sequence reads left to right. */
+.flow__steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.5rem, 2.6vw, 2.5rem);
+  margin-top: clamp(3rem, 8svh, 5rem);
+  list-style: none;
+}
+
+.flow__step {
+  position: relative;
+}
+
+.flow__step::before {
+  content: '';
+  position: absolute;
+  top: 0.6em;
+  left: 2.5rem;
+  right: calc(-1 * clamp(1.5rem, 2.6vw, 2.5rem) + 0.75rem);
+  height: 1px;
+  background: var(--c-line-strong);
+}
+
+.flow__step:last-child::before {
+  right: 0;
+}
+
+.flow__n {
+  display: block;
+  color: var(--c-accent-light);
+  font-variant-numeric: tabular-nums;
+}
+
+.flow__step-title {
+  margin-top: 1.5rem;
+  font-size: clamp(1.0625rem, 1.3vw, 1.25rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.flow__text {
+  margin-top: 0.6rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--c-muted);
+  text-wrap: pretty;
+}
+
+.flow__price {
+  max-width: 40em;
+  margin-top: clamp(3rem, 7svh, 4.5rem);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--text-soft);
+}
+
+.flow__price strong {
+  font-weight: 500;
+  color: var(--c-fg);
 }
 
 /* ── Projekt anfragen ───────────────────────────────────────── */
@@ -481,6 +565,15 @@
   .request {
     grid-template-columns: minmax(0, 1fr);
   }
+
+  .flow__steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 2.5rem;
+  }
+
+  .flow__step:nth-child(2n)::before {
+    right: 0;
+  }
 }
 
 @media (max-width: 767.98px) {
@@ -491,6 +584,40 @@
 
   .offer__title {
     margin-top: 1rem;
+  }
+
+  /* Vertical on phones: the rule runs down beside the steps. */
+  .flow__steps {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 2rem;
+  }
+
+  .flow__step {
+    padding-left: 2.75rem;
+  }
+
+  .flow__step::before,
+  .flow__step:nth-child(2n)::before {
+    top: 1.6em;
+    bottom: calc(-2rem + 0.4em);
+    left: 0.55em;
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
+
+  .flow__step:last-child::before {
+    display: none;
+  }
+
+  .flow__n {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .flow__step-title {
+    margin-top: 0;
   }
 
   .request__options,

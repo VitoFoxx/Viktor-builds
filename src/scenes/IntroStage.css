@@ -186,7 +186,7 @@
   outline-offset: 4px;
 }
 
-/* The website's place, with room up and left for the two studies that fan
+/* The website's place, with room up and left for the three studies that fan
    out behind it (.hero-fan, offsets below). */
 .hero__showcase {
   display: grid;
@@ -197,19 +197,19 @@
 
 /* The slot for the website. Empty in the markup: the stage timeline lays
    the browser frame and the design study exactly into this box. Its
-   aspect ratio is the frame's. Moved down by one fan step, so the fan as
+   aspect ratio is the frame's. Moved down by half the fan's steps, so the fan as
    a whole sits centred. */
 .hero__visual {
   position: relative;
-  width: min(74%, calc(64svh * 1.6 * 0.74));
+  width: min(65%, calc(64svh * 1.6 * 0.65));
   aspect-ratio: 16 / 10;
-  translate: 0 23%;
+  translate: 0 34.5%;
 }
 
 .hero__example {
   position: absolute;
   top: 100%;
-  left: 0;
+  right: 0;
   margin-top: 1rem;
   font-size: var(--fs-label);
   font-weight: 500;
@@ -408,8 +408,8 @@
   }
 
   .hero__visual {
-    width: min(69%, calc(52svh * 1.6), calc((100svh - 34rem) * 1.6));
-    translate: 0 6%;
+    width: min(60%, calc(45svh * 1.6), calc((100svh - 34rem) * 1.6 * 0.87));
+    translate: 0 9%;
   }
 
   .hero__example {
@@ -526,8 +526,8 @@
   }
 
   .hero__visual {
-    width: min(calc(100cqw / 1.76), calc(100cqh * 0.6 / 1.08));
-    translate: 0 4%;
+    width: min(calc(100cqw / 2.14), calc(100cqh * 0.6 / 1.12));
+    translate: 0 6%;
     align-self: start;
   }
 
@@ -572,7 +572,7 @@
   }
 }
 
-/* ── The fan: two more studies behind the opening's website ────
+/* ── The fan: three more studies behind the opening's website ────
    Inside the frame wrap, so the opening's slot transform places them with
    the website. Each card is the frame's size, moved up and left by `--k`
    steps; --fan-in (load intro) and --fan-out (first scroll) scale the

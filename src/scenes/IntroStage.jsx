@@ -9,6 +9,12 @@ import SceneAdapt from './SceneAdapt.jsx'
 import SceneBusiness from './SceneBusiness.jsx'
 import './IntroStage.css'
 
+// The scrollbar's tone follows the page: dark on the opening's paper,
+// light once it has turned anthracite (base.css).
+const setTone = (dark) => {
+  document.documentElement.dataset.tone = dark ? 'dark' : 'light'
+}
+
 export default function IntroStage() {
   const stage = useRef(null)
 
@@ -27,13 +33,25 @@ export default function IntroStage() {
         if (reduceMotion) {
           carriedProgress = 0
           createReducedMotion(q)
+          // Static sections: dark from the end of the opening on.
+          ScrollTrigger.create({
+            trigger: q('.scene--void')[0],
+            start: 'bottom center',
+            onEnter: () => setTone(true),
+            onLeaveBack: () => setTone(false),
+          })
           return
         }
 
         createIntroTimeline(q)
         const tl = createStageTimeline(stage.current, q, {
           isDesktop,
-          onUpdate: (self) => (carriedProgress = self.progress),
+          onUpdate: (self) => {
+            carriedProgress = self.progress
+            // Halfway through the paper turning anthracite ('plan', 1 s fade).
+            const a = self.animation
+            setTone(self.progress * a.duration() >= a.labels.plan + 0.5)
+          },
         })
         const st = tl.scrollTrigger
 

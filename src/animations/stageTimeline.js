@@ -50,7 +50,7 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
     y: () => rect().y + slot.offsetHeight / 2 - stage.offsetHeight / 2,
   }
   const GLIDE = { duration: 1.8, ease: 'power2.inOut' }
-  const GLIDE_AT = 0.15
+  const GLIDE_AT = 0 // moves with the very first scroll
   // The opening shows the site's first screen whole: its hero is as tall as
   // the frame's page area shows, so nothing is cut at the frame's edge.
   // Back to one full screen once the page is hidden (Scene 02 on).

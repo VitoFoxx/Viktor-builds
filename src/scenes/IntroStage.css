@@ -262,6 +262,7 @@
   font-weight: 600;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
+  text-wrap: balance;
   color: var(--c-ink);
 }
 

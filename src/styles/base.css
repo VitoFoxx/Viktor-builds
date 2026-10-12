@@ -60,8 +60,42 @@
 }
 
 html {
+  /* Scrollbar: dark on the opening's paper, light once the page turns
+     anthracite. IntroStage.jsx sets data-tone as the visitor scrolls. */
+  --scrollbar-thumb: var(--c-ink);
+  --scrollbar-track: var(--c-paper);
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+}
+
+html[data-tone='dark'] {
+  --scrollbar-thumb: var(--c-fg);
+  --scrollbar-track: var(--c-bg);
+}
+
+/* A classic scrollbar, so it stays visible (overlay scrollbars hide
+   while idle). Chromium and Safari. */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  min-height: 3rem;
+}
+
+/* Firefox only: in Chromium, scrollbar-color would switch off the rules above. */
+@supports (-moz-appearance: none) {
+  html {
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
 }
 
 body {

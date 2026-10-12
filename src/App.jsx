@@ -1,4 +1,5 @@
 import IntroStage from './scenes/IntroStage.jsx'
+import ScrollNudge from './components/ScrollNudge.jsx'
 import SceneResult, { SiteFooter } from './scenes/SceneResult.jsx'
 
 export default function App() {
@@ -9,6 +10,7 @@ export default function App() {
         <SceneResult />
       </main>
       <SiteFooter />
+      <ScrollNudge />
     </>
   )
 }

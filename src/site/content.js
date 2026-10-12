@@ -9,6 +9,7 @@
 export const study = {
   trade: 'Metallbau',
   context: 'Website 01 / Metallbau',
+  label: 'Beispiel-Website · Metallbau',
   nav: ['Projekte', 'Leistungen', 'Kontakt'],
   navAction: 'Anfrage',
   eyebrow: 'Metallbau · Hannover',

@@ -9,6 +9,11 @@
      Scene 04, where ADAPT takes over (read by experienceTimeline.js). */
   --frame-w: min(80vw, 1120px, calc((100svh - 17rem) * 1.6));
   --exit-scale: 0.75;
+  /* Bands of VITOWORKS around the study while it plays (Scene 03 / 04,
+     read by portalTimeline.js). Pixels, so the script can read them. */
+  --demo-top: 112px;
+  --demo-side: 160px;
+  --demo-bottom: 88px;
 
   position: relative;
 }
@@ -392,6 +397,10 @@
 /* ── Medium widths: copy above, website below ───────────────── */
 
 @media (min-width: 768px) and (max-width: 1099.98px) {
+  .stage {
+    --demo-side: 64px;
+  }
+
   .scene.scene--void {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto auto 1fr;
@@ -502,6 +511,9 @@
   .stage {
     --frame-w: min(84vw, 400px, calc((100svh - 15rem) * 0.6));
     --exit-scale: 0.78;
+    --demo-top: 76px;
+    --demo-side: 28px;
+    --demo-bottom: 56px;
   }
 
   .interface__frame-wrap {

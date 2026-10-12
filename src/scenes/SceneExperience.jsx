@@ -30,6 +30,12 @@ export default function SceneExperience() {
         </span>
       </h2>
 
+      {/* Above the study while it plays: what the visitor is looking at.
+          The heading says the same for assistive technology. */}
+      <p className="experience__label" aria-hidden="true">
+        {study.label}
+      </p>
+
       <div
         className="portal__clip site"
         data-brand="metallbau"

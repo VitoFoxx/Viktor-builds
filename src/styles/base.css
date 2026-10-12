@@ -60,15 +60,41 @@
 }
 
 html {
-  /* The native scrollbar gives way to the scroll rail (ScrollRail.jsx),
-     which is always visible. */
-  scrollbar-width: none;
+  /* Scrollbar: dark on the opening's paper, light once the page turns
+     anthracite. IntroStage.jsx sets data-tone as the visitor scrolls. */
+  --scrollbar-thumb: rgb(28 27 25 / 0.55);
+  --scrollbar-track: var(--c-paper);
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
+html[data-tone='dark'] {
+  --scrollbar-thumb: rgb(236 230 219 / 0.5);
+  --scrollbar-track: var(--c-bg);
+}
+
+/* A classic scrollbar, so it stays visible (overlay scrollbars hide
+   while idle). Chromium and Safari. */
 ::-webkit-scrollbar {
-  display: none;
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  border-radius: 999px;
+}
+
+/* Firefox only: in Chromium, scrollbar-color would switch off the rules above. */
+@supports (-moz-appearance: none) {
+  html {
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
 }
 
 body {

@@ -7,8 +7,8 @@ import { portalGeometry } from './portalTimeline.js'
  *
  * Labels (timeline seconds, continuing portalTimeline.js):
  *   demo     13.7  the visitor "scrolls" through the study
- *   exit     16.2  (mobile 17.5) the study shrinks back into the frame,
- *                  chrome and stage return
+ *   exit     16.2  (mobile 17.5) the study shrinks back to --exit-scale,
+ *                  its label leaves
  *   handoff  17.8  (mobile 19.1) no rest: ADAPT (Scene 05, adaptTimeline.js)
  *                  starts here
  *
@@ -17,8 +17,9 @@ import { portalGeometry } from './portalTimeline.js'
  * more time because its page is taller relative to the screen and its pace
  * (vh per second) is lower.
  *
- * The exit is the inverse of `enter`, aimed at a centred frame scaled to
- * --exit-scale instead of 1. Clip, content and frame stay coupled.
+ * The frame never leaves: the study runs inside it (portalTimeline.js, `fit`).
+ * The exit shrinks it to a centred frame at --exit-scale. Clip, content and
+ * frame stay coupled.
  */
 export function addExperience(tl, stage, q, { isDesktop }) {
   const clip = q('.portal__clip')[0]
@@ -28,7 +29,10 @@ export function addExperience(tl, stage, q, { isDesktop }) {
 
   // Shared with the CSS (IntroStage.css), which sizes the frame.
   const S = parseFloat(getComputedStyle(stage).getPropertyValue('--exit-scale')) || 0.75
-  const pageEnd = () => -Math.max(0, demo.offsetHeight - stage.offsetHeight)
+  // The frame's page area shows this much of the page (in its own pixels).
+  const page = q('.frame__page')[0]
+  const shown = () => (page.offsetHeight / page.offsetWidth) * stage.offsetWidth
+  const pageEnd = () => -Math.max(0, demo.offsetHeight - shown())
   // Page movement and when its rows come into view, as fractions of it.
   const T = isDesktop
     ? { scroll: 2.1, caption: 0.62, details: 0.68, stagger: 0.12 }
@@ -69,7 +73,7 @@ export function addExperience(tl, stage, q, { isDesktop }) {
     // Back to the top of the page while it recedes into the frame.
     .to(demo, { y: 0, duration: 1.3, ease: 'power2.inOut' }, 'exit')
     .to(q('.site-hero__img'), { yPercent: 0, duration: 1.3, ease: 'power2.inOut' }, 'exit')
-    .set(wrap, { autoAlpha: 1 }, 'exit')
+    .to(q('.experience__label'), { autoAlpha: 0, y: '-=8', duration: 0.6, ease: 'power1.in' }, 'exit')
     .to(clip, { clipPath: clipAt(S), ...EXIT }, 'exit')
     .to(content, { ...contentAt(S), ...EXIT }, 'exit')
     .to(

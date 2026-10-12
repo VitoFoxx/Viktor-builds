@@ -4,7 +4,8 @@
  *
  * Labels (timeline seconds, continuing stageTimeline.js):
  *   resolve  7.6   inside the frame, the abstract page becomes the real site
- *   enter    9.2   the view moves into the frame until the site fills the screen
+ *   enter    9.2   the frame grows until the site fills the screen, but for
+ *                 a band of VITOWORKS around it with the study's label
  *   arrive  11.4   short rest, then Scene 04 (experienceTimeline.js)
  *
  * The site layer is laid out at full viewport size. At the start it is
@@ -47,24 +48,41 @@ export function portalGeometry(stage, q) {
     return { x: () => at().left, y: () => at().top, scale: () => at().width / at().W }
   }
 
-  return { wrap, area, clipAt, contentAt }
+  // The study's stage (Scene 03 / 04): the frame as large as fits, but
+  // never the full screen. A band of VITOWORKS stays around it, the label
+  // on top (--demo-top / --demo-side / --demo-bottom, IntroStage.css), so
+  // the study never reads as a page of its own.
+  const inset = (name) => parseFloat(getComputedStyle(stage).getPropertyValue(name)) || 0
+  const fit = () => {
+    const top = inset('--demo-top')
+    const bottom = inset('--demo-bottom')
+    const s = Math.min(
+      (stage.offsetWidth - 2 * inset('--demo-side')) / wrap.offsetWidth,
+      (stage.offsetHeight - top - bottom) / wrap.offsetHeight,
+    )
+    // Centred in the room between the bands, as a move of the centred frame.
+    const dy = top + (stage.offsetHeight - top - bottom) / 2 - stage.offsetHeight / 2
+    // The label's offset from its band, so it sits right above the frame
+    // where the frame is narrower than the room (mobile).
+    const labelY = (stage.offsetHeight - s * wrap.offsetHeight) / 2 + dy - top
+    return { s, dy, labelY }
+  }
+  // The same, as the frame's origin-'0 0' transform (scale about its centre, then move).
+  const wrapAt = (s = 1, dx = 0, dy = 0) => ({
+    scale: () => read(s),
+    x: () => read(dx) + ((1 - read(s)) * wrap.offsetWidth) / 2,
+    y: () => read(dy) + ((1 - read(s)) * wrap.offsetHeight) / 2,
+  })
+
+  return { wrap, area, clipAt, contentAt, fit, wrapAt }
 }
 
 export function addPortal(tl, stage, q) {
   const clip = q('.portal__clip')[0]
   const content = q('.portal__content')[0]
-  const { wrap, area, clipAt, contentAt } = portalGeometry(stage, q)
-
-  // Origin-'0 0' transform that maps the frame's page area onto the full stage.
-  const frameTarget = (axis) => () => {
-    const a = area()
-    const k = a.W / a.width
-    if (axis === 'scale') return k
-    const pos = axis === 'x' ? a.left : a.top
-    const start = axis === 'x' ? (a.W - wrap.offsetWidth) / 2 : (a.H - wrap.offsetHeight) / 2
-    return -start - k * (pos - start)
-  }
-  const CLIP_FULL = 'inset(0px 0px 0px 0px round 0px 0px 0px 0px)'
+  const { wrap, clipAt, contentAt, fit, wrapAt } = portalGeometry(stage, q)
+  const fitS = () => fit().s
+  const fitY = () => fit().dy
 
   /* ── resolve ──────────────────────────────────────────── */
   // "Lights on": the light page fades in over the dark mock first, then the
@@ -84,25 +102,31 @@ export function addPortal(tl, stage, q) {
     .to(q('.site-hero__img .site-photo'), { scale: 1, duration: 1.2, ease: 'power2.out' }, 'resolve+=0.55')
 
   /* ── enter ────────────────────────────────────────────── */
+  // The frame grows to the study's stage (see `fit`), chrome included:
+  // it stays a website shown by VITOWORKS, never a new window.
   const ENTER = { duration: 2.2, ease: 'power2.inOut' }
 
   tl.addLabel('enter', 'resolve+=1.6')
-    .fromTo(clip, { clipPath: clipAt(1) }, { clipPath: CLIP_FULL, ...ENTER, immediateRender: false }, 'enter')
+    .fromTo(clip, { clipPath: clipAt(1) }, { clipPath: clipAt(fitS, 0, fitY), ...ENTER, immediateRender: false }, 'enter')
     .fromTo(
       content,
       { ...contentAt(1), transformOrigin: '0 0' },
-      { x: 0, y: 0, scale: 1, ...ENTER, immediateRender: false },
+      { ...contentAt(fitS, 0, fitY), ...ENTER, immediateRender: false },
       'enter',
     )
-    // The frame grows with the page area, so its chrome stays attached
-    // above the clip's top edge and slides out of view.
     .set(wrap, { transformOrigin: '0 0' }, 'enter')
-    .to(wrap, { x: frameTarget('x'), y: frameTarget('y'), scale: frameTarget('scale'), ...ENTER }, 'enter')
+    .to(wrap, { ...wrapAt(fitS, 0, fitY), ...ENTER }, 'enter')
     .to(q('.interface__message'), { y: () => -stage.offsetHeight * 0.22, autoAlpha: 0, duration: 1.3, ease: 'power2.in' }, 'enter')
+    // The study's label replaces the headline in the top band.
+    .fromTo(
+      q('.experience__label'),
+      { autoAlpha: 0, y: () => fit().labelY + 8 },
+      { autoAlpha: 1, y: () => fit().labelY, duration: 0.7, ease: 'power2.out' },
+      'enter+=1.2',
+    )
 
   /* ── arrive ───────────────────────────────────────────── */
   tl.addLabel('arrive', 'enter+=2.2')
-    .set(wrap, { autoAlpha: 0 }, 'arrive')
     .to({}, { duration: 0.6 }, 'arrive')
 }
 

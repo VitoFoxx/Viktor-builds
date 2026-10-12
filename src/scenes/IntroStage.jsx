@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { gsap, ScrollTrigger, useGSAP } from '../animations/gsap.js'
 import { MEDIA, createStageTimeline, createReducedMotion } from '../animations/stageTimeline.js'
 import { createIntroTimeline } from '../animations/introTimeline.js'
+import { registerStage } from '../animations/chapters.js'
 import SceneVoid from './SceneVoid.jsx'
 import SceneInterface from './SceneInterface.jsx'
 import SceneExperience from './SceneExperience.jsx'
@@ -9,8 +10,8 @@ import SceneAdapt from './SceneAdapt.jsx'
 import SceneBusiness from './SceneBusiness.jsx'
 import './IntroStage.css'
 
-// The scrollbar's tone follows the page: dark on the opening's paper,
-// light once it has turned anthracite (base.css).
+// The scroll rail's tone follows the page: dark on the opening's paper,
+// light once it has turned anthracite (ScrollRail.css).
 const setTone = (dark) => {
   document.documentElement.dataset.tone = dark ? 'dark' : 'light'
 }
@@ -54,6 +55,7 @@ export default function IntroStage() {
           },
         })
         const st = tl.scrollTrigger
+        registerStage(st)
 
         const jumpTo = (progress) => {
           st.scroll(st.start + progress * (st.end - st.start))
@@ -86,6 +88,7 @@ export default function IntroStage() {
         ScrollTrigger.addEventListener('refresh', restore)
 
         return () => {
+          registerStage(null)
           cancelAnimationFrame(raf)
           refs?.removeEventListener('click', toReferences)
           ScrollTrigger.removeEventListener('refreshInit', keep)

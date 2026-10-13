@@ -49,6 +49,33 @@ html[data-tone='dark'] .nudge__arrow {
   stroke: var(--c-accent-light);
 }
 
+/* Desktop: beside the scrollbar thumb, the arrow pointing down its track.
+   A small notch on the right edge ties the label to the thumb. */
+.nudge[data-at-thumb] {
+  left: auto;
+  right: 1.125rem;
+  bottom: auto;
+  top: var(--thumb-y);
+  translate: -0.5rem -50%;
+}
+
+.nudge[data-at-thumb][data-shown] {
+  translate: 0 -50%;
+}
+
+.nudge[data-at-thumb]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -0.375rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-top: inherit;
+  border-right: inherit;
+  background: inherit;
+  transform: translateY(-50%) rotate(45deg);
+}
+
 /* Phones: above the context line at the bottom edge. */
 @media (max-width: 767.98px) {
   .nudge {

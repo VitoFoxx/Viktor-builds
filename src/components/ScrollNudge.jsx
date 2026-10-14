@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { hero } from '../site/content.js'
 import './ScrollNudge.css'
 
-const PAUSE = 3000
+const PAUSE = 2000
 const THUMB_MIN = 48 // ::-webkit-scrollbar-thumb min-height (base.css)
 
 /**

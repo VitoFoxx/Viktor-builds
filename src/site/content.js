@@ -167,7 +167,7 @@ export const hero = {
   request: 'Projekt anfragen',
   references: 'Beispiele',
   example: 'Beispiele: Zahnarztpraxis · Barbershop · Restaurant · Metallbau',
-  scroll: 'Scrollen Sie: Hier entsteht eine Website',
+  scroll: 'Scrollen und Erleben: Hier könnte Ihre Website entstehen!',
   // Shown when a visitor pauses inside the scroll story (ScrollNudge.jsx).
   nudge: 'Weiterscrollen',
 }

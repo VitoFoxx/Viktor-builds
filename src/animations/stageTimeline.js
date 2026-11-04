@@ -1,3 +1,4 @@
+import { LINE_IN, PART_IN, PART_OUT } from './flow.js'
 import { gsap } from './gsap.js'
 import { addPortal, portalGeometry } from './portalTimeline.js'
 import { addExperience } from './experienceTimeline.js'
@@ -105,10 +106,10 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
   /* ── hero ─────────────────────────────────────────────── */
 
   tl.addLabel('hero', 0)
-    .to(q('.scroll-hint'), { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, 'hero')
+    .to(q('.scroll-hint'), { autoAlpha: 0, y: PART_OUT, duration: 0.3, ease: 'power1.in' }, 'hero')
     .to(q('.hero__bar'), { autoAlpha: 0, y: -16, duration: 0.7, ease: 'power1.in' }, 'hero')
     .to(q('.hero__copy'), { autoAlpha: 0, y: () => -window.innerHeight * 0.08, duration: 0.9, ease: 'power2.in' }, 'hero')
-    .to(slot, { autoAlpha: 0, duration: 0.4, ease: 'power1.in' }, 'hero')
+    .to(slot, { autoAlpha: 0, y: PART_OUT, duration: 0.4, ease: 'power1.in' }, 'hero')
     // The two studies behind the website step aside and leave it alone.
     .to(q('.hero-fan'), { '--fan-out': 0.5, autoAlpha: 0, duration: 0.6, ease: 'power1.in' }, 'hero')
     // Frame, clip and content share one ease, so they stay locked together.
@@ -132,16 +133,19 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
   tl.addLabel('plan', 1.7)
     .to(stage, { backgroundColor: bg, duration: 1.0, ease: 'power1.inOut' }, 'plan')
     .to(site, { autoAlpha: 0, duration: 0.7, ease: 'power1.inOut' }, 'plan')
+    // The finished page goes on upwards as it fades, and waits below.
+    .to(q('.site-demo'), { y: () => PART_OUT() * 2, duration: 0.7, ease: 'power1.in' }, 'plan')
+    .set(q('.site-demo'), { y: 0 }, 'plan+=0.7')
     .to(q('.frame-shadow'), { autoAlpha: 0, duration: 0.6, ease: 'power1.inOut' }, 'plan')
     // Hidden, so Scene 03 can set it into the grid again (portalTimeline.js).
     .set(q('.site-hero .site-line__inner'), { yPercent: 110 }, 'plan+=0.7')
-    .set(q('.site-hero [data-reveal]'), { autoAlpha: 0, y: 10 }, 'plan+=0.7')
-    .set(q('.site-hero__media'), { autoAlpha: 0 }, 'plan+=0.7')
+    .set(q('.site-hero [data-reveal]'), { autoAlpha: 0, y: PART_IN }, 'plan+=0.7')
+    .set(q('.site-hero__media'), { autoAlpha: 0, y: () => PART_IN() * 2 }, 'plan+=0.7')
     .set(q('.site-hero__img .site-photo'), { scale: 1.08 }, 'plan+=0.7')
     .fromTo(
       q('.interface__message-a'),
-      { autoAlpha: 0, y: 10 },
-      { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out' },
+      { autoAlpha: 0, y: LINE_IN },
+      { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power3.out' },
       'plan+=0.5',
     )
 
@@ -149,14 +153,14 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
   tl.addLabel('build', 2.4)
     .fromTo(
       q('.mock-nav__mark, .mock-bar--logo, .mock-nav__link, .mock-nav__burger'),
-      { autoAlpha: 0, y: -6 },
-      { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.07, ease: 'power2.out' },
+      { autoAlpha: 0, y: PART_IN },
+      { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.07, ease: 'power3.out' },
       'build',
     )
     .fromTo(
       q('.mock-bar--eyebrow'),
-      { scaleX: 0 },
-      { scaleX: 1, duration: 0.5, ease: 'power2.out' },
+      { scaleX: 0, y: PART_IN },
+      { scaleX: 1, y: 0, duration: 0.6, ease: 'power3.out' },
       'build+=0.4',
     )
     .fromTo(
@@ -167,8 +171,8 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
     )
     .fromTo(
       q('.mock-bar--text'),
-      { scaleX: 0 },
-      { scaleX: 1, duration: 0.6, stagger: 0.1, ease: 'power2.out' },
+      { scaleX: 0, y: PART_IN },
+      { scaleX: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power3.out' },
       'build+=1.0',
     )
     .fromTo(
@@ -185,20 +189,20 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
     )
     .fromTo(
       q('.mock-btn'),
-      { autoAlpha: 0, y: 8 },
-      { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out' },
+      { autoAlpha: 0, y: PART_IN },
+      { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out' },
       'build+=1.8',
     )
     .fromTo(
       q('.mock-col__rule'),
-      { scaleX: 0 },
-      { scaleX: 1, duration: 0.7, stagger: 0.12, ease: 'power2.inOut' },
+      { scaleX: 0, y: PART_IN },
+      { scaleX: 1, y: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out' },
       'build+=2.3',
     )
     .fromTo(
       q('.mock-bar--col-title, .mock-bar--col-text'),
-      { autoAlpha: 0, y: 6 },
-      { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.06, ease: 'power2.out' },
+      { autoAlpha: 0, y: PART_IN },
+      { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.06, ease: 'power3.out' },
       'build+=2.6',
     )
 
@@ -206,8 +210,8 @@ export function createStageTimeline(stage, q, { isDesktop, onUpdate }) {
   tl.addLabel('experience', 6.0)
     .fromTo(
       q('.interface__message-b'),
-      { autoAlpha: 0, y: 8 },
-      { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power2.out' },
+      { autoAlpha: 0, y: LINE_IN },
+      { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power3.out' },
       'experience',
     )
     // Hold the finished interface for a moment before Scene 03 begins.

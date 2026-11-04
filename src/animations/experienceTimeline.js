@@ -1,3 +1,4 @@
+import { PART_IN, PART_OUT } from './flow.js'
 import { portalGeometry } from './portalTimeline.js'
 
 /**
@@ -69,11 +70,19 @@ export function addExperience(tl, stage, q, { isDesktop }) {
   const EXIT = { duration: 1.6, ease: 'power2.inOut' }
 
   // A short hold on the last row before the page leaves.
+  // Scrolling on, the page goes on upwards and out; its top comes up again
+  // from below while it recedes into the frame (never back down: the story
+  // only flows one way, see flow.js).
   tl.addLabel('exit', `demo+=${T.scroll + 0.4}`)
-    // Back to the top of the page while it recedes into the frame.
-    .to(demo, { y: 0, duration: 1.3, ease: 'power2.inOut' }, 'exit')
-    .to(q('.site-hero__img'), { yPercent: 0, duration: 1.3, ease: 'power2.inOut' }, 'exit')
-    .to(q('.experience__label'), { autoAlpha: 0, y: '-=8', duration: 0.6, ease: 'power1.in' }, 'exit')
+    .to(demo, { y: () => pageEnd() + PART_OUT() * 3, autoAlpha: 0, duration: 0.5, ease: 'power2.in' }, 'exit')
+    .set(q('.site-hero__img'), { yPercent: 0 }, 'exit+=0.5')
+    .fromTo(
+      demo,
+      { y: () => PART_IN() * 3, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: 0.9, ease: 'power3.out', immediateRender: false },
+      'exit+=0.5',
+    )
+    .to(q('.experience__label'), { autoAlpha: 0, y: () => `-=${PART_IN()}`, duration: 0.6, ease: 'power1.in' }, 'exit')
     .to(clip, { clipPath: clipAt(S), ...EXIT }, 'exit')
     .to(content, { ...contentAt(S), ...EXIT }, 'exit')
     .to(

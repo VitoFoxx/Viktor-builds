@@ -1,6 +1,7 @@
 import { gsap } from './gsap.js'
 import { portalGeometry } from './portalTimeline.js'
 import { boxIn } from './adaptTimeline.js'
+import { LINE_IN, LINE_OUT, PART_IN, PART_OUT } from './flow.js'
 
 const MORPH = { duration: 1.1, ease: 'power3.inOut' }
 const PUSH = { duration: 0.55, ease: 'power3.inOut' }
@@ -21,7 +22,7 @@ const focusOf = (img) => {
  *                     frame becomes a phone and the practice page reflows
  *                     into it, every element from its desktop position
  *   evening     1.6   DI 21:47, the site reads "closed" … THAN LOOK GOOD.
- *   request     2.6   three short steps, each pushed in from the right
+ *   request     2.6   three short steps, each pushed up from below
  *   sent        5.75  the request in four lines
  *   morning     7.05  MI 07:30, the phone is put away, its four lines
  *                     move into the practice's entry
@@ -237,11 +238,11 @@ export function addBusiness(tl, stage, q, { isDesktop }) {
 
   tl.addLabel('business', 'adaptEnd')
     .set(layer, { autoAlpha: 1 }, 'business')
-    .to(q('.adapt__message'), { autoAlpha: 0, y: -10, duration: 0.45, ease: 'power1.in' }, 'business')
+    .to(q('.adapt__message'), { autoAlpha: 0, y: LINE_OUT, duration: 0.45, ease: 'power1.in' }, 'business')
     .fromTo(
       q('.business__message-a'),
-      { autoAlpha: 0, y: 10 },
-      { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out' },
+      { autoAlpha: 0, y: LINE_IN },
+      { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out' },
       'business+=0.3',
     )
 
@@ -250,7 +251,7 @@ export function addBusiness(tl, stage, q, { isDesktop }) {
   // What a phone has no room for leaves the desktop page first.
   tl.to(
     [...page.querySelectorAll('.d-nav__links, .d-status__emergency, .d-hours'), ...q('.frame__dot')],
-    { autoAlpha: 0, duration: 0.3, ease: 'power1.in' },
+    { autoAlpha: 0, y: PART_OUT, duration: 0.3, ease: 'power1.in' },
     'business+=0.15',
   )
 
@@ -265,8 +266,8 @@ export function addBusiness(tl, stage, q, { isDesktop }) {
   // What only the phone has.
   tl.fromTo(
     phoneAll('.pd-burger, .device__clock'),
-    { autoAlpha: 0 },
-    { autoAlpha: 1, duration: 0.35, ease: 'power1.out' },
+    { autoAlpha: 0, y: PART_IN },
+    { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power3.out' },
     'reflow+=0.85',
   )
 
@@ -282,8 +283,8 @@ export function addBusiness(tl, stage, q, { isDesktop }) {
   lineIn(q('.time__mark--evening .time__mask > *'), 'evening')
   tl.fromTo(
     q('.business__message-b'),
-    { autoAlpha: 0, y: 10 },
-    { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out' },
+    { autoAlpha: 0, y: LINE_IN },
+    { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out' },
     'evening+=0.1',
   )
   // The site itself knows the practice is closed.
@@ -300,10 +301,12 @@ export function addBusiness(tl, stage, q, { isDesktop }) {
     tl
       .to(phone('.pd-bar__press'), { autoAlpha: 1, duration: 0.08, ease: 'none' }, at)
       .to(phone('.pd-bar__press'), { autoAlpha: 0, duration: 0.25, ease: 'power1.out' }, at + 0.08)
+  // Each step comes up from below and pushes the last one out at the top,
+  // like the page scrolling on (flow.js).
   const push = (i, at) => {
     tl.set(pages[i], { autoAlpha: 1 }, at)
-      .fromTo(pages[i], { xPercent: 100 }, { xPercent: 0, ...PUSH }, at)
-      .to(pages[i - 1], { xPercent: -100, ...PUSH }, at)
+      .fromTo(pages[i], { yPercent: 100 }, { yPercent: 0, ...PUSH }, at)
+      .to(pages[i - 1], { yPercent: -100, ...PUSH }, at)
       .set(pages[i - 1], { autoAlpha: 0 }, at + PUSH.duration)
     if (i < labels.length) {
       lineOut(labels[i - 1], at)
@@ -322,6 +325,9 @@ export function addBusiness(tl, stage, q, { isDesktop }) {
   const STEP = 1.0
   const t0 = tl.labels.evening + 1.0
   tl.addLabel('request', t0)
+  // The pages move under the navigation, never over it (the reflow, done
+  // by now, needs them unclipped).
+  tl.set(phone('.pd-pages'), { clipPath: 'inset(0% 0% 0% 0%)' }, t0)
 
   // The appointment bar → 1 of 3: the concern.
   press(t0)
@@ -356,15 +362,15 @@ export function addBusiness(tl, stage, q, { isDesktop }) {
   press(t3)
   tl.addLabel('sent', t3 + 0.1)
   // While the request is open, the visitor may answer it: one quiet line.
-  tl.fromTo(q('.time__hint'), { autoAlpha: 0, y: 6 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: 'power2.out' }, t0 + 0.5)
-    .to(q('.time__hint'), { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, t3)
+  tl.fromTo(q('.time__hint'), { autoAlpha: 0, y: PART_IN }, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power3.out' }, t0 + 0.5)
+    .to(q('.time__hint'), { autoAlpha: 0, y: PART_OUT, duration: 0.3, ease: 'power1.in' }, t3)
   push(4, t3 + 0.1)
   tl.to(phone('.pd-bar'), { yPercent: 100, duration: 0.45, ease: 'power2.in' }, t3 + 0.15)
     .to(progress, { autoAlpha: 0, duration: 0.3 }, t3 + 0.35)
     .fromTo(
       phoneAll('.pd-sent__line, .pd-sent__text, .pd-summary__row'),
-      { autoAlpha: 0, y: 8 },
-      { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.07, ease: 'power2.out' },
+      { autoAlpha: 0, y: PART_IN },
+      { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.07, ease: 'power3.out' },
       t3 + 0.45,
     )
 
@@ -412,8 +418,8 @@ export function addBusiness(tl, stage, q, { isDesktop }) {
   })
   tl.fromTo(
     q('.entry__head, .entry__label'),
-    { autoAlpha: 0, y: 6 },
-    { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out' },
+    { autoAlpha: 0, y: PART_IN },
+    { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power3.out' },
     'morning+=0.55',
   )
 

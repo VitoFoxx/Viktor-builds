@@ -612,24 +612,73 @@
     inset: 0;
   }
 
+  /* --mx / --my: the pointer, -1 … 1 across the screen (IntroStage.jsx,
+     smoothed by GSAP). The deeper a card, the further it shifts against
+     the pointer: the fan reads as layers. --lift: the card under the
+     pointer moves a little further out of the stack. */
   .hero-fan__card {
     --step: calc(var(--k) * (var(--fan-in) + var(--fan-out)) * -1);
+    --lift: 0;
     display: block;
     position: absolute;
     inset: 0;
-    translate: calc(var(--step) * var(--fan-dx)) calc(var(--step) * var(--fan-dy));
+    translate:
+      calc(var(--step) * var(--fan-dx) - var(--mx, 0) * var(--k) * 7px - var(--lift) * 1.6%)
+      calc(var(--step) * var(--fan-dy) - var(--my, 0) * var(--k) * 5px - var(--lift) * 2.4%);
     border-radius: var(--radius-frame);
     box-shadow:
       0 2px 4px rgb(28 27 25 / 0.06),
       0 24px 48px -20px rgb(28 27 25 / 0.32);
+    cursor: pointer;
+    transition: --lift 0.45s var(--ease-out);
+    -webkit-tap-highlight-color: transparent;
   }
 
   .hero-fan__card img {
     display: block;
     width: 100%;
     height: 100%;
+    border-radius: inherit;
     object-fit: cover;
   }
+
+  /* Which website a card is, on hover: in the corner the fan leaves free. */
+  .hero-fan__tag {
+    position: absolute;
+    left: 0.75rem;
+    top: 0.625rem;
+    padding: 0.4em 0.7em;
+    font-size: var(--fs-label);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-paper);
+    background: var(--c-ink);
+    border-radius: 3px;
+    opacity: 0;
+    translate: 0 4px;
+    transition:
+      opacity 0.3s var(--ease-out),
+      translate 0.3s var(--ease-out);
+    pointer-events: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .hero-fan__card:hover {
+      --lift: 1;
+    }
+
+    .hero-fan__card:hover .hero-fan__tag {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+}
+
+@property --lift {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
 }
 
 @media (min-width: 768px) and (max-width: 1099.98px) and (prefers-reduced-motion: no-preference) {

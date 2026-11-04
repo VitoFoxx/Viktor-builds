@@ -61,9 +61,13 @@
     display: block;
     padding: 0;
     visibility: hidden;
+    /* Only the study itself (inside its clip) takes the pointer, so the
+       opening's fan beside it stays clickable. */
+    pointer-events: none;
   }
 
   .scene--site .portal__clip {
+    pointer-events: auto;
     position: absolute;
     inset: 0;
     width: auto;

@@ -378,6 +378,8 @@ export function addAdapt(tl, stage, q) {
       .fromTo(contexts[i + 1], { autoAlpha: 1, yPercent: 110 }, { yPercent: 0, duration: 0.5, ease: 'power2.out' }, counter + 0.35)
 
     tl.addLabel(step.label, i === 0 ? 'adapt' : '>').add(sub.timeScale(step.speed), step.label)
+    // The moment the new website stands (a way in from the opening's fan).
+    tl.addLabel(`${step.label}Built`, tl.labels[step.label] + (sub.labels.built + 0.15) / step.speed)
   })
 
   tl.addLabel('adaptEnd')

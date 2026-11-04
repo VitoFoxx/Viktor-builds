@@ -120,7 +120,7 @@ const transformOf = (fn) => ({
  *   replan   1.6   grid, then every placeholder to its new place
  *   rebuild  2.95  new ground, then the page in its own order
  */
-function rebuild({ layer, from, rest, blocks, root, build, lead = 0.75, hold }) {
+function rebuild({ layer, from, rest, blocks, root, build, drift, lead = 0.75, hold }) {
   const tl = gsap.timeline()
   const site = layer.querySelector('.adapt__site > *')
   const skeleton = layer.querySelector('.adapt__skeleton')
@@ -199,6 +199,14 @@ function rebuild({ layer, from, rest, blocks, root, build, lead = 0.75, hold }) 
   build(tl, handOver)
 
   tl.addLabel('built').to({}, { duration: hold })
+
+  // While the page stands, its photos keep moving a little, each at its
+  // own pace: the page reads as layers, not as a flat picture. Ends with
+  // the hold, so the timing of everything after stays as it is.
+  if (drift) {
+    const start = tl.labels.rebuild + 1.45
+    drift(tl, start, tl.labels.built + hold - start)
+  }
   return tl
 }
 
@@ -218,6 +226,12 @@ const wipe = (targets, from = 'top', duration = 0.75) => [
   { clipPath: from === 'top' ? 'inset(0% 0% 100% 0%)' : 'inset(100% 0% 0% 0%)' },
   { clipPath: 'inset(0% 0% 0% 0%)', duration, ease: 'power3.inOut' },
 ]
+
+// The big photo comes slowly closer, the small one sinks against it.
+const depth = (main, detail) => (tl, at, duration) =>
+  tl
+    .to(main, { scale: 1.05, yPercent: -1.5, duration, ease: 'none' }, at)
+    .fromTo(detail, { scale: 1, yPercent: 0 }, { scale: 1.07, yPercent: 2.5, duration, ease: 'none', immediateRender: false }, at)
 
 /* ── Build orders: what each business shows first ───────── */
 
@@ -347,10 +361,19 @@ export function addAdapt(tl, stage, q) {
       from: { scope: metalRoot, root: metalRoot },
       rest: q('.scene--site .site-nav, .scene--site .site-project, .scene--site .site-details'),
       build: buildRestaurant,
+      drift: (q) => depth(q('.r-hero__img'), q('.r-chef .site-photo')),
       hold: 1.2,
       speed: 1,
     },
-    { label: 'salon', build: buildSalon, lead: 0.4, hold: 1.0, speed: 1 / 0.75 },
+    {
+      label: 'salon',
+      build: buildSalon,
+      drift: (q) => depth(q('.s-room .site-photo'), q('.s-razor .site-photo')),
+      lead: 0.4,
+      hold: 1.0,
+      speed: 1 / 0.75,
+    },
+    // The practice holds still: BUSINESS measures its photos for the reflow.
     { label: 'dental', build: buildDental, lead: 0.4, hold: 2.4, speed: 1 / 0.62 },
   ]
 
@@ -366,6 +389,7 @@ export function addAdapt(tl, stage, q) {
       blocks: STUDIES[i].blocks,
       root,
       build: step.build(scoped(layer), q),
+      drift: step.drift?.(scoped(layer)),
       lead: step.lead,
       hold: step.hold,
     })

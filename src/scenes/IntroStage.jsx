@@ -3,11 +3,13 @@ import { gsap, ScrollTrigger, useGSAP } from '../animations/gsap.js'
 import { MEDIA, createStageTimeline, createReducedMotion } from '../animations/stageTimeline.js'
 import { createIntroTimeline } from '../animations/introTimeline.js'
 import { glideTo } from '../animations/scrollTo.js'
+import { enableDemoTouch } from '../animations/demoTouch.js'
 import SceneVoid from './SceneVoid.jsx'
 import SceneInterface from './SceneInterface.jsx'
 import SceneExperience from './SceneExperience.jsx'
 import SceneAdapt from './SceneAdapt.jsx'
 import SceneBusiness from './SceneBusiness.jsx'
+import '../site/interactive.css'
 import './IntroStage.css'
 
 // The scrollbar's tone follows the page: dark on the opening's paper,
@@ -76,6 +78,7 @@ export default function IntroStage() {
         }
         const root = stage.current
         root.addEventListener('click', onJump)
+        const releaseDemos = enableDemoTouch(root)
 
         // The fan follows the pointer while the opening is on screen.
         const fan = q('.hero-fan')[0]
@@ -115,6 +118,7 @@ export default function IntroStage() {
         return () => {
           cancelAnimationFrame(raf)
           root.removeEventListener('click', onJump)
+          releaseDemos()
           if (onPointer) window.removeEventListener('pointermove', onPointer)
           ScrollTrigger.removeEventListener('refreshInit', keep)
           ScrollTrigger.removeEventListener('refresh', restore)

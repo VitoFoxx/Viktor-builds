@@ -56,7 +56,9 @@ export default function SceneResult() {
             <li className="fact" key={fact.value}>
               <p className="fact__value">
                 {fact.prefix && <small>{fact.prefix} </small>}
-                <span className="fact__num">{fact.value}</span>
+                <span className="fact__num" data-value={fact.value}>
+                  {fact.value}
+                </span>
                 <span className="fact__unit"> %</span>
               </p>
               <p className="fact__text">{fact.text}</p>

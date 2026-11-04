@@ -55,7 +55,8 @@ export function createReveals(q) {
     facts.forEach((fact, i) => {
       const t = i * 0.14
       const num = fact.querySelector('.fact__num')
-      const value = Number(num.textContent)
+      // From the markup's data, not the text: the text is what we count.
+      const value = Number(num.dataset.value)
       const counter = { v: 0 }
       tl.fromTo(fact, { '--rule': 0 }, { '--rule': 1, duration: 0.8, ease: 'power2.inOut' }, t)
         .fromTo(fact.querySelector('.fact__value'), { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.7 }, t + 0.2)

@@ -317,6 +317,31 @@
   transform: scale(0);
 }
 
+/* The picked answer: its dot is drawn by the timeline (--pick on the list,
+   businessTimeline.js). A tap moves the pick; the dot springs in. */
+.pd-option.is-picked .pd-option__dot {
+  transform: scale(var(--pick, 1));
+  animation: pd-pick 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes pd-pick {
+  from {
+    scale: 0.3;
+  }
+}
+
+.scene--business .pd-option {
+  pointer-events: auto;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .scene--business .pd-option:hover .pd-option__radio {
+    border-color: var(--brand-accent);
+  }
+}
+
 .pd-choice {
   margin-top: 6cqw;
 }

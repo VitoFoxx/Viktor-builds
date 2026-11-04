@@ -1,6 +1,7 @@
 import SiteDentalPhone from '../site/SiteDentalPhone.jsx'
 import withStop from '../components/withStop.jsx'
 import { address, brand, business, dentalRequest } from '../site/content.js'
+import { summaryFor, useAnswers } from '../site/visitorChoice.js'
 import './SceneBusiness.css'
 
 const Mark = ({ time, modifier }) => (
@@ -27,6 +28,9 @@ const Mark = ({ time, modifier }) => (
  * next to the morning (the entry).
  */
 export default function SceneBusiness() {
+  // The entry shows what the visitor picked on the phone.
+  const summary = summaryFor(useAnswers())
+
   return (
     <section className="scene scene--business" aria-labelledby="business-title">
       <h2 id="business-title" className="business__message">
@@ -38,6 +42,7 @@ export default function SceneBusiness() {
       <div className="business__time" aria-hidden="true">
         <Mark time={business.evening} modifier="evening" />
         <Mark time={business.morning} modifier="morning" />
+        <p className="time__hint">{business.hint}</p>
       </div>
 
       <p className="business__sr">
@@ -69,7 +74,7 @@ export default function SceneBusiness() {
       <div className="business__entry">
         <p className="entry__head">{business.entry}</p>
         <dl className="entry__list">
-          {dentalRequest.summary.map((row) => (
+          {summary.map((row) => (
             <div className="entry__row" key={row.label}>
               <dt className="entry__label">{row.label}</dt>
               <dd className="entry__value">{row.value}</dd>

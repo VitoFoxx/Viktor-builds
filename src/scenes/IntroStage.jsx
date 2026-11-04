@@ -55,6 +55,8 @@ export default function IntroStage() {
           },
         })
         const st = tl.scrollTrigger
+        // For checks in development: the timeline and its scroll mapping.
+        if (import.meta.env.DEV) window.__stage = { tl, st }
 
         const jumpTo = (progress) => {
           st.scroll(st.start + progress * (st.end - st.start))

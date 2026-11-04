@@ -74,6 +74,11 @@
   gap: 0.6rem;
 }
 
+/* Only in motion, while the request is open (businessTimeline.js). */
+.time__hint {
+  display: none;
+}
+
 /* Each line in its own mask, so the morning can replace the evening. */
 .time__mask {
   display: block;
@@ -275,6 +280,24 @@
    ───────────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: no-preference) {
+  .time__hint {
+    display: block;
+    visibility: hidden;
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: var(--c-muted);
+    text-wrap: balance;
+  }
+
+  .time__hint::before {
+    content: '';
+    display: block;
+    width: 1.75rem;
+    height: 1px;
+    margin: 0 0 0.75rem auto;
+    background: var(--c-accent-light);
+  }
+
   .stage > .scene--business {
     z-index: 5;
     display: block;
@@ -330,6 +353,14 @@
     align-items: flex-end;
   }
 
+  .time__hint {
+    grid-area: 2 / 1;
+    justify-self: end;
+    max-width: 14em;
+    margin-top: 2.25rem;
+    text-align: right;
+  }
+
   .business__entry {
     left: calc(50% + var(--phone-w) / 2 + var(--side-gap));
     width: min(24vw, 22rem);
@@ -357,6 +388,18 @@
 
   .time__clock {
     font-size: clamp(1.75rem, 8.5vw, 2.5rem);
+  }
+
+  .time__hint {
+    justify-self: center;
+    max-width: none;
+    margin-top: 1rem;
+    font-size: 0.8125rem;
+    text-align: center;
+  }
+
+  .time__hint::before {
+    display: none;
   }
 
   /* In the morning the phone moves up, the entry takes its place. */

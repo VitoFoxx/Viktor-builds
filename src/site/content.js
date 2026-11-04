@@ -187,6 +187,8 @@ export const business = {
   evening: { clock: 'Di 21:47', state: 'Praxis geschlossen', spoken: 'Dienstag, 21:47 Uhr' },
   morning: { clock: 'Mi 07:30', state: 'Vor der Sprechstunde', spoken: 'Mittwoch, 7:30 Uhr' },
   entry: 'Eingang über die Website · Di 21:47',
+  // While the request is open: the visitor may answer it themselves.
+  hint: 'Tippen Sie selbst eine Antwort an.',
 }
 
 // Scene 07 RESULT, the contact area. Viktor's own page: German, Sie,

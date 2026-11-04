@@ -1,6 +1,6 @@
 import SiteDentalPhone from '../site/SiteDentalPhone.jsx'
 import withStop from '../components/withStop.jsx'
-import { brand, business, dentalRequest } from '../site/content.js'
+import { address, brand, business, dentalRequest } from '../site/content.js'
 import './SceneBusiness.css'
 
 const Mark = ({ time, modifier }) => (
@@ -53,7 +53,7 @@ export default function SceneBusiness() {
           <div className="device__chrome" />
           <div className="device__bar" aria-hidden="true">
             <span className="device__clock">{business.evening.clock.split(' ')[1]}</span>
-            <span className="device__url">ihr-unternehmen.de</span>
+            <span className="device__url">{address}</span>
           </div>
           <div className="device__ground" />
           <div className="device__site" aria-hidden="true">

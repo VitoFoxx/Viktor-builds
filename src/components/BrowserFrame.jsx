@@ -1,3 +1,4 @@
+import { address } from '../site/content.js'
 import './BrowserFrame.css'
 
 // Decorative mock of a website being built. The real message lives in the
@@ -11,7 +12,7 @@ export default function BrowserFrame() {
           <span className="frame__dot" />
           <span className="frame__dot" />
         </span>
-        <span className="frame__url">ihr-unternehmen.de</span>
+        <span className="frame__url">{address}</span>
       </div>
 
       <div className="frame__page">

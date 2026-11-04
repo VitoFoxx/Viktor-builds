@@ -4,6 +4,7 @@ import { MEDIA, createStageTimeline, createReducedMotion } from '../animations/s
 import { createIntroTimeline } from '../animations/introTimeline.js'
 import { glideTo } from '../animations/scrollTo.js'
 import { enableDemoTouch } from '../animations/demoTouch.js'
+import { startSmoothScroll } from '../animations/smoothScroll.js'
 import SceneVoid from './SceneVoid.jsx'
 import SceneInterface from './SceneInterface.jsx'
 import SceneExperience from './SceneExperience.jsx'
@@ -80,10 +81,13 @@ export default function IntroStage() {
         root.addEventListener('click', onJump)
         const releaseDemos = enableDemoTouch(root)
 
-        // The fan follows the pointer while the opening is on screen.
+        // Mouse or trackpad: smooth wheel scrolling, and the fan follows
+        // the pointer while the opening is on screen.
+        const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+        const stopSmoothScroll = finePointer ? startSmoothScroll() : null
         const fan = q('.hero-fan')[0]
         let onPointer = null
-        if (fan && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        if (fan && finePointer) {
           gsap.set(fan, { '--mx': 0, '--my': 0 })
           const toX = gsap.quickTo(fan, '--mx', { duration: 0.9, ease: 'power3.out' })
           const toY = gsap.quickTo(fan, '--my', { duration: 0.9, ease: 'power3.out' })
@@ -119,6 +123,7 @@ export default function IntroStage() {
           cancelAnimationFrame(raf)
           root.removeEventListener('click', onJump)
           releaseDemos()
+          stopSmoothScroll?.()
           if (onPointer) window.removeEventListener('pointermove', onPointer)
           ScrollTrigger.removeEventListener('refreshInit', keep)
           ScrollTrigger.removeEventListener('refresh', restore)

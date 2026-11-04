@@ -1,3 +1,4 @@
+import { LINE_IN, PART_IN, PART_OUT } from './flow.js'
 import { gsap } from './gsap.js'
 import { portalGeometry } from './portalTimeline.js'
 
@@ -148,7 +149,7 @@ function rebuild({ layer, from, rest, blocks, root, build, drift, lead = 0.75, h
     const el = first(from.scope, b.from)
     if (el && !fading.has(el)) {
       fading.add(el)
-      tl.to(el, { autoAlpha: 0, duration: 0.25, ease: 'power1.in' }, `apart+=${(b.out * OUT + 0.08).toFixed(2)}`)
+      tl.to(el, { autoAlpha: 0, y: PART_OUT, duration: 0.3, ease: 'power1.in' }, `apart+=${(b.out * OUT + 0.08).toFixed(2)}`)
     }
 
     /* ── re-plan: every placeholder to its new place ─── */
@@ -159,7 +160,7 @@ function rebuild({ layer, from, rest, blocks, root, build, drift, lead = 0.75, h
     )
   })
   // Whatever has no placeholder goes with the photo, the last piece.
-  tl.to(rest, { autoAlpha: 0, duration: 0.25, ease: 'power1.in' }, `apart+=${(9 * OUT + 0.08).toFixed(2)}`)
+  tl.to(rest, { autoAlpha: 0, y: PART_OUT, duration: 0.3, ease: 'power1.in' }, `apart+=${(9 * OUT + 0.08).toFixed(2)}`)
 
   // The new plan is drawn first, then the fields move into it.
   tl.fromTo(
@@ -170,20 +171,20 @@ function rebuild({ layer, from, rest, blocks, root, build, drift, lead = 0.75, h
   )
     .fromTo(
       $('.adapt__guide--v'),
-      { autoAlpha: 0, scaleY: 0 },
+      { autoAlpha: 0, scaleY: 0, transformOrigin: '50% 100%' },
       { autoAlpha: 1, scaleY: 1, duration: 0.55, stagger: 0.05, ease: 'power2.inOut' },
       'replan+=0.05',
     )
     .to($('.adapt__guide'), { autoAlpha: 0, duration: 0.4, ease: 'power1.out' }, 'replan+=1.6')
 
   /* ── rebuild ──────────────────────────────────────────── */
-  // New ground, laid from the top. The placeholders take the new page's
+  // New ground, laid from below. The placeholders take the new page's
   // tone with it (they would vanish on a ground of their own colour).
   const style = getComputedStyle(layer)
   tl.addLabel('rebuild', 'replan+=1.35')
     .fromTo(
       $('.adapt__bg'),
-      { autoAlpha: 1, clipPath: 'inset(0% 0% 100% 0%)' },
+      { autoAlpha: 1, clipPath: 'inset(100% 0% 0% 0%)' },
       { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.6, ease: 'power2.inOut' },
       'rebuild',
     )
@@ -218,12 +219,14 @@ const rise = (targets) => [
 ]
 const fadeUp = (targets, stagger = 0) => [
   targets,
-  { autoAlpha: 0, y: 8 },
-  { autoAlpha: 1, y: 0, duration: 0.5, stagger, ease: 'power2.out' },
+  { autoAlpha: 0, y: PART_IN },
+  { autoAlpha: 1, y: 0, duration: 0.6, stagger, ease: 'power3.out' },
 ]
-const wipe = (targets, from = 'top', duration = 0.75) => [
+// Photos and bands open from their lower edge upwards, in the scroll's
+// direction (flow.js).
+const wipe = (targets, duration = 0.75) => [
   targets,
-  { clipPath: from === 'top' ? 'inset(0% 0% 100% 0%)' : 'inset(100% 0% 0% 0%)' },
+  { clipPath: 'inset(100% 0% 0% 0%)' },
   { clipPath: 'inset(0% 0% 0% 0%)', duration, ease: 'power3.inOut' },
 ]
 
@@ -246,14 +249,14 @@ const buildRestaurant = (q, stageQ) => (tl, handOver) => {
   )
   handOver(['photo'], 'rebuild+=0.6').fromTo(
     q('.r-nav'),
-    { autoAlpha: 0, y: 6 },
-    { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+    { autoAlpha: 0, y: PART_IN },
+    { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out' },
     'rebuild+=0.6',
   )
   handOver(['logo', 'menu', 'action'], 'rebuild+=0.6')
-    .fromTo(q('.r-eyebrow'), { autoAlpha: 0, y: 6 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 'rebuild+=0.75')
+    .fromTo(...fadeUp(q('.r-eyebrow')), 'rebuild+=0.75')
     .fromTo(...rise(q('.r-hero__title .site-line__inner')), 'rebuild+=0.8')
-  handOver(['eyebrow', 'title-1', 'title-2'], 'rebuild+=0.75').fromTo(...wipe(q('.r-chef'), 'bottom', 0.7), 'rebuild+=1.05')
+  handOver(['eyebrow', 'title-1', 'title-2'], 'rebuild+=0.75').fromTo(...wipe(q('.r-chef'), 0.7), 'rebuild+=1.05')
   handOver(['detail'], 'rebuild+=1.45').fromTo(
     ...fadeUp(q('.r-today__label, .r-today__hours, .r-menu [data-reveal]'), 0.06),
     'rebuild+=1.3',
@@ -263,8 +266,8 @@ const buildRestaurant = (q, stageQ) => (tl, handOver) => {
     // "→ DIFFERENT WEBSITE." once the first proof stands.
     .fromTo(
       stageQ('.adapt__message-b, .adapt__message-sub'),
-      { autoAlpha: 0, y: 8 },
-      { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power2.out' },
+      { autoAlpha: 0, y: LINE_IN },
+      { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.08, ease: 'power3.out' },
       'rebuild+=2.1',
     )
 }
@@ -273,7 +276,7 @@ const buildRestaurant = (q, stageQ) => (tl, handOver) => {
 // by word with its prices, the razor and the line on the cut, the booking
 // last.
 const buildSalon = (q) => (tl, handOver) => {
-  tl.fromTo(...wipe(q('.s-room'), 'bottom'), 'rebuild+=0.15').fromTo(
+  tl.fromTo(...wipe(q('.s-room')), 'rebuild+=0.15').fromTo(
     q('.s-room .site-photo'),
     { scale: 1.08 },
     { scale: 1, duration: 1.3, ease: 'power2.out' },
@@ -287,7 +290,7 @@ const buildSalon = (q) => (tl, handOver) => {
   handOver(['eyebrow', 'label', 'title-1', 'title-2', 'title-3'], 'rebuild+=0.8')
     .fromTo(...fadeUp(q('.s-price [data-reveal]'), 0.04), 'rebuild+=1.05')
   handOver(['prices'], 'rebuild+=1.1')
-    .fromTo(...wipe(q('.s-razor'), 'top', 0.7), 'rebuild+=1.1')
+    .fromTo(...wipe(q('.s-razor'), 0.7), 'rebuild+=1.1')
     .fromTo(...fadeUp(q('.s-style')), 'rebuild+=1.3')
   handOver(['detail'], 'rebuild+=1.5').fromTo(...fadeUp(q('.s-steps, .s-walkin'), 0.08), 'rebuild+=1.45')
   handOver(['hours'], 'rebuild+=1.5').fromTo(...fadeUp(q('.s-action')), 'rebuild+=1.85')
@@ -297,11 +300,11 @@ const buildSalon = (q) => (tl, handOver) => {
 // Practice: status bar and the two photos (structure), navigation, the
 // question, the ways in and the hours, the appointment last.
 const buildDental = (q) => (tl, handOver) => {
-  tl.fromTo(...wipe(q('.d-status'), 'top', 0.5), 'rebuild+=0.1')
+  tl.fromTo(...wipe(q('.d-status'), 0.5), 'rebuild+=0.1')
   handOver(['status'], 'rebuild+=0.35')
     .fromTo(...wipe(q('.d-reception')), 'rebuild+=0.15')
     .fromTo(q('.d-reception .site-photo'), { scale: 1.06 }, { scale: 1, duration: 1.3, ease: 'power2.out' }, 'rebuild+=0.15')
-    .fromTo(...wipe(q('.d-chair'), 'top', 0.7), 'rebuild+=0.4')
+    .fromTo(...wipe(q('.d-chair'), 0.7), 'rebuild+=0.4')
   handOver(['photo', 'detail'], 'rebuild+=0.75')
     .fromTo(...fadeUp(q('.d-nav__logo, .d-nav__links li'), 0.05), 'rebuild+=0.6')
   handOver(['logo', 'links'], 'rebuild+=0.6')
@@ -348,8 +351,8 @@ export function addAdapt(tl, stage, q) {
     .set(root, { ...contentAt(S), transformOrigin: '0 0' }, 'adapt')
     .fromTo(
       q('.adapt__message-a'),
-      { autoAlpha: 0, y: 10 },
-      { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out' },
+      { autoAlpha: 0, y: LINE_IN },
+      { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power3.out' },
       'adapt+=0.75',
     )
 

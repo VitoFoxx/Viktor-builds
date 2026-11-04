@@ -1,5 +1,3 @@
-import { PART_IN } from './flow.js'
-
 /**
  * Scene 03: Enter the Website. Appended to the stage's master timeline, so
  * Scene 02 → 03 is one continuous pinned sequence.
@@ -97,11 +95,10 @@ export function addPortal(tl, stage, q) {
     .to(q('.site-hero .site-line__inner'), { yPercent: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out' }, 'resolve+=0.45')
     .to(
       q('.site-hero [data-reveal]'),
-      { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.06, ease: 'power3.out' },
+      { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.06, ease: 'power2.out' },
       'resolve+=0.5',
     )
-    // Everything arrives from below (flow.js; the start is set in stageTimeline.js).
-    .to(q('.site-hero__media'), { autoAlpha: 1, y: 0, duration: 0.9, ease: 'power3.out' }, 'resolve+=0.55')
+    .to(q('.site-hero__media'), { autoAlpha: 1, duration: 0.7, ease: 'power1.inOut' }, 'resolve+=0.55')
     .to(q('.site-hero__img .site-photo'), { scale: 1, duration: 1.2, ease: 'power2.out' }, 'resolve+=0.55')
 
   /* ── enter ────────────────────────────────────────────── */
@@ -123,8 +120,8 @@ export function addPortal(tl, stage, q) {
     // The study's label replaces the headline in the top band.
     .fromTo(
       q('.experience__label'),
-      { autoAlpha: 0, y: () => fit().labelY + PART_IN() },
-      { autoAlpha: 1, y: () => fit().labelY, duration: 0.8, ease: 'power3.out' },
+      { autoAlpha: 0, y: () => fit().labelY + 8 },
+      { autoAlpha: 1, y: () => fit().labelY, duration: 0.7, ease: 'power2.out' },
       'enter+=1.2',
     )
 

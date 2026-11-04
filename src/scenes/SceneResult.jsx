@@ -14,7 +14,7 @@ const Legal = ({ href, children }) => (href ? <a href={href}>{children}</a> : <s
  * closed the ring (ihr-unternehmen.de → VITOWORKS / WEBSITES, DIE KUNDEN ZUM HANDELN BRINGEN.);
  * here VITOWORKS says plainly what it offers, and the request at the end
  * is the one thing to do. Normal page flow, so the request is comfortable
- * to fill in. Its parts arrive once in the stage's vocabulary
+ * to fill in. Its parts arrive in the stage's vocabulary
  * (revealTimeline.js); the form itself never moves while in use.
  *
  * Without motion the stage has no ring closure, so the section opens with

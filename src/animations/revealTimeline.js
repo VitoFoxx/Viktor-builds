@@ -1,4 +1,4 @@
-import { gsap } from './gsap.js'
+import { gsap, ScrollTrigger } from './gsap.js'
 
 /**
  * The part after the pinned stage (Scene 07, normal page flow) keeps the
@@ -7,12 +7,28 @@ import { gsap } from './gsap.js'
  * offer and the steps are built as in Scene 02: grey placeholder lines
  * first, then the text takes their place.
  *
- * Each group plays once, when it comes into view; scrolling back leaves it
- * standing. Reduced motion: nothing here runs (SceneResult.jsx).
+ * Each group plays whenever it comes into view, from below or from above.
+ * Once it has left the screen completely, it is set back to its start, so
+ * it builds again the next time. Reduced motion: nothing here runs
+ * (SceneResult.jsx).
  */
 export function createReveals(q) {
-  const once = (trigger, start = 'top 82%') =>
-    gsap.timeline({ defaults: { ease: 'power3.out' }, scrollTrigger: { trigger, start, once: true } })
+  const group = (trigger, start = 'top 82%', onReset) => {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' }, paused: true })
+    // A fast jump can pass a trigger in one step: act only on where the
+    // page actually is.
+    const play = (self) => self.isActive && tl.play()
+    const reset = (self) => {
+      if (self.isActive) return
+      tl.pause(0)
+      onReset?.()
+    }
+    // In view: play (entering from below, or from above when scrolling up).
+    ScrollTrigger.create({ trigger, start, end: 'bottom 18%', onEnter: play, onEnterBack: play })
+    // Fully off screen: back to the start, out of sight.
+    ScrollTrigger.create({ trigger, start: 'top bottom', end: 'bottom top', onLeave: reset, onLeaveBack: reset })
+    return tl
+  }
 
   // A headline rises from its baseline, as the lines over the stage do.
   const rise = (tl, targets, at = 0) =>
@@ -38,20 +54,23 @@ export function createReveals(q) {
         const color = getComputedStyle(el).color
         tl.fromTo(el, { color: 'transparent' }, { color, duration: 0.45, ease: 'power1.out', clearProps: 'color' }, t + 0.6 + j * 0.08)
       })
-      tl.to(text, { '--bar-o': 0, duration: 0.45, stagger: 0.08, ease: 'power1.out' }, t + 0.6)
+      // Explicit start: built again after a reset, the lines show once more.
+      tl.fromTo(text, { '--bar-o': 1 }, { '--bar-o': 0, duration: 0.45, stagger: 0.08, ease: 'power1.out' }, t + 0.6)
     })
   }
 
   /* ── Sichtbarkeit ─────────────────────────────────────── */
   {
-    const tl = once(q('.visibility')[0])
+    const tl = group(q('.visibility')[0])
     fadeUp(tl, q('.visibility__label'), 0)
     rise(tl, q('.visibility__title'), 0.05)
     fadeUp(tl, q('.visibility__lead'), 0.35)
   }
   {
     const facts = q('.fact')
-    const tl = once(q('.visibility__facts')[0], 'top 85%')
+    const nums = q('.fact__num')
+    // Rendering back to the start does not run the counters: zero them.
+    const tl = group(q('.visibility__facts')[0], 'top 85%', () => nums.forEach((num) => (num.textContent = 0)))
     facts.forEach((fact, i) => {
       const t = i * 0.14
       const num = fact.querySelector('.fact__num')
@@ -78,7 +97,7 @@ export function createReveals(q) {
 
   /* ── Über mich ────────────────────────────────────────── */
   {
-    const tl = once(q('.result__intro')[0])
+    const tl = group(q('.result__intro')[0])
     fadeUp(tl, q('.result__eyebrow'), 0)
     rise(tl, q('.result__title'), 0.05)
     tl.fromTo(
@@ -92,7 +111,7 @@ export function createReveals(q) {
 
   /* ── Leistungen: built like the website in Scene 02 ───── */
   {
-    const tl = once(q('.result__offer')[0], 'top 85%')
+    const tl = group(q('.result__offer')[0], 'top 85%')
     build(tl, q('.offer'), 0, { rule: true, parts: '.offer__title, .offer__text' })
     tl.fromTo(q('.offer__n'), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4, stagger: 0.12 }, 0.2)
     fadeUp(tl, q('.result__services'), 1.2)
@@ -100,13 +119,13 @@ export function createReveals(q) {
 
   /* ── Ablauf: the line runs through the four steps ─────── */
   {
-    const tl = once(q('.flow')[0])
+    const tl = group(q('.flow')[0])
     fadeUp(tl, q('.flow__label'), 0)
     rise(tl, q('.flow__title'), 0.05)
   }
   {
     const steps = q('.flow__step')
-    const tl = once(q('.flow__steps')[0], 'top 85%')
+    const tl = group(q('.flow__steps')[0], 'top 85%')
     steps.forEach((step, i) => {
       const t = i * 0.28
       tl.fromTo(step.querySelector('.flow__n'), { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.5 }, t)
@@ -118,7 +137,7 @@ export function createReveals(q) {
 
   /* ── Projekt anfragen ─────────────────────────────────── */
   {
-    const tl = once(q('.request')[0])
+    const tl = group(q('.request')[0])
     rise(tl, q('.request__title'), 0)
     fadeUp(tl, q('.request__text, .request__direct, .request__region'), 0.3, 0.08)
     fadeUp(tl, q('.request__form'), 0.45)

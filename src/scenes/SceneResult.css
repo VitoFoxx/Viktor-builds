@@ -282,7 +282,7 @@
   color: var(--c-muted);
 }
 
-.fact__value span {
+.fact__unit {
   color: var(--c-accent-light);
 }
 
@@ -804,5 +804,72 @@
   .request__hint {
     display: block;
     margin: 0.3rem 0 0;
+  }
+}
+
+/* ── Motion: the stage's vocabulary (revealTimeline.js) ─────────
+   --rule draws a top rule from the left, --line the step line, --bar
+   lays grey placeholder lines over a text (one per line of type) and
+   --bar-o lets them go. All idle at their final state without script. */
+
+@media (prefers-reduced-motion: no-preference) {
+  .fact,
+  .offer {
+    position: relative;
+    border-top-color: transparent;
+  }
+
+  @media (max-width: 767.98px) {
+    /* On phones the steps' line runs down beside them. */
+    .flow__step::before {
+      transform: scaleY(var(--line, 1));
+      transform-origin: 50% 0;
+    }
+  }
+
+  .fact::before,
+  .offer::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -1px;
+    height: 1px;
+    background: var(--c-line-strong);
+    transform: scaleX(var(--rule, 1));
+    transform-origin: 0 50%;
+  }
+
+  .flow__step::before {
+    transform: scaleX(var(--line, 1));
+    transform-origin: 0 50%;
+  }
+
+  .offer__title,
+  .offer__text,
+  .flow__step-title,
+  .flow__text {
+    position: relative;
+  }
+
+  .offer__title::after,
+  .offer__text::after,
+  .flow__step-title::after,
+  .flow__text::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* One grey line per line of type, as the placeholders in Scene 02. */
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0 0.4em,
+      rgb(236 230 219 / 0.13) 0.4em calc(1lh - 0.4em),
+      transparent calc(1lh - 0.4em) 1lh
+    );
+    border-radius: 2px;
+    transform: scaleX(var(--bar, 0));
+    transform-origin: 0 50%;
+    opacity: var(--bar-o, 1);
+    pointer-events: none;
   }
 }

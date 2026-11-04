@@ -1,3 +1,6 @@
+import { useRef } from 'react'
+import { gsap, useGSAP } from '../animations/gsap.js'
+import { createReveals } from '../animations/revealTimeline.js'
 import ProjectRequest from '../components/ProjectRequest.jsx'
 import { result, visibility, flow, request, contact, footer } from '../site/content.js'
 import portrait480 from '../assets/about/viktor-portrait-480.webp'
@@ -11,19 +14,31 @@ const Legal = ({ href, children }) => (href ? <a href={href}>{children}</a> : <s
  * closed the ring (ihr-unternehmen.de → VITOWORKS / WEBSITES, DIE KUNDEN ZUM HANDELN BRINGEN.);
  * here VITOWORKS says plainly what it offers, and the request at the end
  * is the one thing to do. Normal page flow, so the request is comfortable
- * to fill in. Calm on purpose: no scroll animation.
+ * to fill in. Its parts arrive once in the stage's vocabulary
+ * (revealTimeline.js); the form itself never moves while in use.
  *
  * Without motion the stage has no ring closure, so the section opens with
  * it in plain type.
  */
 export default function SceneResult() {
+  const root = useRef(null)
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia()
+      mm.add('(prefers-reduced-motion: no-preference)', () => createReveals(gsap.utils.selector(root)))
+      return () => mm.revert()
+    },
+    { scope: root },
+  )
+
   const direct = [
     contact.email && { label: contact.email, href: `mailto:${contact.email}` },
     contact.phone && { label: contact.phone, href: `tel:${contact.phoneHref || contact.phone}` },
   ].filter(Boolean)
 
   return (
-    <section className="result" aria-labelledby="result-title">
+    <section className="result" aria-labelledby="result-title" ref={root}>
       <div className="result__ring">
         <p className="result__address">{result.claim.address}</p>
         <p className="result__name">{result.claim.name}</p>
@@ -41,8 +56,8 @@ export default function SceneResult() {
             <li className="fact" key={fact.value}>
               <p className="fact__value">
                 {fact.prefix && <small>{fact.prefix} </small>}
-                {fact.value}
-                <span> %</span>
+                <span className="fact__num">{fact.value}</span>
+                <span className="fact__unit"> %</span>
               </p>
               <p className="fact__text">{fact.text}</p>
               <p className="fact__source">

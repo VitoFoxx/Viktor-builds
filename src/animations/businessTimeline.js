@@ -310,7 +310,8 @@ export function addBusiness(tl, stage, q, { isDesktop }) {
       lineIn(labels[i], at + 0.15)
     }
   }
-  const pick = (el, at) => tl.fromTo(el, { scale: 0 }, { scale: 1, duration: 0.3, ease: 'power3.out' }, at)
+  // The picked answer's dot (whichever the visitor picked, see visitorChoice.js).
+  const pick = (list, at) => tl.fromTo(list, { '--pick': 0 }, { '--pick': 1, duration: 0.3, ease: 'power3.out' }, at)
   const onAccent = getComputedStyle(phone('[data-brand]')).getPropertyValue('--brand-on-accent').trim()
   const choose = (option, at) =>
     tl
@@ -326,7 +327,7 @@ export function addBusiness(tl, stage, q, { isDesktop }) {
   press(t0)
   push(1, t0 + 0.1)
   tl.fromTo(progress, { autoAlpha: 1, scaleX: 0 }, { scaleX: 1 / 3, ...PUSH }, t0 + 0.1)
-  pick(step(1).querySelector('.pd-option__dot'), t0 + 0.75)
+  pick(step(1).querySelector('.pd-options'), t0 + 0.75)
 
   // → 2 of 3: new here, statutory insurance.
   const t1 = t0 + STEP
@@ -342,7 +343,7 @@ export function addBusiness(tl, stage, q, { isDesktop }) {
   press(t2)
   push(3, t2 + 0.1)
   tl.to(progress, { scaleX: 1, ...PUSH }, t2 + 0.1)
-  pick(step(3).querySelector('.pd-option__dot'), t2 + 0.75)
+  pick(step(3).querySelector('.pd-options'), t2 + 0.75)
   tl.fromTo(
     phone('.pd-field__value'),
     { clipPath: 'inset(0% 100% 0% 0%)' },
@@ -354,6 +355,9 @@ export function addBusiness(tl, stage, q, { isDesktop }) {
   const t3 = t2 + STEP
   press(t3)
   tl.addLabel('sent', t3 + 0.1)
+  // While the request is open, the visitor may answer it: one quiet line.
+  tl.fromTo(q('.time__hint'), { autoAlpha: 0, y: 6 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: 'power2.out' }, t0 + 0.5)
+    .to(q('.time__hint'), { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, t3)
   push(4, t3 + 0.1)
   tl.to(phone('.pd-bar'), { yPercent: 100, duration: 0.45, ease: 'power2.in' }, t3 + 0.15)
     .to(progress, { autoAlpha: 0, duration: 0.3 }, t3 + 0.35)

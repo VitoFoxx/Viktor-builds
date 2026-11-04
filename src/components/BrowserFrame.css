@@ -45,6 +45,7 @@
   padding: 0.35cqw 2.6cqw;
   font-size: max(10px, 1.05cqw);
   letter-spacing: 0.02em;
+  white-space: nowrap;
   color: var(--c-muted);
   background: var(--c-surface-raised);
   border-radius: 99px;

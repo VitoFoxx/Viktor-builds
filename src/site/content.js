@@ -1,6 +1,12 @@
 // Content of the design studies. There is deliberately no company name:
 // the wordmark is the trade itself, so each demo reads as a study by
 // VITOWORKS, never as a client or a reference.
+
+import { personal } from './personal.js'
+
+// The address in every frame: "your business". A personal link
+// (?fuer=…, see personal.js) puts the visitor's own address there.
+export const address = personal?.domain ?? 'ihr-unternehmen.de'
 //
 // 01 Metallbau: Scene 03 / 04. 02 Restaurant: rebuilt from it in ADAPT
 // (Scene 05), with its own layout, type and priorities, not new colours
@@ -148,7 +154,7 @@ export const dentalRequest = {
 }
 
 // Scene 07 RESULT: the next website in the count is the visitor's.
-export const yours = { context: 'Website 05 / Ihr Unternehmen' }
+export const yours = { context: `Website 05 / ${personal?.name ?? 'Ihr Unternehmen'}` }
 
 // The brand. Viktor is the person, VITOWORKS the name of the studio.
 export const brand = { name: 'VITOWORKS' }
@@ -161,7 +167,7 @@ export const hero = {
     { label: 'Leistungen', href: '#leistungen' },
     { label: 'Kontakt', href: '#kontakt' },
   ],
-  eyebrow: 'Webdesign und Entwicklung',
+  eyebrow: personal ? `Webdesign und Entwicklung · für ${personal.name}` : 'Webdesign und Entwicklung',
   claim: ['Websites', 'nach Maß.'],
   sub: 'Individuelle Websites für Unternehmen, die nicht nur gut aussehen, sondern Kunden zum Handeln bringen.',
   request: 'Projekt anfragen',
@@ -181,13 +187,15 @@ export const business = {
   evening: { clock: 'Di 21:47', state: 'Praxis geschlossen', spoken: 'Dienstag, 21:47 Uhr' },
   morning: { clock: 'Mi 07:30', state: 'Vor der Sprechstunde', spoken: 'Mittwoch, 7:30 Uhr' },
   entry: 'Eingang über die Website · Di 21:47',
+  // While the request is open: the visitor may answer it themselves.
+  hint: 'Tippen Sie selbst eine Antwort an.',
 }
 
 // Scene 07 RESULT, the contact area. Viktor's own page: German, Sie,
 // short. Fields marked "einzutragen" are Viktor's to fill in before the
 // launch; empty values are simply not shown (no invented contact data).
 export const result = {
-  claim: { address: 'ihr-unternehmen.de', name: brand.name, line: 'Websites, die Kunden zum Handeln bringen.' },
+  claim: { address, name: brand.name, line: 'Websites, die Kunden zum Handeln bringen.' },
   eyebrow: `${brand.name} · Webdesign und Entwicklung in Hannover`,
   title: ['Individuelle Websites', 'für Unternehmen.'],
   lead: 'Ich bin Viktor, Webentwickler aus der Region Hannover. Ich baue Websites, die zu Ihrem Unternehmen passen und Ihre Kunden gezielt zur Anfrage, Buchung oder Kontaktaufnahme führen. Kein Baukasten, keine Vorlage: Ihre Website gibt es nur einmal, wie ein Anzug, der nur Ihnen passt.',
@@ -263,6 +271,8 @@ export const request = {
       label: 'Ihr Unternehmen',
       question: 'Was macht Ihr Unternehmen?',
       placeholder: 'z. B. Tischlerei mit eigener Werkstatt',
+      // From a personal link: the business is already named.
+      prefill: personal?.name ?? '',
     },
     {
       label: 'Ziel',

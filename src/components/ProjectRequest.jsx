@@ -85,6 +85,7 @@ export default function ProjectRequest() {
           name="company"
           type="text"
           placeholder={company.placeholder}
+          defaultValue={company.prefill || undefined}
           autoComplete="organization"
           required
         />

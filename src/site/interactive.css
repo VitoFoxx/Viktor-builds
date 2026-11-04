@@ -1,0 +1,76 @@
+/* ─────────────────────────────────────────────────────────────
+   The design studies respond to the pointer: when the visitor rests in
+   a scene, buttons, menus and lists answer hover and click like on a
+   real website. Only leaf elements take the pointer (the layers around
+   them stay click-through), and only while visible (an element faded
+   out by the timeline is hidden, so the pointer passes to what is shown).
+   Hover moves use `translate`, never `transform`: the timeline owns that.
+   ───────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  :is(
+      .site-nav__links li,
+      .site-nav__contact,
+      .site-hero__actions > *,
+      .site-facts__item,
+      .r-nav__menu,
+      .r-nav__reserve,
+      .r-menu__item,
+      .r-reserve__action,
+      .s-index li,
+      .s-nav-action,
+      .s-price,
+      .s-steps li,
+      .s-action,
+      .d-status__links > *,
+      .d-nav__links li,
+      .d-nav__action,
+      .d-need
+    ) {
+    pointer-events: auto;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      background-color 0.25s var(--ease-out),
+      box-shadow 0.25s var(--ease-out),
+      filter 0.25s var(--ease-out),
+      translate 0.3s var(--ease-out),
+      scale 0.15s var(--ease-out);
+  }
+
+  /* Rows that can be picked (a dish, a service, a concern): the pick
+     stays, marked by a rule on its left (demoTouch.js). */
+  :is(.site-facts__item, .r-menu__item, .s-price, .d-need).is-picked {
+    background-color: color-mix(in srgb, currentColor 7%, transparent);
+    box-shadow: inset 2px 0 0 currentColor;
+  }
+
+  /* A press, on every action. */
+  :is(.site-hero__actions > *, .site-nav__contact, .r-nav__reserve, .r-reserve__action, .s-nav-action, .s-action, .d-nav__action):active {
+    scale: 0.97;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    :is(.site-facts__item, .r-menu__item, .s-price, .d-need):hover {
+      background-color: color-mix(in srgb, currentColor 5%, transparent);
+    }
+
+    :is(.site-nav__links li, .r-nav__menu, .s-index li, .s-steps li, .d-nav__links li, .d-status__links > *):hover {
+      translate: 0 -1px;
+      opacity: 0.72;
+    }
+
+    :is(.site-hero__actions > *, .site-nav__contact, .r-nav__reserve, .r-reserve__action, .s-nav-action, .s-action, .d-nav__action):hover {
+      filter: brightness(1.14);
+      translate: 0 -1px;
+    }
+
+    .d-need:hover .d-need__go {
+      translate: 3px 0;
+    }
+  }
+
+  .d-need__go {
+    transition: translate 0.3s var(--ease-out);
+  }
+}

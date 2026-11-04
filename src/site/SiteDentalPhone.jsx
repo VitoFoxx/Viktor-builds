@@ -1,5 +1,6 @@
 import SitePhoto from './SitePhoto.jsx'
 import { dental, dentalRequest as request } from './content.js'
+import { pickAnswer, summaryFor, useAnswers } from './visitorChoice.js'
 import './dental-phone.css'
 
 const Line = ({ children }) => (
@@ -8,13 +9,23 @@ const Line = ({ children }) => (
   </span>
 )
 
-const Radio = ({ label }) => (
-  <li className="pd-option">
+// One answer. The timeline draws the dot of the picked one (--pick on the
+// list); a tap picks another (visitorChoice.js).
+const Radio = ({ label, picked, onPick }) => (
+  <li className={picked ? 'pd-option is-picked' : 'pd-option'} onClick={onPick}>
     <span className="pd-option__label">{label}</span>
     <span className="pd-option__radio">
       <span className="pd-option__dot" />
     </span>
   </li>
+)
+
+const Options = ({ options, picked, onPick }) => (
+  <ul className="pd-options">
+    {options.map((option, i) => (
+      <Radio label={option} key={option} picked={i === picked} onPick={() => onPick(i)} />
+    ))}
+  </ul>
 )
 
 /**
@@ -32,6 +43,8 @@ const Radio = ({ label }) => (
  */
 export default function SiteDentalPhone() {
   const [concern, facts, when] = request.steps
+  const answers = useAnswers()
+  const summary = summaryFor(answers)
 
   return (
     <div className="pd-site">
@@ -96,11 +109,7 @@ export default function SiteDentalPhone() {
         <div className="pd-page pd-page--step">
           <p className="pd-step">{request.label} · 1 von 3</p>
           <p className="pd-step__title">{concern.title}</p>
-          <ul className="pd-options">
-            {concern.options.map((option) => (
-              <Radio label={option} key={option} />
-            ))}
-          </ul>
+          <Options options={concern.options} picked={answers.concern} onPick={(i) => pickAnswer('concern', i)} />
         </div>
 
         {/* Step 2: two facts the practice needs before the first call. */}
@@ -126,11 +135,7 @@ export default function SiteDentalPhone() {
         <div className="pd-page pd-page--step">
           <p className="pd-step">{request.label} · 3 von 3</p>
           <p className="pd-step__title">{when.title}</p>
-          <ul className="pd-options">
-            {when.options.map((option) => (
-              <Radio label={option} key={option} />
-            ))}
-          </ul>
+          <Options options={when.options} picked={answers.when} onPick={(i) => pickAnswer('when', i)} />
           <p className="pd-field">
             <span className="pd-field__label">{when.phoneLabel}</span>
             <span className="pd-field__box">
@@ -150,7 +155,7 @@ export default function SiteDentalPhone() {
           </p>
           <p className="pd-sent__text">{request.sent.text}</p>
           <dl className="pd-summary">
-            {request.summary.map((row) => (
+            {summary.map((row) => (
               <div className="pd-summary__row" key={row.label}>
                 <dt>{row.label}</dt>
                 <dd className="pd-summary__value">{row.value}</dd>

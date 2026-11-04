@@ -2,11 +2,15 @@ import { useRef } from 'react'
 import { gsap, ScrollTrigger, useGSAP } from '../animations/gsap.js'
 import { MEDIA, createStageTimeline, createReducedMotion } from '../animations/stageTimeline.js'
 import { createIntroTimeline } from '../animations/introTimeline.js'
+import { glideTo } from '../animations/scrollTo.js'
+import { enableDemoTouch } from '../animations/demoTouch.js'
+import { startSmoothScroll } from '../animations/smoothScroll.js'
 import SceneVoid from './SceneVoid.jsx'
 import SceneInterface from './SceneInterface.jsx'
 import SceneExperience from './SceneExperience.jsx'
 import SceneAdapt from './SceneAdapt.jsx'
 import SceneBusiness from './SceneBusiness.jsx'
+import '../site/interactive.css'
 import './IntroStage.css'
 
 // The scrollbar's tone follows the page: dark on the opening's paper,
@@ -54,6 +58,8 @@ export default function IntroStage() {
           },
         })
         const st = tl.scrollTrigger
+        // For checks in development: the timeline and its scroll mapping.
+        if (import.meta.env.DEV) window.__stage = { tl, st }
 
         const jumpTo = (progress) => {
           st.scroll(st.start + progress * (st.end - st.start))
@@ -61,14 +67,42 @@ export default function IntroStage() {
           st.getTween()?.progress(1)
         }
 
-        // "Beispiele" leads to the first website at full size. The anchor
-        // target sits inside the pinned stage, so scroll to its moment.
-        const refs = q('.hero__refs')[0]
-        const toReferences = (event) => {
+        // Ways in from the opening: "Beispiele" leads to the first website
+        // at full size, each card of the fan to its website in ADAPT. The
+        // targets sit inside the pinned stage, so glide to their moment.
+        const onJump = (event) => {
+          const link = event.target.closest('[data-jump]')
+          const label = link?.dataset.jump
+          if (!label || !(label in tl.labels)) return
           event.preventDefault()
-          window.scrollTo({ top: st.labelToScroll('arrive'), behavior: 'smooth' })
+          glideTo(st.labelToScroll(label))
         }
-        refs?.addEventListener('click', toReferences)
+        const root = stage.current
+        root.addEventListener('click', onJump)
+        const releaseDemos = enableDemoTouch(root)
+
+        // Mouse or trackpad: smooth wheel scrolling, and the fan follows
+        // the pointer while the opening is on screen.
+        const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+        const stopSmoothScroll = finePointer ? startSmoothScroll() : null
+        const fan = q('.hero-fan')[0]
+        let onPointer = null
+        if (fan && finePointer) {
+          gsap.set(fan, { '--mx': 0, '--my': 0 })
+          const toX = gsap.quickTo(fan, '--mx', { duration: 0.9, ease: 'power3.out' })
+          const toY = gsap.quickTo(fan, '--my', { duration: 0.9, ease: 'power3.out' })
+          let resting = true
+          onPointer = (event) => {
+            if (st.progress > 0.03) {
+              if (!resting) toX(0), toY(0), (resting = true)
+              return
+            }
+            resting = false
+            toX((event.clientX / window.innerWidth) * 2 - 1)
+            toY((event.clientY / window.innerHeight) * 2 - 1)
+          }
+          window.addEventListener('pointermove', onPointer, { passive: true })
+        }
 
         let raf = 0
         if (carriedProgress > 0) {
@@ -87,7 +121,10 @@ export default function IntroStage() {
 
         return () => {
           cancelAnimationFrame(raf)
-          refs?.removeEventListener('click', toReferences)
+          root.removeEventListener('click', onJump)
+          releaseDemos()
+          stopSmoothScroll?.()
+          if (onPointer) window.removeEventListener('pointermove', onPointer)
           ScrollTrigger.removeEventListener('refreshInit', keep)
           ScrollTrigger.removeEventListener('refresh', restore)
         }

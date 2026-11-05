@@ -1,83 +1,112 @@
 import { useRef } from 'react'
 import { gsap, ScrollTrigger, useGSAP } from '../animations/gsap.js'
-import { MEDIA, createStageTimeline, createReducedMotion } from '../animations/stageTimeline.js'
+import { MEDIA, createStage, createReducedMotion } from '../animations/stageTimeline.js'
 import { createIntroTimeline } from '../animations/introTimeline.js'
 import { glideTo } from '../animations/scrollTo.js'
 import { enableDemoTouch } from '../animations/demoTouch.js'
 import { startSmoothScroll } from '../animations/smoothScroll.js'
 import SceneVoid from './SceneVoid.jsx'
 import SceneInterface from './SceneInterface.jsx'
-import SceneExperience from './SceneExperience.jsx'
 import SceneAdapt from './SceneAdapt.jsx'
 import SceneBusiness from './SceneBusiness.jsx'
 import '../site/interactive.css'
 import './IntroStage.css'
 
 // The scrollbar's tone follows the page: dark on the opening's paper,
-// light once it has turned anthracite (base.css).
+// light once the anthracite part fills the screen (base.css).
 const setTone = (dark) => {
   document.documentElement.dataset.tone = dark ? 'dark' : 'light'
 }
 
+// Where the ways in from the opening lead (data-jump), and how far below
+// the top of the screen the target should come to rest.
+const JUMPS = {
+  study: { target: '.study', offset: 0.1 },
+  restaurant: { target: '.adapt__layer--restaurant', offset: 0.08 },
+  salon: { target: '.adapt__layer--salon', offset: 0.08 },
+  dental: { target: '.adapt__layer--dental', offset: 0.08 },
+}
+
+/**
+ * The story, Scene 01 – 06, as sections in the page's own flow (see
+ * stageTimeline.js). Scene 07 follows in SceneResult.jsx.
+ */
 export default function IntroStage() {
   const stage = useRef(null)
+
+  // The opening's website: the study laid out at the screen's width and
+  // scaled into its frame, as tall as the frame shows.
+  const fitHeroSite = () => {
+    const page = stage.current?.querySelector('.hero-card__page')
+    if (!page?.offsetWidth) return
+    const width = document.documentElement.clientWidth
+    const scale = page.offsetWidth / width
+    page.style.setProperty('--hero-w', `${width}px`)
+    page.style.setProperty('--hero-s', scale)
+    page.style.setProperty('--hero-h', `${Math.ceil(page.offsetHeight / scale) + 2}px`)
+  }
 
   useGSAP(
     () => {
       const mm = gsap.matchMedia()
-      // Progress through the pinned sequence, carried across a breakpoint
-      // change. Reverting the old pin collapses the page, which would
-      // otherwise throw the visitor back to the top.
-      let carriedProgress = 0
+      const q = gsap.utils.selector(stage)
+      const root = stage.current
+
+      // A change of breakpoint rebuilds the motion; ScrollTrigger then
+      // starts from the top. Keep the visitor where they were instead: the
+      // section at the top of the screen, and how far into it.
+      let place = null
+      const keepPlace = () => {
+        const el = [...document.querySelectorAll('.stage > .scene, .result > *, .footer')].find(
+          (section) => section.getBoundingClientRect().bottom > 0,
+        )
+        if (!el) return
+        const box = el.getBoundingClientRect()
+        place = { el, into: -box.top / box.height }
+      }
+      const returnToPlace = () => {
+        if (!place) return
+        const { el, into } = place
+        place = null
+        const restore = () => {
+          ScrollTrigger.removeEventListener('refresh', restore)
+          const box = el.getBoundingClientRect()
+          window.scrollTo(0, window.scrollY + box.top + into * box.height)
+        }
+        ScrollTrigger.addEventListener('refresh', restore)
+      }
+
+      // Dark from the moment the opening has mostly left the screen.
+      ScrollTrigger.create({
+        trigger: q('.scene--void')[0],
+        start: 'bottom 45%',
+        onEnter: () => setTone(true),
+        onLeaveBack: () => setTone(false),
+      })
 
       mm.add(MEDIA, (ctx) => {
         const { isDesktop, reduceMotion } = ctx.conditions
-        const q = gsap.utils.selector(stage)
+        returnToPlace()
 
         if (reduceMotion) {
-          carriedProgress = 0
           createReducedMotion(q)
-          // Static sections: dark from the end of the opening on.
-          ScrollTrigger.create({
-            trigger: q('.scene--void')[0],
-            start: 'bottom center',
-            onEnter: () => setTone(true),
-            onLeaveBack: () => setTone(false),
-          })
-          return
+          return keepPlace
         }
 
+        fitHeroSite()
+        window.addEventListener('resize', fitHeroSite)
         createIntroTimeline(q)
-        const tl = createStageTimeline(stage.current, q, {
-          isDesktop,
-          onUpdate: (self) => {
-            carriedProgress = self.progress
-            // Halfway through the paper turning anthracite ('plan', 1 s fade).
-            const a = self.animation
-            setTone(self.progress * a.duration() >= a.labels.plan + 0.5)
-          },
-        })
-        const st = tl.scrollTrigger
-        // For checks in development: the timeline and its scroll mapping.
-        if (import.meta.env.DEV) window.__stage = { tl, st }
+        createStage(q, { isDesktop })
 
-        const jumpTo = (progress) => {
-          st.scroll(st.start + progress * (st.end - st.start))
-          st.update()
-          st.getTween()?.progress(1)
-        }
-
-        // Ways in from the opening: "Beispiele" leads to the first website
-        // at full size, each card of the fan to its website in ADAPT. The
-        // targets sit inside the pinned stage, so glide to their moment.
+        // Ways in from the opening: "Beispiele" and the website in front
+        // lead to the study, each card of the fan to its website in ADAPT.
         const onJump = (event) => {
-          const link = event.target.closest('[data-jump]')
-          const label = link?.dataset.jump
-          if (!label || !(label in tl.labels)) return
+          const jump = JUMPS[event.target.closest('[data-jump]')?.dataset.jump]
+          const el = jump && root.querySelector(jump.target)
+          if (!el) return
           event.preventDefault()
-          glideTo(st.labelToScroll(label))
+          glideTo(el.getBoundingClientRect().top + window.scrollY - window.innerHeight * jump.offset)
         }
-        const root = stage.current
         root.addEventListener('click', onJump)
         const releaseDemos = enableDemoTouch(root)
 
@@ -93,8 +122,8 @@ export default function IntroStage() {
           const toY = gsap.quickTo(fan, '--my', { duration: 0.9, ease: 'power3.out' })
           let resting = true
           onPointer = (event) => {
-            if (st.progress > 0.03) {
-              if (!resting) toX(0), toY(0), (resting = true)
+            if (window.scrollY > window.innerHeight * 0.1) {
+              if (!resting) (toX(0), toY(0), (resting = true))
               return
             }
             resting = false
@@ -104,34 +133,21 @@ export default function IntroStage() {
           window.addEventListener('pointermove', onPointer, { passive: true })
         }
 
-        let raf = 0
-        if (carriedProgress > 0) {
-          const progress = carriedProgress
-          raf = requestAnimationFrame(() => jumpTo(progress))
-        }
-
-        // A resize within the same breakpoint changes the pinned distance
-        // (it is measured in viewport heights). Keep the visitor at the same
-        // moment of the sequence instead of the same pixel offset.
-        let kept = 0
-        const keep = () => (kept = st.progress)
-        const restore = () => kept > 0 && jumpTo(kept)
-        ScrollTrigger.addEventListener('refreshInit', keep)
-        ScrollTrigger.addEventListener('refresh', restore)
-
         return () => {
-          cancelAnimationFrame(raf)
+          keepPlace()
+          window.removeEventListener('resize', fitHeroSite)
           root.removeEventListener('click', onJump)
           releaseDemos()
           stopSmoothScroll?.()
           if (onPointer) window.removeEventListener('pointermove', onPointer)
-          ScrollTrigger.removeEventListener('refreshInit', keep)
-          ScrollTrigger.removeEventListener('refresh', restore)
         }
       })
 
       // Typography metrics change once the web font has loaded.
-      document.fonts?.ready.then(() => ScrollTrigger.refresh())
+      document.fonts?.ready.then(() => {
+        fitHeroSite()
+        ScrollTrigger.refresh()
+      })
 
       return () => mm.revert()
     },
@@ -142,7 +158,6 @@ export default function IntroStage() {
     <div className="stage" ref={stage}>
       <SceneVoid />
       <SceneInterface />
-      <SceneExperience />
       <SceneAdapt />
       <SceneBusiness />
     </div>

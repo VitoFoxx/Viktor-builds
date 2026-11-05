@@ -6,10 +6,10 @@ const PAUSE = 2000
 const THUMB_MIN = 48 // ::-webkit-scrollbar-thumb min-height (base.css)
 
 /**
- * "Weiterscrollen": appears when a visitor stops inside the pinned scroll
- * story, so a still frame doesn't read as the end of the page. Gone again
- * on the next scroll. Not with reduced motion: there the page scrolls as
- * plain sections.
+ * "Weiterscrollen": appears when a visitor stops inside the story, so a
+ * screen at rest doesn't read as the end of the page. Gone again on the
+ * next scroll. Not with reduced motion: there the page scrolls as plain
+ * sections.
  *
  * With a visible scrollbar (desktop) the hint sits beside its thumb and
  * points down the track; without one (phones) it stays centred at the
@@ -23,11 +23,11 @@ export default function ScrollNudge() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     let timer = 0
 
-    // Past the opening, and the pinned stage still fills the screen.
+    // Past the opening, and the story (Scene 02 – 06) still fills the screen.
     const inStory = () => {
-      const spacer = document.querySelector('.stage')?.parentElement
-      if (!spacer) return false
-      const { bottom } = spacer.getBoundingClientRect()
+      const story = document.querySelector('.stage')
+      if (!story) return false
+      const { bottom } = story.getBoundingClientRect()
       return window.scrollY > window.innerHeight * 0.25 && bottom > window.innerHeight * 1.5
     }
 

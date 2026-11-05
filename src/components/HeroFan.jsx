@@ -14,13 +14,13 @@ import dentalM420 from '../assets/site/hero-fan-dental-m-420.webp'
 // media.js (restaurant, salon, dental) and fall under the same asset audit.
 // Back to front: `--k` is the card's distance from the website.
 //
-// Each card is a way in: a click glides to the moment its website stands
-// in ADAPT (`jump`, a label of the master timeline). Pointer only: the
-// keyboard way in is the opening's "Beispiele" link.
+// Each card is a way in: a click glides to its website in ADAPT (`jump`,
+// see IntroStage.jsx). Pointer only: the keyboard way in is the opening's
+// "Beispiele" link.
 const cards = [
-  { key: 'dental', k: 3, small: dental640, large: dental1100, mobile: dentalM420, name: 'Zahnarztpraxis', jump: 'dentalBuilt' },
-  { key: 'barbershop', k: 2, small: barbershop640, large: barbershop1100, mobile: barbershopM420, name: 'Barbershop', jump: 'salonBuilt' },
-  { key: 'restaurant', k: 1, small: restaurant640, large: restaurant1100, mobile: restaurantM420, name: 'Restaurant', jump: 'restaurantBuilt' },
+  { key: 'dental', k: 3, small: dental640, large: dental1100, mobile: dentalM420, name: 'Zahnarztpraxis', jump: 'dental' },
+  { key: 'barbershop', k: 2, small: barbershop640, large: barbershop1100, mobile: barbershopM420, name: 'Barbershop', jump: 'salon' },
+  { key: 'restaurant', k: 1, small: restaurant640, large: restaurant1100, mobile: restaurantM420, name: 'Restaurant', jump: 'restaurant' },
 ]
 
 export default function HeroFan() {

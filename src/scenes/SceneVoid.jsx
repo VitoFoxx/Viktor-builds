@@ -1,5 +1,8 @@
 import ScrollHint from '../components/ScrollHint.jsx'
-import { brand, hero, result } from '../site/content.js'
+import HeroFan from '../components/HeroFan.jsx'
+import { FrameChrome } from '../components/BrowserFrame.jsx'
+import SiteDemo from '../site/SiteDemo.jsx'
+import { brand, hero } from '../site/content.js'
 
 // The claim is set in capitals; CSS would spell ß as SS ("MASS").
 const capitalSharpS = (text) => text.replace(/ß/g, 'ẞ')
@@ -7,14 +10,11 @@ const capitalSharpS = (text) => text.replace(/ß/g, 'ẞ')
 /**
  * Scene 01: the opening. Clarity first: who (VITOWORKS), what (websites
  * nach Maß), for whom (Unternehmen), why (they bring customers to act),
- * and the two ways on. The website itself sits in `.hero__visual`: the
- * slot only marks the place, the real browser frame (Scene 02) and the
- * design study (Scene 03) are laid into it by the stage timeline, so the
- * website seen first is the one the visitor later builds and enters.
- * Two more studies fan out behind it (HeroFan, inside the frame).
- *
- * `.void__type` is not part of the opening: RESULT brings the brand and
- * the closing claim back here at the end of the stage.
+ * and the two ways on. On the right the metalwork study in its browser
+ * frame, the website the visitor sees being built next (Scene 02); three
+ * more studies fan out behind it (HeroFan). The study is laid out at the
+ * screen's width and scaled into the frame (IntroStage.jsx, --hero-s), so
+ * it is the same page as below, only smaller.
  */
 export default function SceneVoid() {
   return (
@@ -53,7 +53,7 @@ export default function SceneVoid() {
           <a className="hero__cta" href="#kontakt">
             {hero.request} <span aria-hidden="true">→</span>
           </a>
-          <a className="hero__refs" href="#beispiele" data-jump="arrive">
+          <a className="hero__refs" href="#beispiele" data-jump="study">
             {hero.references}
           </a>
         </p>
@@ -61,22 +61,21 @@ export default function SceneVoid() {
 
       <div className="hero__showcase">
         <div className="hero__visual" aria-hidden="true">
+          <HeroFan />
+          <span className="frame-shadow" />
+          <a className="hero-card frame" href="#beispiele" data-jump="study" tabIndex={-1}>
+            <FrameChrome />
+            <div className="hero-card__page">
+              <div className="hero-card__site site" data-brand="metallbau">
+                <SiteDemo />
+              </div>
+            </div>
+          </a>
           <p className="hero__example">{hero.example}</p>
         </div>
       </div>
 
       <ScrollHint />
-
-      <div className="void__type" aria-hidden="true">
-        <p className="void__title">
-          <span className="void__word">
-            <span className="void__mask">
-              <span className="void__word-inner">{brand.name}</span>
-            </span>
-          </span>
-        </p>
-        <p className="void__tagline">{result.claim.line}</p>
-      </div>
     </section>
   )
 }

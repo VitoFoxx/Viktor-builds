@@ -1,5 +1,3 @@
-import { LINE_IN, LINE_OUT, PART_OUT } from './flow.js'
-
 /**
  * Scene 07: Result. Appended to the master timeline at `businessEnd`,
  * where BUSINESS left the dark phone between the morning and the entry.
@@ -34,10 +32,10 @@ export function addResult(tl, stage, q, { isDesktop, device }) {
   tl.addLabel('result', 'businessEnd')
     .to(
       q('.business__message, .business__time, .business__entry'),
-      { autoAlpha: 0, y: LINE_OUT, duration: 0.5, ease: 'power1.in' },
+      { autoAlpha: 0, duration: 0.5, ease: 'power1.in' },
       'result',
     )
-    .to(q('.device__site, .device__clock'), { autoAlpha: 0, y: PART_OUT, duration: 0.4, ease: 'power1.in' }, 'result+=0.05')
+    .to(q('.device__site, .device__clock'), { autoAlpha: 0, duration: 0.4, ease: 'power1.in' }, 'result+=0.05')
     // The next website is the visitor's.
     .to(contexts[contexts.length - 2], { yPercent: -110, duration: 0.5, ease: 'power2.in' }, 'result+=0.15')
     .fromTo(
@@ -77,7 +75,7 @@ export function addResult(tl, stage, q, { isDesktop, device }) {
     .to(q('.void__word-inner'), { yPercent: 0, duration: 1.0, stagger: 0.09, ease: 'power4.out' }, 'claim+=0.3')
     .fromTo(
       tagline,
-      { autoAlpha: 0, y: LINE_IN },
+      { autoAlpha: 0, y: 14 },
       { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power3.out', immediateRender: false },
       'claim+=0.75',
     )

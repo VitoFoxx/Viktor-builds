@@ -60,16 +60,18 @@
 }
 
 html {
-  /* Scrollbar: dark on the opening's paper, light once the page turns
-     anthracite. IntroStage.jsx sets data-tone as the visitor scrolls. */
-  --scrollbar-thumb: var(--c-ink);
+  /* Scrollbar: the page's red. On the opening's paper the red of its
+     button, once the page turns anthracite the lighter red of its marks
+     there (full stops, rules). IntroStage.jsx sets data-tone as the
+     visitor scrolls. */
+  --scrollbar-thumb: var(--c-accent);
   --scrollbar-track: var(--c-paper);
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
 html[data-tone='dark'] {
-  --scrollbar-thumb: var(--c-fg);
+  --scrollbar-thumb: var(--c-accent-light);
   --scrollbar-track: var(--c-bg);
 }
 

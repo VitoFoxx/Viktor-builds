@@ -60,16 +60,19 @@ export function createReveals(q) {
     fadeUp(tl, q('.visibility__lead'), 0.35)
   }
   {
+    // Each figure counts as it comes up itself: on a phone they stand one
+    // below the other. Side by side (one row) they follow one another, a
+    // few steps of scroll apart; the start is read again on every refresh.
     const facts = q('.fact')
-    const tl = group(q('.visibility__facts')[0], 'top 90%', 'top 45%')
-    facts.forEach((fact, i) => {
-      const t = i * 0.14
+    facts.forEach((fact) => {
+      const col = () => facts.filter((f) => f.offsetTop === fact.offsetTop).indexOf(fact)
+      const tl = group(fact, () => `top ${92 - col() * 5}%`, () => `top ${52 - col() * 5}%`)
       const num = fact.querySelector('.fact__num')
       // From the markup's data, not the text: the text is what we count.
       const value = Number(num.dataset.value)
       const counter = { v: 0 }
-      tl.fromTo(fact, { '--rule': 0 }, { '--rule': 1, duration: 0.8, ease: 'power2.inOut' }, t)
-        .fromTo(fact.querySelector('.fact__value'), { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.7 }, t + 0.2)
+      tl.fromTo(fact, { '--rule': 0 }, { '--rule': 1, duration: 0.8, ease: 'power2.inOut' }, 0)
+        .fromTo(fact.querySelector('.fact__value'), { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.7 }, 0.2)
         .fromTo(
           counter,
           { v: 0 },
@@ -79,9 +82,9 @@ export function createReveals(q) {
             ease: 'power2.out',
             onUpdate: () => (num.textContent = Math.round(counter.v)),
           },
-          t + 0.2,
+          0.2,
         )
-      fadeUp(tl, fact.querySelectorAll('.fact__text, .fact__source'), t + 0.55, 0.08)
+      fadeUp(tl, fact.querySelectorAll('.fact__text, .fact__source'), 0.55, 0.08)
     })
   }
 

@@ -129,6 +129,9 @@
   left: 0;
   right: 0;
   bottom: 0;
+  /* A page waiting to the right of the screen must not widen the page
+     around the phone (on a phone it could be pushed sideways). */
+  overflow: clip;
 }
 
 .pd-page {

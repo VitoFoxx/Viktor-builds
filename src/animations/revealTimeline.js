@@ -1,34 +1,19 @@
-import { gsap, ScrollTrigger } from './gsap.js'
+import { gsap } from './gsap.js'
+import { SCRUB } from './along.js'
 
 /**
- * The part after the pinned stage (Scene 07, normal page flow) keeps the
- * stage's vocabulary instead of turning into a plain page: headlines rise
- * from below a mask, rules draw themselves, the figures count up, and the
- * offer and the steps are built as in Scene 02: grey placeholder lines
- * first, then the text takes their place.
+ * Scene 07 (normal page flow) in the story's vocabulary: the ring rises,
+ * headlines rise from below a mask, rules draw themselves, the figures
+ * count up, and the offer and the steps are built as in Scene 02: grey
+ * placeholder lines first, then the text takes their place.
  *
- * Each group plays whenever it comes into view, from below or from above.
- * Once it has left the screen completely, it is set back to its start, so
- * it builds again the next time. Reduced motion: nothing here runs
- * (SceneResult.jsx).
+ * Like the story, every group is bound to the scroll: it builds while it
+ * comes up from the bottom edge of the screen, and runs backwards when the
+ * visitor scrolls back. Reduced motion: nothing here runs (SceneResult.jsx).
  */
 export function createReveals(q) {
-  const group = (trigger, start = 'top 82%', onReset) => {
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' }, paused: true })
-    // A fast jump can pass a trigger in one step: act only on where the
-    // page actually is.
-    const play = (self) => self.isActive && tl.play()
-    const reset = (self) => {
-      if (self.isActive) return
-      tl.pause(0)
-      onReset?.()
-    }
-    // In view: play (entering from below, or from above when scrolling up).
-    ScrollTrigger.create({ trigger, start, end: 'bottom 18%', onEnter: play, onEnterBack: play })
-    // Fully off screen: back to the start, out of sight.
-    ScrollTrigger.create({ trigger, start: 'top bottom', end: 'bottom top', onLeave: reset, onLeaveBack: reset })
-    return tl
-  }
+  const group = (trigger, start = 'top 92%', end = 'top 52%') =>
+    gsap.timeline({ defaults: { ease: 'power3.out' }, scrollTrigger: { trigger, start, end, scrub: SCRUB } })
 
   // A headline rises from its baseline, as the lines over the stage do.
   const rise = (tl, targets, at = 0) =>
@@ -59,6 +44,14 @@ export function createReveals(q) {
     })
   }
 
+  /* ── The ring: the address, the brand, the closing claim ── */
+  {
+    const tl = group(q('.result__ring')[0], 'top 85%', 'center 50%')
+    fadeUp(tl, q('.result__context, .result__address'), 0, 0.1)
+    tl.fromTo(q('.result__name-inner'), { yPercent: 110 }, { yPercent: 0, duration: 1.0, ease: 'power3.out' }, 0.25)
+    fadeUp(tl, q('.result__claim'), 0.75)
+  }
+
   /* ── Sichtbarkeit ─────────────────────────────────────── */
   {
     const tl = group(q('.visibility')[0])
@@ -68,9 +61,7 @@ export function createReveals(q) {
   }
   {
     const facts = q('.fact')
-    const nums = q('.fact__num')
-    // Rendering back to the start does not run the counters: zero them.
-    const tl = group(q('.visibility__facts')[0], 'top 85%', () => nums.forEach((num) => (num.textContent = 0)))
+    const tl = group(q('.visibility__facts')[0], 'top 90%', 'top 45%')
     facts.forEach((fact, i) => {
       const t = i * 0.14
       const num = fact.querySelector('.fact__num')
@@ -87,7 +78,6 @@ export function createReveals(q) {
             duration: 1.5,
             ease: 'power2.out',
             onUpdate: () => (num.textContent = Math.round(counter.v)),
-            onComplete: () => (num.textContent = value),
           },
           t + 0.2,
         )
@@ -111,7 +101,7 @@ export function createReveals(q) {
 
   /* ── Leistungen: built like the website in Scene 02 ───── */
   {
-    const tl = group(q('.result__offer')[0], 'top 85%')
+    const tl = group(q('.result__offer')[0], 'top 90%', 'top 40%')
     build(tl, q('.offer'), 0, { rule: true, parts: '.offer__title, .offer__text' })
     tl.fromTo(q('.offer__n'), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4, stagger: 0.12 }, 0.2)
     fadeUp(tl, q('.result__services'), 1.2)
@@ -125,7 +115,7 @@ export function createReveals(q) {
   }
   {
     const steps = q('.flow__step')
-    const tl = group(q('.flow__steps')[0], 'top 85%')
+    const tl = group(q('.flow__steps')[0], 'top 90%', 'top 45%')
     steps.forEach((step, i) => {
       const t = i * 0.28
       tl.fromTo(step.querySelector('.flow__n'), { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.5 }, t)

@@ -1,0 +1,130 @@
+/* ─────────────────────────────────────────────────────────────
+   Scene 02 – 04: from the idea to the website, and through it.
+   Viktor's line and label in his own type; the study only ever
+   inside its browser frame. The same layout with and without
+   motion; motion adds the plan over the first screen and the
+   browser bar that stays at the top while the page passes.
+   ───────────────────────────────────────────────────────────── */
+
+.scene.scene--interface {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 0;
+  padding: clamp(5rem, 16svh, 10rem) var(--gutter) clamp(4rem, 12svh, 8rem);
+}
+
+.interface__message {
+  margin-bottom: clamp(1.25rem, 3.5svh, 2rem);
+  font-size: var(--fs-line);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  text-align: center;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.interface__message-a {
+  color: var(--c-muted);
+}
+
+.interface__message-a,
+.interface__message-b {
+  display: inline-block;
+}
+
+.interface__message-b span:first-child {
+  color: var(--c-muted);
+}
+
+/* The lines' full stop: the one red letter, as in the opening claim. */
+.line__stop {
+  color: var(--c-accent-light);
+}
+
+/* What the visitor is looking at, with the red rule of the opening's
+   eyebrow: an example of the work, never a page of its own. */
+.study__label {
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  margin-bottom: clamp(1rem, 2.6svh, 1.5rem);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.study__label::before {
+  content: '';
+  width: 1.75rem;
+  height: 1px;
+  background: var(--c-accent-light);
+}
+
+/* The browser frame, in the flow and as tall as the page it shows.
+   `clip` (not `hidden`) keeps the corners round without making the frame
+   a scroll container, so the browser bar can stay on screen (sticky). */
+.study.frame {
+  /* One screen of the study: the frame's page area at 16 : 10 (mobile
+     3 : 5), the same box the plan is drawn in (BrowserFrame.css). */
+  --screen-h: calc(100cqw * 10 / 16 - 3.4cqw - 2px);
+
+  position: relative;
+  inset: auto;
+  display: block;
+  width: var(--frame-w);
+  overflow: clip;
+}
+
+.study .frame__chrome {
+  position: sticky;
+  z-index: 3;
+  top: 0;
+  background: var(--c-surface);
+}
+
+.study__page {
+  position: relative;
+}
+
+.study__content {
+  container-type: inline-size;
+  background: var(--brand-bg);
+}
+
+/* The plan: only in motion, over the first screen. */
+.study .frame__page {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .study.frame {
+    --screen-h: calc(100cqw * 5 / 3 - 9cqw - 2px);
+  }
+
+  .interface__message-a,
+  .interface__message-b {
+    display: inline;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .study .site-hero {
+    height: var(--screen-h);
+    min-height: 0;
+  }
+
+  .study .frame__page {
+    display: flex;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--screen-h);
+    background: var(--c-surface);
+  }
+}

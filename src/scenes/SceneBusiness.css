@@ -3,7 +3,7 @@
    type; the practice only ever inside the device.
    Base layout = reduced motion: the line, then the evening (time and
    the phone with the sent request) next to the morning (time and the
-   entry).
+   entry). The pin and the hold only exist in motion.
    ───────────────────────────────────────────────────────────── */
 
 .scene.scene--business {
@@ -22,6 +22,14 @@
   justify-items: center;
   row-gap: clamp(1.25rem, 3.5svh, 2rem);
   padding: clamp(4rem, 12svh, 8rem) var(--gutter);
+}
+
+.business__pin {
+  display: contents;
+}
+
+.business__hold {
+  display: none;
 }
 
 .business__message {
@@ -271,18 +279,17 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Motion layout: a layer of the pinned stage over ADAPT's last
-   state. The phone stands where the frame stood, the line above it,
-   the time to its left and the entry to its right (on mobile: the
-   time below it, the entry where the phone was).
-   businessTimeline.js starts every part on the frame and the
-   practice's desktop page and moves it here.
+   Motion layout: the scene comes up from below, then its screen
+   (.business__pin, sticky) holds for the length of .business__hold
+   while the request is made, and moves on upwards. In that screen
+   the phone stands in the middle, the line above it, the time to its
+   left and the entry to its right (on mobile: the time below it, the
+   entry follows below the screen). businessTimeline.js.
    ───────────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: no-preference) {
   .time__hint {
     display: block;
-    visibility: hidden;
     font-size: 0.875rem;
     line-height: 1.45;
     color: var(--c-muted);
@@ -298,20 +305,30 @@
     background: var(--c-accent-light);
   }
 
-  .stage > .scene--business {
-    z-index: 5;
-    display: block;
-    padding: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
   .scene.scene--business {
     /* Narrow (portrait) screens keep room for the time and the entry. */
     --phone-h: min(72svh, 46rem, 74vw);
     --phone-w: calc(var(--phone-h) / 2.05);
     --phone-top: calc(50% - var(--phone-h) / 2 + 2svh);
     --side-gap: clamp(2rem, 5.5vw, 6rem);
+
+    display: block;
+    justify-items: stretch;
+    min-height: 0;
+    margin-top: clamp(4rem, 12svh, 8rem);
+    padding: 0;
+  }
+
+  .business__pin {
+    display: block;
+    position: sticky;
+    top: 0;
+    height: 100svh;
+  }
+
+  .business__hold {
+    display: block;
+    height: 170svh;
   }
 
   .business__message {
@@ -321,13 +338,8 @@
     bottom: calc(100% - var(--phone-top) + clamp(1.25rem, 3.5svh, 2.25rem));
   }
 
-  .device__shell {
-    inset: -50vmax;
-  }
-
   .business__device {
     position: absolute;
-    visibility: hidden;
     top: var(--phone-top);
     left: calc(50% - var(--phone-w) / 2);
   }
@@ -371,6 +383,13 @@
   .scene.scene--business {
     --phone-h: min(62svh, 36rem);
     --phone-top: calc(50% - var(--phone-h) / 2 - 1.5svh);
+
+    /* Room for the entry, which follows below the held screen. */
+    padding-bottom: 22rem;
+  }
+
+  .business__hold {
+    height: 130svh;
   }
 
   .business__time {
@@ -402,13 +421,13 @@
     display: none;
   }
 
-  /* In the morning the phone moves up, the entry takes its place. */
+  /* Just below the held screen: it comes up as the scene moves on. */
   .business__entry {
     left: var(--gutter);
     right: var(--gutter);
     width: auto;
-    top: calc(var(--phone-top) + var(--phone-h) * 0.42);
-    height: calc(var(--phone-h) * 0.58);
+    top: calc(100% + 2rem);
+    height: auto;
     justify-content: flex-start;
   }
 

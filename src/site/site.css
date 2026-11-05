@@ -1,7 +1,7 @@
 /* ─────────────────────────────────────────────────────────────
-   The demo client website (Scene 03 / 04): one short page in the
-   brand's tokens. Viktor's own layer around it (statement, caption,
-   context line) lives in SceneExperience.css.
+   The demo client website (Scene 01 – 04): one short page in the
+   brand's tokens. Viktor's own layer around it (line, label, frame)
+   lives in SceneInterface.css.
    Base rules = static final state, which is also the reduced-motion
    layout. Motion-only layout lives at the bottom.
    ───────────────────────────────────────────────────────────── */
@@ -81,14 +81,9 @@ img.site-photo,
 }
 
 /* ── Hero ───────────────────────────────────────────────────────
-   Sized in cqw of the viewport-wide .portal__content, with the same
-   numbers as the mock in BrowserFrame.css. Scaled down to the frame's
-   page area, both grids coincide. */
-
-.portal__content {
-  container-type: inline-size;
-  background: var(--brand-bg);
-}
+   Sized in cqw of its container (.study__content, .hero-card__site),
+   with the same numbers as the mock in BrowserFrame.css, so the plan
+   and the page share one grid. */
 
 .site-hero {
   display: flex;
@@ -454,38 +449,9 @@ img.site-photo,
   }
 }
 
-/* Short phones: the facts row would fall below the fold of the pinned hero. */
+/* Short phones: the facts row would not fit the study's first screen. */
 @media (max-width: 767.98px) and (max-height: 700px) {
   .site-facts {
     display: none;
-  }
-}
-
-/* ─────────────────────────────────────────────────────────────
-   Motion layout. GSAP drives these states (portalTimeline.js,
-   experienceTimeline.js).
-   ───────────────────────────────────────────────────────────── */
-
-@media (prefers-reduced-motion: no-preference) {
-  .portal__content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  /* The hero is exactly one screen; the rest of the page sits below it
-     and is "scrolled" by moving .site-demo (experienceTimeline.js). */
-  .stage .site-hero {
-    /* One screen; inside the opening's frame, the frame's page height
-       (stageTimeline.js). */
-    height: var(--site-hero-h, 100svh);
-    min-height: 0;
-  }
-
-  /* Keeps the last row clear of Viktor's context line. */
-  .stage .site-details {
-    padding-bottom: max(8cqw, 4rem);
   }
 }

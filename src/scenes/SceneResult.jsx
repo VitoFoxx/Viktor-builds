@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { gsap, useGSAP } from '../animations/gsap.js'
 import { createReveals } from '../animations/revealTimeline.js'
 import ProjectRequest from '../components/ProjectRequest.jsx'
-import { result, visibility, flow, request, contact, footer } from '../site/content.js'
+import { brand, result, visibility, flow, request, contact, footer, yours } from '../site/content.js'
 import portrait480 from '../assets/about/viktor-portrait-480.webp'
 import portrait960 from '../assets/about/viktor-portrait-960.webp'
 import './SceneResult.css'
@@ -10,15 +10,11 @@ import './SceneResult.css'
 const Legal = ({ href, children }) => (href ? <a href={href}>{children}</a> : <span>{children}</span>)
 
 /**
- * Scene 07: Result, the part after the pinned stage. The stage has just
- * closed the ring (ihr-unternehmen.de → VITOWORKS / WEBSITES, DIE KUNDEN ZUM HANDELN BRINGEN.);
- * here VITOWORKS says plainly what it offers, and the request at the end
- * is the one thing to do. Normal page flow, so the request is comfortable
- * to fill in. Its parts arrive in the stage's vocabulary
- * (revealTimeline.js); the form itself never moves while in use.
- *
- * Without motion the stage has no ring closure, so the section opens with
- * it in plain type.
+ * Scene 07: Result. It opens by closing the ring (ihr-unternehmen.de →
+ * VITOWORKS / WEBSITES, DIE KUNDEN ZUM HANDELN BRINGEN.); then VITOWORKS
+ * says plainly what it offers, and the request at the end is the one
+ * thing to do. Its parts come up in the story's vocabulary as they enter
+ * from below (revealTimeline.js); the form itself never moves while in use.
  */
 export default function SceneResult() {
   const root = useRef(null)
@@ -40,8 +36,14 @@ export default function SceneResult() {
   return (
     <section className="result" aria-labelledby="result-title" ref={root}>
       <div className="result__ring">
+        {/* The count of the story's websites ends on the visitor's own. */}
+        <p className="result__context">
+          {brand.name} <span aria-hidden="true">—</span> {yours.context}
+        </p>
         <p className="result__address">{result.claim.address}</p>
-        <p className="result__name">{result.claim.name}</p>
+        <p className="result__name">
+          <span className="result__name-inner">{result.claim.name}</span>
+        </p>
         <p className="result__claim">{result.claim.line}</p>
       </div>
 

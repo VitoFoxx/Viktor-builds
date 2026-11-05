@@ -1,9 +1,9 @@
 /* ─────────────────────────────────────────────────────────────
    Scene 05: Adapt. Viktor's line and context in his own type; each
    design study only ever inside its page (.adapt__page).
-   Base layout = reduced motion: a dark section with the line and the
-   three studies one below the other, each in a static browser frame
-   under its context line.
+   The line, then the three studies one below the other, each in a
+   browser frame under its context line; the same with and without
+   motion (adaptTimeline.js builds each one as it comes in).
    ───────────────────────────────────────────────────────────── */
 
 .scene.scene--adapt {
@@ -49,11 +49,9 @@
   color: var(--c-muted);
 }
 
-.adapt__clip {
-  width: min(100%, 1120px);
-}
-
 .adapt__content {
+  width: var(--frame-w);
+  margin-top: clamp(1.5rem, 5svh, 3rem);
   display: flex;
   flex-direction: column;
   gap: clamp(3rem, 9svh, 5rem);
@@ -75,55 +73,19 @@
   color: var(--c-muted);
 }
 
-/* Static browser frame around each study. */
+/* Browser frame around each study (bar: FrameChrome, BrowserFrame.css). */
 .adapt__page {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--c-line-strong);
   border-radius: var(--radius-frame);
+  background: var(--c-surface);
   container-type: inline-size;
-}
-
-.adapt__page::before {
-  content: '';
-  display: block;
-  height: 2.25rem;
-  background: var(--c-surface-raised);
-  border-bottom: 1px solid var(--c-line);
 }
 
 .adapt__site {
   position: relative;
   background: var(--brand-bg);
-}
-
-/* The page's ground in motion (laid during its rebuild). */
-.adapt__bg {
-  display: none;
-  position: absolute;
-  inset: 0;
-  background: var(--brand-bg);
-}
-
-.adapt__skeleton {
-  display: none;
-}
-
-/* Placeholder tone while a page is taken apart (--ph-from: on the old
-   ground) and once the new ground is laid (--ph-to). */
-.adapt__layer--restaurant {
-  --ph-from: rgb(36 30 26);
-  --ph-to: rgb(36 30 26);
-}
-
-.adapt__layer--salon {
-  --ph-from: rgb(36 26 21);
-  --ph-to: rgb(236 238 232);
-}
-
-.adapt__layer--dental {
-  --ph-from: rgb(236 238 232);
-  --ph-to: rgb(20 33 44);
 }
 
 @media (max-width: 767.98px) {
@@ -136,190 +98,4 @@
     margin-inline: auto;
     text-wrap: balance;
   }
-}
-
-/* ─────────────────────────────────────────────────────────────
-   Motion layout: a layer of the pinned stage over Scene 04's exit
-   state. adaptTimeline.js clips it to the frame's page area and
-   scales the screen-sized content into it, like the portal. The
-   three pages lie on top of each other, the next one above.
-   ───────────────────────────────────────────────────────────── */
-
-@media (prefers-reduced-motion: no-preference) {
-  .stage > .scene--adapt {
-    z-index: 4;
-    display: block;
-    padding: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  /* The frame at its exit scale, centred like the frame itself, so the
-     line sits just above it (as Scene 02's line sits above the frame). */
-  .adapt__anchor {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: calc(var(--frame-w) * var(--exit-scale));
-    aspect-ratio: 16 / 10;
-    translate: -50% -50%;
-  }
-
-  .adapt__message {
-    position: absolute;
-    /* The screen's width, less the gutters, around the frame's centre. */
-    left: calc(50% - 50vw + var(--gutter));
-    right: calc(50% - 50vw + var(--gutter));
-    bottom: 100%;
-    margin-bottom: clamp(1.25rem, 3.5svh, 2.25rem);
-  }
-
-  /* Shown by the shared context line in Scene 04 instead (it counts on). */
-  .adapt__context {
-    display: none;
-  }
-
-  .adapt__clip {
-    position: absolute;
-    inset: 0;
-    width: auto;
-  }
-
-  .adapt__content {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    container-type: inline-size;
-    /* At least the frame's page area (see restaurant.css): on screens
-       wider than 16:10 the screen is shorter than the page area. */
-    min-height: 59cqw;
-  }
-
-  .adapt__layer,
-  .adapt__page {
-    position: absolute;
-    inset: 0;
-  }
-
-  .adapt__page {
-    border: 0;
-    border-radius: 0;
-    overflow: visible;
-  }
-
-  .adapt__page::before {
-    content: none;
-  }
-
-  /* Each ground is laid during its rebuild (adaptTimeline.js). */
-  .adapt__site {
-    background: none;
-  }
-
-  .adapt__bg {
-    display: block;
-    visibility: hidden;
-  }
-
-  /* Placeholders of Scene 02: plain fields in the page's tone, moved and
-     sized by transform from a 100 × 100 px box (adaptTimeline.js). */
-  .adapt__skeleton {
-    display: block;
-    position: absolute;
-    inset: 0;
-    color: var(--ph-from);
-  }
-
-  .adapt__block {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100px;
-    height: 100px;
-    transform-origin: 0 0;
-    background: color-mix(in srgb, currentColor 10%, transparent);
-    visibility: hidden;
-  }
-
-  .adapt__block--image {
-    background: color-mix(in srgb, currentColor 17%, transparent);
-  }
-
-  .adapt__block--line {
-    background: color-mix(in srgb, currentColor 16%, transparent);
-  }
-
-  /* The new grid, shown briefly while the placeholders re-plan. */
-  .adapt__guide {
-    position: absolute;
-    background: color-mix(in srgb, currentColor 28%, transparent);
-    visibility: hidden;
-  }
-
-  .adapt__guide--h {
-    left: 0;
-    right: 0;
-    height: 1px;
-  }
-
-  .adapt__guide--v {
-    top: 0;
-    bottom: 0;
-    width: 1px;
-  }
-
-  /* Restaurant: the kitchen photo's lower edge; gutter, menu, its end,
-     the cook (restaurant.css). */
-  .adapt__layer--restaurant .adapt__guide--h { top: 34cqw; }
-  .adapt__layer--restaurant .adapt__guide--v0 { left: 4.4cqw; }
-  .adapt__layer--restaurant .adapt__guide--v1 { left: 30cqw; }
-  .adapt__layer--restaurant .adapt__guide--v2 { left: 66cqw; }
-  .adapt__layer--restaurant .adapt__guide--v3 { left: 74cqw; }
-
-  /* Barbershop: the board's top; razor and index, board, prices, room
-     (salon.css). */
-  .adapt__layer--salon .adapt__guide--h { top: 11.4cqw; }
-  .adapt__layer--salon .adapt__guide--v0 { left: 14.5cqw; }
-  .adapt__layer--salon .adapt__guide--v1 { left: 18.6cqw; }
-  .adapt__layer--salon .adapt__guide--v2 { left: 41.5cqw; }
-  .adapt__layer--salon .adapt__guide--v3 { left: 63cqw; }
-
-  /* Practice: under the navigation; the two columns, the photos
-     (dental.css). */
-  .adapt__layer--dental .adapt__guide--h { top: 10.6cqw; }
-  .adapt__layer--dental .adapt__guide--v0 { left: 4.4cqw; }
-  .adapt__layer--dental .adapt__guide--v1 { left: 50cqw; }
-  .adapt__layer--dental .adapt__guide--v2 { left: 77cqw; }
-  .adapt__layer--dental .adapt__guide--v3 { left: 79cqw; }
-}
-
-@media (max-width: 767.98px) and (prefers-reduced-motion: no-preference) {
-  .adapt__content {
-    min-height: 163cqw;
-  }
-
-  .adapt__anchor {
-    aspect-ratio: 3 / 5;
-  }
-
-  .adapt__layer--restaurant .adapt__guide--h { top: 74cqw; }
-  .adapt__layer--restaurant .adapt__guide--v0 { left: 6cqw; }
-  .adapt__layer--restaurant .adapt__guide--v1 { left: 56cqw; }
-  .adapt__layer--restaurant .adapt__guide--v2 { left: 62cqw; }
-  .adapt__layer--restaurant .adapt__guide--v3 { left: auto; right: 6cqw; }
-
-  .adapt__layer--salon .adapt__guide--h { top: 75cqw; }
-  .adapt__layer--salon .adapt__guide--v0 { left: 6cqw; }
-  .adapt__layer--salon .adapt__guide--v1 { left: 36cqw; }
-  .adapt__layer--salon .adapt__guide--v2 { left: 48cqw; }
-  .adapt__layer--salon .adapt__guide--v3 { left: auto; right: 6cqw; }
-
-  .adapt__layer--dental .adapt__guide--h { top: 23cqw; }
-  .adapt__layer--dental .adapt__guide--v0 { left: 6cqw; }
-  .adapt__layer--dental .adapt__guide--v1 { left: 61cqw; }
-  .adapt__layer--dental .adapt__guide--v2 { left: 63cqw; }
-  .adapt__layer--dental .adapt__guide--v3 { left: auto; right: 6cqw; }
 }

@@ -6,10 +6,9 @@ let introDone = false
 
 /**
  * Load intro for the opening. Animates only *inner* elements, so it never
- * fights the scroll timeline, which animates their wrappers (.hero__bar,
- * .hero__copy, .hero__visual, the frame wrap and the site's clip). The fan
- * shares one element with it, on separate properties (--fan-in here,
- * --fan-out and opacity there).
+ * fights the scroll motion, which moves their wrappers (.hero__copy,
+ * .hero__showcase). The fan shares one element with it, on separate
+ * properties (--fan-in here, --fan-out there).
  */
 export function createIntroTimeline(q) {
   if (introDone) return null
@@ -23,13 +22,13 @@ export function createIntroTimeline(q) {
     .fromTo(q('.hero__eyebrow'), { '--rule': 0 }, { '--rule': 1, duration: 0.6, ease: 'power3.inOut', immediateRender: true }, 0.55)
     .from(q('.hero__stop'), { scale: 0, duration: 0.55, ease: 'back.out(3)' }, 0.8)
     // The website appears as one object: frame and page together.
-    .from(q('.frame, .portal__content'), { autoAlpha: 0, duration: 1.1, ease: 'power1.out' }, 0.45)
+    .from(q('.hero-card, .frame-shadow'), { autoAlpha: 0, duration: 1.1, ease: 'power1.out' }, 0.45)
     // Then the two studies fan out from behind it.
     .from(q('.hero-fan__card'), { autoAlpha: 0, duration: 0.4, stagger: 0.12, ease: 'power1.out' }, 1.05)
     .from(q('.hero-fan'), { '--fan-in': 0, duration: 1.4, ease: 'expo.out' }, 1.05)
     .from(q('.hero__example, .scroll-hint__inner'), { autoAlpha: 0, duration: 0.8, ease: 'power1.out' }, 1.3)
-    // A hint that the website moves: it lifts once and settles. On the
-    // `translate` property, so it adds to the scroll timeline's transforms.
-    .to(q('.scene--interface, .scene--site'), { translate: '0 -14px', duration: 0.5, ease: 'power2.out' }, 2.5)
-    .to(q('.scene--interface, .scene--site'), { translate: '0 0px', duration: 0.8, ease: 'power2.inOut', clearProps: 'translate' }, 3.0)
+    // A hint that the page moves: the website lifts once and settles. On
+    // the `translate` property, so it adds to the scroll motion's transform.
+    .to(q('.hero__showcase'), { translate: '0 -14px', duration: 0.5, ease: 'power2.out' }, 2.5)
+    .to(q('.hero__showcase'), { translate: '0 0px', duration: 0.8, ease: 'power2.inOut', clearProps: 'translate' }, 3.0)
 }

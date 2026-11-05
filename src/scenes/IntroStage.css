@@ -1,19 +1,13 @@
 /* ─────────────────────────────────────────────────────────────
-   Base layout = static final state of both scenes.
-   This is what reduced-motion visitors see: two calm sections.
-   The cinematic (pinned, layered) layout is added further below.
+   The story's sections, one below the other in the page flow, the
+   same with and without motion (stageTimeline.js adds the motion).
+   This file: the stage, the opening (Scene 01) and its website.
    ───────────────────────────────────────────────────────────── */
 
 .stage {
-  /* Frame size (Scene 02) and the scale the frame returns to after
-     Scene 04, where ADAPT takes over (read by experienceTimeline.js). */
+  /* Width of the study's browser frame (Scene 02 – 04): a band of
+     VITOWORKS stays on both sides. */
   --frame-w: min(80vw, 1120px, calc((100svh - 17rem) * 1.6));
-  --exit-scale: 0.75;
-  /* Bands of VITOWORKS around the study while it plays (Scene 03 / 04,
-     read by portalTimeline.js). Pixels, so the script can read them. */
-  --demo-top: 112px;
-  --demo-side: 160px;
-  --demo-bottom: 88px;
 
   position: relative;
 }
@@ -236,8 +230,7 @@
     min-height: 88svh;
   }
 
-  .hero__showcase,
-  .void__type {
+  .hero__showcase {
     display: none;
   }
 }
@@ -283,109 +276,7 @@
   stroke-width: 1.5;
 }
 
-/* ── Ring closure (RESULT): brand and closing claim ─────────────
-   Hidden until the end of the stage, then centred on the dark stage. */
-
-.void__type {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: var(--gutter);
-  color: var(--c-fg);
-  text-align: center;
-  pointer-events: none;
-}
-
-.void__title {
-  font-size: var(--fs-display);
-  font-weight: 600;
-  line-height: 0.86;
-  letter-spacing: var(--tracking-display);
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.void__word,
-.void__tagline {
-  visibility: hidden;
-  opacity: 0;
-}
-
-.void__word {
-  display: block;
-}
-
-.void__mask {
-  display: block;
-  clip-path: inset(-0.5em -0.5em 0 -0.5em);
-}
-
-.void__word-inner {
-  display: block;
-}
-
-.void__tagline {
-  max-width: 90vw;
-  margin-top: clamp(1.5rem, 3.2vw, 2.75rem);
-  font-size: clamp(0.9375rem, 1.6vw, 1.5rem);
-  font-weight: 500;
-  letter-spacing: 0.24em;
-  /* Balances the trailing letter-spacing so the line sits optically centered. */
-  text-indent: 0.24em;
-  text-transform: uppercase;
-  text-wrap: balance;
-}
-
-/* ── Scene 02: From Idea to Interface ───────────────────────── */
-
-.interface__stack {
-  position: relative;
-}
-
-/* Sits above the frame without taking part in the centering, so the frame's
-   center is exactly the stage's center. */
-.interface__message {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 100%;
-  margin-bottom: clamp(1.25rem, 3.5svh, 2rem);
-  font-size: var(--fs-line);
-  font-weight: 600;
-  line-height: 0.98;
-  letter-spacing: -0.04em;
-  text-align: center;
-  text-transform: uppercase;
-  text-wrap: balance;
-}
-
-.interface__message-a {
-  color: var(--c-muted);
-}
-
-.interface__message-a,
-.interface__message-b {
-  display: inline-block;
-}
-
-.interface__message-b span:first-child {
-  color: var(--c-muted);
-}
-
-/* The lines' full stop: the one red letter, as in the opening claim. */
-.line__stop {
-  color: var(--c-accent-light);
-}
-
-.interface__frame-wrap {
-  position: relative;
-  width: var(--frame-w);
-  aspect-ratio: 16 / 10;
-}
-
+/* The website lies on the opening's paper: a soft contact shadow. */
 .frame-shadow {
   display: none;
   position: absolute;
@@ -396,13 +287,42 @@
     0 24px 48px -16px rgb(28 27 25 / 0.28);
 }
 
+/* The opening's website: the metalwork study, laid out at the screen's
+   width (--hero-w) and scaled into the frame (--hero-s, IntroStage.jsx),
+   its first screen as tall as the frame shows (--hero-h). A link to the
+   study below. */
+.hero-card {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hero-card__page {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.hero-card__site {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--hero-w, 100vw);
+  container-type: inline-size;
+  transform: scale(var(--hero-s, 0.4));
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+
+.hero-card__site .site-hero {
+  height: var(--hero-h, 100svh);
+  min-height: 0;
+}
+
 /* ── Medium widths: copy above, website below ───────────────── */
 
 @media (min-width: 768px) and (max-width: 1099.98px) {
-  .stage {
-    --demo-side: 64px;
-  }
-
   .scene.scene--void {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto auto 1fr;
@@ -431,6 +351,10 @@
   .hero__example {
     left: auto;
     right: 0;
+  }
+
+  .stage {
+    --frame-w: min(86vw, 1120px);
   }
 
   /* In the free space right of the actions. */
@@ -496,36 +420,13 @@
     display: none;
   }
 
-  .void__title {
-    font-size: clamp(3rem, 15.5vw, 6rem);
-  }
-
-  .void__tagline {
-    letter-spacing: 0.2em;
-    text-indent: 0.2em;
-  }
-
-  .interface__message-a,
-  .interface__message-b {
-    display: inline;
-  }
-
   .stage {
-    --frame-w: min(84vw, 400px, calc((100svh - 15rem) * 0.6));
-    --exit-scale: 0.78;
-    --demo-top: 76px;
-    --demo-side: 28px;
-    --demo-bottom: 56px;
-  }
-
-  .interface__frame-wrap {
-    aspect-ratio: 3 / 5;
+    --frame-w: min(86vw, 30rem);
   }
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Cinematic layout: all scenes layered on one pinned stage.
-   GSAP drives every state change from here (stageTimeline.js).
+   Motion: the opening shows its website (the fan, the study in front).
    ───────────────────────────────────────────────────────────── */
 
 /* Mobile, in motion: copy on top, the fan of websites fills the rest of
@@ -556,32 +457,6 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  /* Starts on the opening's paper; the stage turns anthracite as the
-     website is taken back to its plan (Scene 02). */
-  .stage {
-    height: 100svh;
-    overflow: hidden;
-    background: var(--c-paper);
-  }
-
-  .stage > .scene {
-    position: absolute;
-    inset: 0;
-    min-height: 0;
-  }
-
-  /* Above every layer, so its links stay usable; the empty parts let
-     clicks through. */
-  .stage > .scene--void {
-    z-index: 6;
-    background: none;
-    pointer-events: none;
-  }
-
-  .scene--void a {
-    pointer-events: auto;
-  }
-
   .frame-shadow {
     display: block;
   }
@@ -592,10 +467,9 @@
 }
 
 /* ── The fan: three more studies behind the opening's website ────
-   Inside the frame wrap, so the opening's slot transform places them with
-   the website. Each card is the frame's size, moved up and left by `--k`
-   steps; --fan-in (load intro) and --fan-out (first scroll) scale the
-   steps, both animated by GSAP. */
+   In the website's slot. Each card is the frame's size, moved up and
+   left by `--k` steps; --fan-in (load intro) and --fan-out (scrolling
+   away) scale the steps, both animated by GSAP. */
 
 .hero-fan {
   display: none;

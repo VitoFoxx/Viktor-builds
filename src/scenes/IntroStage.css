@@ -235,6 +235,13 @@
   }
 }
 
+/* A low window: the scroll hint takes the caption's place. */
+@media (min-width: 768px) and (max-height: 700px) {
+  .hero__example {
+    display: none;
+  }
+}
+
 /* Bottom right, under the website: where the eye lands after the
    frame. A line and an arrow, no box. */
 .scroll-hint {

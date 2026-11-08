@@ -49,6 +49,7 @@ const Choice = ({ type, name, options }) => (
 export default function ProjectRequest() {
   const id = useId()
   const [sent, setSent] = useState(null)
+  const [copied, setCopied] = useState(false)
   const confirmation = useRef(null)
 
   const onSubmit = (event) => {
@@ -69,6 +70,27 @@ export default function ProjectRequest() {
         <a className="request__again" href={sent}>
           {request.sent.again}
         </a>
+        {/* Webmail users have no mail program: give them the address itself. */}
+        {contact.email && (
+          <p className="request__fallback">
+            {request.sent.direct} <a href={`mailto:${contact.email}`}>{contact.email}</a>
+            {contact.phone && (
+              <>
+                {' '}
+                oder rufen Sie an: <a href={`tel:${contact.phoneHref || contact.phone}`}>{contact.phone}</a>
+              </>
+            )}
+            {navigator.clipboard && (
+              <button
+                className="request__copy"
+                type="button"
+                onClick={() => navigator.clipboard.writeText(contact.email).then(() => setCopied(true), () => {})}
+              >
+                {copied ? request.sent.copied : request.sent.copy}
+              </button>
+            )}
+          </p>
+        )}
       </div>
     )
   }
@@ -117,7 +139,15 @@ export default function ProjectRequest() {
         <button className="request__submit" type="submit">
           {request.submit} <span aria-hidden="true">→</span>
         </button>
-        <p className="request__note">{request.note}</p>
+        <p className="request__note">
+          {request.note}
+          {contact.privacyUrl && (
+            <>
+              {' '}
+              <a href={contact.privacyUrl}>{request.privacy}</a>
+            </>
+          )}
+        </p>
       </div>
     </form>
   )

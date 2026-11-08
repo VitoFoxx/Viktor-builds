@@ -658,6 +658,42 @@
   border-bottom: 1px solid var(--c-line-strong);
 }
 
+/* The plain way in, for visitors without a mail program. */
+.request__fallback {
+  margin-top: 1.25rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--c-muted);
+}
+
+.request__fallback a,
+.request__note a {
+  color: var(--c-fg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--c-line-strong);
+}
+
+.request__fallback a[href^='tel:'] {
+  white-space: nowrap;
+}
+
+.request__fallback a:hover,
+.request__note a:hover {
+  border-bottom-color: var(--c-accent-light);
+}
+
+.request__copy {
+  display: block;
+  min-height: 2.75rem;
+  margin-top: 0.5rem;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--c-accent-light);
+  font: inherit;
+  cursor: pointer;
+}
+
 /* ── Footer ─────────────────────────────────────────────────── */
 
 .footer {

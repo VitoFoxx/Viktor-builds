@@ -289,11 +289,15 @@ export const request = {
     },
   ],
   submit: 'Projekt anfragen',
-  note: 'Beim Absenden öffnet sich Ihr E-Mail-Programm mit der fertigen Nachricht. Gespeichert wird nichts.',
+  note: 'Beim Absenden öffnet sich Ihr E-Mail-Programm mit der fertigen Nachricht. Die Website selbst speichert nichts.',
+  privacy: 'Zum Datenschutz',
   sent: {
     title: ['Danke.', 'Ihre Anfrage ist fertig.'],
     text: 'Sie liegt in Ihrem E-Mail-Programm bereit. Bitte dort noch absenden.',
     again: 'Nicht geöffnet? Noch einmal öffnen',
+    direct: 'Kein E-Mail-Programm? Schreiben Sie direkt an',
+    copy: 'Adresse kopieren',
+    copied: 'Kopiert',
   },
   subject: 'Projektanfrage',
 }
@@ -304,8 +308,8 @@ export const contact = {
   phone: '+49 172 4756485',
   phoneHref: '+491724756485',
   region: 'Webdesign aus Hannover',
-  imprintUrl: '',
-  privacyUrl: '',
+  imprintUrl: '/impressum/',
+  privacyUrl: '/datenschutz/',
 }
 
 export const footer = {

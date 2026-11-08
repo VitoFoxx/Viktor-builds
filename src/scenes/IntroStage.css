@@ -320,9 +320,11 @@
   min-height: 0;
 }
 
-/* ── Medium widths: copy above, website below ───────────────── */
+/* ── Medium widths: copy above, website below ─────────────────
+   Only tall enough (≥ 740px): a short window keeps the two columns,
+   or the website would shrink to a postage stamp. */
 
-@media (min-width: 768px) and (max-width: 1099.98px) {
+@media (min-width: 768px) and (max-width: 1099.98px) and (min-height: 740px) {
   .scene.scene--void {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto auto 1fr;
@@ -555,7 +557,7 @@
   initial-value: 0;
 }
 
-@media (min-width: 768px) and (max-width: 1099.98px) and (prefers-reduced-motion: no-preference) {
+@media (min-width: 768px) and (max-width: 1099.98px) and (min-height: 740px) and (prefers-reduced-motion: no-preference) {
   .hero-fan {
     --fan-dx: 22%;
     --fan-dy: 6%;

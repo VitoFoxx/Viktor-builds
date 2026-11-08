@@ -5,6 +5,7 @@ import { createIntroTimeline } from '../animations/introTimeline.js'
 import { glideTo } from '../animations/scrollTo.js'
 import { enableDemoTouch } from '../animations/demoTouch.js'
 import { startSmoothScroll } from '../animations/smoothScroll.js'
+import { SCRUB } from '../animations/along.js'
 import SceneVoid from './SceneVoid.jsx'
 import SceneInterface from './SceneInterface.jsx'
 import SceneAdapt from './SceneAdapt.jsx'
@@ -75,6 +76,36 @@ export default function IntroStage() {
         }
         ScrollTrigger.addEventListener('refresh', restore)
       }
+
+      // From cream to anthracite as the visitor scrolls, never a cut: the
+      // opening and the section below share one colour, which darkens while
+      // that section comes up the screen. It stays light a while, passes the
+      // middle quickly and settles dark. The type on it (the opening's copy,
+      // the line and label below) switches from ink to light in one short
+      // step where both read alike, so it never fades into the grey.
+      // Bound to the scroll in every mode: a change of colour, no movement.
+      const token = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim()
+      const ink = { color: '--c-ink', '--c-ink': '--c-ink', '--c-ink-muted': '--c-ink-muted', '--c-ink-line': '--c-ink-line', '--c-fg': '--c-ink', '--c-muted': '--c-ink-muted' }
+      const light = { color: '--c-fg', '--c-ink': '--c-fg', '--c-ink-muted': '--c-muted', '--c-ink-line': '--c-line', '--c-fg': '--c-fg', '--c-muted': '--c-muted' }
+      const resolve = (set) => Object.fromEntries(Object.entries(set).map(([key, name]) => [key, token(name)]))
+      const next = q('.scene--interface')[0]
+      gsap
+        .timeline({
+          defaults: { ease: 'none' },
+          scrollTrigger: { trigger: next, start: 'top bottom', end: 'top 35%', scrub: SCRUB },
+        })
+        .fromTo(
+          [q('.scene--void')[0], next],
+          { backgroundColor: token('--c-paper') },
+          { backgroundColor: token('--c-bg'), duration: 1, ease: 'power2.inOut' },
+          0,
+        )
+        .fromTo(
+          q('.hero__bar, .hero__copy, .scroll-hint, .interface__message, .study__label'),
+          resolve(ink),
+          { ...resolve(light), duration: 0.04 },
+          0.48,
+        )
 
       // Dark from the moment the opening has mostly left the screen.
       ScrollTrigger.create({

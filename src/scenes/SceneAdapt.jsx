@@ -1,3 +1,5 @@
+import { useLayoutEffect, useRef } from 'react'
+import { ScrollTrigger } from '../animations/gsap.js'
 import SiteRestaurant from '../site/SiteRestaurant.jsx'
 import SiteSalon from '../site/SiteSalon.jsx'
 import SiteDental from '../site/SiteDental.jsx'
@@ -14,6 +16,61 @@ const STUDIES = [
   { brand: 'dental', Site: SiteDental, content: dental, label: 'eine Zahnarztpraxis' },
 ]
 
+// The studies are laid out for a frame at least this wide (their type has
+// pixel floors). A narrower frame (small laptop window, tablet) shows the
+// same layout, scaled down as a whole, instead of one that collides.
+const MIN_SITE_W = 940
+
+function useFitToFrame(ref) {
+  useLayoutEffect(() => {
+    const root = ref.current
+    if (!root) return undefined
+    const pages = [...root.querySelectorAll('.adapt__page')]
+    const desktop = window.matchMedia('(min-width: 768px)')
+    let frame = 0
+
+    const fit = () => {
+      let changed = false
+      pages.forEach((page) => {
+        const site = page.querySelector('.adapt__site')
+        const w = page.clientWidth
+        const scale = desktop.matches && w > 0 && w < MIN_SITE_W ? w / MIN_SITE_W : 1
+        if (scale === 1) {
+          if (page.hasAttribute('data-fit')) {
+            page.removeAttribute('data-fit')
+            page.style.removeProperty('--fit-s')
+            site.style.removeProperty('height')
+            changed = true
+          }
+          return
+        }
+        // The scaled study takes up its scaled height in the page.
+        page.setAttribute('data-fit', '')
+        page.style.setProperty('--fit-s', scale)
+        const height = `${Math.round(site.firstElementChild.offsetHeight * scale)}px`
+        if (site.style.height !== height) {
+          site.style.height = height
+          changed = true
+        }
+      })
+      if (changed) {
+        cancelAnimationFrame(frame)
+        frame = requestAnimationFrame(() => ScrollTrigger.refresh())
+      }
+    }
+
+    const ro = new ResizeObserver(fit)
+    pages.forEach((page) => ro.observe(page))
+    desktop.addEventListener('change', fit)
+    fit()
+    return () => {
+      ro.disconnect()
+      desktop.removeEventListener('change', fit)
+      cancelAnimationFrame(frame)
+    }
+  }, [ref])
+}
+
 /**
  * Scene 05: Adapt. Viktor's line, then the three businesses one below the
  * other, each in its own browser frame under its context line. Every
@@ -22,6 +79,8 @@ const STUDIES = [
  * practice shows first.
  */
 export default function SceneAdapt() {
+  const content = useRef(null)
+  useFitToFrame(content)
   return (
     <section className="scene scene--adapt" aria-labelledby="adapt-title">
       <h2 id="adapt-title" className="adapt__message">
@@ -33,7 +92,7 @@ export default function SceneAdapt() {
         <span className="adapt__message-sub">{adapt.sub}</span>
       </h2>
 
-      <div className="adapt__content">
+      <div className="adapt__content" ref={content}>
         {STUDIES.map(({ brand, Site, content, label }) => (
           <div
             className={`adapt__layer adapt__layer--${brand}`}
@@ -48,7 +107,9 @@ export default function SceneAdapt() {
             <div className="adapt__page">
               <FrameChrome />
               <div className="adapt__site">
-                <Site />
+                <div className="adapt__fit">
+                  <Site />
+                </div>
               </div>
             </div>
           </div>

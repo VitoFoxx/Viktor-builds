@@ -99,3 +99,16 @@
     text-wrap: balance;
   }
 }
+
+/* A frame narrower than the studies are laid out for (SceneAdapt.jsx):
+   the study keeps its layout at MIN_SITE_W and is scaled down as a whole. */
+.adapt__page[data-fit] .adapt__site {
+  overflow: hidden;
+}
+
+.adapt__page[data-fit] .adapt__fit {
+  width: 940px;
+  container-type: inline-size;
+  transform: scale(var(--fit-s));
+  transform-origin: 0 0;
+}

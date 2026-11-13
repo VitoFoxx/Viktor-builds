@@ -35,12 +35,13 @@ const JUMPS = {
 export default function IntroStage() {
   const stage = useRef(null)
 
-  // The opening's website: the study laid out at the screen's width and
-  // scaled into its frame, as tall as the frame shows.
+  // The opening's website: the study laid out at the screen's width (at
+  // most a common desktop's, so a very wide screen does not stretch it)
+  // and scaled into its frame, as tall as the frame shows.
   const fitHeroSite = () => {
     const page = stage.current?.querySelector('.hero-card__page')
     if (!page?.offsetWidth) return
-    const width = document.documentElement.clientWidth
+    const width = Math.min(document.documentElement.clientWidth, 1920)
     const scale = page.offsetWidth / width
     page.style.setProperty('--hero-w', `${width}px`)
     page.style.setProperty('--hero-s', scale)

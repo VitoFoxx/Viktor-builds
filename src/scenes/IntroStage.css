@@ -7,7 +7,7 @@
 .stage {
   /* Width of the study's browser frame (Scene 02 – 04): a band of
      VITOWORKS stays on both sides. */
-  --frame-w: min(80vw, 1120px, calc((100svh - 17rem) * 1.6));
+  --frame-w: min(80vw, 70rem, calc((100svh - 17rem) * 1.6));
 
   position: relative;
 }
@@ -30,6 +30,9 @@
   place-items: stretch;
   column-gap: clamp(2.5rem, 4.5vw, 5rem);
   padding-top: 0;
+  /* On a wide screen the opening keeps together in the middle, the
+     paper fills the screen. */
+  padding-inline: var(--page-pad);
   background: var(--c-paper);
   color: var(--c-ink);
 }
@@ -109,7 +112,8 @@
 
 .hero__title {
   margin-top: clamp(1.25rem, 3svh, 2rem);
-  font-size: clamp(3rem, 7vw, 8.5rem);
+  /* Grows with the screen up to the content's full width (--page-max). */
+  font-size: clamp(3rem, 7vw, 7rem);
   font-weight: 600;
   line-height: 0.9;
   letter-spacing: -0.05em;
@@ -246,7 +250,7 @@
    frame. A line and an arrow, no box. */
 .scroll-hint {
   position: absolute;
-  right: var(--gutter);
+  right: var(--page-pad);
   bottom: clamp(1.25rem, 4svh, 2.25rem);
   pointer-events: none;
 }

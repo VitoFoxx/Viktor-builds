@@ -198,7 +198,7 @@ export const result = {
   claim: { address, name: brand.name, line: 'Websites, die Kunden zum Handeln bringen.' },
   eyebrow: `${brand.name} · Webdesign und Entwicklung in Hannover`,
   title: ['Individuelle Websites', 'für Unternehmen.'],
-  lead: 'Ich bin Viktor, Webentwickler aus der Region Hannover. Ich baue Websites, die zu Ihrem Unternehmen passen und Ihre Kunden gezielt zur Anfrage, Buchung oder Kontaktaufnahme führen. Kein Baukasten, keine Vorlage: Ihre Website gibt es nur einmal, wie ein Anzug, der nur Ihnen passt.',
+  lead: 'Ich bin Viktor, Webentwickler aus der Region Hannover. Ich baue Websites, die zu Ihrem Unternehmen passen und Ihre Kunden gezielt zur Anfrage, Buchung oder Kontaktaufnahme führen. Als studierter Wirtschaftsingenieur (M.Sc., TU Clausthal) arbeite ich hauptberuflich im Qualitätswesen eines großen, international tätigen Familienunternehmens. Dort zählt jedes Detail, und genau so entstehen auch meine Websites: durchdacht, sorgfältig umgesetzt und geprüft, bevor sie online gehen. Design, Programmierung und Texte erhalten Sie aus einer Hand, Ihre eigenen Fotos binden wir einfach mit ein. Kein Baukasten, keine Vorlage: Ihre Website gibt es nur einmal, wie ein Anzug, der nur Ihnen passt.',
   portrait: { alt: 'Viktor, Webentwickler bei VITOWORKS', caption: 'Viktor · Hannover' },
   offer: [
     { title: 'Individuelle Websites', text: 'Aufbau, Gestaltung und Texte richten sich nach Ihrem Betrieb und Ihren Kunden.' },

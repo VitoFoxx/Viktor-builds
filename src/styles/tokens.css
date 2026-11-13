@@ -33,6 +33,11 @@
 
   /* Space */
   --gutter: clamp(1rem, 4vw, 3rem);
+  /* The widest the content runs; beyond it, the backgrounds still fill
+     the screen and the content stays centred. */
+  --page-max: 100rem;
+  /* Side padding that holds the content to --page-max. */
+  --page-pad: max(var(--gutter), (100% - var(--page-max)) / 2);
 
   /* Shape */
   --radius-frame: 12px;

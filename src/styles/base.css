@@ -70,6 +70,18 @@ html {
   text-size-adjust: 100%;
 }
 
+/* Large screens (27", 32", 34" ultrawide): the whole page grows with the
+   screen instead of leaving its type and spacing at laptop size. Almost
+   every size on the page is in rem, so the root alone scales it all.
+   16px up to 1920 × 1080; then by width and height, whichever is
+   smaller (a wide but low window must not grow out of its height), up
+   to 22px. */
+@media (min-width: 1921px) and (min-height: 1081px) {
+  html {
+    font-size: clamp(16px, min(0.833vw, 1.48vh), 22px);
+  }
+}
+
 html[data-tone='dark'] {
   --scrollbar-thumb: var(--c-accent-light);
   --scrollbar-track: var(--c-bg);
